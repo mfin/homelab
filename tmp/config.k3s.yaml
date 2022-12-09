@@ -1,0 +1,8 @@
+node-ip: 10.3.0.201
+node-external-ip: 10.10.0.201
+flannel-external-ip: true
+flannel-iface: eth1
+disable:
+  - servicelb
+  - traefik
+

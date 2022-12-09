@@ -1,0 +1,47 @@
+{{- range $index, $app := .Values.apps }}
+{{- $defaultPath := printf "apps/%s" $app.name }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $app.name }}
+  namespace: {{ $.Release.Namespace }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: {{ $app.name }}
+spec:
+  project: default
+
+  source:
+    repoURL: {{ $.Values.gitops.repo }}
+    targetRevision: {{ $.Values.gitops.revision }}
+    path: k8s/{{ $app.path | default $defaultPath }}
+
+    helm:
+      releaseName: {{ $app.name }}
+
+      {{- if (and $.Values.gitops.secretName $app.secrets) }}
+      valueFiles:
+        - secrets+age-import-kubernetes://{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
+      {{- end }}
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ default $app.name $app.namespace }}
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+    - ServerSideApply=true
+    retry:
+      limit: 10
+      backoff:
+        duration: 1m
+        factor: 2
+        maxDuration: 16m
+{{- end }}

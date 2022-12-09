@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: le-cert
+spec:
+  dnsNames:
+    - "lab.finzgar.net"
+    - "*.lab.finzgar.net"
+  secretName: le-cert
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"

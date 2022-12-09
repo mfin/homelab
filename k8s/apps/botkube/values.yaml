@@ -1,0 +1,13 @@
+botkube:
+  settings:
+    clusterName: homelab
+
+  communications:
+    default-group:
+      discord:
+        enabled: true
+
+  executors:
+    kubectl-read-only:
+      kubectl:
+        enabled: true

@@ -1,0 +1,64 @@
+csiDriver:
+  name: "org.democratic-csi.iscsi-synology"
+
+storageClasses:
+- name: synology-iscsi
+  defaultClass: false
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+  allowVolumeExpansion: true
+  parameters:
+    fsType: ext4
+
+  mountOptions: []
+  secrets:
+    provisioner-secret:
+    controller-publish-secret:
+    node-stage-secret:
+    node-publish-secret:
+    controller-expand-secret:
+
+volumeSnapshotClasses:
+- name: synology-iscsi
+  parameters:
+  secrets:
+    snapshotter-secret:
+
+controller:
+  externalResizer:
+    enabled: true
+
+  externalSnapshotter:
+    enabled: true
+
+driver:
+  config:
+    driver: synology-iscsi
+    httpConnection:
+      protocol: https
+      host: nas.bm.lab.finzgar.net
+      port: 443
+      username: matjaz-admin
+      password: FbHBjD*zB8yvRt99r*Y4@#P7eGc#P6
+      allowInsecure: true
+      session: "democratic-csi"
+      serialize: true
+
+    iscsi:
+      targetPortal: "server[:port]"
+      interface: ""
+      baseiqn: "iqn.2000-01.com.synology:csi."
+
+      namePrefix: ""
+      nameSuffix: ""
+
+      lunTemplate:
+        type: "BLUN"
+
+      lunSnapshotTemplate:
+        is_locked: true
+        is_app_consistent: true
+
+      targetTemplate:
+        auth_type: 0
+        max_sessions: 0
