@@ -2,7 +2,7 @@
 
 # homelab :microscope:
 
-_`k8s-at-home` lab running on ArgoCD, Renovate and Github Actions :zap:_
+_K8s on Proxmox deployed with Ansible for HomeOps and tinkering :zap:_
 
 </div>
 
