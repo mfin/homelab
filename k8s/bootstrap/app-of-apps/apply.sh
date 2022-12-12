@@ -4,5 +4,5 @@ helm template \
     --include-crds \
     --namespace argocd \
     --values values.yaml \
-    argocd . \
+    app-of-apps . \
     | kubectl apply -n argocd -f -

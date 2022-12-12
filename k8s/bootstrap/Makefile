@@ -1,6 +1,6 @@
 .POSIX:
 
-default: namespace argocd root
+default: namespace argocd app-of-apps
 
 namespace:
 	kubectl create namespace argocd --dry-run=client --output=yaml \
@@ -10,6 +10,6 @@ namespace:
 argocd:
 	cd argocd && ./apply.sh
 
-.PHONY: root
-root:
-	cd root && ./apply.sh
+.PHONY: app-of-apps
+app-of-apps:
+	cd app-of-apps && ./apply.sh

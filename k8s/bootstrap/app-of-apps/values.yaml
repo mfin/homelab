@@ -1,0 +1,12 @@
+gitops:
+  repo: https://github.com/mfin/homelab
+  revision: main
+  secretName: helm-secrets-private-keys#key.txt?secrets.yaml
+
+sets:
+  - name: bootstrap
+    namespace: argocd
+  - name: apps
+  - name: chat
+  - name: misc
+  - name: networking

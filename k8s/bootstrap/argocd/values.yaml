@@ -63,6 +63,8 @@ argo-cd:
         value: "false"
       - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
         value: "false"
+      - name: HELM_SECRETS_IGNORE_MISSING_VALUES
+        value: "true"
     volumes:
       - name: custom-tools
         emptyDir: {}
