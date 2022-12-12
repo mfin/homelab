@@ -1,6 +1,6 @@
 <div align="center">
 
-# homelab :microscope:
+# #homelab :microscope:
 
 ### `k8s-@-home` setup running on ArgoCD, Renovate and Github Actions :zap:
 
