@@ -10,12 +10,12 @@ apps:
   - name: argocd
     path: bootstrap/argocd
     secrets: true
-  - name: botkube
-    secrets: true
-  - name: cert-manager
-    secrets: true
+  # - name: botkube
+  #   secrets: true
+  # - name: cert-manager
+  #   secrets: true
   - name: metallb
     namespace: metallb-system
-  - name: reflector
-  - name: traefik
-  - name: whoami
+  # - name: reflector
+  # - name: traefik
+  # - name: whoami

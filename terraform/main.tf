@@ -16,6 +16,7 @@ resource "proxmox_vm_qemu" "proxmox_vm_master" {
   cores      = 1
   nameserver = "10.10.0.3"
   hastate = "ignored"
+  iothread = 0
  
   network {
     model  = "virtio"
