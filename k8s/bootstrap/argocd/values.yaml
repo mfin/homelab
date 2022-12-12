@@ -26,11 +26,6 @@ argo-cd:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-      hosts:
-        - &host argocd.lab.finzgar.net
-      tls:
-        - hosts:
-            - *host
     metrics: &metrics
       enabled: false
       serviceMonitor:

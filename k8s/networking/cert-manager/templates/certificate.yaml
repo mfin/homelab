@@ -4,8 +4,8 @@ metadata:
   name: le-cert
 spec:
   dnsNames:
-    - "lab.finzgar.net"
-    - "*.lab.finzgar.net"
+    - "{{ .Values.homelab_domain }}"
+    - "*.{{ .Values.homelab_domain }}"
   secretName: le-cert
   issuerRef:
     name: letsencrypt-issuer
