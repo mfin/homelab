@@ -28,3 +28,7 @@
   - vm as secondary
   - keepalived for shared ip
   - gravity sync for configuration
+
+- https://mattei.io/vpn/2022/01/08/how-to-use-wireguard-without-masquarade.html
+- https://www.procustodibus.com/blog/2020/12/wireguard-site-to-site-config/
+- https://www.reddit.com/r/WireGuard/comments/sdp27b/create_route_into_wireguard_network_from_unifi/
