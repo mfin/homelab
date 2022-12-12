@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: &host whoami.lab.finzgar.net
+    - host: whoami.{{ .Values.homelab_domain }}
       http:
         paths:
           - path: /
@@ -20,4 +20,4 @@ spec:
                   number: 80
   tls:
     - hosts:
-      - *host
+      - whoami.{{ .Values.homelab_domain }}
