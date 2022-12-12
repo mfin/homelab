@@ -2,7 +2,7 @@
 
 # homelab :microscope:
 
-_K8s on Proxmox deployed with Ansible for HomeOps and tinkering :zap:_
+_K8s for HomeOps and tinkering :zap:_
 
 </div>
 
