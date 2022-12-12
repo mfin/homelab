@@ -2,7 +2,7 @@
 
 # homelab :microscope:
 
-_ k8s-@-home setup running on ArgoCD, Renovate and Github Actions :zap:
+### `k8s-@-home` setup running on ArgoCD, Renovate and Github Actions :zap:
 
 </div>
 
