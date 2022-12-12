@@ -4,7 +4,7 @@
   gather_facts: yes
   become: yes
   roles:
-    - role: prereq
+    - role: requirements
     - role: download
 
 - hosts: master
@@ -12,7 +12,7 @@
   roles:
     - role: k3s/master
 
-- hosts: node
+- hosts: worker
   become: yes
   roles:
-    - role: k3s/node
+    - role: k3s/worker
