@@ -3,6 +3,9 @@
 **/Chart.lock
 **/charts/*.tgz
 
+### helm-secrets ###
+.decrypted~secrets.yaml
+
 ### Terraform ###
 # Local .terraform directories
 **/.terraform/*
