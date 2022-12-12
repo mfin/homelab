@@ -11,4 +11,8 @@ I treat this as my personal playground to improve my technical skills while util
 
 > “I do not believe you can do today’s job with yesterday’s methods and be in business tomorrow”
 
-<div align="right">- (Horatio Nelson Jackson)</div>
+<div align="right">
+
+**- (Horatio Nelson Jackson)**
+
+</div>
