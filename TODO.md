@@ -5,6 +5,9 @@
   - nfs mounts
 - figure out a backup solution
 - install all dependencies only with ansible
+- kubed
+- system upgrade controller
+- custom registry
 
 - migration
   - mosquitto
