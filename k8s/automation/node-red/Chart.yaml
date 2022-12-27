@@ -1,0 +1,7 @@
+apiVersion: v2
+name: node-red
+version: 0.0.0
+dependencies:
+  - name: node-red
+    version: 0.21.3
+    repository: https://schwarzit.github.io/node-red-chart/

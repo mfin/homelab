@@ -9,3 +9,4 @@ sets:
   - name: apps
   - name: misc
   - name: networking
+  - name: automation
