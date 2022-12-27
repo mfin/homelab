@@ -26,7 +26,6 @@ app-template:
       type: LoadBalancer
       annotations:
         metallb.universe.tf/allow-shared-ip: traefik
-      externalTrafficPolicy: Local
       ports:
         http:
           enabled: false
