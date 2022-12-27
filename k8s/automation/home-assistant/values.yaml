@@ -1,0 +1,56 @@
+app-template:
+  image:
+    repository: homeassistant/home-assistant
+    tag: 2022.12.7
+    pullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
+  env:
+    TZ: "Europe/Ljubljana"
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+
+  service:
+    main:
+      type: LoadBalancer
+      # loadBalancerIP: 10.10.0.5
+      annotations:
+        metallb.universe.tf/allow-shared-ip: traefik
+      ports:
+        http:
+          port: 8123
+        mdns-tcp:
+          enabled: true
+          port: 5353
+          protocol: TCP
+          targetPort: 5353
+        mdns-udp:
+          enabled: true
+          port: 5353
+          protocol: UDP
+          targetPort: 5353
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      hosts:
+      - host: "hass.lab.finzgar.net"
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "hass.lab.finzgar.net"
+
+  persistence:
+    config:
+      enabled: true
+      existingClaim: home-assistant-pvc
+
+  resources:
+    limits:
+      memory: 3000Mi
+    requests:
+      cpu: 100m
+      memory: 1000Mi
