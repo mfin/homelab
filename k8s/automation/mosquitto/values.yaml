@@ -1,0 +1,63 @@
+app-template:
+  values:
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: mosquitto-config
+      secret.reloader.stakater.com/reload: mosquitto-secrets
+
+    image:
+      repository: eclipse-mosquitto
+      tag: 2.0.15
+
+    initContainers:
+      copy-config:
+        image: eclipse-mosquitto:2.0.15@sha256:29c92f9144d4e65f7e647694d4b6aa7f0ac6a995bd102251ea05f7edf258ad20
+        command:
+          - "/bin/sh"
+          - -c
+        args:
+          - cp /data/mosquitto_passwords/* /data/external_config/ && mosquitto_passwd -U /data/external_config/mosquitto_pwd
+        volumeMounts:
+          - name: mosquitto-passwords
+            mountPath: /data/mosquitto_passwords
+          - name: external-config
+            mountPath: /data/external_config
+
+    service:
+      main:
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/allow-shared-ip: traefik
+        externalTrafficPolicy: Local
+        ports:
+          http:
+            enabled: false
+          mqtt:
+            enabled: true
+            port: 1883
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: mosquitto-pvc
+      mosquitto-config:
+        enabled: true
+        type: configMap
+        name: mosquitto-config
+        mountPath: /mosquitto/config/mosquitto.conf
+        subPath: mosquitto.conf
+      mosquitto-passwords:
+        enabled: true
+        type: secret
+        name: mosquitto-passwords
+        mountPath: "-"
+      external-config:
+        enabled: true
+        type: emptyDir
+        mountPath: /mosquitto/external_config
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 64M
+      limits:
+        memory: 124M
