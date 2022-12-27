@@ -1,9 +1,6 @@
 .POSIX:
 
-default: terraform ansible k8s
-
-terraform:
-	cd terraform && terraform init && terraform apply -auto-approve
+default: ansible k8s
 
 .PHONY: ansible
 ansible:
