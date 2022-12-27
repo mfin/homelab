@@ -7,6 +7,5 @@ sets:
   - name: bootstrap
     namespace: argocd
   - name: apps
-  - name: chat
   - name: misc
   - name: networking
