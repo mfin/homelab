@@ -10,6 +10,9 @@ app-template:
   hostNetwork: true
   dnsPolicy: ClusterFirstWithHostNet
 
+  controller:
+    replicas: 0
+
   service:
     main:
       type: LoadBalancer
