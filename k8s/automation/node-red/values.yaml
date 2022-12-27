@@ -8,15 +8,17 @@ node-red:
 
   ingress:
     enabled: true
-    className: traefik
+    className: "traefik"
+
     hosts:
       - host: node-red.lab.finzgar.net
         paths:
           - path: /
             pathType: ImplementationSpecific
+
     tls:
       hosts:
-       - node-red.lab.finzgar.net
+        - node-red.lab.finzgar.net
 
     # annotations:
     #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
