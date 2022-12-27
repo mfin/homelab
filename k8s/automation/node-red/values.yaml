@@ -17,8 +17,8 @@ node-red:
             pathType: ImplementationSpecific
 
     tls:
-      hosts:
-        - node-red.lab.finzgar.net
+      - hosts:
+         - node-red.lab.finzgar.net
 
     # annotations:
     #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
