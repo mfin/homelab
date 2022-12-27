@@ -1,25 +1,45 @@
-node-red:
+app-template:
+  image:
+    repository: docker.io/nodered/node-red
+    tag: 3.0.2
+
   env:
     TZ: "Europe/Ljubljana"
 
-  persistence:
-    enabled: true
-    existingClaim: node-red-pvc
+  service:
+    main:
+      ports:
+        http:
+          port: 1880
 
   ingress:
-    enabled: true
-    className: "traefik"
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+      hosts:
+        - host: &host node-red.lab.finzgar.net
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
 
-    hosts:
-      - host: node-red.lab.finzgar.net
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+  # podSecurityContext:
+  #   runAsUser: 568
+  #   runAsGroup: 568
+  #   fsGroup: 568
+  #   fsGroupChangePolicy: "OnRootMismatch"
 
-    tls:
-      - hosts:
-         - node-red.lab.finzgar.net
+  persistence:
+    config:
+      enabled: true
+      existingClaim: node-red-pvc
+      mountPath: "/data"
 
-    # annotations:
-    #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    #   traefik.ingress.kubernetes.io/router.tls: "true"
+  resources:
+    requests:
+      cpu: 22m
+      memory: 164M
+    limits:
+      memory: 262M
