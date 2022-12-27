@@ -29,6 +29,8 @@ app-template:
           metallb.universe.tf/allow-shared-ip: traefik
         externalTrafficPolicy: Local
         ports:
+          http:
+            enabled: false
           mqtt:
             enabled: true
             primary: true
