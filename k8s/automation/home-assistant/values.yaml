@@ -13,7 +13,6 @@ app-template:
   service:
     main:
       type: LoadBalancer
-      # loadBalancerIP: 10.10.0.5
       annotations:
         metallb.universe.tf/allow-shared-ip: traefik
       ports:
