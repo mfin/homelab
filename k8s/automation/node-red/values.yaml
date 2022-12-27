@@ -11,6 +11,9 @@ node-red:
     className: traefik
     hosts:
       - host: node-red.lab.finzgar.net
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
     tls:
       hosts:
        - node-red.lab.finzgar.net
