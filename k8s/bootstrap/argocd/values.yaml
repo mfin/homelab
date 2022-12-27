@@ -58,6 +58,8 @@ argo-cd:
         value: "false"
       - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
         value: "false"
+      - name: HELM_SECRETS_IGNORE_MISSING_VALUES
+        value: "true"
     volumes:
       - name: custom-tools
         emptyDir: {}
@@ -87,9 +89,9 @@ argo-cd:
 
         env:
           - name: HELM_SECRETS_VERSION
-            value: "3.12.0"
+            value: "4.2.2"
           - name: KUBECTL_VERSION
-            value: "1.24.3"
+            value: "1.26.0"
           - name: SOPS_VERSION
             value: "3.7.3"
         volumeMounts:

@@ -27,7 +27,7 @@ spec:
 
         helm:
           valueFiles:
-            - secrets+age-import-kubernetes://?{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
+            - secrets+age-import-kubernetes://{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
       syncPolicy:
         automated:
           prune: true
