@@ -1,19 +1,20 @@
-env:
-  TZ: "Europe/Ljubljana"
+node-red:
+  env:
+    TZ: "Europe/Ljubljana"
 
-persistence:
-  enabled: true
-  existingClaim: node-red-pvc
+  persistence:
+    enabled: true
+    existingClaim: node-red-pvc
 
-ingress:
-  enabled: true
-  ingressClassName: traefik
-  hosts:
-    - host: &host node-red.lab.finzgar.net
-  tls:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
     hosts:
-      - *host
+      - host: &host node-red.lab.finzgar.net
+    tls:
+      hosts:
+        - *host
 
-  # annotations:
-  #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
-  #   traefik.ingress.kubernetes.io/router.tls: "true"
+    # annotations:
+    #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    #   traefik.ingress.kubernetes.io/router.tls: "true"
