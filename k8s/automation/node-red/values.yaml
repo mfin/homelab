@@ -16,14 +16,6 @@ app-template:
     main:
       enabled: true
       ingressClassName: "traefik"
-      hosts:
-        - host: &host node-red.lab.finzgar.net
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
 
   # podSecurityContext:
   #   runAsUser: 568
