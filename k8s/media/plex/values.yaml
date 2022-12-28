@@ -17,7 +17,7 @@ app-template:
 
   ingress:
     main:
-      enabled: false
+      enabled: true
       ingressClassName: traefik
 
   persistence:
