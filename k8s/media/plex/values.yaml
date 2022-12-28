@@ -8,6 +8,7 @@ app-template:
     TZ: Europe/Ljubljana
   service:
     main:
+      enabled: false
       type: LoadBalancer
       # externalTrafficPolicy: Local
       ports:
@@ -17,7 +18,7 @@ app-template:
   hostNetwork: true
   ingress:
     main:
-      enabled: true
+      enabled: false
       ingressClassName: traefik
 
   persistence:
