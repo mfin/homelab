@@ -14,7 +14,13 @@ app-template:
       ports:
         http:
           port: 32400
-
+  probes:
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
+    startup:
+      enabled: false
   hostNetwork: true
   ingress:
     main:
