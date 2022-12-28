@@ -6,4 +6,4 @@ spec:
   type: ExternalName
   ports:
   - port: 5443
-  externalName: nas.bm.lab.finzgar.net
+  externalName: 10.10.0.20
