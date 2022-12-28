@@ -1,10 +1,13 @@
-intel-gpu-plugin:
+app-template:
   controller:
     type: daemonset
     strategy: RollingUpdate
   image:
     repository: docker.io/intel/intel-gpu-plugin
     tag: 0.25.1
+  service:
+    main:
+      enabled: false
   probes:
     liveness:
       enabled: false
