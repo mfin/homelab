@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -13,3 +14,20 @@ spec:
           scheme: https
           serversTransport: skip-tls
           port: 5443
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pihole
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`pihole.lab.finzgar.net`)
+    kind: Rule
+    middlewares:
+    - name: admin-prefix
+    services:
+    - name: pihole
+      port: 80
+---
