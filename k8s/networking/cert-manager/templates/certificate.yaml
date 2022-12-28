@@ -6,6 +6,7 @@ spec:
   dnsNames:
     - "{{ .Values.homelab_domain }}"
     - "*.{{ .Values.homelab_domain }}"
+{{ .Values.additional_domains | indent 4 }}
   secretName: le-cert
   issuerRef:
     name: letsencrypt-issuer
