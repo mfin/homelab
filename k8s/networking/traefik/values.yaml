@@ -12,5 +12,8 @@ traefik:
 
   providers:
     kubernetesCRD:
-      allowExternalNameServices: false
-      allowEmptyServices: false
+      allowExternalNameServices: true
+      allowEmptyServices: true
+    kubernetesIngress:
+      allowExternalNameServices: true
+      allowEmptyServices: true
