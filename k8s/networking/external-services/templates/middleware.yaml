@@ -3,6 +3,5 @@ kind: Middleware
 metadata:
   name: admin-prefix
 spec:
-  replacePathRegex:
-    regex: ^/(.*)
-    replacement: /admin/$$1
+  addPrefix:
+    prefix: /admin
