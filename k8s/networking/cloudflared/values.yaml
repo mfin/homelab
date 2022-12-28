@@ -28,7 +28,7 @@ app-template:
     tunnel:
       enabled: true
       type: secret
-      name: cloudlfared-secret
+      name: cloudflared-secret
       mountPath: /etc/cloudflared/creds.json
       subPath: creds.json
       readOnly: true
