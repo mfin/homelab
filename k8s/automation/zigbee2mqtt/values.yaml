@@ -1,0 +1,36 @@
+app-template:
+  controller:
+    type: statefulset
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: ghcr.io/koenkk/zigbee2mqtt
+    tag: 1.28.4
+  envFrom:
+    - secretRef:
+        name: zigbee2mqtt-secret
+  service:
+    main:
+      ports:
+        http:
+          port: 8080
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+  persistence:
+    config:
+      enabled: true
+      existingClaim: zigbee2mqtt-pvc
+      mountPath: "/data"
+    usb:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_cee7ceb60413ec11bad721c7bd930c07-if00-port0
+      hostPathType: CharDevice
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 500Mi
