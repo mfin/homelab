@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: synology-photos
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`photos.finzgar.net`)
+      kind: Rule
+      services:
+        - name: synology-photos
+          scheme: https
+          serversTransport: skip-tls
+          port: 5443

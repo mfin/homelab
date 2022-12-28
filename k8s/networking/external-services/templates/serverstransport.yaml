@@ -1,0 +1,7 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: skip-tls
+
+spec:
+  insecureSkipVerify: true

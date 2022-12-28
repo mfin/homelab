@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: synology-photos
+spec:
+  type: ExternalName
+  ports:
+  - port: 5443
+  externalName: nas.bm.lab.finzgar.net
