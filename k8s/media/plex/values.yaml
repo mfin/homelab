@@ -1,0 +1,45 @@
+app-template:
+  controller:
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/plex
+    tag: 1.30.0.6486-629d58034@sha256:b3e3a2a305443f243643553161cff639f3dcc74349595884ac9c77cf6bb24068
+  env:
+    TZ: Europe/Ljubljana
+  service:
+    main:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      ports:
+        http:
+          port: 32400
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+
+  volumeClaimTemplates:
+    - name: config
+      mountPath: /config
+      accessMode: ReadWriteOnce
+      size: 30Gi
+      storageClass: local-path
+  persistence:
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      mountPath: /data
+      readOnly: true
+    transcode:
+      enabled: true
+      type: emptyDir
+
+  resources:
+    requests:
+      gpu.intel.com/i915: 1
+      cpu: 100m
+      memory: 2000Mi
+    limits:
+      gpu.intel.com/i915: 1
+      memory: 10000Mi
