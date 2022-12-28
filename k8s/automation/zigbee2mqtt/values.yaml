@@ -26,7 +26,7 @@ app-template:
     usb:
       enabled: true
       type: hostPath
-      hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_cee7ceb60413ec11bad721c7bd930c07-if00-port0
+      hostPath: /dev/ttyUSB0
       hostPathType: CharDevice
   resources:
     requests:
