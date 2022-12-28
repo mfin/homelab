@@ -1,11 +1,10 @@
 app-template:
   image:
-    repository: linuxserver/plex
-    tag: 1.30.0
-  strategy:
-    type: Recreate
+    repository: ghcr.io/onedr0p/plex
+    tag: 1.30.0.6486-629d58034@sha256:b3e3a2a305443f243643553161cff639f3dcc74349595884ac9c77cf6bb24068
+  controller:
+    type: statefulset
   env:
-    VERSION: docker
     TZ: Europe/Ljubljana
   service:
     main:
