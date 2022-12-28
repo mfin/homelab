@@ -18,13 +18,10 @@ app-template:
       enabled: true
       ingressClassName: traefik
 
-  volumeClaimTemplates:
-    - name: config
-      mountPath: /config
-      accessMode: ReadWriteOnce
-      size: 30Gi
-      storageClass: local-path
   persistence:
+    config:
+      enabled: true
+      existingClaim: plex-pvc
     data:
       enabled: true
       type: nfs
