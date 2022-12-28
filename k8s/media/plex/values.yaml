@@ -10,7 +10,7 @@ app-template:
   service:
     main:
       type: LoadBalancer
-      # externalTrafficPolicy: Local
+      externalTrafficPolicy: Local
       ports:
         http:
           port: 32400
