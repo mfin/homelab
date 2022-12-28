@@ -13,6 +13,7 @@ app-template:
       ports:
         http:
           port: 32400
+  hostNetwork: true
   ingress:
     main:
       enabled: false
