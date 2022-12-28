@@ -18,6 +18,8 @@ app-template:
     main:
       enabled: true
       ingressClassName: traefik
+  securityContext:
+    privileged: true
   persistence:
     config:
       enabled: true
