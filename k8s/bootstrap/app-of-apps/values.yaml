@@ -10,3 +10,4 @@ sets:
   - name: misc
   - name: networking
   - name: automation
+  - name: media

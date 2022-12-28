@@ -1,0 +1,35 @@
+intel-gpu-plugin:
+  controller:
+    type: daemonset
+    strategy: RollingUpdate
+  image:
+    repository: docker.io/intel/intel-gpu-plugin
+    tag: 0.25.1
+  service:
+    main:
+      enabled: false
+  probes:
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
+    startup:
+      enabled: false
+  persistence:
+    devfs:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/dri
+      hostPathType: Directory
+      readOnly: true
+    sysfs:
+      enabled: true
+      type: hostPath
+      hostPath: /sys/class/drm
+      hostPathType: Directory
+      readOnly: true
+    kubeletsockets:
+      enabled: true
+      type: hostPath
+      hostPathType: Directory
+      hostPath: /var/lib/kubelet/device-plugins
