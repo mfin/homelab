@@ -9,3 +9,8 @@ traefik:
   ports:
     web:
       redirectTo: websecure
+
+  providers:
+    kubernetesCRD:
+      allowExternalNameServices: false
+      allowEmptyServices: false
