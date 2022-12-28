@@ -1,7 +1,7 @@
 app-template:
   podAnnotations:
     configmap.reloader.stakater.com/reload: mosquitto-config
-    secret.reloader.stakater.com/reload: mosquitto-secrets
+    secret.reloader.stakater.com/reload: mosquitto-passwords
 
   image:
     repository: eclipse-mosquitto
