@@ -10,5 +10,5 @@ data:
     originRequest:
       connectTimeout: 30s
 
-    ingress: |
-      {{ .Values.cloudflared.ingress }}
+    ingress:
+{{ .Values.cloudflared.ingress | indent 6 }}
