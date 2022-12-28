@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-config
+data:
+  config.yaml: |-
+    tunnel: "{{ .Values.cloudflared.tunnelId }}"
+    credentials-file: /etc/cloudflared/creds.json
+    no-autoupdate: true
+    originRequest:
+      connectTimeout: 30s
+
+    ingress: |
+      {{ .Values.cloudflared.ingress }}
