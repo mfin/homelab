@@ -1,0 +1,101 @@
+git:
+  name: homelab
+  url: https://github.com/mfin/homelab
+
+secret:
+  name: helm-secrets-private-keys
+  age:
+    key: key.txt
+
+argo-cd:
+  configs:
+    cm:
+      exec.enabled: 'true'
+      statusbadge.enabled: 'true'
+      helm.valuesFileSchemes: >-
+        secrets+gpg-import, secrets+gpg-import-kubernetes,
+        secrets+age-import, secrets+age-import-kubernetes,
+        secrets,secrets+literal,
+        https
+  server:
+    extraArgs:
+      - --insecure
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+    metrics: &metrics
+      enabled: false
+      serviceMonitor:
+        enabled: false
+  dex:
+    enabled: false
+  controller:
+    metrics: *metrics
+  repoServer:
+    metrics: *metrics
+    rbac:
+    - apiGroups:
+      - ""
+      resources:
+      - secrets
+      verbs:
+      - get
+    env:
+      - name: HELM_PLUGINS
+        value: /custom-tools/helm-plugins/
+      - name: HELM_SECRETS_SOPS_PATH
+        value: /custom-tools/sops
+      - name: HELM_SECRETS_KUBECTL_PATH
+        value: /custom-tools/kubectl
+      - name: HELM_SECRETS_CURL_PATH
+        value: /custom-tools/curl
+      - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
+        value: "false"
+      - name: HELM_SECRETS_IGNORE_MISSING_VALUES
+        value: "true"
+    volumes:
+      - name: custom-tools
+        emptyDir: {}
+      - name: helm-secrets-private-keys
+        secret:
+          secretName: helm-secrets-private-keys
+
+    volumeMounts:
+      - mountPath: /custom-tools
+        name: custom-tools
+      - mountPath: /helm-secrets-private-keys/
+        name: helm-secrets-private-keys
+
+    initContainers:
+      - name: download-tools
+        image: ubuntu:22.04
+        command:
+          - /bin/bash
+          - -c
+          - |
+            DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y wget
+            mkdir -p /custom-tools/helm-plugins
+            wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-
+            wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+            wget -qO /custom-tools/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+            chmod +x /custom-tools/*
+
+        env:
+          - name: HELM_SECRETS_VERSION
+            value: "4.2.2"
+          - name: KUBECTL_VERSION
+            value: "1.26.0"
+          - name: SOPS_VERSION
+            value: "3.7.3"
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+  redis:
+    metrics: *metrics

@@ -1,0 +1,31 @@
+app-template:
+  image:
+    repository: docker.io/nodered/node-red
+    tag: 3.0.2
+
+  env:
+    TZ: "Europe/Ljubljana"
+
+  service:
+    main:
+      ports:
+        http:
+          port: 1880
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+
+  persistence:
+    config:
+      enabled: true
+      existingClaim: node-red-pvc
+      mountPath: "/data"
+
+  resources:
+    requests:
+      cpu: 22m
+      memory: 164M
+    limits:
+      memory: 262M

@@ -1,0 +1,43 @@
+app-template:
+  image:
+    repository: plexinc/pms-docker
+    tag: 1.30.0.6486-629d58034
+  controller:
+    type: statefulset
+  env:
+    TZ: Europe/Ljubljana
+  service:
+    main:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      ports:
+        http:
+          port: 32400
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+
+  persistence:
+    config:
+      enabled: true
+      existingClaim: plex-pvc
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      mountPath: /data
+      readOnly: true
+    transcode:
+      enabled: true
+      type: emptyDir
+
+  resources:
+    requests:
+      gpu.intel.com/i915: 1
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      gpu.intel.com/i915: 1
+      memory: 4000Mi

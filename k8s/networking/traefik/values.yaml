@@ -1,0 +1,24 @@
+traefik:
+  additionalArguments:
+    - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
+
+  service:
+    annotations:
+      metallb.universe.tf/allow-shared-ip: traefik
+
+  ports:
+    web:
+      redirectTo: websecure
+
+  providers:
+    kubernetesCRD:
+      allowExternalNameServices: true
+      allowEmptyServices: true
+    kubernetesIngress:
+      allowExternalNameServices: true
+      allowEmptyServices: true
+  logs:
+    general:
+      level: WARN
+    access:
+      enabled: true

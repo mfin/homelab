@@ -1,0 +1,33 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: synology-photos
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`{{ .Values.photos.domain }}`)
+      kind: Rule
+      services:
+        - name: synology-photos
+          scheme: https
+          serversTransport: skip-tls
+          port: {{ .Values.photos.port }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pihole
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`{{ .Values.pihole.domain }}`)
+    kind: Rule
+    middlewares:
+    - name: admin-prefix
+    services:
+    - name: pihole
+      port: {{ .Values.pihole.port }}
+---

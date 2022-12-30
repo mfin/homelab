@@ -1,0 +1,7 @@
+apiVersion: v2
+name: reflector
+version: 0.0.0
+dependencies:
+  - name: reflector
+    version: 6.1.47
+    repository: https://emberstack.github.io/helm-charts

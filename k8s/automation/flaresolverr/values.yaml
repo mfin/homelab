@@ -1,0 +1,25 @@
+app-template:
+  image:
+    repository: ghcr.io/flaresolverr/flaresolverr
+    tag: v2.2.10
+
+  env:
+    TZ: Europe/Ljubljana
+
+  service:
+    main:
+      ports:
+        http:
+          port: 8191
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+
+  resources:
+    requests:
+      cpu: 15m
+      memory: 100Mi
+    limits:
+      memory: 1Gi
