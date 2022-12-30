@@ -12,6 +12,7 @@ argo-cd:
     cm:
       exec.enabled: 'true'
       statusbadge.enabled: 'true'
+      timeout.reconciliation: 0
       helm.valuesFileSchemes: >-
         secrets+gpg-import, secrets+gpg-import-kubernetes,
         secrets+age-import, secrets+age-import-kubernetes,
@@ -30,6 +31,11 @@ argo-cd:
       enabled: false
       serviceMonitor:
         enabled: false
+  applicationSet:
+    webhook:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
   dex:
     enabled: false
   controller:
