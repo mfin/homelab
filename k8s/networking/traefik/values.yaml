@@ -18,7 +18,5 @@ traefik:
       allowExternalNameServices: true
       allowEmptyServices: true
   logs:
-    general:
-      level: WARN
     access:
       enabled: true
