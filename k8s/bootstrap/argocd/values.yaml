@@ -12,7 +12,7 @@ argo-cd:
     cm:
       exec.enabled: 'true'
       statusbadge.enabled: 'true'
-      timeout.reconciliation: 0
+      timeout.reconciliation: 0s
       helm.valuesFileSchemes: >-
         secrets+gpg-import, secrets+gpg-import-kubernetes,
         secrets+age-import, secrets+age-import-kubernetes,
