@@ -21,4 +21,4 @@ traefik:
         enabled: true
   logs:
     access:
-      enabled: true
+      enabled: false
