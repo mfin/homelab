@@ -17,6 +17,8 @@ traefik:
     kubernetesIngress:
       allowExternalNameServices: true
       allowEmptyServices: true
+      publishedService:
+        enabled: true
   logs:
     access:
       enabled: true
