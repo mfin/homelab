@@ -1,49 +1,49 @@
 app-template:
-  image:
-    repository: plexinc/pms-docker
-    tag: 1.30.0.6486-629d58034
   controller:
     type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/qbittorrent
+    tag: 4.5.0@sha256:26fa8645757f9d7e5ab72620d75fd8752c968c6b8810b8935ce770d7d1303fe9
   env:
     TZ: Europe/Ljubljana
+    QBITTORRENT__PORT: &port 80
+    QBITTORRENT__BT_PORT: &port-bt 50413
   service:
     main:
-      enabled: true
-      type: LoadBalancer
-      externalTrafficPolicy: Local
       ports:
         http:
-          port: 32400
+          port: *port
+    bittorrent:
+      enabled: true
+      type: LoadBalancer
+      ports:
+        bittorrent:
+          enabled: true
+          port: *port-bt
+          protocol: TCP
+          targetPort: *port-bt
+      externalTrafficPolicy: Local
   ingress:
     main:
       enabled: true
       ingressClassName: traefik
-
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100
     fsGroup: 100
     fsGroupChangePolicy: "OnRootMismatch"
-
   persistence:
     config:
       enabled: true
-      existingClaim: plex-pvc
+      existingClaim: qbittorrent-config
     data:
       enabled: true
       type: nfs
       path: /volume1/data
       mountPath: /data
-      readOnly: true
-    transcode:
-      enabled: true
-      type: emptyDir
-
   resources:
     requests:
-      gpu.intel.com/i915: 1
-      cpu: 100m
-      memory: 200Mi
+      cpu: 10m
+      memory: 250Mi
     limits:
-      gpu.intel.com/i915: 1
-      memory: 4000Mi
+      memory: 6000Mi
