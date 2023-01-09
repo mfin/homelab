@@ -9,9 +9,6 @@ app-template:
     RADARR__INSTANCE_NAME: Radarr
     RADARR__PORT: &port 80
     RADARR__LOG_LEVEL: info
-  envFrom:
-    - secretRef:
-        name: radarr-secret
   service:
     main:
       ports:
