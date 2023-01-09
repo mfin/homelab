@@ -25,7 +25,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      path: /app/config
+      mountPath: /app/config
       existingClaim: overseerr-config
     data:
       enabled: true
