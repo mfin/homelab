@@ -27,11 +27,6 @@ app-template:
       enabled: true
       mountPath: /app/config
       existingClaim: overseerr-config
-    data:
-      enabled: true
-      type: nfs
-      path: /volume1/data
-      mountPath: /data
   resources:
     requests:
       cpu: 10m
