@@ -1,0 +1,40 @@
+app-template:
+  controller:
+    type: statefulset
+  image:
+    repository: ghcr.io/sct/overseerr
+    tag: 1.31.0
+  env:
+    TZ: Europe/Ljubljana
+    PORT: &port 80
+    LOG_LEVEL: info
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      path: /app/config
+      existingClaim: overseerr-config
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
