@@ -1,0 +1,39 @@
+app-template:
+  image:
+    repository: ghcr.io/onedr0p/unpackerr
+    tag: 0.10.1
+  env:
+    TZ: Europe/Ljubljana
+    UN_SONARR_0_URL: http://sonarr.sonarr
+    UN_SONARR_0_PATHS_0: /data/downloads
+    UN_RADARR_0_URL: http://radarr.radarr
+    UN_RADARR_0_PATHS_0: /data/downloads
+    UN_RADARR_1_URL: http://radarr-4k.radarr-4k
+    UN_RADARR_1_PATHS_0: /data/downloads
+  service:
+    main:
+      enabled: false
+  probes:
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
+    startup:
+      enabled: false
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
