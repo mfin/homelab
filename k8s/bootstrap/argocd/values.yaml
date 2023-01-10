@@ -110,3 +110,37 @@ argo-cd:
             name: custom-tools
   redis:
     metrics: *metrics
+
+  notifications:
+    secret:
+      create: false
+
+    notifiers:
+      service.email.gmail: |
+        username: $email-username
+        password: $email-password
+        host: smtp.gmail.com
+        port: 465
+        from: $email-username
+
+    subscriptions:
+    - recipients:
+      - email:argo@mfin.dev
+      triggers:
+      - on-sync-running
+
+    triggers:
+      trigger.on-sync-running: |
+        - description: Application syncing is running
+          send:
+          - app-sync-running
+          when: app.status.operationState.phase in ['Running']
+      defaultTriggers: |
+        - on-sync-running
+    templates:
+      template.app-sync-running: |
+        email:
+          subject: Start syncing application {{.app.metadata.name}}.
+        message: |
+          The sync operation of application {{.app.metadata.name}} has started at {{.app.status.operationState.startedAt}}.
+          Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
