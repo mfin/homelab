@@ -19,10 +19,6 @@ app-template:
           port: 5555
         ldap:
           port: 389
-  ingress:
-    main:
-      enabled: true
-      ingressClassName: traefik
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100
