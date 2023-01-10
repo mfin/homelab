@@ -44,3 +44,36 @@ data:
 
     server:
       port: 80
+
+    identity_providers:
+      oidc:
+        cors:
+          endpoints: ["authorization", "token", "revocation", "introspection"]
+          allowed_origins_from_client_redirect_uris: true
+        clients:
+          - id: argocd
+            description: Argo CD
+            secret: {{ .Values.authelia.argocdSecret }}
+            public: false
+            authorization_policy: two_factor
+            redirect_uris:
+              - {{ .Values.authelia.argocdUrl }}/auth/callback
+            scopes:
+              - openid
+              - groups
+              - email
+              - profile
+            userinfo_signing_algorithm: none
+          - id: argocd-cli
+            description: Argo CD (CLI)
+            public: true
+            authorization_policy: two_factor
+            redirect_uris:
+              - http://localhost:8085/auth/callback
+            scopes:
+              - openid
+              - groups
+              - email
+              - profile
+              - offline_access
+            userinfo_signing_algorithm: none
