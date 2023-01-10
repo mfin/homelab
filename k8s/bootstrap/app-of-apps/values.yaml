@@ -11,3 +11,4 @@ sets:
   - name: networking
   - name: automation
   - name: media
+  - name: authentication
