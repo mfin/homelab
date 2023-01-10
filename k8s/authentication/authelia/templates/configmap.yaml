@@ -12,21 +12,21 @@ data:
       local:
         path: /db/db.sqlite3
 
-  authentication_backend:
-    password_reset:
-      disable: true
-    ldap:
-      implementation: custom
-      url: ldap://glauth.glauth
-      timeout: 5s
-      start_tls: false
-      base_dn: "{{ .Values.authelia.baseDN }}"
-      additional_users_dn: OU=users
-      users_filter: (&({username_attribute}={input})(objectClass=posixAccount))
-      username_attribute: uid
-      mail_attribute: mail
-      display_name_attribute: givenName
-      groups_filter: (&(memberUid={username})(objectClass=posixGroup))
-      group_name_attribute: cn
-      user: "{{ .Values.authelia.user }}"
-      password: "{{ .Values.authelia.password }}"
+    authentication_backend:
+      password_reset:
+        disable: true
+      ldap:
+        implementation: custom
+        url: ldap://glauth.glauth
+        timeout: 5s
+        start_tls: false
+        base_dn: "{{ .Values.authelia.baseDN }}"
+        additional_users_dn: OU=users
+        users_filter: (&({username_attribute}={input})(objectClass=posixAccount))
+        username_attribute: uid
+        mail_attribute: mail
+        display_name_attribute: givenName
+        groups_filter: (&(memberUid={username})(objectClass=posixGroup))
+        group_name_attribute: cn
+        user: "{{ .Values.authelia.user }}"
+        password: "{{ .Values.authelia.password }}"
