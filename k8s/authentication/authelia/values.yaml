@@ -6,7 +6,7 @@ app-template:
   image:
     repository: ghcr.io/authelia/authelia
     tag: 4.37.5
-  args: ["--config", "/etc/authelia/config.yml"]
+  args: ["--config", "/etc/authelia/config.yaml"]
   env:
     TZ: Europe/Ljubljana
   enableServiceLinks: false
@@ -47,8 +47,8 @@ app-template:
       enabled: true
       type: configMap
       name: authelia-config
-      subPath: config.yml
-      mountPath: /etc/authelia/config.yml
+      subPath: config.yaml
+      mountPath: /etc/authelia/config.yaml
       readOnly: false
     db:
       enabled: true
