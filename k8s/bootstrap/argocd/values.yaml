@@ -125,7 +125,7 @@ argo-cd:
 
     subscriptions:
     - recipients:
-      - email:argo@mfin.dev
+      - gmail:argo@mfin.dev
       triggers:
       - on-sync-running
 
