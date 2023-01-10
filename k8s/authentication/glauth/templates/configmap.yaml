@@ -32,7 +32,7 @@ data:
         name = "{{ .Values.glauth.searchUserName }}"
         uidnumber = 6000
         primarygroup = 5000
-        passbcrypt = "{{ htpasswd .Values.glauth.searchUserName .Values.glauth.searchPassword }}"
+        passbcrypt = "{{ .Values.glauth.searchPassword }}"
         [[users.capabilities]]
             action = "search"
             object = "*"
@@ -44,4 +44,4 @@ data:
         uidnumber = 6001
         primarygroup = 5002
         othergroups = [ 5001 ]
-        passbcrypt = "{{ htpasswd .Values.glauth.mfinUserName .Values.glauth.mfinPassword }}"
+        passbcrypt = "{{ .Values.glauth.mfinPassword }}"
