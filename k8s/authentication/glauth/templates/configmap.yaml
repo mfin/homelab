@@ -22,7 +22,7 @@ data:
         name = "svc-accounts"
         gidnumber = 5000
     [[groups]]
-        name = "admins"
+        name = "admin"
         gidnumber = 5001
     [[groups]]
         name = "users"
