@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
@@ -6,3 +7,12 @@ spec:
   redirectScheme:
     scheme: https
     permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: authelia
+spec:
+  forwardAuth:
+    address: {{ .Values.custom.autheliaUrl }}
+    trustForwardHeader: true
