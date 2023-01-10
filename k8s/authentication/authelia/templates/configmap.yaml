@@ -30,3 +30,14 @@ data:
         group_name_attribute: cn
         user: "{{ .Values.authelia.user }}"
         password: "{{ .Values.authelia.password }}"
+
+    access_control:
+      default_policy: two_factor
+
+    session:
+      domain: {{ .Values.authelia.domain }}
+
+    notifier:
+      disable_startup_check: false
+      filesystem:
+        filename: /db/notification.txt
