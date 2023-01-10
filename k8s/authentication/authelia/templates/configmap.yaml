@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authelia-config
+data:
+  config.yaml: |-
+    storage:
+      encryption_key: "{{ .Values.authelia.encryptionKey }}"
+      local:
+        path: /db/db.sqlite3

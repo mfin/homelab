@@ -1,0 +1,61 @@
+app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    type: statefulset
+  image:
+    repository: ghcr.io/authelia/authelia
+    tag: 4.37.5
+  args: ["--config", "/etc/authelia/config.yml", "--config.experimental.filters", "expand-env"]
+  env:
+    TZ: Europe/Ljubljana
+  enableServiceLinks: false
+  service:
+    main:
+      ports:
+        http:
+          port: &port 80
+        metrics:
+          enabled: true
+          port: 8080
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /api/health
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: authelia-config
+      subPath: config.yml
+      mountPath: /etc/authelia/config.yml
+      readOnly: false
+    db:
+      enabled: true
+      existingClaim: authelia-db
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
