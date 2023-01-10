@@ -6,7 +6,7 @@ app-template:
   image:
     repository: ghcr.io/authelia/authelia
     tag: 4.37.5
-  args: ["--config", "/etc/authelia/config.yml", "--config.experimental.filters", "expand-env"]
+  args: ["--config", "/etc/authelia/config.yml"]
   env:
     TZ: Europe/Ljubljana
   enableServiceLinks: false
