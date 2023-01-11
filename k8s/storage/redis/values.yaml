@@ -1,0 +1,20 @@
+app-template:
+  image:
+    repository: docker.io/library/redis
+    tag: 7.0.7
+
+  service:
+    main:
+      ports:
+        http:
+          enabled: false
+        redis:
+          enabled: true
+          port: 6379
+
+  resources:
+    requests:
+      cpu: 23m
+      memory: 64M
+    limits:
+      memory: 64M
