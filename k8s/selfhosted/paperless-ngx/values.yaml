@@ -45,8 +45,6 @@ app-template:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
 
   podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
     fsGroup: 100
     fsGroupChangePolicy: "OnRootMismatch"
 
