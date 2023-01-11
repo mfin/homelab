@@ -8,6 +8,21 @@ app-template:
     repository: ghcr.io/paperless-ngx/paperless-ngx
     tag: 1.11.3
 
+  initContainers:
+    copy-scripts:
+      image: ubuntu:22.04
+      command:
+        - /bin/bash
+        - -c
+        - |
+          cp /pushover-notifier.sh /mnt/scripts
+          chmod +x /mnt/scripts/*
+      volumeMounts:
+        - name: scripts
+          mountPath: /mnt/scripts
+        - name: notifier
+          mountPath: /pushover-notifier.sh
+
   env:
     COMPOSE_PROJECT_NAME: paperless
     PAPERLESS_CONSUMER_POLLING: "60"
@@ -23,7 +38,7 @@ app-template:
     PAPERLESS_TIME_ZONE: "Europe/Ljubljana"
     PAPERLESS_CONSUMPTION_DIR: /mnt/inbox
     PAPERLESS_MEDIA_ROOT: /mnt/paperless
-    PAPERLESS_POST_CONSUME_SCRIPT: /scripts/pushover-notifier.sh
+    PAPERLESS_POST_CONSUME_SCRIPT: /mnt/scripts/pushover-notifier.sh
     USERMAP_UID: 1028
     USERMAP_GID: 100
 
@@ -68,8 +83,12 @@ app-template:
       type: configMap
       name: pushover-notifier
       subPath: pushover-notifier.sh
-      mountPath: /scripts/pushover-notifier.sh
+      mountPath: /pushover-notifier.sh
       readOnly: true
+    scripts:
+      enabled: true
+      type: emptyDir
+      mountPath: /mnt/scripts
 
   resources:
     requests:
