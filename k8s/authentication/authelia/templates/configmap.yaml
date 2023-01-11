@@ -45,6 +45,8 @@ data:
         username: {{ .Values.authelia.smtpUsername }}
         password: {{ .Values.authelia.smtpPassword }}
         sender: "Authelia <{{ .Values.authelia.smtpSender }}>"
+        disable_require_tls: true
+        disable_starttls: true
 
     server:
       port: 80
