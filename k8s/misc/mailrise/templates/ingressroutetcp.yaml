@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mailrise
+spec:
+  entryPoints:
+    - mailsecure
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: smtp
+      port: 25
+  tls:
+    domains:
+    - main: {{ .Values.mailrise.hostname }}

@@ -7,6 +7,10 @@ traefik:
       metallb.universe.tf/allow-shared-ip: traefik
 
   ports:
+    mailsecure:
+      port: 465
+      expose: true
+      exposedPort: 465
     web:
       redirectTo: websecure
 
