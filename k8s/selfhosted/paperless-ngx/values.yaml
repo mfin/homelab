@@ -15,7 +15,6 @@ app-template:
         - /bin/bash
         - -c
         - |
-          ls -lah /scripts/pushover-notifier.sh
           cp /scripts/pushover-notifier.sh /mnt/scripts
           chmod +x /mnt/scripts/*
       volumeMounts:
