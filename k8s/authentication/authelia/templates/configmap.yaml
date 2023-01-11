@@ -40,12 +40,11 @@ data:
     notifier:
       disable_startup_check: false
       smtp:
-        host: mailrise.mailrise.svc.cluster.local
-        port: 25
+        host: {{ .Values.authelia.smtpHost }}
+        port: 465
         username: {{ .Values.authelia.smtpUsername }}
         password: {{ .Values.authelia.smtpPassword }}
         sender: "Authelia <{{ .Values.authelia.smtpSender }}>"
-        disable_require_tls: true
 
     server:
       port: 80
