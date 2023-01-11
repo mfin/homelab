@@ -23,6 +23,7 @@ app-template:
           mountPath: /mnt/scripts
         - name: notifier
           mountPath: /scripts/pushover-notifier.sh
+          subPath: pushover-notifier.sh
 
   env:
     COMPOSE_PROJECT_NAME: paperless
