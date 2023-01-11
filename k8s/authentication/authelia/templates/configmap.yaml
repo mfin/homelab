@@ -17,7 +17,7 @@ data:
         disable: true
       ldap:
         implementation: custom
-        url: ldap://glauth.glauth
+        url: ldap://glauth.glauth.svc.cluster.local
         timeout: 5s
         start_tls: false
         base_dn: "{{ .Values.authelia.baseDN }}"
