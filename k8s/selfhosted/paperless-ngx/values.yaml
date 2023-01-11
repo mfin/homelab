@@ -15,7 +15,7 @@ app-template:
         - /bin/bash
         - -c
         - |
-          cp /pushover-notifier.sh /mnt/scripts
+          cp /scripts/pushover-notifier.sh /mnt/scripts
           chmod +x /mnt/scripts/*
       volumeMounts:
         - name: scripts
@@ -83,7 +83,7 @@ app-template:
       type: configMap
       name: pushover-notifier
       subPath: pushover-notifier.sh
-      mountPath: /pushover-notifier.sh
+      mountPath: /scripts/pushover-notifier.sh
       readOnly: true
     scripts:
       enabled: true
