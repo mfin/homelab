@@ -6,7 +6,7 @@ gitops:
 sets:
   - name: bootstrap
     namespace: argocd
-  - name: apps
+  - name: selfhosted
   - name: misc
   - name: networking
   - name: automation
