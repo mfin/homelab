@@ -8,7 +8,7 @@ spec:
   routes:
   - match: HostSNI(`*`)
     services:
-    - name: smtp
+    - name: mailrise
       port: 25
   tls:
     domains:
