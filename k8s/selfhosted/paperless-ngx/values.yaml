@@ -23,6 +23,7 @@ app-template:
     PAPERLESS_TIME_ZONE: "Europe/Ljubljana"
     PAPERLESS_CONSUMPTION_DIR: /mnt/inbox
     PAPERLESS_MEDIA_ROOT: /mnt/paperless
+    PAPERLESS_POST_CONSUME_SCRIPT: /scripts/pushover-notifier.sh
     USERMAP_UID: 1028
     USERMAP_GID: 100
 
@@ -58,6 +59,13 @@ app-template:
       mountPath: /mnt/inbox
       type: nfs
       path: /volume1/paperless_inbox
+    notifier:
+      enabled: true
+      type: configMap
+      name: pushover-notifier
+      subPath: pushover-notifier.sh
+      mountPath: /scripts/pushover-notifier.sh
+      readOnly: true
 
   resources:
     requests:
