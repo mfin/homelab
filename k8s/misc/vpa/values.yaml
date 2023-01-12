@@ -1,3 +1,6 @@
 vpa:
   updater:
     enabled: false
+  recommender:
+    image:
+      tag: 0.12.0
