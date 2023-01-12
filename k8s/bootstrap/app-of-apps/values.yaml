@@ -13,3 +13,4 @@ sets:
   - name: media
   - name: authentication
   - name: storage
+  - name: monitoring
