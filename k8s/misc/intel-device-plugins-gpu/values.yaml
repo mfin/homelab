@@ -1,2 +1,2 @@
 intel-device-plugins-gpu:
-  name: intel-device-plugins-gpu
+  name: intel-gpu-plugin
