@@ -4,7 +4,7 @@ hajimari:
   hajimari:
     title: mfin/homelab
     lightTheme: gazette
-    darkTheme: blazkboard
+    darkTheme: blackboard
     alwaysTargetBlank: true
     showGreeting: false
     showAppGroups: false
