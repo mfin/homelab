@@ -20,7 +20,7 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
-        hajimari.io/enable: true
+        hajimari.io/enable: "true"
         hajimari.io/icon: filmstrip
         hajimari.io/appName: Radarr
         hajimari.io/info: Movie collection manager for Usenet and BitTorrent users

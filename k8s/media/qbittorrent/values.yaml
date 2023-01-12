@@ -29,7 +29,7 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
-        hajimari.io/enable: true
+        hajimari.io/enable: "true"
         hajimari.io/icon: download
         hajimari.io/appName: qBittorrent
         hajimari.io/info: Open-source software alternative to µTorrent

@@ -6,7 +6,7 @@ goldilocks:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
-        hajimari.io/enable: true
+        hajimari.io/enable: "true"
         hajimari.io/icon: gauge
         hajimari.io/appName: Goldilocks
         hajimari.io/info: Utility that can help you identify a starting point for resource requests and limits

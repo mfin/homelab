@@ -31,8 +31,8 @@ argo-cd:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: true
-        hajimari.io/enable: true
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        hajimari.io/enable: "true"
         hajimari.io/icon: robot
         hajimari.io/appName: ArgoCD
         hajimari.io/info: Declarative, GitOps continuous delivery tool for Kubernetes

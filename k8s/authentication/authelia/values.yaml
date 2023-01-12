@@ -38,7 +38,7 @@ app-template:
       enabled: true
       ingressClassName: traefik
       annotations:
-        hajimari.io/enable: true
+        hajimari.io/enable: "true"
         hajimari.io/icon: lock
         hajimari.io/appName: Authelia
         hajimari.io/info: Authentication and authorization, MFA and SSO

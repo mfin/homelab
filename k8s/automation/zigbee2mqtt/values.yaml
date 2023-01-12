@@ -20,7 +20,7 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
-        hajimari.io/enable: true
+        hajimari.io/enable: "true"
         hajimari.io/icon: zigbee
         hajimari.io/appName: Zigbee2MQTT
         hajimari.io/info: Zigbee to MQTT bridge
