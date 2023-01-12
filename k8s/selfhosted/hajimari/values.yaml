@@ -1,0 +1,32 @@
+hajimari:
+  env:
+    TZ: Europe/Ljubljana
+  hajimari:
+    title: mfin/homelab
+    alwaysTargetBlank: true
+    showGreeting: false
+    showAppGroups: false
+    showAppStatus: false
+    showBookmarkGroups: false
+    showGlobalBookmarks: false
+    showAppUrls: false
+    defaultEnable: true
+    namespaceSelector:
+      any: true
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: "false"
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+  podAnnotations:
+    configmap.reloader.stakater.com/reload: "hajimari-settings"
+  persistence:
+    data:
+      enabled: true
+      type: emptyDir
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128M
