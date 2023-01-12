@@ -59,6 +59,10 @@ app-template:
       ingressClassName: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: true
+        hajimari.io/icon: file-document
+        hajimari.io/appName: Paperless
+        hajimari.io/info: Document management system that transforms your physical documents into a searchable online archive
 
   podSecurityContext:
     fsGroup: 100

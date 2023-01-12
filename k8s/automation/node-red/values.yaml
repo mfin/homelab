@@ -18,6 +18,10 @@ app-template:
       ingressClassName: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: true
+        hajimari.io/icon: resistor-nodes
+        hajimari.io/appName: Node-RED
+        hajimari.io/info: Low-code programming for event-driven applications
 
   persistence:
     config:

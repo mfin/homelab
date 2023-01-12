@@ -37,6 +37,11 @@ app-template:
     main:
       enabled: true
       ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: true
+        hajimari.io/icon: lock
+        hajimari.io/appName: Authelia
+        hajimari.io/info: Authentication and authorization, MFA and SSO
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100

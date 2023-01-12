@@ -25,6 +25,10 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: true
+        hajimari.io/icon: movie-search
+        hajimari.io/appName: Prowlarr
+        hajimari.io/info: Indexer manager/proxy built on the popular *arr .net/reactjs base stack
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100

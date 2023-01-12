@@ -17,6 +17,11 @@ app-template:
     main:
       enabled: true
       ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: true
+        hajimari.io/icon: eye-circle
+        hajimari.io/appName: Overseerr
+        hajimari.io/info: Request management and media discovery for Plex ecosystem
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100

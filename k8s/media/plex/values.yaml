@@ -18,6 +18,11 @@ app-template:
     main:
       enabled: true
       ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: true
+        hajimari.io/icon: plex
+        hajimari.io/appName: Plex
+        hajimari.io/info: Personal media server
 
   podSecurityContext:
     runAsUser: 1028

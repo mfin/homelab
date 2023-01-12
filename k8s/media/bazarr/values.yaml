@@ -17,6 +17,10 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: true
+        hajimari.io/icon: subtitles
+        hajimari.io/appName: Bazarr
+        hajimari.io/info: Manages and downloads subtitles based on your requirements
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100
