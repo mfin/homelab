@@ -3,6 +3,8 @@ hajimari:
     TZ: Europe/Ljubljana
   hajimari:
     title: mfin/homelab
+    lightTheme: paper
+    darkTheme: espresso
     alwaysTargetBlank: true
     showGreeting: false
     showAppGroups: false
