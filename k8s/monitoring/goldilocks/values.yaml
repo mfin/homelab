@@ -1,5 +1,6 @@
 goldilocks:
   dashboard:
+    replicaCount: 1
     ingress:
       enabled: true
       ingressClassName: traefik
