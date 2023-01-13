@@ -36,9 +36,6 @@ app-template:
           protocol: TCP
 
   persistence:
-    data:
-      enabled: true
-      existingClaim: mosquitto-pvc
     mosquitto-config:
       enabled: true
       type: configMap
