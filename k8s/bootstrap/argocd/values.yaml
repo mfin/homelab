@@ -40,11 +40,6 @@ argo-cd:
       enabled: false
       serviceMonitor:
         enabled: false
-  applicationSet:
-    webhook:
-      ingress:
-        enabled: true
-        ingressClassName: traefik
   dex:
     enabled: false
   controller:
