@@ -7,8 +7,8 @@ spec:
   initImage: intel/intel-gpu-initcontainer:0.25.1
   logLevel:  2
   sharedDevNum: 1
-  resourceManager: false
-  enableMonitoring: false
+  # resourceManager: false
+  # enableMonitoring: false
   preferredAllocationPolicy: none
 
   nodeSelector:
