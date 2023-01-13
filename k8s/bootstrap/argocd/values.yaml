@@ -120,7 +120,7 @@ argo-cd:
         password: $email-password
         host: $email-hostname
         port: 465
-        from: $email-username
+        from: $email-from
 
     triggers:
       trigger.on-sync-running: |
