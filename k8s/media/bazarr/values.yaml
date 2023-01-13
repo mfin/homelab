@@ -1,5 +1,6 @@
 app-template:
   controller:
+    replicas: 0
     type: statefulset
   image:
     repository: ghcr.io/onedr0p/bazarr

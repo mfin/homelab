@@ -1,4 +1,6 @@
 app-template:
+  controller:
+    replicas: 0
   image:
     repository: docker.io/nodered/node-red
     tag: 3.0.2
