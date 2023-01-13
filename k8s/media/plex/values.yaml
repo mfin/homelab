@@ -31,8 +31,8 @@ app-template:
     fsGroup: 100
     fsGroupChangePolicy: "OnRootMismatch"
     supplementalGroups:
-        - 44
-        - 109
+      - 44 # video
+      - 109 # render
 
   persistence:
     config:
