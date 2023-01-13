@@ -1,4 +1,4 @@
 node-feature-discovery:
-  master:
-    annotations:
+  worker:
+    daemonsetAnnotations:
       deprecated.daemonset.template.generation: "1"
