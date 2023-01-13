@@ -1,5 +1,5 @@
 gitops:
-  repo: https://github.com/mfin/homelab
+  repo: https://github.com/mfin/homelab.git
   revision: main
   secretName: helm-secrets-private-keys#key.txt?secrets.yaml
 
