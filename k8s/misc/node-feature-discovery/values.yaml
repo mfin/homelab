@@ -1,0 +1,4 @@
+node-feature-discovery:
+  master:
+    annotations:
+      deprecated.daemonset.template.generation: "1"

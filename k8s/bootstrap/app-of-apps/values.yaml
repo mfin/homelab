@@ -75,7 +75,7 @@ apps:
     path: k8s/selfhosted
   - name: redis
     path: k8s/storage
-  # - name: node-feature-discovery
-  #   path: k8s/misc
+  - name: node-feature-discovery
+    path: k8s/misc
   # - name: intel-device-plugins-gpu
   #   path: k8s/misc
