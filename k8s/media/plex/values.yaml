@@ -30,6 +30,9 @@ app-template:
     runAsGroup: 100
     fsGroup: 100
     fsGroupChangePolicy: "OnRootMismatch"
+    supplementalGroups:
+        - 44
+        - 109
 
   persistence:
     config:
