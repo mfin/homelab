@@ -118,7 +118,7 @@ argo-cd:
       service.email.pushover: |
         username: $email-username
         password: $email-password
-        host: smtp.gmail.com
+        host: $email-hostname
         port: 465
         from: $email-username
 
