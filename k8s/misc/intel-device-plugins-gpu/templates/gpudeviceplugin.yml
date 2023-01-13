@@ -1,14 +1,12 @@
 apiVersion: deviceplugin.intel.com/v1
 kind: GpuDevicePlugin
 metadata:
-  name: intel-gpu-device
+  name: intel-gpu-plugin
 spec:
   image: intel/intel-gpu-plugin:0.25.1
   initImage: intel/intel-gpu-initcontainer:0.25.1
   logLevel:  2
   sharedDevNum: 1
-  # resourceManager: false
-  # enableMonitoring: false
   preferredAllocationPolicy: none
 
   nodeSelector:
