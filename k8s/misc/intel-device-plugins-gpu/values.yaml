@@ -3,5 +3,6 @@ intel-device-plugins-gpu:
   nodeFeatureRule: true
   sharedDevNum: 3
   resourceManager: true
+  enableMonitoring: false
   annotations:
     test: test
