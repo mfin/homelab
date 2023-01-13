@@ -3,14 +3,75 @@ gitops:
   revision: main
   secretName: helm-secrets-private-keys#key.txt?secrets.yaml
 
-sets:
-  - name: bootstrap
+apps:
+  - name: argocd
+    path: k8s/bootstrap
+  - name: app-of-apps
+    path: k8s/bootstrap
     namespace: argocd
-  - name: selfhosted
-  - name: misc
-  - name: networking
-  - name: automation
-  - name: media
-  - name: authentication
-  - name: storage
-  - name: monitoring
+  - name: authelia
+    path: k8s/authentication
+  - name: glauth
+    path: k8s/authentication
+  - name: flaresolverr
+    path: k8s/automation
+  - name: gotenberg
+    path: k8s/automation
+  - name: home-assistant
+    path: k8s/automation
+  - name: mosquitto
+    path: k8s/automation
+  - name: node-red
+    path: k8s/automation
+  - name: tika
+    path: k8s/automation
+  - name: zigbee2mqtt
+    path: k8s/automation
+  - name: bazarr
+    path: k8s/media
+  - name: overseerr
+    path: k8s/media
+  - name: plex
+    path: k8s/media
+  - name: prowlarr
+    path: k8s/media
+  - name: qbittorrent
+    path: k8s/media
+  - name: radarr
+    path: k8s/media
+  - name: radarr-4k
+    path: k8s/media
+  - name: sonarr
+    path: k8s/media
+  - name: unpackerr
+    path: k8s/media
+  - name: intel-device-plugins-operator
+    path: k8s/misc
+  - name: mailrise
+    path: k8s/misc
+  - name: reflector
+    path: k8s/misc
+  - name: reloader
+    path: k8s/misc
+  - name: vpa
+    path: k8s/misc
+  - name: goldilocks
+    path: k8s/monitoring
+  - name: cert-manager
+    path: k8s/networking
+  - name: cloudflared
+    path: k8s/networking
+  - name: external-services
+    path: k8s/networking
+  - name: metallb
+    path: k8s/networking
+  - name: traefik
+    path: k8s/networking
+  - name: hajimari
+    path: k8s/selfhosted
+  - name: paperless-ngx
+    path: k8s/selfhosted
+  - name: whoami
+    path: k8s/selfhosted
+  - name: redis
+    path: k8s/storage

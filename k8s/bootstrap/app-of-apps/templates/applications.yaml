@@ -1,0 +1,39 @@
+{{- range $index, $app := .Values.apps }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $app.name }}
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: '{{ default $app.name $app.namespace }}'
+  project: default
+  source:
+    repoURL: {{ $.Values.gitops.repo }}
+    path: {{ $app.path }}/{{ $app.name }}
+    targetRevision: {{ $.Values.gitops.revision }}
+
+    helm:
+      valueFiles:
+        - secrets+age-import-kubernetes://{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 10
+      backoff:
+        duration: 1m
+        factor: 2
+        maxDuration: 16m
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+{{- end }}
