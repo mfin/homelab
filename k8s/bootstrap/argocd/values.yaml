@@ -115,18 +115,12 @@ argo-cd:
       create: false
 
     notifiers:
-      service.email.gmail: |
+      service.email.pushover: |
         username: $email-username
         password: $email-password
         host: smtp.gmail.com
         port: 465
         from: $email-username
-
-    subscriptions:
-    - recipients:
-      - gmail:argo@mfin.dev
-      triggers:
-      - on-sync-running
 
     triggers:
       trigger.on-sync-running: |
