@@ -9,6 +9,8 @@ secret:
 
 argo-cd:
   global:
+    image:
+      tag: v2.4.18
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
     statefulsetAnnotations:
