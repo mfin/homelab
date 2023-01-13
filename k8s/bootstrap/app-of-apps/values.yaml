@@ -46,15 +46,15 @@ apps:
   - name: unpackerr
     path: k8s/media
   - name: intel-device-plugins-operator
-    path: k8s/misc
+    path: k8s/system
   - name: mailrise
-    path: k8s/misc
+    path: k8s/selfhosted
   - name: reflector
-    path: k8s/misc
+    path: k8s/system
   - name: reloader
-    path: k8s/misc
+    path: k8s/system
   - name: vpa
-    path: k8s/misc
+    path: k8s/system
   - name: goldilocks
     path: k8s/monitoring
   - name: cert-manager
@@ -76,6 +76,6 @@ apps:
   - name: redis
     path: k8s/storage
   - name: node-feature-discovery
-    path: k8s/misc
+    path: k8s/system
   - name: intel-device-plugins-gpu
-    path: k8s/misc
+    path: k8s/system
