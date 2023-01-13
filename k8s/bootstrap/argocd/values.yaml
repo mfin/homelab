@@ -133,7 +133,7 @@ argo-cd:
     templates:
       template.app-sync-running: |
         email:
-          subject: Start syncing application {{.app.metadata.name}}.
+          subject: Syncing application {{.app.metadata.name}}
         message: |
           The sync operation of application {{.app.metadata.name}} has started at {{.app.status.operationState.startedAt}}.
           Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
