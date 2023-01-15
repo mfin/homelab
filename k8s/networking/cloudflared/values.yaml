@@ -2,6 +2,8 @@ app-template:
   priorityClassName: system-cluster-critical
   controller:
     replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
   image:
     repository: cloudflare/cloudflared
     tag: 1315-645e22744c07
@@ -32,9 +34,6 @@ app-template:
       mountPath: /etc/cloudflared/creds.json
       subPath: creds.json
       readOnly: true
-  podAnnotations:
-    configmap.reloader.stakater.com/reload: cloudflared-config
-    secret.reloader.stakater.com/reload: cloudflared-secret
   probes:
     liveness:
       enabled: true
