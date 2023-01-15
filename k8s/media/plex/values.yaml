@@ -1,3 +1,4 @@
+# TODO: think about the Plex networking some more
 app-template:
   image:
     repository: ghcr.io/onedr0p/plex
