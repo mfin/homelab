@@ -1,0 +1,11 @@
+external-dns:
+  image:
+    tag: 0.13.2
+
+  registry: noop
+  provider: pihole
+
+  env:
+    valueFrom:
+      secretKeyRef:
+        name: pihole-secret

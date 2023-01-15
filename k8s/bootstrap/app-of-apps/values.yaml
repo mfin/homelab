@@ -79,3 +79,5 @@ apps:
     path: k8s/system
   - name: intel-device-plugins-gpu
     path: k8s/system
+  - name: external-dns
+    path: k8s/networking
