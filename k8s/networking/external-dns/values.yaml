@@ -6,6 +6,6 @@ external-dns:
   provider: pihole
 
   env:
-    valueFrom:
-      secretKeyRef:
-        name: pihole-secret
+    - valueFrom:
+        secretKeyRef:
+          name: pihole-secret
