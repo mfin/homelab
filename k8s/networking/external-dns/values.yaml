@@ -6,11 +6,13 @@ external-dns:
   provider: pihole
 
   env:
-    - valueFrom:
+    - name: EXTERNAL_DNS_PIHOLE_SERVER
+      valueFrom:
         secretKeyRef:
-          name: EXTERNAL_DNS_PIHOLE_SERVER
-          key: pihole-secret
-    - valueFrom:
+          name: pihole-secret
+          key: EXTERNAL_DNS_PIHOLE_SERVER
+    - name: EXTERNAL_DNS_PIHOLE_PASSWORD
+      valueFrom:
         secretKeyRef:
-          name: EXTERNAL_DNS_PIHOLE_PASSWORD
-          key: pihole-secret
+          name: pihole-secret
+          key: EXTERNAL_DNS_PIHOLE_PASSWORD
