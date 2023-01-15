@@ -8,9 +8,9 @@ external-dns:
   env:
     - valueFrom:
         secretKeyRef:
-          name: pihole-secret
-          key: EXTERNAL_DNS_PIHOLE_SERVER
+          name: EXTERNAL_DNS_PIHOLE_SERVER
+          key: pihole-secret
     - valueFrom:
         secretKeyRef:
-          name: pihole-secret
-          key: EXTERNAL_DNS_PIHOLE_PASSWORD
+          name: EXTERNAL_DNS_PIHOLE_PASSWORD
+          key: pihole-secret
