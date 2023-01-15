@@ -3,6 +3,8 @@ traefik:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
 
   service:
+    spec:
+      externalTrafficPolicy: Local
     annotations:
       metallb.universe.tf/allow-shared-ip: traefik
 
