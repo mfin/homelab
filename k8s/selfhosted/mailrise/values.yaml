@@ -4,7 +4,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: ghcr.io/yoryan/mailrise
-    tag: latest
+    tag: latest # TODO: check why image tag doesn't work
 
   service:
     main:

@@ -6,7 +6,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: cloudflare/cloudflared
-    tag: 1315-645e22744c07
+    tag: 2022.12.1
   env:
     TZ: "Europe/Ljubljana"
   args:

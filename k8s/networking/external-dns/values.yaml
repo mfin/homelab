@@ -1,6 +1,6 @@
 external-dns:
   image:
-    tag: v0.13.2
+    tag: v0.13.2 # TODO: once there's update to this chart, remove tag
 
   registry: noop
   provider: pihole
