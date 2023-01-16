@@ -3,7 +3,7 @@ app-template:
     repository: ghcr.io/onedr0p/tautulli
     tag: 2.11.1
   controller:
-    replicas: 1
+    replicas: 0
     type: statefulset
   env:
     TZ: Europe/Ljubljana
