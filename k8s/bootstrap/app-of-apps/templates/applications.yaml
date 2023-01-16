@@ -7,8 +7,10 @@ metadata:
   namespace: {{ $.Release.Namespace }}
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
+  {{- if not (default $app.disableFinalizer false) }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  {{- end }}
 spec:
   destination:
     name: in-cluster
