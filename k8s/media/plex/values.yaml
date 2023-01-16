@@ -16,9 +16,6 @@ app-template:
       ports:
         http:
           port: 32400
-      annotations:
-        traefik.ingress.kubernetes.io/service.serversscheme: https
-        traefik.ingress.kubernetes.io/service.serverstransport: traefik-skip-tls@kubernetescrd
   ingress:
     main:
       enabled: true
