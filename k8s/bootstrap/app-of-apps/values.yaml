@@ -83,6 +83,6 @@ apps:
     path: k8s/networking
   - name: tautulli
     path: k8s/media
-  - name: kube-prometheus-stack
-    path: k8s/monitoring
-    disableFinalizer: true
+  # - name: kube-prometheus-stack
+  #   path: k8s/monitoring
+  #   disableFinalizer: true
