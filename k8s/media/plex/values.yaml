@@ -15,7 +15,12 @@ app-template:
       externalTrafficPolicy: Local
       ports:
         http:
-          port: 32400
+          enabled: false
+        https:
+          enabled: true
+          primary: true
+          port: 443
+          targetPort: 32400
   ingress:
     main:
       enabled: true
