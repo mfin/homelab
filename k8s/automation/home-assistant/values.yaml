@@ -67,7 +67,7 @@ app-template:
         - "/config/.vscode"
       ingress:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: traefik
         annotations:
           hajimari.io/appName: "HASS Config"
           hajimari.io/icon: cib:visual-studio-code
