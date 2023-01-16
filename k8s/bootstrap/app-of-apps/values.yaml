@@ -81,3 +81,5 @@ apps:
     path: k8s/system
   - name: external-dns
     path: k8s/networking
+  - name: tautulli
+    path: k8s/media
