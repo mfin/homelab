@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ddclient-config
+data:
+  ddclient.conf: |-
+    syslog=yes
+    ssl=yes
+    daemon=600
+
+    protocol=cloudflare
+    use=web
+    web=dynamicdns.park-your-domain.com/getip
+    ttl=1
+    login={{ .Values.ddclient.login }}
+    password={{ .Values.ddclient.password }}
+    zone={{ .Values.ddclient.zone }}
+    {{ .Values.ddclient.hostname }}

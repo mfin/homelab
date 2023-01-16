@@ -1,0 +1,21 @@
+app-template:
+  controller:
+    replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: linuxserver/ddclient
+    tag: 3.10.0
+  env:
+    TZ: "Europe/Ljubljana"
+  service:
+    main:
+      enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: ddclient-config
+      mountPath: /config/ddclient.conf
+      subPath: ddclient.conf
+      readOnly: true
