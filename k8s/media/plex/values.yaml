@@ -25,6 +25,7 @@ app-template:
         hajimari.io/icon: plex
         hajimari.io/appName: Plex
         hajimari.io/info: Personal media server
+        traefik.ingress.kubernetes.io/service.serversscheme: https
 
   podSecurityContext:
     runAsUser: 1028
