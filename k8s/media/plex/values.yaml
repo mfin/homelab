@@ -18,7 +18,7 @@ app-template:
           port: 32400
   ingress:
     main:
-      enabled: false
+      enabled: true
       ingressClassName: traefik
       annotations:
         hajimari.io/enable: "true"
