@@ -1,0 +1,41 @@
+app-template:
+  image:
+    repository: ghcr.io/onedr0p/tautulli
+    tag: 2.11.1
+  controller:
+    replicas: 1
+    type: statefulset
+  env:
+    TZ: Europe/Ljubljana
+  service:
+    main:
+      ports:
+        http:
+          port: 8181
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: chart-bar
+        hajimari.io/appName: Tautulli
+        hajimari.io/info: Monitor your Plex Media Server
+
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+
+  persistence:
+    config:
+      enabled: true
+      existingClaim: tautulli-config
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 500Mi
