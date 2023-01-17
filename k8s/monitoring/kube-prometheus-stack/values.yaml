@@ -60,7 +60,7 @@ kube-prometheus-stack:
               - alertname = "InfoInhibitor"
           - receiver: pushover
             matchers:
-              - severity = "critical"
+              - severity =~ "critical|alert"
             continue: true
     alertmanagerSpec:
       storage:
