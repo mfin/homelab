@@ -1,11 +1,6 @@
 metallb:
-  controller:
-    metrics:
+  prometheus:
+    serviceMonitor:
       enabled: true
-      serviceMonitor:
-        enabled: true
-  speaker:
-    metrics:
+    prometheusRule:
       enabled: true
-      serviceMonitor:
-        enabled: true
