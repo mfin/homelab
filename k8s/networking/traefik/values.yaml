@@ -31,6 +31,8 @@ traefik:
       exposedPort: 465
     web:
       redirectTo: websecure
+    metrics:
+      expose: true
 
   providers:
     kubernetesCRD:
