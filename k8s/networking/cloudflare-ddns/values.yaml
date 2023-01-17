@@ -4,10 +4,11 @@ app-template:
     annotations:
       reloader.stakater.com/auto: "true"
   image:
-    repository: linuxserver/ddclient
-    tag: 3.10.0
+    repository: timothyjmiller/cloudflare-ddns
+    tag: latest
   env:
     TZ: "Europe/Ljubljana"
+    CONFIG_PATH: "/etc/cloudflare-ddns/"
   service:
     main:
       enabled: false
@@ -15,7 +16,7 @@ app-template:
     config:
       enabled: true
       type: configMap
-      name: ddclient-config
-      mountPath: /config/ddclient.conf
-      subPath: ddclient.conf
+      name: cloudflare-ddns-config
+      mountPath: /etc/cloudflare-ddns/config.json
+      subPath: config.json
       readOnly: true
