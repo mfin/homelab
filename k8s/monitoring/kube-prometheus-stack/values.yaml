@@ -1,9 +1,8 @@
 kube-prometheus-stack:
   cleanPrometheusOperatorObjectNames: true
   grafana:
-    ingress:
-      enabled: true
-      ingressClassName: traefik
+    enabled: false
+    forceDeployDashboards: true
   prometheus:
     ingress:
       enabled: true
