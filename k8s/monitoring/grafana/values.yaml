@@ -1,4 +1,18 @@
 grafana:
+  env:
+    GF_ANALYTICS_CHECK_FOR_UPDATES: false
+    GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
+    GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
+    GF_EXPLORE_ENABLED: true
+    GF_GRAFANA_NET_URL: https://grafana.net
+    GF_LOG_MODE: console
+    GF_PANELS_DISABLE_SANITIZE_HTML: true
+    GF_PATHS_DATA: /var/lib/grafana/data
+    GF_PATHS_LOGS: /var/log/grafana
+    GF_PATHS_PLUGINS: /var/lib/grafana/plugins
+    GF_PATHS_PROVISIONING: /etc/grafana/provisioning
+    GF_SECURITY_ALLOW_EMBEDDING: true
+    GF_SECURITY_COOKIE_SAMESITE: grafana
   rbac:
     pspEnabled: false
   serviceMonitor:
@@ -15,3 +29,21 @@ grafana:
       hajimari.io/icon: simple-icons:grafana
   testFramework:
     enabled: false
+  grafana.ini:
+    auth:
+      oauth_auto_login: false
+    auth.generic_oauth:
+      enabled: true
+      name: Authelia
+      scopes: "openid profile email groups"
+      empty_scopes: false
+      login_attribute_path: preferred_username
+      groups_attribute_path: groups
+      name_attribute_path: name
+      use_pkce: true
+    auth.generic_oauth.group_mapping:
+      role_attribute_path: |-
+        contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
+      org_id: 1
+    auth.basic:
+      enabled: false
