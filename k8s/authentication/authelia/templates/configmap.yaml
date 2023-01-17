@@ -49,6 +49,11 @@ data:
     server:
       port: 80
 
+    telemetry:
+      metrics:
+        enabled: true
+        address: "tcp://0.0.0.0:8080"
+
     identity_providers:
       oidc:
         issuer_private_key: |-
