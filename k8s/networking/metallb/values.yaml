@@ -1,9 +1,11 @@
 metallb:
   controller:
     metrics:
+      enabled: true
       serviceMonitor:
         enabled: true
   speaker:
     metrics:
+      enabled: true
       serviceMonitor:
         enabled: true
