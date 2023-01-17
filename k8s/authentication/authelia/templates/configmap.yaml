@@ -88,3 +88,17 @@ data:
               - profile
               - offline_access
             userinfo_signing_algorithm: none
+          - id: grafana
+            description: Grafana
+            secret: "{{ .Values.authelia.grafanaSecret }}"
+            public: false
+            authorization_policy: two_factor
+            pre_configured_consent_duration: 1y
+            scopes:
+              - openid
+              - groups
+              - email
+              - profile
+            redirect_uris:
+              - {{ .Values.authelia.grafanaUrl }}/login/generic_oauth
+            userinfo_signing_algorithm: none
