@@ -20,6 +20,7 @@ data:
         }
       ],
       "a": true,
+      "aaaa": false,
       "purgeUnknownRecords": false,
       "ttl": 300
     }
