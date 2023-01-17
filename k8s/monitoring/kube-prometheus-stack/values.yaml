@@ -14,3 +14,6 @@ kube-prometheus-stack:
         hajimari.io/icon: alert-decagram-outline
         hajimari.io/appName: alertmanager
         hajimari.io/info: Handles alerts sent by client applications such as the Prometheus server
+    config:
+      global:
+        resolve_timeout: 5m
