@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: prometheus-data
   labels:
-    prometheus.storage.local: prometheus-data
+    storage: prometheus-data
   annotations:
     volumeType: local
 spec:
@@ -20,7 +20,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: alertmanager-data
   labels:
-    prometheus.storage.local: alertmanager-data
+    storage: alertmanager-data
   annotations:
     volumeType: local
 spec:
