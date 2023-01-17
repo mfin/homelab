@@ -22,7 +22,7 @@ kube-prometheus-stack:
         volumeClaimTemplate:
           spec:
             selector:
-              matchLabel:
+              matchLabels:
                 storage: prometheus-data
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
@@ -60,7 +60,7 @@ kube-prometheus-stack:
         volumeClaimTemplate:
           spec:
             selector:
-              matchLabel:
+              matchLabels:
                 storage: alertmanager-data
   kubeControllerManager:
     enabled: true
