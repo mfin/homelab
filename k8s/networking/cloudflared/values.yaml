@@ -25,6 +25,7 @@ app-template:
           enabled: true
           primary: true
           port: 3333
+          protocol: TCP
   serviceMonitor:
     main:
       enabled: true
