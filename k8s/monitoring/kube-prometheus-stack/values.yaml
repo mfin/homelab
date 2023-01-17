@@ -8,6 +8,8 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
   alertmanager:
     ingress:
       enabled: true
