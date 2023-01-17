@@ -49,3 +49,7 @@ kube-prometheus-stack:
       enabled: true
       https: true
       insecureSkipVerify: true
+  kubeProxy:
+    enabled: true
+  kubeEtcd:
+    enabled: true
