@@ -48,6 +48,9 @@ grafana:
   datasources:
     datasources.yaml:
       apiVersion: 1
+      deleteDatasources:
+        - name: Alertmanager
+          orgId: 1
       datasources:
         - name: Prometheus
           type: prometheus
