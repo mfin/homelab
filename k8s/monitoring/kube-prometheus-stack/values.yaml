@@ -8,3 +8,9 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: alert-decagram-outline
+        hajimari.io/appName: alertmanager
+        hajimari.io/info: Handles alerts sent by client applications such as the Prometheus server
