@@ -10,6 +10,10 @@ kube-prometheus-stack:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: simple-icons:prometheus
+        hajimari.io/appName: Prometheus
+        hajimari.io/info: Open-source monitoring system with a dimensional data model, flexible query language, efficient time series database and modern alerting approach
     prometheusSpec:
       retention: 2d
       retentionSize: 6GB
