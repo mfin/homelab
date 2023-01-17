@@ -16,7 +16,7 @@ app-template:
     - --metrics=0.0.0.0:3333
     - --no-autoupdate
     - run
-  service::
+  service:
     main:
       ports:
         http:
