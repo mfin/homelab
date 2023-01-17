@@ -8,7 +8,7 @@ data:
       "cloudflare": [
         {
           "authentication": {
-            "api_token": "{{ .Values.cloudflare.apiToken }}",
+            "api_token": "{{ .Values.cloudflare.apiToken }}"
           },
           "zone_id": "{{ .Values.cloudflare.zoneId }}",
           "subdomains": [
