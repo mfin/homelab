@@ -46,6 +46,9 @@ app-template:
           path: /api/prometheus
           interval: 10s
           scrapeTimeout: 10s
+          bearerTokenSecret:
+            name: home-assistant-token
+            key: token
 
   persistence:
     config:
