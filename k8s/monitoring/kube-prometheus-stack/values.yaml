@@ -49,9 +49,12 @@ kube-prometheus-stack:
         repeat_interval: 6h
         receiver: pushover
         routes:
+          - receiver: healthchecksio
+            matchers:
+              - alertname = "Watchdog"
           - receiver: "null"
             matchers:
-              - alertname =~ "InfoInhibitor|Watchdog"
+              - alertname = "InfoInhibitor"
           - receiver: pushover
             matchers:
               - severity = "critical"
