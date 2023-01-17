@@ -37,9 +37,9 @@ argo-cd:
         hajimari.io/appName: ArgoCD
         hajimari.io/info: Declarative, GitOps continuous delivery tool for Kubernetes
     metrics: &metrics
-      enabled: false
+      enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
   dex:
     enabled: false
   controller:
@@ -111,6 +111,7 @@ argo-cd:
     metrics: *metrics
 
   notifications:
+    metrics: *metrics
     secret:
       create: false
 
