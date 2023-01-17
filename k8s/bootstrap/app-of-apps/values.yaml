@@ -87,3 +87,5 @@ apps:
     path: k8s/monitoring
   - name: cloudflare-ddns
     path: k8s/networking
+  - name: grafana
+    path: k8s/monitoring

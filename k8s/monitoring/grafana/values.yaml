@@ -1,0 +1,13 @@
+grafana:
+  serviceMonitor:
+    enabled: true
+  persistence:
+    enabled: false
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      hajimari.io/enable: "true"
+      hajimari.io/appName: Grafana
+      hajimari.io/info: Open source analytics & monitoring solution for every database
+      hajimari.io/icon: simple-icons:grafana
