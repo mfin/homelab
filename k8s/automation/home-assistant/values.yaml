@@ -43,7 +43,7 @@ app-template:
       endpoints:
         - port: http
           scheme: http
-          path: /api/metrics
+          path: /api/prometheus
           interval: 10s
           scrapeTimeout: 10s
 
