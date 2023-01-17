@@ -13,7 +13,16 @@ traefik:
       serviceMonitor:
         enabled: true
       prometheusRule:
-        enabled: true
+        rules:
+        - alert: TraefikDown
+          expr: up{job="traefik"} == 0
+          for: 5m
+          labels:
+            context: traefik
+            severity: critical
+          annotations:
+            summary: "Traefik Down"
+            description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
 
   ports:
     mailsecure:
