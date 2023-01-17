@@ -21,9 +21,10 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            selector:
-              matchLabels:
-                storage: prometheus-data
+            storageClassName: local-path
+            resources:
+              requests:
+                storage: 20Gi
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
@@ -56,12 +57,13 @@ kube-prometheus-stack:
               - severity = "critical"
             continue: true
     alertmanagerSpec:
-      storageSpec:
+      storage:
         volumeClaimTemplate:
           spec:
-            selector:
-              matchLabels:
-                storage: alertmanager-data
+            storageClassName: local-path
+            resources:
+              requests:
+                storage: 1Gi
   kubeControllerManager:
     enabled: true
     serviceMonitor:
