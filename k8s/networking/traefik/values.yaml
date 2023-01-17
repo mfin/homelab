@@ -8,6 +8,12 @@ traefik:
     annotations:
       metallb.universe.tf/allow-shared-ip: traefik
 
+  prometheus:
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
+
   ports:
     mailsecure:
       port: 465
