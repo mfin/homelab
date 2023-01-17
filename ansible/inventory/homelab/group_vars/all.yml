@@ -3,5 +3,5 @@ k3s_version: v1.26.0+k3s1
 ansible_user: mfin
 systemd_dir: /etc/systemd/system
 master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
-extra_server_args: "--default-local-storage-path /mnt/nvme --disable traefik --disable servicelb"
+extra_server_args: "--default-local-storage-path /mnt/nvme --disable traefik --disable servicelb --etcd-expose-metrics true --kube-proxy-arg metrics-bind-address=0.0.0.0 --kube-controller-manager-arg bind-address=0.0.0.0 --kube-scheduler-arg bind-address=0.0.0.0"
 extra_agent_args: ""
