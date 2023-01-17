@@ -16,3 +16,6 @@ external-dns:
         secretKeyRef:
           name: pihole-secret
           key: EXTERNAL_DNS_PIHOLE_PASSWORD
+
+  serviceMonitor:
+    enabled: true
