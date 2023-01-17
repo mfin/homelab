@@ -4,3 +4,7 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: traefik
+  alertmanager:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
