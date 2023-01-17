@@ -10,6 +10,22 @@ kube-prometheus-stack:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+    prometheusSpec:
+      retention: 2d
+      retentionSize: 6GB
+      enableAdminAPI: true
+      walCompression: true
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: local-path
+            resources:
+              requests:
+                storage: 20Gi
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
   alertmanager:
     ingress:
       enabled: true
