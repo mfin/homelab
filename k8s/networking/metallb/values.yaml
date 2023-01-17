@@ -1,0 +1,9 @@
+metallb:
+  controller:
+    metrics:
+      serviceMonitor:
+        enabled: true
+  speaker:
+    metrics:
+      serviceMonitor:
+        enabled: true
