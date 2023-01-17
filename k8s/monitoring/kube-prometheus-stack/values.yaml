@@ -37,3 +37,15 @@ kube-prometheus-stack:
             matchers:
               - severity = "critical"
             continue: true
+  kubeControllerManager:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      https: true
+      insecureSkipVerify: true
+  kubeScheduler:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      https: true
+      insecureSkipVerify: true
