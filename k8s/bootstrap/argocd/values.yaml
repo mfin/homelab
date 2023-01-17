@@ -40,6 +40,8 @@ argo-cd:
       enabled: true
       serviceMonitor:
         enabled: true
+        annotations:
+          argo: stop-reconciling
   dex:
     enabled: false
   controller:
