@@ -1,2 +1,6 @@
 kube-prometheus-stack:
   cleanPrometheusOperatorObjectNames: true
+  grafana:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
