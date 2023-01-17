@@ -37,6 +37,16 @@ app-template:
         hajimari.io/appName: Home Assistant
         hajimari.io/info: Home automation that puts local control and privacy first
 
+  serviceMonitor:
+    main:
+      enabled: true
+      endpoints:
+        - port: http
+          scheme: http
+          path: /api/metrics
+          interval: 10s
+          scrapeTimeout: 10s
+
   persistence:
     config:
       enabled: true
