@@ -22,7 +22,7 @@ kube-prometheus-stack:
         volumeClaimTemplate:
           spec:
             selector:
-              prometheus.storage.local: prometheus-data
+              "prometheus.storage.local": prometheus-data
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
@@ -59,7 +59,7 @@ kube-prometheus-stack:
         volumeClaimTemplate:
           spec:
             selector:
-              prometheus.storage.local: alertmanager-data
+              "prometheus.storage.local": alertmanager-data
   kubeControllerManager:
     enabled: true
     serviceMonitor:
