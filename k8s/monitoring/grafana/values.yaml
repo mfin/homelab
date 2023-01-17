@@ -18,7 +18,8 @@ grafana:
   serviceMonitor:
     enabled: true
   persistence:
-    enabled: false
+    enabled: true
+    existingClaim: grafana-data
   ingress:
     enabled: true
     ingressClassName: traefik
