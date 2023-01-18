@@ -7,7 +7,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
-  {{- if not (default $app.disableFinalizer false) }}
+  {{- if not (default false $app.disableFinalizer) }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   {{- end }}
@@ -20,10 +20,11 @@ spec:
     repoURL: {{ $.Values.gitops.repo }}
     path: {{ $app.path }}/{{ $app.name }}
     targetRevision: {{ $.Values.gitops.revision }}
-
+    {{- if eq (default "helm" $app.type) "helm" }}
     helm:
       valueFiles:
         - secrets+age-import-kubernetes://{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
+    {{- end }}
   syncPolicy:
     automated:
       prune: true
