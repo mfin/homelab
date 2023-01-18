@@ -5,7 +5,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: timothyjmiller/cloudflare-ddns
-    tag: latest
+    tag: latest # TODO: fix this
   env:
     TZ: "Europe/Ljubljana"
     CONFIG_PATH: "/etc/cloudflare-ddns/"

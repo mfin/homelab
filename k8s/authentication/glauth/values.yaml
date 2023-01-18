@@ -10,7 +10,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: docker.io/glauth/glauth
-    tag: v2.2.0-RC1
+    tag: v2.2.0-RC1 # TODO: does it match renovate?
   command: ["/app/glauth", "-c", "/etc/glauth/config.toml"]
   service:
     main:

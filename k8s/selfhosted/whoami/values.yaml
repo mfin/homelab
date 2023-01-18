@@ -1,0 +1,16 @@
+app-template:
+  image:
+    repository: containous/whoami
+    tag: v1.5.0
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
