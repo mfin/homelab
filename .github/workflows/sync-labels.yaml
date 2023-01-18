@@ -1,10 +1,11 @@
 name: Sync labels
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - .github/labels.yml
+      - .github/labels.yaml
 jobs:
   build:
     runs-on: ubuntu-latest
