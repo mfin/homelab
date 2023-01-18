@@ -126,17 +126,58 @@ argo-cd:
         from: $email-from
 
     triggers:
-      trigger.on-sync-running: |
-        - description: Application syncing is running
+      trigger.on-deployed: |
+        - description: Application is synced and healthy. Triggered once per commit.
+          oncePer: app.status.sync.revision
           send:
-          - app-sync-running
-          when: app.status.operationState.phase in ['Running']
+          - app-deployed
+          when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+      trigger.on-health-degraded: |
+        - description: Application has degraded
+          send:
+          - app-health-degraded
+          when: app.status.health.status == 'Degraded'
+      trigger.on-sync-failed: |
+        - description: Application syncing has failed
+          send:
+          - app-sync-failed
+          when: app.status.operationState.phase in ['Error', 'Failed']
+      trigger.on-sync-status-unknown: |
+        - description: Application status is 'Unknown'
+          send:
+          - app-sync-status-unknown
+          when: app.status.sync.status == 'Unknown'
       defaultTriggers: |
-        - on-sync-running
+        - on-deployed
+        - on-health-degraded
+        - on-sync-failed
+        - on-sync-status-unknown
     templates:
-      template.app-sync-running: |
+      template.app-deployed: |
         email:
-          subject: Syncing application {{.app.metadata.name}}
+          subject: New version of an application {{.app.metadata.name}} is up and running.
         message: |
-          The sync operation of application {{.app.metadata.name}} has started at {{.app.status.operationState.startedAt}}.
+          {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
+      template.app-health-degraded: |
+        email:
+          subject: Application {{.app.metadata.name}} has degraded.
+        message: |
+          {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} has degraded.
+          Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+      template.app-sync-failed: |
+        email:
+          subject: Failed to sync application {{.app.metadata.name}}.
+        message: |
+          {{if eq .serviceType "slack"}}:exclamation:{{end}}  The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
           Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+      template.app-sync-status-unknown: |
+        email:
+          subject: Application {{.app.metadata.name}} sync status is 'Unknown'
+        message: |
+          {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} sync is 'Unknown'.
+          Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+          {{if ne .serviceType "slack"}}
+          {{range $c := .app.status.conditions}}
+              * {{$c.message}}
+          {{end}}
+          {{end}}
