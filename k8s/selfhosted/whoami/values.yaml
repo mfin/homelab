@@ -1,6 +1,4 @@
 app-template:
-  strategy:
-    type: RollingUpdate
   image:
     repository: containous/whoami
     tag: v1.5.0
