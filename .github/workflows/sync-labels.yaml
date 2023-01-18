@@ -16,4 +16,5 @@ jobs:
         with:
           config-file: .github/labels.yaml
           delete-other-labels: true
+          request-token: ${{ secrets.GITHUB_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
