@@ -3,12 +3,29 @@
   "extends": [
     "config:base"
   ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "(^|/)all.yml$"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?_version: (?<currentValue>.*)\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
   "packageRules": [
     {
       "description": "Loose versioning for non-semver packages",
       "matchDatasources": ["docker"],
       "versioning": "loose",
       "matchPackagePatterns": ["plex"]
+    },
+    {
+      "description": "Use custom regex versioning for k3s",
+      "matchPackageNames": ["k3s"],
+      "matchDatasources": ["github-releases"],
+      "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>\\+k3s)(?<build>\\d+)$"
     }
   ]
 }
