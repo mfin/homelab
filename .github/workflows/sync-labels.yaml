@@ -1,20 +1,17 @@
 name: Sync labels
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - .github/labels.yaml
-
+      - .github/labels.yml
 jobs:
-  labels:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: EndBug/label-sync@da00f2c11fdb78e4fae44adac2fdd713778ea3e8 # renovate: tag=v2.3.2
+      - uses: actions/checkout@v2
+      - uses: micnncim/action-label-syncer@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          config-file: .github/labels.yaml
-          delete-other-labels: true
-          request-token: ${{ secrets.GITHUB_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          manifest: .github/labels.yml
