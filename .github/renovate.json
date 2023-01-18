@@ -26,12 +26,6 @@
       "matchDatasources": ["docker"],
       "versioning": "loose",
       "matchPackagePatterns": ["plex"]
-    },
-    {
-      "description": "Use custom regex versioning for k3s",
-      "matchPackageNames": ["k3s"],
-      "matchDatasources": ["github-releases"],
-      "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>\\+k3s)(?<build>\\d+)$"
     }
   ]
 }
