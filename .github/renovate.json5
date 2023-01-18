@@ -2,9 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    "github>mfin/homelab//.github/renovate/autoMerge.json",
-    "github>mfin/homelab//.github/renovate/labels.json",
-    "github>mfin/homelab//.github/renovate/semanticCommits.json"
+    "github>mfin/homelab//.github/renovate/autoMerge.json5",
+    "github>mfin/homelab//.github/renovate/labels.json5",
+    "github>mfin/homelab//.github/renovate/semanticCommits.json5"
   ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
