@@ -20,7 +20,7 @@
   "repositories": ["mfin/homelab"],
   "onboarding": false,
   "requireConfig": "optional",
-  "gitAuthor": "mfin-bot <mfin-bot[bot]@users.noreply.github.com>",
+  "gitAuthor": "mfin-bot <33290360+mfin-bot[bot]@users.noreply.github.com>",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "regexManagers": [
     {
