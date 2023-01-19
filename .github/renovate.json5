@@ -24,12 +24,15 @@
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "regexManagers": [
     {
+      "description": "Process custom dependencies",
       "fileMatch": [
-        "(^|/)all.yml$"
+        "ansible/.+\\.ya?ml$",
+        "k8s/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?_version: (?<currentValue>.*)\\s"
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ],
