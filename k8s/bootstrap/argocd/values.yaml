@@ -161,7 +161,7 @@ argo-cd:
         github:
           status:
             state: success
-            label: "continuous-delivery/{{.app.metadata.name}}"
+            label: "argocd app={{.app.metadata.name}}"
       template.app-health-degraded: |
         email:
           subject: Application {{.app.metadata.name}} has degraded.
