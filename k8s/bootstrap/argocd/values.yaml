@@ -94,9 +94,9 @@ argo-cd:
           - |
             DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y wget
             mkdir -p /custom-tools/helm-plugins
-            wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-
-            wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
-            wget -qO /custom-tools/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+            wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-
+            wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+            wget -qO /custom-tools/kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
             chmod +x /custom-tools/*
 
         env:
