@@ -9,6 +9,7 @@ metadata:
     argocd.argoproj.io/manifest-generate-paths: .
     notifications.argoproj.io/subscribe.on-deployed.github: ""
     notifications.argoproj.io/subscribe.on-sync-failed.github: ""
+    notifications.argoproj.io/subscribe.on-health-degraded.github: ""
   {{- if not (default false $app.disableFinalizer) }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
