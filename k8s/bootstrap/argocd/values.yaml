@@ -125,8 +125,8 @@ argo-cd:
         port: 465
         from: $email-from
       service.github: |
-        appID: $github-appId
-        installationID: $github-installationId
+        appID: "$github-appId"
+        installationID: "$github-installationId"
         privateKey: $github-privateKey
 
     triggers:
