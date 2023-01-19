@@ -4,6 +4,8 @@
     "config:base",
     "docker:enableMajor",
     ":semanticCommits",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
     "github>mfin/homelab//.github/renovate/autoMerge.json5",
     "github>mfin/homelab//.github/renovate/commitMessage.json5",
     "github>mfin/homelab//.github/renovate/labels.json5",
@@ -13,6 +15,13 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "commitBodyTable": true,
+  "platform": "github",
+  "username": "mfin-bot[bot]",
+  "repositories": ["mfin/homelab"],
+  "onboarding": false,
+  "requireConfig": "optional",
+  "gitAuthor": "mfin-bot <mfin-bot[bot]@users.noreply.github.com>",
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "regexManagers": [
     {
       "fileMatch": [
