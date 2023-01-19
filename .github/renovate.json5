@@ -6,6 +6,8 @@
     ":semanticCommits",
     ":disableRateLimiting",
     ":dependencyDashboard",
+    ":automergeDigest",
+    ":automergeBranch",
     "github>mfin/homelab//.github/renovate/autoMerge.json5",
     "github>mfin/homelab//.github/renovate/commitMessage.json5",
     "github>mfin/homelab//.github/renovate/labels.json5",
@@ -20,7 +22,7 @@
   "repositories": ["mfin/homelab"],
   "onboarding": false,
   "requireConfig": "optional",
-  "gitAuthor": "mfin-bot <33290360+mfin-bot[bot]@users.noreply.github.com>",
+  "gitAuthor": "mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "regexManagers": [
     {
