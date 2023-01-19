@@ -14,4 +14,4 @@ jobs:
     steps:
       - name: Output hello text
         run: |
-          echo "HELLO WORLD"
+          sleep 120 && echo "HELLO WORLD"
