@@ -30,7 +30,7 @@
         "k8s/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value): (\\?)("?)(?<currentValue>.+?)(\\?)("?)\\n"
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value): (\\?)(\"?)(?<currentValue>.+?)(\\?)(\"?)\\n"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
     }
