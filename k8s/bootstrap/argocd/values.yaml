@@ -124,6 +124,10 @@ argo-cd:
         host: $email-hostname
         port: 465
         from: $email-from
+      service.github: |
+        appID: $github-appId
+        installationID: $github-installationId
+        privateKey: $github-privateKey
 
     triggers:
       trigger.on-deployed: |
@@ -158,6 +162,10 @@ argo-cd:
           subject: New version of an application {{.app.metadata.name}} is up and running.
         message: |
           {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
+        github:
+          status:
+            state: success
+            label: "continuous-delivery/{{.app.metadata.name}}"
       template.app-health-degraded: |
         email:
           subject: Application {{.app.metadata.name}} has degraded.
