@@ -1,0 +1,27 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: coredns
+  labels:
+    external-service.metrics: coredns
+spec:
+  type: ExternalName
+  ports:
+  - port: {{ .Values.coredns.port }}
+    name: metrics
+  externalName: {{ .Values.coredns.hostname }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+  name: coredns
+spec:
+  endpoints:
+  - path: /metrics
+    port: metrics
+    scheme: http
+  selector:
+    matchLabels:
+      external-service.metrics: coredns
