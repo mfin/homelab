@@ -1,0 +1,58 @@
+app-template:
+  controller:
+    replicas: 3
+    strategy: RollingUpdate
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: quay.io/oriedge/k8s_gateway
+    tag: v0.3.2
+  args: ["-conf", "/etc/coredns/Corefile"]
+  service:
+    main:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      ports:
+        http:
+          enabled: false
+        metrics:
+          enabled: true
+          port: 9153
+        dns:
+          enabled: true
+          port: 53
+          targetPort: 1053
+          protocol: UDP
+  serviceMonitor:
+    main:
+      enabled: true
+      endpoints:
+        - port: metrics
+          scheme: http
+          path: /metrics
+  probes:
+    readiness:
+      custom: true
+      spec:
+        httpGet:
+          path: /ready
+          port: 8181
+    liveness:
+      custom: true
+      spec:
+        httpGet:
+          path: /health
+          port: 8080
+    startup:
+      enabled: false
+  serviceAccount:
+    create: true
+    name: k8s-gateway
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: k8s-gateway-config
+      subPath: Corefile
+      mountPath: /etc/coredns/Corefile
+      readOnly: true
