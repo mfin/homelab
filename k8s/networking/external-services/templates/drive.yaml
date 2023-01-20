@@ -49,7 +49,7 @@ spec:
   - match: HostSNI(`*`)
     services:
     - name: drive
-      port: sync
+      port: {{ .Values.drive.syncPort }}
   tls:
     domains:
     - main: {{ .Values.drive.domain }}
