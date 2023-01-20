@@ -17,6 +17,11 @@ app-template:
           port: 25
           protocol: TCP
 
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+
   persistence:
     notifier:
       enabled: true
