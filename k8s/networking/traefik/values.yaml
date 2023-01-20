@@ -49,4 +49,4 @@ traefik:
         enabled: true
   logs:
     access:
-      enabled: false
+      enabled: true
