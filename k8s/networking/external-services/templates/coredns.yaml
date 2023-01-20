@@ -2,26 +2,26 @@
 kind: Service
 apiVersion: v1
 metadata:
- name: coredns
- labels:
-  external: coredns
+  name: coredns
+  labels:
+    external: coredns
 spec:
- type: ClusterIP
- ports:
- - name: metrics
-   port: {{ .Values.coredns.port }}
-   targetPort: {{ .Values.coredns.port }}
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: {{ .Values.coredns.port }}
+    targetPort: {{ .Values.coredns.port }}
 ---
 kind: Endpoints
 apiVersion: v1
 metadata:
- name: coredns
+  name: coredns
 subsets:
- - addresses:
-     - ip: {{ .Values.coredns.ip }}
-   ports:
-	   - name: metrics
-       port: {{ .Values.coredns.port }}
+  - addresses:
+      - ip: {{ .Values.coredns.ip }}
+    ports:
+      - name: metrics
+        port: {{ .Values.coredns.port }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
