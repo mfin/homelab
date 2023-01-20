@@ -9,12 +9,3 @@ spec:
   - port: {{ .Values.photos.port }}
   externalName: {{ .Values.photos.ip }}
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: pihole
-spec:
-  externalName: {{ .Values.pihole.ip }}
-  type: ExternalName
-  ports:
-    - port: {{ .Values.pihole.port }}
