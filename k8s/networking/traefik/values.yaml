@@ -48,5 +48,7 @@ traefik:
       publishedService:
         enabled: true
   logs:
+    general:
+      level: DEBUG
     access:
       enabled: true
