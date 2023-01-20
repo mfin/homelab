@@ -50,3 +50,6 @@ spec:
     services:
     - name: drive
       port: {{ .Values.drive.syncPort }}
+  tls:
+    domains:
+    - main: {{ .Values.drive.domain }}
