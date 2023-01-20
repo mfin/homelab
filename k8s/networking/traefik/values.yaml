@@ -29,6 +29,10 @@ traefik:
       port: 465
       expose: true
       exposedPort: 465
+    drive-sync:
+      port: 6690
+      expose: true
+      exposedPort: 6690
     web:
       redirectTo: websecure
     metrics:

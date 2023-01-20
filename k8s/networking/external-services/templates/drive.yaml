@@ -16,6 +16,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: drive
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure,drive-sync
 spec:
   ingressClassName: traefik
   rules:
