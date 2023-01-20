@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: coredns
   labels:
-    external-service.metrics: coredns
+    external.metrics: coredns
 spec:
   type: ExternalName
   ports:
@@ -24,4 +24,4 @@ spec:
     scheme: http
   selector:
     matchLabels:
-      external-service.metrics: coredns
+      external.metrics: coredns
