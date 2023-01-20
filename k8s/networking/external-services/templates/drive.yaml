@@ -52,4 +52,4 @@ spec:
       port: sync
   tls:
     domains:
-    - main: {{ .Values.mailrise.hostname }}
+    - main: {{ .Values.drive.domain }}
