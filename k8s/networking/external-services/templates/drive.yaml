@@ -10,6 +10,9 @@ spec:
   type: ExternalName
   ports:
   - port: {{ .Values.drive.port }}
+    name: https
+  - port: {{ .Values.drive.syncPort }}
+    name: sync
   externalName: {{ .Values.drive.ip }}
 ---
 apiVersion: networking.k8s.io/v1
@@ -17,7 +20,7 @@ kind: Ingress
 metadata:
   name: drive
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure,drive-sync
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
   rules:
@@ -34,3 +37,19 @@ spec:
   tls:
   - hosts:
     - {{ .Values.drive.domain }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: drive
+spec:
+  entryPoints:
+    - drive-sync
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: drive
+      port: sync
+  tls:
+    domains:
+    - main: {{ .Values.mailrise.hostname }}
