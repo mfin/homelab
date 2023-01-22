@@ -51,4 +51,5 @@ spec:
     - name: drive
       port: {{ .Values.drive.syncPort }}
   tls:
-    secretName: le-cert
+    domains:
+    - main: {{ .Values.drive.domain }}
