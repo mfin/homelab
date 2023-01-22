@@ -51,5 +51,6 @@ spec:
     - name: drive
       port: {{ .Values.drive.syncPort }}
   tls:
+    passthrough: true
     domains:
     - main: {{ .Values.drive.domain }}
