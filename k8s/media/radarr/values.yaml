@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/onedr0p/radarr-develop
-    tag: 4.3.2.6857
+    tag: 4.4.0.6882
   env:
     TZ: Europe/Ljubljana
     RADARR__INSTANCE_NAME: Radarr
