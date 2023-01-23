@@ -11,5 +11,6 @@ spec:
     - name: mailrise
       port: 25
   tls:
+    secretName: le-cert
     domains:
     - main: {{ .Values.mailrise.hostname }}
