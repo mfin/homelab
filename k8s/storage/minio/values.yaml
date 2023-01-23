@@ -53,6 +53,10 @@ app-template:
       enabled: true
       ingressClassName: traefik
       annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: bucket
+        hajimari.io/appName: MinIO
+        hajimari.io/info: MinIO offers high-performance, S3 compatible object storage
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
     s3:
       enabled: true
