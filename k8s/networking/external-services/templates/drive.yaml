@@ -46,7 +46,9 @@ spec:
   entryPoints:
     - drive-sync
   routes:
-  - match: HostSNI(`*`)
+  - match: HostSNI(`{{ .Values.drive.domain }}`)
     services:
     - name: drive
       port: {{ .Values.drive.syncPort }}
+  tls:
+    passthrough: true
