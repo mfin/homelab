@@ -1,0 +1,77 @@
+app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: quay.io/minio/minio
+    tag: RELEASE.2023-01-18T04-36-38Z
+  env:
+    TZ: Europe/Ljubljana
+    MINIO_UPDATE: "off"
+    MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090
+    MINIO_PROMETHEUS_JOB_ID: minio
+  envFrom:
+    - secretRef:
+        name: minio-secret
+  args: ["server", "/data", "--console-address", ":9001"]
+  service:
+    main:
+      enabled: true
+      ports:
+        http:
+          port: 9001
+        api:
+          enabled: true
+          port: &api-port 9000
+  serviceMonitor:
+    main:
+      enabled: true
+      endpoints:
+        - port: api
+          scheme: http
+          path: /minio/v2/metrics/cluster
+          bearerTokenSecret:
+            name: minio-secret
+            key: MINIO_PROMETHEUS_TOKEN
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /minio/health/live
+          port: *api-port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    s3:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: minio-data
+      mountPath: /data
+  resources:
+    requests:
+      memory: 100Mi
+      cpu: 100m
+    limits:
+      memory: 750Mi
