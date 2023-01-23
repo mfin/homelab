@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - mailsecure
   routes:
-  - match: HostSNI(`*`)
+  - match: HostSNI(`{{ .Values.mailrise.hostname }}`)
     services:
     - name: mailrise
       port: 25
