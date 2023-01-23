@@ -1,19 +1,10 @@
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: dashboard
-spec:
-  addPrefix:
-    prefix: /dashboard
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: traefik-dashboard
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-dashboard@kubernetescrd,traefik-authelia@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
