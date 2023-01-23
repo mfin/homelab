@@ -60,3 +60,5 @@ spec:
     services:
     - name: drive-sync
       port: {{ .Values.drive.syncPort }}
+  tls:
+    passthrough: true
