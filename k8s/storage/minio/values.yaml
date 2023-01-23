@@ -56,7 +56,7 @@ app-template:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
     s3:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
   podSecurityContext:
