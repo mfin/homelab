@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: drive-https
+  name: drive
   annotations:
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: external-services-skip-tls@kubernetescrd
@@ -11,15 +11,6 @@ spec:
   ports:
   - port: {{ .Values.drive.port }}
     name: https
-  externalName: {{ .Values.drive.ip }}
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: drive-sync
-spec:
-  type: ExternalName
-  ports:
   - port: {{ .Values.drive.syncPort }}
     name: sync
   externalName: {{ .Values.drive.ip }}
@@ -38,7 +29,7 @@ spec:
       paths:
       - backend:
           service:
-            name: drive-https
+            name: drive
             port:
               number: {{ .Values.drive.port }}
         path: /
@@ -55,7 +46,7 @@ spec:
   entryPoints:
     - drive-sync
   routes:
-  - match: HostSNI(`{{ .Values.drive.domain }}`)
+  - match: HostSNI(`*`)
     services:
-    - name: drive-sync
+    - name: drive
       port: {{ .Values.drive.syncPort }}
