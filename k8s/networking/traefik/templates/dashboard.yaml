@@ -14,8 +14,7 @@ metadata:
   name: traefik-dashboard
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-dashboard@kubernetescrd
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-dashboard@kubernetescrd,traefik-authelia@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
