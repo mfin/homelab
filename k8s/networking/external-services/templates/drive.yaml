@@ -59,6 +59,9 @@ spec:
     - drive-sync
   routes:
   - match: HostSNI(`*`)
+    middlewares:
+    - name: skip-tls
+      namespace: traefik
     services:
     - name: drive
       port: {{ .Values.drive.syncPort }}
