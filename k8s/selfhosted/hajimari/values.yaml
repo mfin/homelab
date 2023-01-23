@@ -21,6 +21,7 @@ hajimari:
       ingressClassName: traefik
       annotations:
         hajimari.io/enable: "false"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
   podAnnotations:
     configmap.reloader.stakater.com/reload: "hajimari-settings"

@@ -17,6 +17,7 @@ app-template:
       enabled: true
       ingressClassName: traefik
       annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: chart-bar
         hajimari.io/appName: Tautulli

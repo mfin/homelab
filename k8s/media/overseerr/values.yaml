@@ -19,6 +19,7 @@ app-template:
       enabled: true
       ingressClassName: traefik
       annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: eye-circle
         hajimari.io/appName: Overseerr

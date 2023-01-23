@@ -51,6 +51,7 @@ app-template:
         hajimari.io/icon: lock
         hajimari.io/appName: Authelia
         hajimari.io/info: Authentication and authorization, MFA and SSO
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100
