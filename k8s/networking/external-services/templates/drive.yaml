@@ -46,9 +46,10 @@ spec:
   entryPoints:
     - drive-sync
   routes:
-  - match: HostSNI(`{{ .Values.drive.domain }}`)
+  - match: HostSNI(`*`)
     services:
     - name: drive
       port: {{ .Values.drive.syncPort }}
   tls:
-    passthrough: true
+    domains:
+    - main: {{ .Values.mailrise.hostname }}
