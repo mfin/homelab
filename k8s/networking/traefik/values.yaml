@@ -25,6 +25,8 @@ traefik:
             description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
 
   ports:
+    traefik:
+      expose: true
     mailsecure:
       port: 465
       expose: true
