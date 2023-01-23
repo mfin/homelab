@@ -61,4 +61,4 @@ spec:
       port: {{ .Values.drive.syncPort }}
   tls:
   - hosts:
-    - {{ .Values.photos.domain }}
+    - {{ .Values.drive.domain }}
