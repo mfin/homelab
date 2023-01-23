@@ -6,11 +6,10 @@ spec:
   entryPoints:
     - mailsecure
   routes:
-  - match: HostSNI(`{{ .Values.mailrise.hostname }}`)
+  - match: HostSNI(`*`)
     services:
     - name: mailrise
       port: 25
   tls:
-    secretName: le-cert
     domains:
     - main: {{ .Values.mailrise.hostname }}
