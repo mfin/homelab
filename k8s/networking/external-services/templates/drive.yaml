@@ -38,6 +38,7 @@ spec:
   - hosts:
     - {{ .Values.drive.domain }}
 ---
+# TODO: TLS termination still unknown
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
