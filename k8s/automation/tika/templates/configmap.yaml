@@ -8,30 +8,7 @@ data:
     <properties>
       <server>
         <params>
-          <port>9998</port>
-          <host>0.0.0.0</host>
-          <id></id>
-          <cors>*</cors>
-          <digest>sha256</digest>
-          <digestMarkLimit>1000000</digestMarkLimit>
           <logLevel>debug</logLevel>
-          <returnStackTrace>false</returnStackTrace>
-          <noFork>false</noFork>
-          <taskTimeoutMillis>300000</taskTimeoutMillis>
-          <maxForkedStartupMillis>120000</maxForkedStartupMillis>
-          <maxRestarts>-1</maxRestarts>
-          <maxFiles>100000</maxFiles>
-          <javaPath>java</javaPath>
-          <forkedJvmArgs>
-            <arg>-Xms1g</arg>
-            <arg>-Xmx1g</arg>
-            <arg>-Dlog4j.configurationFile=my-forked-log4j2.xml</arg>
-          </forkedJvmArgs>
-          <enableUnsecureFeatures>false</enableUnsecureFeatures>
-          <endpoints>
-            <endpoint>status</endpoint>
-            <endpoint>rmeta</endpoint>
-          </endpoints>
         </params>
       </server>
     </properties>
