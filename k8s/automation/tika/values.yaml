@@ -1,4 +1,8 @@
 app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+
   image:
     repository: apache/tika
     tag: 2.6.0.0
