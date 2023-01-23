@@ -6,88 +6,32 @@ data:
   tika-config.xml: |-
     <?xml version="1.0" encoding="UTF-8"?>
     <properties>
-      <!-- <parsers etc.../> -->
-      <server>
-        <params>
-          <!-- which port to start the server on. If you specify a range,
-              e.g. 9995-9998, TikaServerCli will start four forked servers,
-              one at each port.  You can also specify multiple forked servers
-              via a comma-delimited value: 9995,9997.
-     
-          -->
-          <port>9998</port>
-          <host>0.0.0.0</host>
-          <!-- if specified, this will be the id that is used in the
-              /status endpoint and elsewhere.  If an id is specified
-              and more than one forked processes are invoked, each process
-              will have an id followed by the port, e.g my_id-9998. If a
-              forked server has to restart, it will maintain its original id.
-              If not specified, a UUID will be generated.
-              -->
-          <id></id>      
-          <!-- Origin URL for cors requests. Set to '*' if you
-              want to allow all CORS requests. Leave blank or remove element
-              if you do not want to enable CORS. -->
-          <cors>*</cors>
-          <!-- which digests to calculate, comma delimited (e.g. md5,sha256);
-              optionally specify encoding followed by a colon (e.g. "sha1:32").
-              Can be empty if you don't want to calculate a digest -->
-          <digest>sha256</digest>
-          <!-- how much to read to memory during the digest phase before
-              spooling to disc...only if digest is selected -->
-          <digestMarkLimit>1000000</digestMarkLimit>
-          <!-- request URI log level 'debug' or 'info' -->
-          <logLevel>debug</logLevel>
-          <!-- whether or not to return the stacktrace in the data returned
-               to the user when a parse exception happens-->
-          <returnStackTrace>false</returnStackTrace>
-          <!-- If set to 'true', this runs tika server "in process"
-              in the legacy 1.x mode.
-              This means that the server will be susceptible to infinite loops
-              and crashes.
-              If set to 'false', the server will spawn a forked
-              process and restart the forked process on catastrophic failures
-              (this was called -spawnChild mode in 1.x).
-              noFork=false is the default in 2.x
-          -->
-          <noFork>false</noFork>
-          <!-- maximum time to allow per parse before shutting down and restarting
-              the forked parser. Not allowed if noFork=true. -->
-          <taskTimeoutMillis>300000</taskTimeoutMillis>
-          <!-- maximum amount of time to wait for a forked process to
-              start up.
-              Not allowed if noFork=true. -->
-          <maxForkedStartupMillis>120000</maxForkedStartupMillis>
-          <!-- maximum number of times to allow a specific forked process
-              to be restarted.
-              Not allowed if noFork=true. -->
-          <maxRestarts>-1</maxRestarts>
-          <!-- maximum files to parse per forked process before
-              restarting the forked process to clear potential
-              memory leaks.
-              Not allowed if noFork=true. -->
-          <maxFiles>100000</maxFiles>
-          <!-- if you want to specify a specific javaPath for
-              the forked process.  This path should end
-              the application 'java', e.g. /my/special-java/java
-              Not allowed if noFork=true. -->
-          <javaPath>java</javaPath>
-          <!-- jvm args to use in the forked process -->
-          <forkedJvmArgs>
-            <arg>-Xms1g</arg>
-            <arg>-Xmx1g</arg>
-            <arg>-Dlog4j.configurationFile=my-forked-log4j2.xml</arg>
+      <server>
+        <params>
+          <port>9998</port>
+          <host>0.0.0.0</host>
+          <id></id>
+          <cors>*</cors>
+          <digest>sha256</digest>
+          <digestMarkLimit>1000000</digestMarkLimit>
+          <logLevel>debug</logLevel>
+          <returnStackTrace>false</returnStackTrace>
+          <noFork>false</noFork>
+          <taskTimeoutMillis>300000</taskTimeoutMillis>
+          <maxForkedStartupMillis>120000</maxForkedStartupMillis>
+          <maxRestarts>-1</maxRestarts>
+          <maxFiles>100000</maxFiles>
+          <javaPath>java</javaPath>
+          <forkedJvmArgs>
+            <arg>-Xms1g</arg>
+            <arg>-Xmx1g</arg>
+            <arg>-Dlog4j.configurationFile=my-forked-log4j2.xml</arg>
           </forkedJvmArgs>
-          <!-- this must be set to true for any handler that uses a fetcher or emitter.  These pipes features are inherently unsecure because
-               the client has the same read/write access as the tika-server process.  Implementers must secure Tika server so that only their clients can reach it.
-               A byproduct of setting this to true is that the /status endpoint is turned on -->
-          <enableUnsecureFeatures>false</enableUnsecureFeatures>
-          <!-- you can optionally select specific endpoints to turn on/load.  This can improve resource usage and decrease your attack surface.
-               If you want to access the status endpoint, specify it here or set unsecureFeatures to true -->
-          <endpoints>
-            <endpoint>status</endpoint>
-            <endpoint>rmeta</endpoint>
-          </endpoints>
-        </params>
-      </server>
+          <enableUnsecureFeatures>false</enableUnsecureFeatures>
+          <endpoints>
+            <endpoint>status</endpoint>
+            <endpoint>rmeta</endpoint>
+          </endpoints>
+        </params>
+      </server>
     </properties>
