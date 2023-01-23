@@ -1,7 +1,7 @@
 app-template:
   image:
     repository: apache/tika
-    tag: 2.6.0.1 # TODO: does it match renovate?
+    tag: 2.6.0.0
 
   service:
     main:
