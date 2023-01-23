@@ -7,13 +7,25 @@ metadata:
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: external-services-skip-tls@kubernetescrd
 spec:
-  type: ExternalName
+  type: ClusterIP
   ports:
   - port: {{ .Values.drive.port }}
     name: https
   - port: {{ .Values.drive.syncPort }}
     name: sync
-  externalName: {{ .Values.drive.hostname }}
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: drive
+subsets:
+  - addresses:
+      - ip: {{ .Values.drive.ip }}
+    ports:
+      - port: {{ .Values.drive.port }}
+        name: https
+      - port: {{ .Values.drive.syncPort }}
+        name: sync
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -51,6 +63,5 @@ spec:
     - name: drive
       port: {{ .Values.drive.syncPort }}
   tls:
-    passthrough: true
     domains:
     - main: {{ .Values.drive.domain }}

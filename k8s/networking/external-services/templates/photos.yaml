@@ -10,7 +10,7 @@ spec:
   type: ExternalName
   ports:
   - port: {{ .Values.photos.port }}
-  externalName: {{ .Values.photos.hostname }}
+  externalName: {{ .Values.photos.ip }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
