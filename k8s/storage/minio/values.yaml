@@ -29,7 +29,7 @@ app-template:
       endpoints:
         - port: api
           scheme: http
-          path: /minio/v2/metrics/cluster
+          path: /minio/v2/metrics
           bearerTokenSecret:
             name: minio-secret
             key: MINIO_PROMETHEUS_TOKEN
