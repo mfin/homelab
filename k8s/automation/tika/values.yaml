@@ -3,11 +3,24 @@ app-template:
     repository: apache/tika
     tag: 2.6.0.0
 
+  args:
+    - -c
+    - /etc/tika-config.xml
+
   service:
     main:
       ports:
         http:
           port: 9998
+
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: tika-config
+      mountPath: /etc/tika-config.xml
+      subPath: tika-config.xml
+      readOnly: true
 
   resources:
     requests:
