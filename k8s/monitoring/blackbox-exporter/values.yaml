@@ -1,4 +1,4 @@
-blackbox-exporter:
+prometheus-blackbox-exporter:
   fullnameOverride: blackbox-exporter
   pspEnabled: false
   ingress:
