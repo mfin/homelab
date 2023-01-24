@@ -1,4 +1,13 @@
 ---
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSOption
+metadata:
+  name: tls-min-v12
+
+spec:
+  minVersion: VersionTLS12
+  sniStrict: true
+---
 kind: Service
 apiVersion: v1
 metadata:
@@ -63,6 +72,5 @@ spec:
   tls:
     options:
       name: tls-min-v12
-      namespace: traefik
     domains:
     - main: {{ .Values.drive.domain }}
