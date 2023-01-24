@@ -15,7 +15,10 @@ spec:
     params:
       module:
       - icmp
-      target: {{ .Values.targets.icmp }}
+      target:
+      {{- range .Values.targets.icmp }}
+      - {{ . }}
+      {{- end }}
     path: /probe
     port: http
     scheme: http
