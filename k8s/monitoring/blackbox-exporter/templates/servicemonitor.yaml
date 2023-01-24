@@ -13,11 +13,6 @@ spec:
       - instance
       targetLabel: instance
     - action: replace
-      replacement: {{ $target.name }}-{{ $target.module }}
-      sourceLabels:
-      - target
-      targetLabel: target
-    - action: replace
       replacement: {{ $target.module }}
       sourceLabels:
       - module
