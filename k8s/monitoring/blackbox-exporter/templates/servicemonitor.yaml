@@ -6,24 +6,17 @@ spec:
   endpoints:
   {{- range $index, $target := .Values.targets }}
   - interval: 1m
-    relabelings:
-      - action: replace
-        sourceLabels: [__param_module]
-        targetLabel: module
-      - action: replace
-        sourceLabels: [__param_target]
-        targetLabel: instance
-    # metricRelabelings:
-    # - action: replace
-    #   replacement: {{ $target.endpoint }}
-    #   sourceLabels:
-    #   - instance
-    #   targetLabel: instance
-    # - action: replace
-    #   replacement: {{ $target.name }}-{{ $target.module }}
-    #   sourceLabels:
-    #   - target
-    #   targetLabel: target
+    metricRelabelings:
+    - action: replace
+      replacement: {{ $target.endpoint }}
+      sourceLabels:
+      - instance
+      targetLabel: instance
+    - action: replace
+      replacement: {{ $target.name }}-{{ $target.module }}
+      sourceLabels:
+      - target
+      targetLabel: target
     params:
       module:
       - {{ $target.module }}
