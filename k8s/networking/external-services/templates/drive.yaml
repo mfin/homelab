@@ -61,5 +61,8 @@ spec:
     - name: drive-sync
       port: {{ .Values.drive.syncPort }}
   tls:
+    options:
+      name: tls-min-v12
+      namespace: traefik
     domains:
     - main: {{ .Values.drive.domain }}
