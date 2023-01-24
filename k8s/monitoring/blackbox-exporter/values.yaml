@@ -6,6 +6,7 @@ prometheus-blackbox-exporter:
     className: traefik
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
   securityContext:
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
