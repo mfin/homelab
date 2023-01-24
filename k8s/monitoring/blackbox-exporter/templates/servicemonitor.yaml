@@ -17,6 +17,11 @@ spec:
       sourceLabels:
       - target
       targetLabel: target
+    - action: replace
+      replacement: {{ $target.module }}
+      sourceLabels:
+      - module
+      targetLabel: module
     params:
       module:
       - {{ $target.module }}
