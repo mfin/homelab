@@ -13,7 +13,4 @@ prometheus-snmp-exporter:
       defaultMode: 420
 
   serviceMonitor:
-    enabled: true
-    namespace: snmp-exporter
-    path: /snmp
-    scrapeTimeout: 10s
+    enabled: false

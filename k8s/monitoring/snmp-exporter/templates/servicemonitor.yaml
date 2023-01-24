@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: snmp-exporter-synology
+spec:
+  endpoints:
+  - honorLabels: true
+    metricRelabelings:
+    - replacement: nas.mfin.casa
+      sourceLabels:
+      - instance
+      targetLabel: instance
+    - replacement: synology
+      sourceLabels:
+      - target
+      targetLabel: target
+    params:
+      module:
+      - synology
+      target:
+      - {{ .Values.custom.target }}
+    path: /snmp
+    port: http
+    scrapeTimeout: 10s
+  jobLabel: snmp-exporter
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: snmp-exporter
+      app.kubernetes.io/name: prometheus-snmp-exporter
