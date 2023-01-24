@@ -8,18 +8,15 @@ spec:
   - interval: 1m
     metricRelabelings:
     - action: replace
+      replacement: {{ $target.endpoint }}
       sourceLabels:
-      - __param_target
+      - instance
       targetLabel: instance
     - action: replace
       replacement: {{ $target.name }}-{{ $target.module }}
       sourceLabels:
       - target
       targetLabel: target
-    - action: replace
-      sourceLabels:
-      - __params_module
-      targetLabel: module
     params:
       module:
       - {{ $target.module }}
