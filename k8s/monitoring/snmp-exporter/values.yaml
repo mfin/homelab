@@ -14,7 +14,7 @@ prometheus-snmp-exporter:
 
   serviceMonitor:
     enabled: true
-    namespace: monitoring
+    namespace: snmp-exporter
     params:
       - name: synology
         module:
