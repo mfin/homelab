@@ -93,3 +93,5 @@ apps:
     path: k8s/networking
   - name: minio
     path: k8s/storage
+  - name: unpoller
+    path: k8s/monitoring
