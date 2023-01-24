@@ -15,11 +15,6 @@ prometheus-snmp-exporter:
   serviceMonitor:
     enabled: true
     namespace: snmp-exporter
-    params:
-      - name: synology
-        module:
-          - synology
-        target: synology
     path: /snmp
     scrapeTimeout: 10s
     relabelings:
