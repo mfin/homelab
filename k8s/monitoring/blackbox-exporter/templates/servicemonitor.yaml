@@ -4,29 +4,20 @@ metadata:
   name: blackbox-exporter
 spec:
   endpoints:
-  {{- range $index, $target := .Values.targets }}
   - interval: 1m
-    metricRelabelings:
-    - action: replace
-      replacement: {{ $target.endpoint }}
-      sourceLabels:
-      - instance
-      targetLabel: instance
-    - action: replace
-      replacement: {{ $target.name }}-{{ $target.module }}
-      sourceLabels:
-      - target
-      targetLabel: target
+    relabelings:
+      - source_labels: [__params_target]
+        target_label: target
+      - source_labels: [__param_module]
+        target_label: module
     params:
       module:
-      - {{ $target.module }}
-      target:
-      - {{ $target.endpoint }}
+      - icmp
+      target: {{ .Values.targets.icmp }}
     path: /probe
     port: http
     scheme: http
     scrapeTimeout: 30s
-  {{- end }}
   jobLabel: blackbox-exporter
   namespaceSelector:
     matchNames:
