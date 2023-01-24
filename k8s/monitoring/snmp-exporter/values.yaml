@@ -1,0 +1,27 @@
+prometheus-snmp-exporter:
+  fullnameOverride: &app snmp-exporter
+
+  extraArgs:
+    - "--config.file=/config/snmp.yaml"
+
+  extraConfigmapMounts:
+    - name: *app
+      mountPath: /config/snmp.yaml
+      subPath: snmp.yaml
+      configMap: *app
+      readOnly: true
+      defaultMode: 420
+
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    params:
+      - name: synology
+        module:
+          - synology
+        target: synology
+    path: /snmp
+    scrapeTimeout: 10s
+    relabelings:
+      - sourceLabels: [__param_target]
+        targetLabel: instance

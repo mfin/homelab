@@ -95,3 +95,5 @@ apps:
     path: k8s/storage
   - name: unpoller
     path: k8s/monitoring
+  - name: snmp-exporter
+    path: k8s/monitoring
