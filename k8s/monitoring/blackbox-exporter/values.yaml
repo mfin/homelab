@@ -27,10 +27,7 @@ prometheus-blackbox-exporter:
         icmp:
           preferred_ip_protocol: "ip4"
   serviceMonitor:
-    enabled: true
-    defaults:
-      labels:
-        release: prometheus
+    enabled: false
   prometheusRule:
     enabled: true
     additionalLabels:
