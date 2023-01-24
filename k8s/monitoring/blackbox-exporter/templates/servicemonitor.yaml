@@ -6,9 +6,11 @@ spec:
   endpoints:
   - interval: 1m
     relabelings:
-      - sourceLabels: [__params_target]
+      - action: replace
+        sourceLabels: [__params_target]
         targetLabel: target
-      - sourceLabels: [__param_module]
+      - action: replace
+        sourceLabels: [__param_module]
         targetLabel: module
     params:
       module:
