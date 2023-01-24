@@ -4,8 +4,8 @@ metadata:
   name: blackbox-exporter
 spec:
   endpoints:
-  {{- range $index, $target := .Values.targets.icmp }}
-  - interval: 30s
+  {{- range $index, $target := .Values.targets }}
+  - interval: 1m
     metricRelabelings:
     - action: replace
       replacement: {{ $target.endpoint }}
@@ -13,13 +13,13 @@ spec:
       - instance
       targetLabel: instance
     - action: replace
-      replacement: {{ $target.name }}-icmp
+      replacement: {{ $target.name }}-{{ $target.module }}
       sourceLabels:
       - target
       targetLabel: target
     params:
       module:
-      - icmp
+      - {{ $target.module }}
       target:
       - {{ $target.endpoint }}
     path: /probe
