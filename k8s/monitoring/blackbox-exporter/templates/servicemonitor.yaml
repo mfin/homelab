@@ -5,7 +5,7 @@ metadata:
 spec:
   endpoints:
   - interval: 1m
-    relabelings:
+    metricRelabelings:
       - action: replace
         sourceLabels: [__params_target]
         targetLabel: target
