@@ -6,10 +6,10 @@ spec:
   endpoints:
   - interval: 1m
     relabelings:
-      - source_labels: [__params_target]
-        target_label: target
-      - source_labels: [__param_module]
-        target_label: module
+      - sourceLabels: [__params_target]
+        targetLabel: target
+      - sourceLabels: [__param_module]
+        targetLabel: module
     params:
       module:
       - icmp
