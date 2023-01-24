@@ -7,10 +7,10 @@ spec:
   {{- range $index, $target := .Values.targets }}
   - interval: 1m
     relabelings:
-      - source_labels: [__param_module]
-        target_label: module
-      - source_labels: [__param_target]
-        target_label: instance
+      - sourceLabels: [__param_module]
+        targetLabel: module
+      - sourceLabels: [__param_target]
+        targetLabel: instance
     # metricRelabelings:
     # - action: replace
     #   replacement: {{ $target.endpoint }}
