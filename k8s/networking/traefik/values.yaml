@@ -51,11 +51,9 @@ traefik:
         enabled: true
   logs:
     general:
-      format: json
-      level: INFO
+      level: DEBUG
     access:
       enabled: true
-      format: json
   ingressRoute:
     dashboard:
       enabled: false
