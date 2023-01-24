@@ -1,8 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: TLSOption
 metadata:
-  name: default
-  namespace: default
+  name: tls-min-v12
 
 spec:
   minVersion: VersionTLS12
