@@ -6,7 +6,7 @@ spec:
   endpoints:
   {{- range $index, $target := .Values.targets }}
   - interval: 1m
-    relabelings:
+    metricRelabelings:
     - action: replace
       replacement: {{ $target.endpoint }}
       sourceLabels:
