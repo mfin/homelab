@@ -1,14 +1,4 @@
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: TLSOption
-metadata:
-  name: tls-min-v12
-
-spec:
-  minVersion: VersionTLS12
-  maxVersion: VersionTLS13
-  sniStrict: true
----
 kind: Service
 apiVersion: v1
 metadata:
@@ -66,10 +56,7 @@ spec:
   entryPoints:
     - drive-sync
   routes:
-  - match: HostSNI(`{{ .Values.drive.domain }}`)
+  - match: HostSNI(`*`)
     services:
     - name: drive-sync
       port: {{ .Values.drive.syncPort }}
-  tls:
-    options:
-      name: tls-min-v12
