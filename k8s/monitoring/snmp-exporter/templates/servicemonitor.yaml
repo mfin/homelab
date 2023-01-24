@@ -6,11 +6,13 @@ spec:
   endpoints:
   - honorLabels: true
     metricRelabelings:
-    - replacement: nas.mfin.casa
+    - action: replace
+      replacement: nas.mfin.casa
       sourceLabels:
       - instance
       targetLabel: instance
-    - replacement: synology
+    - action: replace
+      replacement: synology
       sourceLabels:
       - target
       targetLabel: target
