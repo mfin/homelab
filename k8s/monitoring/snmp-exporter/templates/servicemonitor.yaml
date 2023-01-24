@@ -7,7 +7,7 @@ spec:
   - honorLabels: true
     metricRelabelings:
     - action: replace
-      replacement: nas.mfin.casa
+      replacement: {{ .Values.custom.target }}
       sourceLabels:
       - instance
       targetLabel: instance
