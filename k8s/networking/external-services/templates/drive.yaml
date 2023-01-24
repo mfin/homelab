@@ -11,7 +11,7 @@ spec:
   ports:
   - port: {{ .Values.drive.port }}
     name: https
-  externalName: {{ .Values.drive.ip }}
+  externalName: {{ .Values.drive.hostname }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
