@@ -57,4 +57,4 @@ prometheus-blackbox-exporter:
           severity: critical
         annotations:
           description: |-
-            The target {{ $labels.instance }} in module {{ $labels.module }} is currently unreachable
+            The target {{ $labels.instance }} is currently unreachable

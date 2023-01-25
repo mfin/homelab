@@ -1,14 +1,14 @@
+{{- range $index, $target := .Values.targets }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: blackbox-exporter
+  name: blackbox-exporter-{{ .Values.target.name }}
 spec:
   endpoints:
-  {{- range $index, $target := .Values.targets }}
   - interval: 1m
     metricRelabelings:
     - action: replace
-      replacement: {{ $target.endpoint }}
+      replacement: {{ $target.name }}
       sourceLabels:
       - instance
       targetLabel: instance
@@ -26,7 +26,6 @@ spec:
     port: http
     scheme: http
     scrapeTimeout: 30s
-  {{- end }}
   jobLabel: blackbox-exporter
   namespaceSelector:
     matchNames:
@@ -35,3 +34,4 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: blackbox-exporter
       app.kubernetes.io/name: prometheus-blackbox-exporter
+{{- end }}
