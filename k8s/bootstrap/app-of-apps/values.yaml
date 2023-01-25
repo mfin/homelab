@@ -99,3 +99,5 @@ apps:
     path: k8s/monitoring
   - name: blackbox-exporter
     path: k8s/monitoring
+  - name: external-dns
+    path: k8s/networking
