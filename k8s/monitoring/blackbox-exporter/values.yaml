@@ -26,6 +26,22 @@ prometheus-blackbox-exporter:
         timeout: 20s
         icmp:
           preferred_ip_protocol: "ip4"
+      tcp:
+        prober: tcp
+        timeout: 5s
+        tcp:
+          preferred_ip_protocol: "ip4"
+      dns_blocking:
+        prober: dns
+        timeout: 5s
+        dns:
+          query_name: "ssl.google-analytics.com"
+          query_type: "A"
+          valid_rcodes:
+            - NOERROR
+          validate_answer_rrs:
+            fail_if_not_matches_regexp:
+              - ".*0.0.0.0"
   serviceMonitor:
     enabled: false
   prometheusRule:
