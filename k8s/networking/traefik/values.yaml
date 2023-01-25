@@ -28,15 +28,12 @@ traefik:
     traefik:
       expose: true
     mailsecure:
-      asDefault: false
       port: 465
       expose: true
       exposedPort: 465
     web:
-      asDefault: false
       redirectTo: websecure
     metrics:
-      asDefault: false
       expose: true
 
   providers:
