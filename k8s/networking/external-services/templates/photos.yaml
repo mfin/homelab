@@ -4,6 +4,7 @@ apiVersion: v1
 metadata:
   name: photos
   annotations:
+    external-dns.home.arpa/enabled: "true"
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: external-services-skip-tls@kubernetescrd
 spec:
