@@ -2,7 +2,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: blackbox-exporter-{{ .Values.target.name }}
+  name: blackbox-exporter-{{ $target.name }}
 spec:
   endpoints:
   - interval: 1m
