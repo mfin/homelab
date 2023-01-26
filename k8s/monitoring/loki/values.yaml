@@ -71,7 +71,7 @@ loki:
       analytics:
         reporting_enabled: false
   gateway:
-    replicas: 1
+    replicas: 3
     image:
       registry: ghcr.io
       repository: nginxinc/nginx-unprivileged
@@ -80,13 +80,13 @@ loki:
       enabled: true
       ingressClassName: traefik
   read:
-    replicas: 1
+    replicas: 3
   write:
-    replicas: 1
+    replicas: 3
     persistence:
       storageClass: local-path
   backend:
-    replicas: 1
+    replicas: 3
     persistence:
       storageClass: local-path
     extraVolumeMounts:
