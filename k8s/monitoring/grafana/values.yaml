@@ -52,6 +52,8 @@ grafana:
       deleteDatasources:
         - name: Alertmanager
           orgId: 1
+        - name: Loki
+          orgId: 1
       datasources:
         - name: Prometheus
           type: prometheus
@@ -64,6 +66,10 @@ grafana:
           url: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc.cluster.local:9093
           jsonData:
             implementation: prometheus
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki-gateway.loki.svc.cluster.local:80
   sidecar:
     dashboards:
       enabled: true
