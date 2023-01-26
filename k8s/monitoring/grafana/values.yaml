@@ -48,9 +48,22 @@ grafana:
       disable_login_form: true
   datasources:
     datasources.yaml:
+      apiVersion: 1
       deleteDatasources:
         - name: Alertmanager
           orgId: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090
+          isDefault: true
+        - name: Alertmanager
+          type: alertmanager
+          access: proxy
+          url: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc.cluster.local:9093
+          jsonData:
+            implementation: prometheus
   sidecar:
     dashboards:
       enabled: true
