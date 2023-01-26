@@ -3,7 +3,7 @@ app-template:
     annotations:
       reloader.stakater.com/auto: "true"
     type: statefulset
-    replicas: 1
+    replicas: 0
   image:
     repository: ghcr.io/paperless-ngx/paperless-ngx
     tag: 1.11.3
