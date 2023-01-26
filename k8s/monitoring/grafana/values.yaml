@@ -46,12 +46,6 @@ grafana:
     auth.basic:
       enabled: false
       disable_login_form: true
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      deleteDatasources:
-        - name: Alertmanager
-          orgId: 1
   sidecar:
     dashboards:
       enabled: true
