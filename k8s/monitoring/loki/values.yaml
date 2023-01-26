@@ -1,7 +1,7 @@
 loki:
   loki:
+    auth_enabled: false
     structuredConfig:
-      auth_enabled: false
       server:
         log_level: info
         http_listen_port: 3100
