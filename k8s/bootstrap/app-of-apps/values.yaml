@@ -101,5 +101,5 @@ apps:
     path: k8s/monitoring
   - name: external-dns
     path: k8s/networking
-  - name: loki
-    path: k8s/monitoring
+  # - name: loki
+  #   path: k8s/monitoring
