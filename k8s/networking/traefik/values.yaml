@@ -35,9 +35,9 @@ traefik:
       redirectTo: websecure
     metrics:
       expose: true
-    # websecure:
-    #   middlewares:
-    #     - traefik-restrict-ips@kubernetescrd
+    websecure:
+      middlewares:
+        - traefik-restrict-ips@kubernetescrd
 
   providers:
     kubernetesCRD:
