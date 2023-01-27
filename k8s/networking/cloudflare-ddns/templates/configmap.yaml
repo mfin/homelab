@@ -14,7 +14,7 @@ data:
           "subdomains": [
             {
               "name": "{{ .Values.cloudflare.subdomain }}",
-              "proxied": false
+              "proxied": true
             }
           ]
         }
