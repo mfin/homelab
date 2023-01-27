@@ -20,6 +20,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-local-only@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
