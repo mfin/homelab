@@ -18,4 +18,4 @@ app-template:
       ingressClassName: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd,traefik-local-only@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-local-only@kubernetescrd
