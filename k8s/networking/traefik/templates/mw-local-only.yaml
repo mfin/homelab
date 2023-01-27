@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: local-only
+spec:
+  ipWhiteList:
+    sourceRange:
+      - 10.0.0.0/8
+      - 192.168.0.0/16
+      - 172.16.0.0/12
