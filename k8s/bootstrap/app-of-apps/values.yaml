@@ -59,8 +59,6 @@ apps:
     path: k8s/monitoring
   - name: cert-manager
     path: k8s/networking
-  - name: cloudflared
-    path: k8s/networking
   - name: external-services
     path: k8s/networking
   - name: metallb
