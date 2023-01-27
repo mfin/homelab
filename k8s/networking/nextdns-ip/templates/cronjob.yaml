@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nextdns-ip
+  namespace: {{ .Release.Namespace }}
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: nextdns-ip
+            image: curlimages/curl:7.87.0
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: NEXTDNS_ID
+              value: {{ .Values.nextdns.id }}
+            - name: NEXTDNS_SECRET
+              value: {{ .Values.nextdns.secret }}
+            args: ["https://link-ip.nextdns.io/$(NEXTDNS_ID)/$(NEXTDNS_SECRET)"]
+          restartPolicy: OnFailure

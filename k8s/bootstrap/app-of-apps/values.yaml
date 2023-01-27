@@ -109,3 +109,5 @@ apps:
   # - name: vector-agent
   #   path: k8s/monitoring
   #   namespace: vector
+  - name: nextdns-ip
+    path: k8s/networking
