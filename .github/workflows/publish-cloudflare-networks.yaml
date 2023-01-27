@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+env:
+  DEFAULT_CLOUDFLARE_NETWORKS_FILE: |-
+    ../../k8s/networking/traefik/templates/mw-cloudflare-only.yaml
+
 jobs:
   cloudflare-networks:
     name: Cloudflare Networks
@@ -25,7 +29,7 @@ jobs:
 
       - name: Cloudflare Networks
         run: |
-          bash ./.github/scripts/cloudflare-networks.sh
+          bash ./.github/scripts/cloudflare-networks.sh $DEFAULT_CLOUDFLARE_NETWORKS_FILE
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4.2.3
