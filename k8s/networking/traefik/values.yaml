@@ -35,6 +35,9 @@ traefik:
       redirectTo: websecure
     metrics:
       expose: true
+    websecure:
+      middlewares:
+        - traefik-local-only@kubernetescrd
 
   providers:
     kubernetesCRD:
