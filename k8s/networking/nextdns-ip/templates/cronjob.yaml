@@ -18,5 +18,5 @@ spec:
               value: {{ .Values.nextdns.id }}
             - name: NEXTDNS_SECRET
               value: {{ .Values.nextdns.secret }}
-            args: ["https://link-ip.nextdns.io/$(NEXTDNS_ID)/$(NEXTDNS_SECRET)"]
+            args: ["-sS", "-X", "POST", "https://link-ip.nextdns.io/$(NEXTDNS_ID)/$(NEXTDNS_SECRET)"]
           restartPolicy: OnFailure
