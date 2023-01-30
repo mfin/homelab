@@ -6,8 +6,8 @@
 
 - name: Download coredns archive from Github Releases
   ansible.builtin.get_url:
-    url: https://github.com/coredns/coredns/releases/download/v{{ coredns_version }}/coredns_{{ coredns_version }}_linux_arm64.tgz
-    checksum: sha256:https://github.com/coredns/coredns/releases/download/v{{ coredns_version }}/coredns_{{ coredns_version }}_linux_arm64.tgz.sha256
+    url: https://github.com/coredns/coredns/releases/download/{{ coredns_version }}/coredns_{{ coredns_version | regex_replace('^v','') }}_linux_arm64.tgz
+    checksum: sha256:https://github.com/coredns/coredns/releases/download/{{ coredns_version }}/coredns_{{ coredns_version | regex_replace('^v','') }}_linux_arm64.tgz.sha256
     dest: /tmp/coredns_{{ coredns_version }}_linux_arm64.tgz
 
 - name: Extract coredns archive
