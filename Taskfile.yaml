@@ -3,10 +3,10 @@ version: "3"
 
 vars:
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
-  CLUSTER_DIR: "{{.ROOT_DIR}}/k8s"
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/k8s"
 
 includes:
-  an: .taskfiles/ansible/Tasks.yaml
+  a: .taskfiles/ansible/Tasks.yaml
 
 tasks:
   default:

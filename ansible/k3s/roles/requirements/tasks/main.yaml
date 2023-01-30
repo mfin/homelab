@@ -14,6 +14,20 @@
     reload: true
   when: ansible_all_ipv6_addresses
 
+- name: Raise max_user_watches
+  ansible.posix.sysctl:
+    name: fs.inotify.max_user_watches
+    value: "1048576"
+    state: present
+    reload: true
+
+- name: Raise max_user_instances
+  ansible.posix.sysctl:
+    name: fs.inotify.max_user_instances
+    value: "1000000"
+    state: present
+    reload: true
+
 - name: Install additional packages
   ansible.builtin.package:
     name:
