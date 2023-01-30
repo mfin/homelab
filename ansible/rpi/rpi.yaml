@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: RPi provisioning
+  hosts: all
   gather_facts: true
   become: true
   roles:

@@ -1,18 +1,21 @@
 ---
 
-- hosts: cluster
+- name: Install requirements
+  hosts: cluster
   gather_facts: true
   become: true
   roles:
     - role: requirements
     - role: download
 
-- hosts: master
+- name: Provision masters
+  hosts: master
   become: true
   roles:
     - role: k3s/master
 
-- hosts: worker
+- name: Provision workers
+  hosts: worker
   become: true
   roles:
     - role: k3s/worker
