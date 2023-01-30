@@ -1,17 +1,17 @@
 ---
 - name: Enable IPv4 forwarding
-  sysctl:
+  ansible.posix.sysctl:
     name: net.ipv4.ip_forward
     value: "1"
     state: present
-    reload: yes
+    reload: true
 
 - name: Enable IPv6 forwarding
-  sysctl:
+  ansible.posix.sysctl:
     name: net.ipv6.conf.all.forwarding
     value: "1"
     state: present
-    reload: yes
+    reload: true
   when: ansible_all_ipv6_addresses
 
 - name: Install additional packages
@@ -22,4 +22,10 @@
       - nfs-common
       - smartmontools
       - sqlite3
-    state: latest
+    state: present
+
+- name: Replace link to /etc/resolv.conf
+  ansible.builtin.file:
+    src: /run/systemd/resolve/resolv.conf
+    dest: /etc/resolv.conf
+    state: link

@@ -1,0 +1,51 @@
+- name: Add coredns user
+  ansible.builtin.user:
+    name: coredns
+    shell: /sbin/nologin
+    home: /var/lib/coredns
+
+- name: Download coredns archive from Github Releases
+  ansible.builtin.get_url:
+    url: https://github.com/coredns/coredns/releases/download/v{{ coredns_version }}/coredns_{{ coredns_version }}_linux_arm64.tgz
+    checksum: sha256:https://github.com/coredns/coredns/releases/download/v{{ coredns_version }}/coredns_{{ coredns_version }}_linux_arm64.tgz.sha256
+    dest: /tmp/coredns_{{ coredns_version }}_linux_arm64.tgz
+
+- name: Extract coredns archive
+  ansible.builtin.unarchive:
+    src: /tmp/coredns_{{ coredns_version }}_linux_arm64.tgz
+    dest: /usr/local/bin
+    remote_src: true
+    owner: root
+    group: root
+    mode: 0755
+  notify: Restart coredns
+
+- name: Create coredns systemd service file
+  ansible.builtin.template:
+    src: templates/coredns.service.j2
+    dest: /etc/systemd/system/coredns.service
+  notify: Restart coredns
+
+- name: Create coredns configuration file
+  ansible.builtin.template:
+    src: templates/Corefile.j2
+    dest: /etc/coredns/Corefile
+    owner: coredns
+    group: coredns
+  notify: Restart coredns
+
+- name: Create zonefile for home domain
+  ansible.builtin.template:
+    src: templates/home_domain.j2
+    dest: /var/lib/coredns/db.{{ home_domain }}
+    owner: coredns
+    group: coredns
+  notify: Restart coredns
+
+- name: Create zonefile for remote domain
+  ansible.builtin.template:
+    src: templates/remote_domain.j2
+    dest: /var/lib/coredns/db.{{ remote_domain }}
+    owner: coredns
+    group: coredns
+  notify: Restart coredns

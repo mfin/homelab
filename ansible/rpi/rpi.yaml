@@ -1,6 +1,10 @@
 ---
 - hosts: all
-  gather_facts: yes
-  become: yes
+  gather_facts: true
+  become: true
   roles:
     - role: requirements
+    - role: coredns
+    - role: nextdns
+    - role: ufw
+    - role: systemd

@@ -1,0 +1,15 @@
+@  3600  IN  SOA  ns1.{{ home_domain }}.  root.{{ home_domain }}.  (
+   2019041900
+   3600
+   600
+   604800
+   600 )
+   3600  IN  NS  ns1.{{ home_domain }}.
+   3600  IN  NS  ns2.{{ home_domain }}.
+
+ns1                    IN A {{ main_dns_ip }}
+ns2                    IN A {{ main_dns_ip }}
+
+{% for record in home_records %}
+{{ record.name }}           IN A {{ record.ip }}
+{% endfor %}

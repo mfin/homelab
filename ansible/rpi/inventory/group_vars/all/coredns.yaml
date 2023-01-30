@@ -1,0 +1,3 @@
+---
+# renovate: datasource=github-releases depName=coredns/coredns
+coredns_version: 1.10.0

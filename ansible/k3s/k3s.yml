@@ -1,18 +1,18 @@
 ---
 
 - hosts: cluster
-  gather_facts: yes
-  become: yes
+  gather_facts: true
+  become: true
   roles:
     - role: requirements
     - role: download
 
 - hosts: master
-  become: yes
+  become: true
   roles:
     - role: k3s/master
 
 - hosts: worker
-  become: yes
+  become: true
   roles:
     - role: k3s/worker

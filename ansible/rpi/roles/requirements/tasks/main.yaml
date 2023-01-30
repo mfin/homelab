@@ -4,11 +4,11 @@
     state: present
 
 - name: Add nextdns repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb https://repo.nextdns.io/deb stable main'
     state: present
     filename: nextdns
-    update_cache: yes
+    update_cache: true
 
 - name: Install additional packages
   ansible.builtin.package:
@@ -36,4 +36,4 @@
       - ufw
       - vim
       - wireguard
-    state: latest
+    state: present

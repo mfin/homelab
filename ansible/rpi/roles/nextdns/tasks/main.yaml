@@ -1,0 +1,11 @@
+- name: Create nextdns systemd service file
+  ansible.builtin.template:
+    src: templates/nextdns.service.j2
+    dest: /etc/systemd/system/nextdns.service
+  notify: Restart nextdns
+
+- name: Create nextdns configuration file
+  ansible.builtin.template:
+    src: templates/nextdns.conf.j2
+    dest: /etc/nextdns.conf
+  notify: Restart nextdns

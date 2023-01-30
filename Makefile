@@ -4,7 +4,7 @@ default: ansible k8s
 
 .PHONY: ansible
 ansible:
-	cd ansible/k3s && ansible-playbook -i ./inventory/homelab/hosts.ini ./k3s.yml
+	cd ansible/k3s && ansible-playbook ./k3s.yml
 
 .PHONY: k8s
 k8s:

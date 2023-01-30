@@ -1,0 +1,10 @@
+.:1053 {
+  log
+  errors
+  cache 30
+
+  prometheus :9153
+
+  file db.{{ home_domain }} {{ home_domain }}
+  file db.{{ remote_domain }} {{ remote_domain }}
+}
