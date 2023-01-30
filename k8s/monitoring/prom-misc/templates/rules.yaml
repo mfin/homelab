@@ -11,7 +11,7 @@ spec:
           annotations:
             description: Homelab power sensor is not available!
           expr: |-
-            homeassistant_entity_available{entity="sensor.homelab_socket_relay_0_power"}
+            homeassistant_entity_available{entity="sensor.homelab_socket_relay_0_power"} == 0
           for: 5m
           labels:
             severity: critical
