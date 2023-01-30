@@ -1,10 +1,10 @@
 .POSIX:
 
-default: ansible k8s
+default: k3s-ansible k8s
 
-.PHONY: ansible
+.PHONY: k3s-ansible
 ansible:
-	cd ansible && ansible-playbook -i ./inventory/homelab/hosts.ini ./k3s.yml
+	cd ansible/k3s && ansible-playbook -i ./inventory/homelab/hosts.ini ./k3s.yml
 
 .PHONY: k8s
 k8s:
