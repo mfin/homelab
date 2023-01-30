@@ -16,30 +16,6 @@
     state: started
     enabled: true
 
-- name: Enable and start nextdns service
-  ansible.builtin.systemd:
-    name: nextdns
-    state: started
-    enabled: true
-
-- name: Enable and start coredns service
-  ansible.builtin.systemd:
-    name: coredns
-    state: started
-    enabled: true
-
-- name: Enable and start ufw service
-  ansible.builtin.systemd:
-    name: ufw
-    state: started
-    enabled: true
-
-- name: Enable and start wireguard service
-  ansible.builtin.systemd:
-    name: wg-quick@wg0
-    state: started
-    enabled: true
-
 - name: Disable and stop systemd-resolved service
   ansible.builtin.systemd:
     name: systemd-resolved

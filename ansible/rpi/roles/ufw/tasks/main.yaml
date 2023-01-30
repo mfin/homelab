@@ -1,3 +1,9 @@
+- name: Install ufw
+  ansible.builtin.package:
+    name:
+      - ufw
+    state: present
+
 - name: Set logging
   community.general.ufw:
     logging: 'on'
@@ -53,3 +59,9 @@
     state: enabled
     direction: incoming
     policy: deny
+
+- name: Enable and start ufw service
+  ansible.builtin.systemd:
+    name: ufw
+    state: started
+    enabled: true

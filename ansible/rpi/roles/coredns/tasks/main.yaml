@@ -49,3 +49,9 @@
     owner: coredns
     group: coredns
   notify: Restart coredns
+
+- name: Enable and start coredns service
+  ansible.builtin.systemd:
+    name: coredns
+    state: started
+    enabled: true

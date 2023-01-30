@@ -1,5 +1,17 @@
+- name: Install wireguard
+  ansible.builtin.package:
+    name:
+      - wireguard
+    state: present
+
 - name: Create wireguard configuration file
   ansible.builtin.template:
     src: templates/wg0.conf.j2
     dest: /etc/wireguard/wg0.conf
   notify: Restart wg0
+
+- name: Enable and start wireguard service
+  ansible.builtin.systemd:
+    name: wg-quick@wg0
+    state: started
+    enabled: true
