@@ -9,3 +9,7 @@ k3s-ansible:
 .PHONY: k8s
 k8s:
 	cd k8s/bootstrap && make
+
+.PHONY: tf-cloudflare
+tf-cloudflare:
+	cd terraform/cloudflare && terraform apply
