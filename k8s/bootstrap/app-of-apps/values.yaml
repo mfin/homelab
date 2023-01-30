@@ -111,3 +111,5 @@ apps:
   #   namespace: vector
   - name: prom-misc
     path: k8s/monitoring
+  - name: smartctl-exporter
+    path: k8s/monitoring
