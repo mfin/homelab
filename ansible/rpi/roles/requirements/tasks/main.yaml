@@ -1,0 +1,39 @@
+- name: Add nextdns signing key
+  ansible.builtin.apt_key:
+    url: https://repo.nextdns.io/nextdns.gpg
+    state: present
+
+- name: Add nextdns repository
+  apt_repository:
+    repo: 'deb https://repo.nextdns.io/deb stable main'
+    state: present
+    filename: nextdns
+    update_cache: yes
+
+- name: Install additional packages
+  ansible.builtin.package:
+    name:
+      - avahi-daemon
+      - avahi-utils
+      - bash-completion
+      - curl
+      - git
+      - iperf3
+      - jq
+      - keepalived
+      - lm-sensors
+      - mailutils
+      - ncdu
+      - nextdns
+      - nfs-common
+      - postfix
+      - prometheus-node-exporter
+      - ripgrep
+      - rsync
+      - smartmontools
+      - sqlite3
+      - tmux
+      - ufw
+      - vim
+      - wireguard
+    state: latest
