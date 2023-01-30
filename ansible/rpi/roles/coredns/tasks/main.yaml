@@ -36,16 +36,16 @@
 
 - name: Create zonefile for home domain
   ansible.builtin.template:
-    src: templates/home_domain.j2
-    dest: /var/lib/coredns/db.{{ home_domain }}
+    src: templates/home.domain.j2
+    dest: /var/lib/coredns/db.{{ home.domain }}
     owner: coredns
     group: coredns
   notify: Restart coredns
 
 - name: Create zonefile for remote domain
   ansible.builtin.template:
-    src: templates/remote_domain.j2
-    dest: /var/lib/coredns/db.{{ remote_domain }}
+    src: templates/remote.domain.j2
+    dest: /var/lib/coredns/db.{{ remote.domain }}
     owner: coredns
     group: coredns
   notify: Restart coredns

@@ -7,5 +7,6 @@
     - role: requirements
     - role: coredns
     - role: nextdns
+    - role: wireguard
     - role: ufw
     - role: systemd

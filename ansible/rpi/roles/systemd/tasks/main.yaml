@@ -34,6 +34,12 @@
     state: started
     enabled: true
 
+- name: Enable and start wireguard service
+  ansible.builtin.systemd:
+    name: wg-quick@wg0
+    state: started
+    enabled: true
+
 - name: Disable and stop systemd-resolved service
   ansible.builtin.systemd:
     name: systemd-resolved

@@ -1,0 +1,14 @@
+[Interface]
+PrivateKey = {{ wireguard.private_key }}
+Address = {{ wireguard.ip }}
+DNS = {{ wireguard.dns_ip }}, 1.1.1.1, 1.0.0.1
+
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
+
+[Peer]
+PublicKey = {{ wireguard.public_key }}
+PresharedKey = {{ wireguard.preshared_key }}
+AllowedIPs = {{ wireguard.network_range }}, {{ remote.network_range }}
+PersistentKeepalive = 0
+Endpoint = {{ wireguard.endpoint }}

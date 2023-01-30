@@ -1,15 +1,15 @@
-@  3600  IN  SOA  ns1.{{ remote_domain }}.  root.{{ remote_domain }}.  (
+@  3600  IN  SOA  ns1.{{ remote.domain }}.  root.{{ remote.domain }}.  (
    2019041900
    3600
    600
    604800
    600 )
-   3600  IN  NS  ns1.{{ remote_domain }}.
-   3600  IN  NS  ns2.{{ remote_domain }}.
+   3600  IN  NS  ns1.{{ remote.domain }}.
+   3600  IN  NS  ns2.{{ remote.domain }}.
 
 ns1             IN  A     {{ main_dns_ip }}
 ns2             IN  A     {{ main_dns_ip }}
 
-{% for record in remote_records %}
+{% for record in remote.records %}
 {{ record.name }}           IN {{ record.type }} {{ record.ip }}
 {% endfor %}

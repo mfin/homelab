@@ -1,0 +1,5 @@
+- name: Create wireguard configuration file
+  ansible.builtin.template:
+    src: templates/wg0.conf.j2
+    dest: /etc/wireguard/wg0.conf
+  notify: Restart wg0

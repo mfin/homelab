@@ -1,8 +1,8 @@
 hardened-privacy false
 timeout 5s
 debug false
-forwarder {{ remote_domain }}.=127.0.0.1:1053
-forwarder {{ home_domain }}.=127.0.0.1:1053
+forwarder {{ remote.domain }}.=127.0.0.1:1053
+forwarder {{ home.domain }}.=127.0.0.1:1053
 forwarder {{ k8s_domain }}.={{ k8s_gateway_ip }}
 cache-max-age 0s
 report-client-info true
