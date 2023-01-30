@@ -1,0 +1,17 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: hass-sensor-down
+spec:
+  groups:
+    - name: hass-sensor-down.rules
+      rules:
+        - alert: HomelabPowerSensorDown
+          annotations:
+            description: Homelab power sensor is not available!
+          expr: |-
+            homeassistant_entity_available{entity="sensor.homelab_socket_relay_0_power"}
+          for: 5m
+          labels:
+            severity: critical
