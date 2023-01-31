@@ -7,3 +7,4 @@ data:
     test: true
     enabled: false
     another: one
+    and: another
