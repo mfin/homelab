@@ -1,0 +1,7 @@
+---
+- name: Play upgrade role
+  hosts: all
+  gather_facts: true
+  become: true
+  roles:
+    - role: upgrade
