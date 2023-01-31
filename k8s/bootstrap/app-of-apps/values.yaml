@@ -113,6 +113,6 @@ apps:
     path: k8s/monitoring
   - name: smartctl-exporter
     path: k8s/monitoring
-  - name: system-upgrade-controller
-    path: k8s/system
-    type: kustomize
+  # - name: system-upgrade-controller
+  #   path: k8s/system
+  #   type: kustomize
