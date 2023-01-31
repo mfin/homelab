@@ -112,6 +112,17 @@ argo-cd:
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
+
+  applicationSet:
+    metrics: *metrics
+
+    webhook:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
   redis:
     metrics: *metrics
 
