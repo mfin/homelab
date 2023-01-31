@@ -3,14 +3,32 @@ version: "3"
 
 vars:
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/k8s"
 
 includes:
   a: .taskfiles/ansible/Tasks.yaml
   k: .taskfiles/k8s/Tasks.yaml
+  t: .taskfiles/terraform/Tasks.yaml
   m: .taskfiles/misc/Tasks.yaml
 
 tasks:
   default:
     silent: true
     cmds: ["task -l"]
+
+  bootstrap:
+    desc: Bootstrap the K3s cluster
+    silent: true
+    cmds:
+      - cd ansible/k3s && ansible-playbook playbooks/prepare.yaml
+      - cd ansible/k3s && ansible-playbook playbooks/k3s.yaml
+      - task: k:create-namespace
+        vars:
+          namespace: argocd
+      - task: k:apply
+        vars:
+          app: k8s/bootstrap/argocd
+      - kubectl -n argocd wait --timeout=60s --for condition=Established crd/applications.argoproj.io crd/applicationsets.argoproj.io
+      - task: k:apply
+        vars:
+          app: k8s/bootstrap/app-of-apps
+          namespace: argocd

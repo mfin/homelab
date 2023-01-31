@@ -1,0 +1,19 @@
+---
+version: '3'
+
+tasks:
+  plan:
+    desc: Run terraform plan in current directory
+    dir: '{{.USER_WORKING_DIR}}'
+    silent: true
+    cmds:
+      - terraform plan -out=tfplan
+
+  apply:
+    desc: Run terraform apply in current directory
+    dir: '{{.USER_WORKING_DIR}}'
+    silent: true
+    preconditions:
+      - test -f tfplan
+    cmds:
+      - terraform apply tfplan && rm tfplan

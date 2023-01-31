@@ -4,9 +4,34 @@ version: '3'
 tasks:
   template:
     desc: Template Helm chart in current directory
-    dir: '{{.USER_WORKING_DIR}}'
+    dir: '{{.app}}'
     silent: true
     env:
       HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
+    vars:
+      app: '{{.app | default .USER_WORKING_DIR}}'
+      namespace: '{{.namespace | default (base .app)}}'
+      name: '{{.name | default (base .app)}}'
     cmds:
-      - helm template --dependency-update --include-crds --namespace {{ base .USER_WORKING_DIR }} {{ base .USER_WORKING_DIR }} . -f secrets://secrets.yaml
+      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml
+
+  apply:
+    desc: Apply Helm chart from current directory
+    dir: '{{.app}}'
+    silent: false
+    env:
+      HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
+    vars:
+      app: '{{.app | default .USER_WORKING_DIR}}'
+      namespace: '{{.namespace | default (base .app)}}'
+      name: '{{.name | default (base .app)}}'
+    cmds:
+      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml | kubectl apply -n {{.namespace}} -f -
+
+  create-namespace:
+    desc: Create K8s namespace
+    silent: true
+    vars:
+      namespace: '{{.namespace | default "default"}}'
+    cmds:
+      - kubectl create namespace {{.namespace}} --dry-run=client --output=yaml | kubectl apply -f -
