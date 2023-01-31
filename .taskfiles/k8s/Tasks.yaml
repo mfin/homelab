@@ -3,6 +3,7 @@ version: '3'
 
 tasks:
   template:
+    desc: Template Helm chart in current directory
     dir: '{{.USER_WORKING_DIR}}'
     silent: true
     env:

@@ -3,6 +3,7 @@ version: '3'
 
 tasks:
   secrets:
+    desc: Decrypt secrets in current directory
     dir: '{{.USER_WORKING_DIR}}'
     silent: true
     cmds:
