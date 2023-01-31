@@ -18,11 +18,11 @@
   "prConcurrentLimit": 0,
   "commitBodyTable": true,
   "platform": "github",
-  "username": "mfin-bot[bot]",
+  "username": "rosey-bot[bot]",
   "repositories": ["mfin/homelab"],
   "onboarding": false,
   "requireConfig": "optional",
-  "gitAuthor": "mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>",
+  "gitAuthor": "rosey-bot <98030736+rosey-bot[bot]@users.noreply.github.com>",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "regexManagers": [
     {
