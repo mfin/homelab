@@ -5,8 +5,24 @@ tasks:
   deps:
     desc: Install/Upgrade Ansible deps
     dir: '{{.ANSIBLE_DIR}}'
+    silent: true
     cmds:
       - ansible-galaxy install -r requirements.yaml --roles-path ~/.ansible/roles --force
       - ansible-galaxy collection install -r requirements.yaml --collections-path ~/.ansible/collections --force
     preconditions:
       - test -f "{{.ANSIBLE_DIR}}/requirements.yaml"
+
+  rpi:
+    desc: Run RPi playbooks
+    dir: '{{.ANSIBLE_DIR}}/rpi'
+    silent: true
+    cmds:
+      - ansible-playbook playbooks/all.yaml
+
+  k3s:
+    desc: Run K3s playbooks
+    dir: '{{.ANSIBLE_DIR}}/k3s'
+    silent: true
+    cmds:
+      - ansible-playbook playbooks/prepare.yaml
+      - ansible-playbook playbooks/k3s.yaml

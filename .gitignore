@@ -43,3 +43,4 @@ override.tf.json
 terraform.rc
 
 tfplan
+kubeconfig

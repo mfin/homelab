@@ -19,8 +19,7 @@ tasks:
     desc: Bootstrap the K3s cluster
     silent: true
     cmds:
-      - cd ansible/k3s && ansible-playbook playbooks/prepare.yaml
-      - cd ansible/k3s && ansible-playbook playbooks/k3s.yaml
+      - task: a:k3s
       - task: k:create-namespace
         vars:
           namespace: argocd
