@@ -1,3 +1,4 @@
+# TODO: when a usecase for GitGenerated kustomize apps comes, this should work
 # apiVersion: argoproj.io/v1alpha1
 # kind: ApplicationSet
 # metadata:
