@@ -19,6 +19,7 @@ tasks:
     desc: Bootstrap the K3s cluster
     silent: true
     cmds:
+      - task: a:deps
       - task: a:k3s
       - task: k:create-namespace
         vars:
