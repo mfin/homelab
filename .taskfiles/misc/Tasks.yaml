@@ -3,8 +3,10 @@ version: '3'
 
 tasks:
   secrets:
-    desc: Decrypt secrets in current directory
-    dir: '{{.USER_WORKING_DIR}}'
+    desc: Decrypt secrets in $dir directory
+    dir: '{{.dir}}'
     silent: true
+    vars:
+      dir: '{{.dir | default .USER_WORKING_DIR}}'
     cmds:
       - find . -type f \( -name "*.sops.yaml" -o -name "secrets.yaml" \) -exec sops -d {} \;

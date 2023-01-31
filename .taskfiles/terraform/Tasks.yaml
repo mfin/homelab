@@ -3,16 +3,20 @@ version: '3'
 
 tasks:
   plan:
-    desc: Run terraform plan in current directory
-    dir: '{{.USER_WORKING_DIR}}'
+    desc: Run terraform plan in $dir directory
+    dir: '{{.dir}}'
     silent: true
+    vars:
+      dir: '{{.dir | default .USER_WORKING_DIR}}'
     cmds:
       - terraform plan -out=tfplan
 
   apply:
-    desc: Run terraform apply in current directory
-    dir: '{{.USER_WORKING_DIR}}'
+    desc: Run terraform apply in $dir directory
+    dir: '{{.dir}}'
     silent: true
+    vars:
+      dir: '{{.dir | default .USER_WORKING_DIR}}'
     preconditions:
       - test -f tfplan
     cmds:

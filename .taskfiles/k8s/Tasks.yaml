@@ -3,7 +3,7 @@ version: '3'
 
 tasks:
   template:
-    desc: Template Helm chart in current directory
+    desc: Template Helm chart in $app directory
     dir: '{{.app}}'
     silent: true
     env:
@@ -16,7 +16,7 @@ tasks:
       - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml
 
   apply:
-    desc: Apply Helm chart from current directory
+    desc: Apply Helm chart from $app directory
     dir: '{{.app}}'
     silent: true
     env:
@@ -29,7 +29,7 @@ tasks:
       - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml | kubectl apply -n {{.namespace}} -f -
 
   create-namespace:
-    desc: Create K8s namespace
+    desc: Create K8s namespace with name $namespace
     silent: true
     vars:
       namespace: '{{.namespace | default "default"}}'
