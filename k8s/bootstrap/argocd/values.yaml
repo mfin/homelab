@@ -113,15 +113,16 @@ argo-cd:
           - mountPath: /custom-tools
             name: custom-tools
 
-  applicationSet:
-    metrics: *metrics
+  # TODO: only needed for GitGenerator
+  # applicationSet:
+  #   metrics: *metrics
 
-    webhook:
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  #   webhook:
+  #     ingress:
+  #       enabled: true
+  #       ingressClassName: traefik
+  #       annotations:
+  #         traefik.ingress.kubernetes.io/router.entrypoints: websecure
 
   redis:
     metrics: *metrics
