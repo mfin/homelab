@@ -3,7 +3,7 @@ gitops:
   revision: main
   secretName: helm-secrets-private-keys#key.txt?secrets.yaml
 
-apps:
+helmApps:
   - name: argocd
     path: k8s/bootstrap
   - name: app-of-apps
