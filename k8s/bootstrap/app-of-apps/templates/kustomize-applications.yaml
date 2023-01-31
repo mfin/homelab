@@ -7,7 +7,7 @@ spec:
   - git:
       repoURL: {{ $.Values.gitops.repo }}
       revision: {{ $.Values.gitops.revision }}
-      directories:
+      files:
       - path: k8s/**/kustomization.yaml
   template:
     metadata:
