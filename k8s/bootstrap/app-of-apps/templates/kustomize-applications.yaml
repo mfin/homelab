@@ -19,7 +19,7 @@ spec:
         targetRevision: {{ $.Values.gitops.revision }}
         path: '{{ `{{path}}` }}'
       destination:
-        server: in-cluster
+        name: in-cluster
         namespace: '{{ `{{path.basename}}` }}'
       syncPolicy:
         automated:
