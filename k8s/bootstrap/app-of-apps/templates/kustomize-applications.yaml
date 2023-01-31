@@ -1,38 +1,38 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: kustomize-applications
-  namespace: {{ $.Release.Namespace }}
-spec:
-  generators:
-  - git:
-      repoURL: {{ $.Values.gitops.repo }}
-      revision: {{ $.Values.gitops.revision }}
-      files:
-      - path: k8s/**/kustomization.yaml
-  template:
-    metadata:
-      name: '{{ `{{path.basename}}` }}'
-    spec:
-      project: default
-      source:
-        repoURL: {{ $.Values.gitops.repo }}
-        targetRevision: {{ $.Values.gitops.revision }}
-        path: '{{ `{{path}}` }}'
-      destination:
-        name: in-cluster
-        namespace: '{{ `{{path.basename}}` }}'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        retry:
-          limit: 10
-          backoff:
-            duration: 1m
-            factor: 2
-            maxDuration: 16m
-        syncOptions:
-          - CreateNamespace=true
-          - ApplyOutOfSyncOnly=true
-          - ServerSideApply=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: kustomize-applications
+#   namespace: {{ $.Release.Namespace }}
+# spec:
+#   generators:
+#   - git:
+#       repoURL: {{ $.Values.gitops.repo }}
+#       revision: {{ $.Values.gitops.revision }}
+#       files:
+#       - path: k8s/**/kustomization.yaml
+#   template:
+#     metadata:
+#       name: '{{ `{{path.basename}}` }}'
+#     spec:
+#       project: default
+#       source:
+#         repoURL: {{ $.Values.gitops.repo }}
+#         targetRevision: {{ $.Values.gitops.revision }}
+#         path: '{{ `{{path}}` }}'
+#       destination:
+#         name: in-cluster
+#         namespace: '{{ `{{path.basename}}` }}'
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+#         retry:
+#           limit: 10
+#           backoff:
+#             duration: 1m
+#             factor: 2
+#             maxDuration: 16m
+#         syncOptions:
+#           - CreateNamespace=true
+#           - ApplyOutOfSyncOnly=true
+#           - ServerSideApply=true
