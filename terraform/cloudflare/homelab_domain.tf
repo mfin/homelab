@@ -1,14 +1,64 @@
-data "cloudflare_zones" "public_domain" {
+data "cloudflare_zones" "primary_domain" {
   filter {
-    name = data.sops_file.secrets.data["cloudflare_homelab_zone"]
+    name = data.sops_file.secrets.data["primary_zone"]
   }
 }
 
 resource "cloudflare_record" "unproxied_cname" {
-  name    = data.sops_file.secrets.data["cloudflare_homelab_unproxied_cname"]
-  zone_id = lookup(data.cloudflare_zones.public_domain.zones[0], "id")
-  value   = data.sops_file.secrets.data["cloudflare_homelab_proxied"]
+  name    = data.sops_file.secrets.data["primary_up_cname"]
+  zone_id = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  value   = data.sops_file.secrets.data["primary_p_cname"]
   proxied = false
   type    = "CNAME"
   ttl     = 1
+}
+
+resource "cloudflare_record" "mx_main" {
+  name     = data.sops_file.secrets.data["primary_zone"]
+  zone_id  = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  value    = "aspmx.l.google.com"
+  proxied  = false
+  type     = "MX"
+  ttl      = 1
+  priority = 1
+}
+
+resource "cloudflare_record" "mx_secondary_1" {
+  name     = data.sops_file.secrets.data["primary_zone"]
+  zone_id  = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  value    = "alt1.aspmx.l.google.com"
+  proxied  = false
+  type     = "MX"
+  ttl      = 1
+  priority = 5
+}
+
+resource "cloudflare_record" "mx_secondary_2" {
+  name     = data.sops_file.secrets.data["primary_zone"]
+  zone_id  = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  value    = "alt2.aspmx.l.google.com"
+  proxied  = false
+  type     = "MX"
+  ttl      = 1
+  priority = 5
+}
+
+resource "cloudflare_record" "mx_tertiary_1" {
+  name     = data.sops_file.secrets.data["primary_zone"]
+  zone_id  = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  value    = "aspmx2.googlemail.com"
+  proxied  = false
+  type     = "MX"
+  ttl      = 1
+  priority = 10
+}
+
+resource "cloudflare_record" "mx_tertiary_2" {
+  name     = data.sops_file.secrets.data["primary_zone"]
+  zone_id  = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  value    = "aspmx3.googlemail.com"
+  proxied  = false
+  type     = "MX"
+  ttl      = 1
+  priority = 10
 }
