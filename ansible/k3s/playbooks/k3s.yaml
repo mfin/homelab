@@ -1,13 +1,5 @@
 ---
 
-- name: Install requirements
-  hosts: cluster
-  gather_facts: true
-  become: true
-  roles:
-    - role: requirements
-    - role: download
-
 - name: Provision masters
   hosts: master
   become: true

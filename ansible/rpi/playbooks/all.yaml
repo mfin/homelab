@@ -1,10 +1,10 @@
 ---
-- name: RPi provisioning
+- name: Play all roles
   hosts: all
   gather_facts: true
   become: true
   roles:
-    - role: requirements
+    - role: prepare
     - role: coredns
     - role: nextdns
     - role: wireguard

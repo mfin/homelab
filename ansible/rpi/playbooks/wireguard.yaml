@@ -1,0 +1,7 @@
+---
+- name: Play wireguard role
+  hosts: all
+  gather_facts: true
+  become: true
+  roles:
+    - role: wireguard

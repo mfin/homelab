@@ -1,0 +1,7 @@
+---
+- name: Play NextDNS role
+  hosts: all
+  gather_facts: true
+  become: true
+  roles:
+    - role: nextdns

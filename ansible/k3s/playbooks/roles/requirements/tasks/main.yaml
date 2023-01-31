@@ -43,3 +43,9 @@
     src: /run/systemd/resolve/resolv.conf
     dest: /etc/resolv.conf
     state: link
+
+- name: Add user SSH public keys
+  ansible.posix.authorized_key:
+    user: "{{ create_user.name }}"
+    key: "{{ item }}"
+  loop: "{{ create_user.ssh_authorized_keys | default([]) }}"
