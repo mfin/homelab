@@ -8,5 +8,6 @@ tasks:
     silent: true
     vars:
       dir: '{{.dir | default .USER_WORKING_DIR}}'
+      string: '{{.string}}'
     cmds:
-      - find . -type f \( -name "*.sops.yaml" -o -name "secrets.yaml" \) -exec sops -d {} \;
+      - find . -type f \( -name "*.sops.yaml" -o -name "secrets.yaml" \) -exec sh -c "(sops -d {} | grep {{.string}}) && echo '{}'" \;
