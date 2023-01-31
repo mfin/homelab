@@ -11,13 +11,13 @@ spec:
       - path: k8s/**/kustomization.yaml
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{ `{{path.basename}}` }}'
     spec:
       project: default
       source:
         repoURL: {{ $.Values.gitops.repo }}
         targetRevision: {{ $.Values.gitops.revision }}
-        path: '{{path}}'
+        path: '{{ `{{path}}` }}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: '{{ `{{path.basename}}` }}'
