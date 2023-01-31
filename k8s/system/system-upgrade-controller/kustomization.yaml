@@ -11,3 +11,10 @@ resources:
 commonLabels:
   app.kubernetes.io/name: system-upgrade-controller
   app.kubernetes.io/instance: system-upgrade-controller
+patchesStrategicMerge:
+  - |
+    $patch: delete
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: system-upgrade
