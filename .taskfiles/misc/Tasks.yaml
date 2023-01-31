@@ -1,0 +1,9 @@
+---
+version: '3'
+
+tasks:
+  secrets:
+    dir: '{{.USER_WORKING_DIR}}'
+    silent: true
+    cmds:
+      - find . -type f \( -name "*.sops.yaml" -o -name "secrets.yaml" \) -exec sops -d {} \;

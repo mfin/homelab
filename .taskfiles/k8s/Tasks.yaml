@@ -1,0 +1,11 @@
+---
+version: '3'
+
+tasks:
+  template:
+    dir: '{{.USER_WORKING_DIR}}'
+    silent: true
+    env:
+      HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
+    cmds:
+      - helm template --dependency-update --include-crds --namespace {{ base .USER_WORKING_DIR }} {{ base .USER_WORKING_DIR }} . -f secrets://secrets.yaml
