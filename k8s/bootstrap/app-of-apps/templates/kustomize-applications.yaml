@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kustomize-applications
+spec:
+  generators:
+  - git:
+      repoURL: {{ $.Values.gitops.repo }}
+      revision: {{ $.Values.gitops.revision }}
+      directories:
+      - path: k8s/**/kustomization.yaml
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: {{ $.Values.gitops.repo }}
+        targetRevision: {{ $.Values.gitops.revision }}
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
