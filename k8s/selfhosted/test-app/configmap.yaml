@@ -6,3 +6,4 @@ data:
   config.yaml: |-
     test: true
     enabled: false
+    another: one
