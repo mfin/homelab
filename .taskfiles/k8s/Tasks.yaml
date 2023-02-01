@@ -19,14 +19,12 @@ tasks:
     desc: Apply Helm chart from $app directory
     dir: '{{.app}}'
     silent: true
-    env:
-      HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
     vars:
       app: '{{.app | default .USER_WORKING_DIR}}'
       namespace: '{{.namespace | default (base .app)}}'
       name: '{{.name | default (base .app)}}'
     cmds:
-      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml | kubectl apply -n {{.namespace}} -f -
+      - app={{.app}} namespace={{.namespace}} name={{.name}} task k:template | kubectl apply -n {{.namespace}} -f -
 
   create-namespace:
     desc: Create K8s namespace with name $namespace
@@ -35,3 +33,26 @@ tasks:
       namespace: '{{.namespace | default "default"}}'
     cmds:
       - kubectl create namespace {{.namespace}} --dry-run=client --output=yaml | kubectl apply -f -
+
+  kubeconform:
+    desc: Template and kubeconform Helm chart in $app directory
+    dir: '{{.app}}'
+    silent: true
+    env:
+      HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
+    vars:
+      app: '{{.app | default .USER_WORKING_DIR}}'
+      namespace: '{{.namespace | default (base .app)}}'
+      name: '{{.name | default (base .app)}}'
+    cmds:
+      - bash {{.ROOT_DIR}}/.bin/kubeconform.sh {{.namespace}} {{.name}}
+
+  clean:
+    desc: Clean all the Helm artifacts from $app directory
+    dir: '{{.app}}'
+    silent: true
+    vars:
+      app: '{{.app | default .USER_WORKING_DIR}}'
+    cmds:
+      - find . -type d -wholename **/*/charts -exec rm -rf {} +
+      - find . -type f -wholename **/*/Chart.lock -delete
