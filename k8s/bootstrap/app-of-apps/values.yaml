@@ -113,3 +113,5 @@ helmApps:
     path: k8s/monitoring
   - name: smartctl-exporter
     path: k8s/monitoring
+  - name: xteve
+    path: k8s/media

@@ -1,0 +1,47 @@
+app-template:
+  image:
+    repository: ghcr.io/mrmarble/xteve
+    tag: v2.3.1
+    pullPolicy: IfNotPresent
+  env:
+    TZ: "Europe/Ljubljana"
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 34400
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/appName: xTeVe
+        hajimari.io/info: M3U Proxy for Plex DVR and Emby Live TV
+        hajimari.io/icon: "arcticons:iptv-smarters"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+      hosts:
+        - host: &host "xteve.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+  persistence:
+    data:
+      enabled: true
+      existingClaim: xteve-data
+  resources:
+    requests:
+      memory: 1Gib
+      cpu: 20m
+    limits:
+      memory: 1Gib
+      cpu: 20m
