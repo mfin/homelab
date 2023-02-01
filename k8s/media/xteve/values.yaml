@@ -1,4 +1,7 @@
 app-template:
+  controller:
+    replicas: 1
+    type: statefulset
   image:
     repository: ghcr.io/mrmarble/xteve
     tag: v2.3.1
