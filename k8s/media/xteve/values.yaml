@@ -5,7 +5,6 @@ app-template:
   image:
     repository: ghcr.io/mrmarble/xteve
     tag: v2.3.1
-    pullPolicy: IfNotPresent
   env:
     TZ: "Europe/Ljubljana"
   podSecurityContext:
@@ -29,14 +28,6 @@ app-template:
         hajimari.io/icon: "arcticons:iptv-smarters"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
-      hosts:
-        - host: &host "xteve.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
   persistence:
     data:
       enabled: true
