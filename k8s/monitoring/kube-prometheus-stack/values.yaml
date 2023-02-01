@@ -60,9 +60,13 @@ kube-prometheus-stack:
           - receiver: "null"
             matchers:
               - alertname = "InfoInhibitor"
-          - receiver: opsgenie
+          - receiver: opsgenie_critical
             matchers:
               - severity =~ "critical|alert"
+            continue: true
+          - receiver: opsgenie_warning
+            matchers:
+              - severity = "warning"
             continue: true
     alertmanagerSpec:
       storage:
