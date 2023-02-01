@@ -29,10 +29,11 @@
       "description": "Process custom dependencies",
       "fileMatch": [
         "ansible/.+\\.ya?ml$",
-        "k8s/.+\\.ya?ml$"
+        "k8s/.+\\.ya?ml$",
+        ".bin/.+\\.sh$"
       ],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value): (\\\\?)(\"?)(?<currentValue>.+?)(\\\\?)(\"?)\\n"
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value)(: |=)(\\\\?)(\"?)(?<currentValue>.+?)(\\\\?)(\"?)\\n"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
