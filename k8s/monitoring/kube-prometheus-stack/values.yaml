@@ -49,7 +49,7 @@ kube-prometheus-stack:
         group_wait: 30s
         group_interval: 5m
         repeat_interval: 6h
-        receiver: opsgenie
+        receiver: opsgenie-warning
         routes:
           - receiver: healthchecksio
             group_wait: 0s
@@ -60,11 +60,11 @@ kube-prometheus-stack:
           - receiver: "null"
             matchers:
               - alertname = "InfoInhibitor"
-          - receiver: opsgenie_critical
+          - receiver: opsgenie-critical
             matchers:
               - severity =~ "critical|alert"
             continue: true
-          - receiver: opsgenie_warning
+          - receiver: opsgenie-warning
             matchers:
               - severity = "warning"
             continue: true
