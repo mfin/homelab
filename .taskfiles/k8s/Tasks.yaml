@@ -54,5 +54,5 @@ tasks:
     vars:
       app: '{{.app | default .USER_WORKING_DIR}}'
     cmds:
-      - find . -type d -wholename **/*/charts -exec rm -rf {} +
-      - find . -type f -wholename **/*/Chart.lock -delete
+      - fd -t d charts --exec rm -rf {}
+      - fd -t f Chart.lock --exec rm -rf {}
