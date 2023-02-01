@@ -34,8 +34,8 @@ app-template:
       existingClaim: xteve-data
   resources:
     requests:
-      memory: 1Gib
+      memory: 1Gi
       cpu: 20m
     limits:
-      memory: 1Gib
+      memory: 1Gi
       cpu: 20m
