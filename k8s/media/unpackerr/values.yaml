@@ -6,13 +6,13 @@ app-template:
     TZ: Europe/Ljubljana
     UN_DEBUG: true
     UN_SONARR_0_URL: http://sonarr.sonarr.svc.cluster.local
-    UN_SONARR_0_PATHS_0: /data/downloads,/data/dl-nzb
+    UN_SONARR_0_PATHS_0: /data/downloads,/data/usenet/complete
     UN_SONARR_0_PROTOCOLS: torrent,usenet
     UN_RADARR_0_URL: http://radarr.radarr.svc.cluster.local
-    UN_RADARR_0_PATHS_0: /data/downloads,/data/dl-nzb
+    UN_RADARR_0_PATHS_0: /data/downloads,/data/usenet/complete
     UN_RADARR_0_PROTOCOLS: torrent,usenet
     UN_RADARR_1_URL: http://radarr-4k.radarr-4k.svc.cluster.local
-    UN_RADARR_1_PATHS_0: /data/downloads,/data/dl-nzb
+    UN_RADARR_1_PATHS_0: /data/downloads,/data/usenet/complete
     UN_RADARR_1_PROTOCOLS: torrent,usenet
   service:
     main:
