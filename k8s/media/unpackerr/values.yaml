@@ -1,4 +1,7 @@
 app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
   image:
     repository: ghcr.io/onedr0p/unpackerr
     tag: 0.10.1
