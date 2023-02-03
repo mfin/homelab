@@ -11,6 +11,9 @@ app-template:
     UN_RADARR_0_PATHS_0: /data/downloads
     UN_RADARR_1_URL: http://radarr-4k.radarr-4k.svc.cluster.local
     UN_RADARR_1_PATHS_0: /data/downloads
+  envFrom:
+    - secretRef:
+        name: unpackerr-secret
   service:
     main:
       enabled: false
