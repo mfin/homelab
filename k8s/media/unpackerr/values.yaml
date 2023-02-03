@@ -7,16 +7,6 @@ app-template:
     tag: 0.10.1
   env:
     TZ: Europe/Ljubljana
-    UN_DEBUG: true
-    UN_SONARR_0_URL: http://sonarr.sonarr.svc.cluster.local
-    UN_SONARR_0_PATHS_0: /data/downloads
-    UN_RADARR_0_URL: http://radarr.radarr.svc.cluster.local
-    UN_RADARR_0_PATHS_0: /data/downloads
-    UN_RADARR_1_URL: http://radarr-4k.radarr-4k.svc.cluster.local
-    UN_RADARR_1_PATHS_0: /data/downloads
-  envFrom:
-    - secretRef:
-        name: unpackerr-secret
   service:
     main:
       enabled: false
@@ -33,6 +23,13 @@ app-template:
     fsGroup: 100
     fsGroupChangePolicy: "OnRootMismatch"
   persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: unpackerr-config
+      mountPath: /config/unpackerr.conf
+      subPath: unpackerr.conf
+      readOnly: true
     data:
       enabled: true
       type: nfs

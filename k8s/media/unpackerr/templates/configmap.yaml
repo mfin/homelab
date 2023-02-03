@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unpackerr-config
+data:
+  unpackerr.conf: |-
+    debug = true
+
+    [[sonarr]]
+     url = "http://sonarr.sonarr.svc.cluster.local"
+     api_key = "{{ .Values.keys.sonarr }}"
+     paths = ["/data/downloads"]
+
+    [[radarr]]
+     url = "http://radarr.radarr.svc.cluster.local"
+     api_key = "{{ .Values.keys.radarr }}"
+     paths = ["/data/downloads"]
+
+    [[radarr]]
+     url = "http://radarr-4k.radarr-4k.svc.cluster.local"
+     api_key = "{{ .Values.keys.radarr4k }}"
+     paths = ["/data/downloads"]
+
+    [[webhook]]
+     template = "pushover"
+     name = "Pushover"
+     url = "https://api.pushover.net/1/messages.json"
+     channel = "{{ .Values.keys.pushoverUserKey }}"
+     token = "{{ .Values.keys.pushoverApiToken }}"
+     events = [3, 7]
