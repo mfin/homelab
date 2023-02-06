@@ -118,8 +118,8 @@ helmApps:
   - name: sabnzbd
     path: k8s/media
   - name: snapshot-validation-webhook
-    path: k8s/system
+    path: k8s/storage
   - name: snapshot-controller
-    path: k8s/system
+    path: k8s/storage
   - name: volsync
     path: k8s/storage
