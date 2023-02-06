@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: whoami-test
   trigger:
-    schedule: "*/5 * * * *"
+    schedule: "0 * * * *"
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
