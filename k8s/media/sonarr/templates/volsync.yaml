@@ -19,7 +19,7 @@ spec:
   trigger:
     schedule: "*/5 * * * *"
   restic:
-    copyMethod: Clone
+    copyMethod: Direct
     pruneIntervalDays: 10
     repository: sonarr-restic-secret
     storageClassName: local-path
