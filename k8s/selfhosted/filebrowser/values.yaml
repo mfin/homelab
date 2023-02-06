@@ -1,0 +1,51 @@
+app-template:
+  controller:
+    replicas: 1
+
+  image:
+    repository: ghcr.io/onedr0p/filebrowser
+    tag: v2.23.0
+
+  env:
+    TZ: Europe/Ljubljana
+    FB_DATABASE: "/data/config/filebrowser.db"
+    FB_ROOT: "/data/public"
+    FB_LOG: "stdout"
+    FB_NOAUTH: "true"
+
+  service:
+    main:
+      ports:
+        http:
+          port: &port 80
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /health
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  persistence:
+    data:
+      enabled: true
+      existingClaim: filebrowser-data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 50Mi
+    limits:
+      memory: 500Mi
