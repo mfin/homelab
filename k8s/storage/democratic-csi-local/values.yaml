@@ -11,10 +11,6 @@ democratic-csi:
     volumeBindingMode: WaitForFirstConsumer
     allowVolumeExpansion: false
 
-  volumeSnapshotClasses:
-  - name: local-hostpath
-    deletionPolicy: Delete
-
   controller:
     enabled: true
     strategy: node

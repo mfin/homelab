@@ -1,0 +1,6 @@
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: local-hostpath
+deletionPolicy: Delete
+driver: org.democratic-csi.local-hostpath
