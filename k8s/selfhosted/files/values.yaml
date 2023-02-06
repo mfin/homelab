@@ -22,7 +22,7 @@ app-template:
       args:
         - mkdir -p /data/config /data/public
       volumeMounts:
-        - name: files-data
+        - name: data
           mountPath: /data
 
   service:
