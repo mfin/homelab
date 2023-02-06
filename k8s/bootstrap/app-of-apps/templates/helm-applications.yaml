@@ -30,7 +30,7 @@ spec:
     {{- end }}
   syncPolicy:
     automated:
-      prune: true
+      prune: {{ default "true" $app.prune }}
       selfHeal: {{ default "true" $app.selfHeal }}
     retry:
       limit: 10
