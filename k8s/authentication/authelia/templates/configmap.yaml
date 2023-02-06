@@ -40,6 +40,11 @@ data:
           resources:
             - "^/api/public/dl/*"
             - "/share/*"
+            - "/static/js/*"
+            - "/static/css/*"
+            - "/static/img/*"
+            - "/static/themes/*"
+            - "/static/fonts/*"
 
     session:
       domain: {{ .Values.authelia.domain }}
