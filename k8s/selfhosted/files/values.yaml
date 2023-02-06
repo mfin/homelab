@@ -9,9 +9,6 @@ app-template:
   env:
     TZ: Europe/Ljubljana
     FB_CONFIG: "/etc/filebrowser.json"
-    FB_DATABASE: "/data/config/filebrowser.db"
-    FB_ROOT: "/data/public"
-    FB_LOG: "stdout"
 
   initContainers:
     mkdir:

@@ -5,6 +5,9 @@ metadata:
 data:
   filebrowser.json: |-
     {
+      "database": "/data/config/database.db",
+      "root": "/data/public",
+      "log": "stdout",
       "auth": {
         "method": "proxy",
         "header": "Remote-User"
