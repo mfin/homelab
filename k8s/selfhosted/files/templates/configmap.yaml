@@ -6,6 +6,7 @@ data:
   filebrowser.json: |-
     {
       "database": "/data/config/database.db",
+      "port": 80,
       "root": "/data/public",
       "log": "stdout",
       "username": "mfin",
