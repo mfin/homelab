@@ -31,7 +31,7 @@ spec:
   syncPolicy:
     automated:
       prune: true
-      selfHeal: true
+      selfHeal: {{ default "true" $app.selfHeal }}
     retry:
       limit: 10
       backoff:

@@ -39,10 +39,12 @@ helmApps:
     path: k8s/media
   - name: radarr
     path: k8s/media
+    selfHeal: "false"
   - name: radarr-4k
     path: k8s/media
   - name: sonarr
     path: k8s/media
+    selfHeal: "false"
   - name: unpackerr
     path: k8s/media
   - name: intel-device-plugins-operator
