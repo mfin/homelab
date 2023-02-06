@@ -19,7 +19,7 @@ spec:
   trigger:
     schedule: "*/5 * * * *"
   restic:
-    copyMethod: Snapshot
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: whoami-restic-secret
     storageClassName: local-hostpath
