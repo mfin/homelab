@@ -7,6 +7,8 @@ data:
     {
       "database": "/data/config/database.db",
       "port": 80,
+      "baseURL": "",
+      "address": "",
       "root": "/data/public",
       "log": "stdout",
       "username": "mfin",
