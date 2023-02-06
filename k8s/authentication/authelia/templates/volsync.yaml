@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: authelia-db
   trigger:
-    manual: test2
+    manual: test3
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
