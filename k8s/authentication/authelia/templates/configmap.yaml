@@ -33,18 +33,6 @@ data:
 
     access_control:
       default_policy: two_factor
-      rules:
-        - domain:
-          - files.{{ .Values.authelia.domain }}
-          policy: bypass
-          resources:
-            - "^/api/public/dl/*"
-            - "/share/*"
-            - "/static/js/*"
-            - "/static/css/*"
-            - "/static/img/*"
-            - "/static/themes/*"
-            - "/static/fonts/*"
 
     session:
       domain: {{ .Values.authelia.domain }}
