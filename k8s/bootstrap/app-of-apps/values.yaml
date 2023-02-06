@@ -69,8 +69,8 @@ helmApps:
     path: k8s/selfhosted
   - name: paperless-ngx
     path: k8s/selfhosted
-  # - name: whoami
-  #   path: k8s/selfhosted
+  - name: whoami
+    path: k8s/selfhosted
   - name: redis
     path: k8s/storage
   - name: node-feature-discovery
