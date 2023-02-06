@@ -3,7 +3,7 @@ app-template:
     replicas: 1
 
   image:
-    repository: ghcr.io/onedr0p/filebrowser
+    repository: filebrowser/filebrowser
     tag: v2.23.0
 
   env:
