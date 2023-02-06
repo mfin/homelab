@@ -18,7 +18,7 @@ spec:
         - alert: VolSyncVolumeOutOfSync
           annotations:
             summary: >-
-              {{ $labels.obj_namespace }}/{{ $labels.obj_name }} volume
+              {{`{{ $labels.obj_namespace }}`}}/{{`{{ $labels.obj_name }}`}}` volume
               is out of sync.
           expr: |
             volsync_volume_out_of_sync == 1
