@@ -8,10 +8,10 @@ app-template:
 
   env:
     TZ: Europe/Ljubljana
+    FB_CONFIG: "/etc/filebrowser.json"
     FB_DATABASE: "/data/config/filebrowser.db"
     FB_ROOT: "/data/public"
     FB_LOG: "stdout"
-    FB_NOAUTH: "true"
 
   initContainers:
     mkdir:
@@ -21,6 +21,9 @@ app-template:
         - -c
       args:
         - mkdir -p /data/config /data/public
+      volumeMounts:
+        - name: files-data
+          mountPath: /data
 
   service:
     main:
@@ -49,6 +52,13 @@ app-template:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
   persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: files-config
+      mountPath: /etc/filebrowser.json
+      subPath: filebrowser.json
+      readOnly: true
     data:
       enabled: true
       existingClaim: files-data
