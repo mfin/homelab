@@ -121,3 +121,5 @@ helmApps:
     path: k8s/system
   - name: snapshot-controller
     path: k8s/system
+  - name: volsync
+    path: k8s/storage
