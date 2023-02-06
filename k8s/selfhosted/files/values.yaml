@@ -1,6 +1,9 @@
 app-template:
   controller:
+    type: statefulset
     replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
 
   image:
     repository: filebrowser/filebrowser
@@ -8,7 +11,6 @@ app-template:
 
   env:
     TZ: Europe/Ljubljana
-    FB_CONFIG: "/etc/filebrowser.json"
 
   initContainers:
     mkdir:
@@ -53,7 +55,7 @@ app-template:
       enabled: true
       type: configMap
       name: files-config
-      mountPath: /etc/filebrowser.json
+      mountPath: /.filebrowser.json
       subPath: filebrowser.json
       readOnly: true
     data:
