@@ -11,11 +11,9 @@ democratic-csi:
     volumeBindingMode: WaitForFirstConsumer
     allowVolumeExpansion: false
 
-  # if your cluster supports snapshots you may enable below
-  volumeSnapshotClasses: []
-  #- name: local-hostpath
-  #  secrets:
-  #    snapshotter-secret:
+  volumeSnapshotClasses:
+  - name: local-hostpath
+    deletionPolicy: Delete
 
   controller:
     enabled: true
