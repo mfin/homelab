@@ -33,6 +33,13 @@ data:
 
     access_control:
       default_policy: two_factor
+      rules:
+        - domain:
+          - files.{{ .Values.authelia.domain }}
+          policy: bypass
+          resources:
+            - "^/api/public/dl/*"
+            - "/share/*"
 
     session:
       domain: {{ .Values.authelia.domain }}
