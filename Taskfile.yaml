@@ -9,6 +9,7 @@ includes:
   k: .taskfiles/k8s/Tasks.yaml
   t: .taskfiles/terraform/Tasks.yaml
   m: .taskfiles/misc/Tasks.yaml
+  v: .taskfiles/volsync/Tasks.yaml
 
 tasks:
   default:

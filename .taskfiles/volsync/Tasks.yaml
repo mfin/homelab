@@ -1,0 +1,31 @@
+---
+version: "3"
+
+x-task-vars: &task-vars
+  rsrc: '{{.rsrc}}'
+  controller: '{{.controller}}'
+  namespace: '{{.namespace}}'
+  ts: '{{.ts}}'
+
+vars:
+  waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volsync/wait-for-job.sh"
+  listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/ListJob.tmpl.yaml"
+  ts: '{{now | date "150405"}}'
+
+tasks:
+  list:
+    desc: List all snapshots taken by restic for a given ReplicationSource (ex. task vs:list rsrc=plex [namespace=default])
+    silent: true
+    cmds:
+      - envsubst < <(cat {{.listJobTemplate}}) | kubectl apply -f -
+      - bash {{.waitForJobScript}} list-{{.rsrc}}-{{.ts}} {{.namespace}}
+      - kubectl -n {{.namespace}} wait job/list-{{.rsrc}}-{{.ts}} --for condition=complete --timeout=1m
+      - kubectl -n {{.namespace}} logs job/list-{{.rsrc}}-{{.ts}} --container list
+      - kubectl -n {{.namespace}} delete job list-{{.rsrc}}-{{.ts}}
+    vars:
+      rsrc: '{{ or .rsrc (fail "ReplicationSource `rsrc` is required") }}'
+      namespace: '{{.namespace | default .rsrc}}'
+    env: *task-vars
+    preconditions:
+      - sh: test -f {{.waitForJobScript}}
+      - sh: test -f {{.listJobTemplate}}
