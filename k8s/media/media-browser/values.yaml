@@ -11,7 +11,7 @@ app-template:
   env:
     TZ: Europe/Ljubljana
     FB_DATABASE: "/data/filebrowser.db"
-    FB_ROOT: "/data"
+    FB_ROOT: "/media"
     FB_LOG: "stdout"
     FB_NOAUTH: "true"
   service:
