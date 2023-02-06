@@ -1,0 +1,3 @@
+snapshot-controller:
+  serviceMonitor:
+    create: true
