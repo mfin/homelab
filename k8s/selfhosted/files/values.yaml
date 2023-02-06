@@ -51,7 +51,7 @@ app-template:
   persistence:
     data:
       enabled: true
-      existingClaim: filebrowser-data
+      existingClaim: files-data
   resources:
     requests:
       cpu: 10m
