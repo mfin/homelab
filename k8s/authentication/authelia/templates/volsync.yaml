@@ -22,6 +22,8 @@ spec:
     copyMethod: Clone
     pruneIntervalDays: 10
     repository: authelia-restic-secret
+    storageClassName: local-path
+    volumeSnapshotClassName: local-path
     cacheCapacity: 2Gi
     retain:
       daily: 10
