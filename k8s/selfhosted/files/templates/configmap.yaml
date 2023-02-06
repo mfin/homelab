@@ -11,5 +11,5 @@ data:
       "address": "",
       "root": "/data/public",
       "log": "stdout",
-      "noauth": true,
+      "noauth": "true",
     }
