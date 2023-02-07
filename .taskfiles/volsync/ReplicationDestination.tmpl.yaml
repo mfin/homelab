@@ -1,0 +1,14 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: "${rsrc}-${claim}-${ts}"
+  namespace: "${namespace}"
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: "${rsrc}-restic-secret"
+    destinationPVC: "${claim}"
+    copyMethod: Direct
+    storageClassName: local-hostpath
