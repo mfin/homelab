@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: zigbee2mqtt-pvc
   trigger:
-    schedule: "0 * * * *"
+    manual: manual-once
   restic:
     copyMethod: Direct
     pruneIntervalDays: 10
