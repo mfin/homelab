@@ -22,8 +22,8 @@ spec:
     copyMethod: Direct
     pruneIntervalDays: 10
     repository: home-assistant-restic-secret
-    storageClassName: local-path
-    volumeSnapshotClassName: local-path
+    storageClassName: local-hostpath
+    volumeSnapshotClassName: local-hostpath
     cacheCapacity: 2Gi
     retain:
       daily: 10
