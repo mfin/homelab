@@ -9,6 +9,6 @@ spec:
     manual: restore-once
   restic:
     repository: "${rsrc}-restic-secret"
-    destinationPVC: "${claim}"
+    destinationPVC: "${pvc}"
     copyMethod: Direct
     storageClassName: local-hostpath
