@@ -15,7 +15,7 @@ grafana:
     enabled: true
   persistence:
     enabled: true
-    existingClaim: grafana-data
+    existingClaim: grafana
   ingress:
     enabled: true
     ingressClassName: traefik

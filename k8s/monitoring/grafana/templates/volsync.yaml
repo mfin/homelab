@@ -15,11 +15,11 @@ kind: ReplicationSource
 metadata:
   name: grafana
 spec:
-  sourcePVC: grafana-data
+  sourcePVC: grafana
   trigger:
-    manual: manual-once
+    schedule: "0 * * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: grafana-restic-secret
     storageClassName: local-hostpath
