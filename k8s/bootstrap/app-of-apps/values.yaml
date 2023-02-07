@@ -89,7 +89,6 @@ helmApps:
     disableSync: true
   - name: actions-runner-controller
     path: k8s/system
-    disableSync: true
   - name: k8s-gateway
     path: k8s/networking
   - name: unpoller
