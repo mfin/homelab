@@ -11,7 +11,6 @@ helmApps:
     namespace: argocd
   - name: authelia
     path: k8s/authentication
-    disableSync: true
   - name: glauth
     path: k8s/authentication
   - name: flaresolverr
