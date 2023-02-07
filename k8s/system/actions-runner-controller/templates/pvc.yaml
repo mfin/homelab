@@ -2,12 +2,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: actions-runner-controller-cache
-  annotations:
-    volumeType: local
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-hostpath
   resources:
     requests:
       storage: 10Gi

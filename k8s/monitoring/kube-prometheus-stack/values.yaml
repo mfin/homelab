@@ -22,7 +22,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: local-path
+            storageClassName: local-hostpath
             resources:
               requests:
                 storage: 20Gi
@@ -72,7 +72,7 @@ kube-prometheus-stack:
       storage:
         volumeClaimTemplate:
           spec:
-            storageClassName: local-path
+            storageClassName: local-hostpath
             resources:
               requests:
                 storage: 1Gi
