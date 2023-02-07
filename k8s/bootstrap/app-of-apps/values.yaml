@@ -69,6 +69,7 @@ helmApps:
     path: k8s/selfhosted
   - name: paperless-ngx
     path: k8s/selfhosted
+    disableSync: true
   - name: whoami
     path: k8s/selfhosted
   - name: redis
