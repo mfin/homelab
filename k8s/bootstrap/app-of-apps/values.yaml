@@ -35,7 +35,6 @@ helmApps:
     path: k8s/media
   - name: prowlarr
     path: k8s/media
-    disableSync: true
   - name: qbittorrent
     path: k8s/media
   - name: radarr

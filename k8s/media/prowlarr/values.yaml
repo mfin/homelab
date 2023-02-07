@@ -39,7 +39,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: prowlarr-config
+      existingClaim: prowlarr
   resources:
     requests:
       cpu: 10m
