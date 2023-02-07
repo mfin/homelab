@@ -11,7 +11,6 @@ helmApps:
     namespace: argocd
   - name: authelia
     path: k8s/authentication
-    disableSync: true
   - name: glauth
     path: k8s/authentication
   - name: flaresolverr
@@ -72,6 +71,7 @@ helmApps:
     path: k8s/selfhosted
   - name: whoami
     path: k8s/selfhosted
+    disableSync: true
   - name: redis
     path: k8s/storage
   - name: node-feature-discovery
