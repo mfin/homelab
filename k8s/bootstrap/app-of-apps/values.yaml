@@ -43,6 +43,7 @@ helmApps:
     path: k8s/media
   - name: sonarr
     path: k8s/media
+    disableSync: true
   - name: unpackerr
     path: k8s/media
   - name: intel-device-plugins-operator
