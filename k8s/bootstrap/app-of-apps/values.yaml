@@ -37,7 +37,6 @@ helmApps:
     path: k8s/media
   - name: qbittorrent
     path: k8s/media
-    disableSync: true
   - name: radarr
     path: k8s/media
   - name: radarr-4k

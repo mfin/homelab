@@ -43,7 +43,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: qbittorrent-config
+      existingClaim: qbittorrent
     data:
       enabled: true
       type: nfs

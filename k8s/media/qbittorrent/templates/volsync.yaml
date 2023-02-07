@@ -15,11 +15,11 @@ kind: ReplicationSource
 metadata:
   name: qbittorrent
 spec:
-  sourcePVC: qbittorrent-config
+  sourcePVC: qbittorrent
   trigger:
-    manual: manual-once
+    schedule: '0 * * * *'
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: qbittorrent-restic-secret
     storageClassName: local-hostpath
