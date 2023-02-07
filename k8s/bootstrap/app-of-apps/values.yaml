@@ -115,7 +115,6 @@ helmApps:
     path: k8s/media
   - name: sabnzbd
     path: k8s/media
-    disableSync: true
   - name: snapshot-validation-webhook
     path: k8s/storage
   - name: snapshot-controller

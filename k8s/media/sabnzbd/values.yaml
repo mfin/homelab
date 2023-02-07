@@ -52,7 +52,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: sabnzbd-config
+      existingClaim: sabnzbd
     data:
       enabled: true
       type: nfs
