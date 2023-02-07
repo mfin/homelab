@@ -71,9 +71,9 @@ helmApps:
     path: k8s/selfhosted
   - name: whoami
     path: k8s/selfhosted
-    disableSync: true
   - name: redis
     path: k8s/storage
+    disableSync: true
   - name: node-feature-discovery
     path: k8s/system
   - name: intel-device-plugins-gpu
