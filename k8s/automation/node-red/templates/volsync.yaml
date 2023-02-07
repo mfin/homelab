@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: node-red-pvc
   trigger:
-    schedule: "0 * * * *"
+    manual: manual-once
   restic:
     copyMethod: Direct
     pruneIntervalDays: 10
