@@ -31,7 +31,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: zigbee2mqtt-pvc
+      existingClaim: zigbee2mqtt
       mountPath: "/data"
     usb:
       enabled: true
