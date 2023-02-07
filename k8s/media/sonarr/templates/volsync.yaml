@@ -15,11 +15,11 @@ kind: ReplicationSource
 metadata:
   name: sonarr
 spec:
-  sourcePVC: sonarr-config
+  sourcePVC: sonarr
   trigger:
-    manual: manual-once
+    schedule: "0 * * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: sonarr-restic-secret
     storageClassName: local-hostpath

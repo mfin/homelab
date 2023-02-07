@@ -49,7 +49,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: sonarr-config
+      existingClaim: sonarr
     data:
       enabled: true
       type: nfs
