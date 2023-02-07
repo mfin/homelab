@@ -31,6 +31,7 @@ helmApps:
     path: k8s/media
   - name: overseerr
     path: k8s/media
+    disableSync: true
   - name: plex
     path: k8s/media
   - name: prowlarr
