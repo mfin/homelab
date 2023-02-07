@@ -15,11 +15,11 @@ kind: ReplicationSource
 metadata:
   name: radarr
 spec:
-  sourcePVC: radarr-config
+  sourcePVC: radarr
   trigger:
-    manual: manual-once
+    schedule: "0 * * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: radarr-restic-secret
     storageClassName: local-hostpath

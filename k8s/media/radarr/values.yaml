@@ -34,7 +34,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: radarr-config
+      existingClaim: radarr
     data:
       enabled: true
       type: nfs
