@@ -29,7 +29,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: node-red-pvc
+      existingClaim: node-red
       mountPath: "/data"
 
   resources:

@@ -15,9 +15,9 @@ kind: ReplicationSource
 metadata:
   name: node-red
 spec:
-  sourcePVC: node-red-pvc
+  sourcePVC: node-red
   trigger:
-    manual: manual-once
+    schedule: "0 * * * *"
   restic:
     copyMethod: Direct
     pruneIntervalDays: 10

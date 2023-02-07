@@ -23,7 +23,6 @@ helmApps:
     path: k8s/automation
   - name: node-red
     path: k8s/automation
-    disableSync: true
   - name: tika
     path: k8s/automation
   - name: zigbee2mqtt
