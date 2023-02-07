@@ -21,7 +21,7 @@ spec:
   restic:
     copyMethod: Direct
     pruneIntervalDays: 10
-    repository: bazarr-restic-secret
+    repository: grafana-restic-secret
     storageClassName: local-hostpath
     volumeSnapshotClassName: local-hostpath
     cacheCapacity: 2Gi
