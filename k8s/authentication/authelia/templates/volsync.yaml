@@ -19,7 +19,7 @@ spec:
   trigger:
     schedule: "0 * * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: authelia-restic-secret
     storageClassName: local-hostpath
