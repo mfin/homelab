@@ -67,7 +67,7 @@ app-template:
       readOnly: false
     db:
       enabled: true
-      existingClaim: authelia-db
+      existingClaim: authelia
   resources:
     requests:
       cpu: 10m
