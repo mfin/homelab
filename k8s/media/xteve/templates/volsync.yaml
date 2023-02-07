@@ -15,9 +15,9 @@ kind: ReplicationSource
 metadata:
   name: xteve
 spec:
-  sourcePVC: xteve-data
+  sourcePVC: xteve
   trigger:
-    manual: manual-once
+    schedule: "0 * * * *"
   restic:
     copyMethod: Direct
     pruneIntervalDays: 10

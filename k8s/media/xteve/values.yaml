@@ -31,7 +31,7 @@ app-template:
   persistence:
     data:
       enabled: true
-      existingClaim: xteve-data
+      existingClaim: xteve
   resources:
     requests:
       memory: 1Gi
