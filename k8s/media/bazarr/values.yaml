@@ -31,7 +31,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: bazarr-config
+      existingClaim: bazarr
     data:
       enabled: true
       type: nfs
