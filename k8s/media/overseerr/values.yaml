@@ -33,7 +33,7 @@ app-template:
     config:
       enabled: true
       mountPath: /app/config
-      existingClaim: overseerr-config
+      existingClaim: overseerr
   resources:
     requests:
       cpu: 10m
