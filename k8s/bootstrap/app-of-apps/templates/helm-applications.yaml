@@ -28,7 +28,7 @@ spec:
       valueFiles:
         - secrets+age-import-kubernetes://{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
     {{- end }}
-  {{- if eq (default "false" $app.disableSync) "false" }}
+  {{- if not (default false $app.disableSync) }}
   syncPolicy:
     automated:
       prune: {{ default "true" $app.prune }}
