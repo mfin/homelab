@@ -15,11 +15,11 @@ kind: ReplicationSource
 metadata:
   name: paperless
 spec:
-  sourcePVC: paperless-data
+  sourcePVC: paperless
   trigger:
-    manual: manual-once
+    schedule: '0 * * * *'
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: paperless-restic-secret
     storageClassName: local-hostpath
