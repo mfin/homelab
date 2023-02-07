@@ -33,7 +33,6 @@ helmApps:
     path: k8s/media
   - name: plex
     path: k8s/media
-    disableSync: true
   - name: prowlarr
     path: k8s/media
   - name: qbittorrent

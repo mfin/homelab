@@ -38,7 +38,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: plex-pvc
+      existingClaim: plex
     data:
       enabled: true
       type: nfs
