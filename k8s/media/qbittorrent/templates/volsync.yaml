@@ -15,7 +15,7 @@ kind: ReplicationSource
 metadata:
   name: qbittorrent
 spec:
-  sourcePVC: qbittorrent
+  sourcePVC: qbittorrent-config
   trigger:
     manual: manual-once
   restic:
