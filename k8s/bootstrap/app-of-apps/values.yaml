@@ -79,7 +79,6 @@ helmApps:
     path: k8s/system
   - name: tautulli
     path: k8s/media
-    disableSync: true
   - name: kube-prometheus-stack
     path: k8s/monitoring
   - name: cloudflare-ddns
