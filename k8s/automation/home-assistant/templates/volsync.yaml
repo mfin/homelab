@@ -15,11 +15,11 @@ kind: ReplicationSource
 metadata:
   name: home-assistant
 spec:
-  sourcePVC: home-assistant-pvc
+  sourcePVC: home-assistant
   trigger:
     schedule: "0 * * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Clone
     pruneIntervalDays: 10
     repository: home-assistant-restic-secret
     storageClassName: local-hostpath

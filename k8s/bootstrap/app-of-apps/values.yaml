@@ -19,7 +19,6 @@ helmApps:
     path: k8s/automation
   - name: home-assistant
     path: k8s/automation
-    disableSync: true
   - name: mosquitto
     path: k8s/automation
   - name: node-red

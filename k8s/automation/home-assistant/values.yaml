@@ -54,7 +54,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: home-assistant-pvc
+      existingClaim: home-assistant
 
   resources:
     limits:
