@@ -58,23 +58,45 @@ tasks:
     desc: Trigger a Restic ReplicationSource restore (ex. task v:restore rsrc=plex [namespace=default])
     dir: '{{.app}}'
     cmds:
+      - task: restore-suspend-app
+        vars: *task-vars
       - task: restore-wipe-job
         vars: *task-vars
       - task: restore-volsync-job
+        vars: *task-vars
+      - task: restore-resume-app
         vars: *task-vars
     vars:
       app: '{{.app | default .USER_WORKING_DIR}}'
       rsrc: '{{.rsrc | default (base .app)}}'
       namespace: '{{.namespace | default .rsrc}}'
+      name: '{{.name | default (base .app)}}'
       claim:
         sh: |
           kubectl -n {{.namespace}} get replicationsource {{.rsrc}} \
             -o jsonpath="{.spec.sourcePVC}"
+      controller:
+        sh: |
+          app=$(kubectl -n {{.namespace}} get persistentvolumeclaim {{.claim}} -o jsonpath="{.metadata.labels.argocd\.argoproj\.io/instance}")
+          if kubectl -n {{ .namespace }} get deployment.apps/$app >/dev/null 2>&1 ; then
+            echo "deployment.apps/$app"
+          else
+            echo "statefulset.apps/$app"
+          fi
     env: *task-vars
     preconditions:
+      - sh: kubectl get -n argocd application {{.name}} -o json | jq -e '.spec.syncPolicy == null'
+        msg: "Application resource for {{.name}} has syncPolicy defined. Disable it first."
       - sh: test -f {{.wipeJobTemplate}}
       - sh: test -f {{.destinationTemplate}}
       - sh: test -f {{.waitForJobScript}}
+
+  restore-suspend-app:
+    internal: true
+    cmds:
+      - kubectl -n {{.namespace}} scale {{.controller}} --replicas 0
+      - kubectl -n {{.namespace}} wait pod --for delete --selector="app.kubernetes.io/name={{.rsrc}}" --timeout=2m
+    env: *task-vars
 
   restore-wipe-job:
     internal: true
@@ -93,4 +115,10 @@ tasks:
       - bash {{.waitForJobScript}} volsync-dst-{{.rsrc}}-{{.claim}}-{{.ts}} {{.namespace}}
       - kubectl -n {{.namespace}} wait job/volsync-dst-{{.rsrc}}-{{.claim}}-{{.ts}} --for condition=complete --timeout=120m
       - kubectl -n {{.namespace}} delete replicationdestination {{.rsrc}}-{{.claim}}-{{.ts}}
+    env: *task-vars
+
+  restore-resume-app:
+    internal: true
+    cmds:
+      - echo "Enable syncPolicy on {{.rsrc}} application!"
     env: *task-vars
