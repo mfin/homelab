@@ -5,7 +5,7 @@ metadata:
   name: overseerr-restic-secret
 type: Opaque
 stringData:
-  RESTIC_REPOSITORY: '{{ .Values.volsync.repository }}/sonarr'
+  RESTIC_REPOSITORY: '{{ .Values.volsync.repository }}/overseerr'
   RESTIC_PASSWORD: '{{ .Values.volsync.password }}'
   AWS_ACCESS_KEY_ID: '{{ .Values.volsync.accessKey }}'
   AWS_SECRET_ACCESS_KEY: '{{ .Values.volsync.secretKey }}'
