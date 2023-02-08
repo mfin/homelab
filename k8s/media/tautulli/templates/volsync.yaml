@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: tautulli
   trigger:
-    schedule: "0 * * * *"
+    schedule: "*/45 * * * *"
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
