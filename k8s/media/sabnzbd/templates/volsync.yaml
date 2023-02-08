@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: sabnzbd
   trigger:
-    schedule: "*/45 * * * *"
+    schedule: "45 * * * *"
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
