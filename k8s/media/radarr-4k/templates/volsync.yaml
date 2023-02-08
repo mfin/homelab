@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: radarr-4k
   trigger:
-    schedule: '0 * * * *'
+    schedule: '*/15 * * * *'
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
