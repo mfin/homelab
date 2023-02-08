@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: xteve
   trigger:
-    schedule: "0 * * * *"
+    schedule: "*/15 * * * *"
   restic:
     copyMethod: Direct
     pruneIntervalDays: 10
