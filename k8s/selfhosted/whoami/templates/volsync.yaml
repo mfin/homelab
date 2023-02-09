@@ -21,7 +21,7 @@ spec:
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
-    repository: plex-restic-secret
+    repository: whoami-restic-secret
     storageClassName: local-hostpath
     volumeSnapshotClassName: local-hostpath
     cacheCapacity: 2Gi
