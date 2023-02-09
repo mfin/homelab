@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: plex-trakt-sync
+spec:
+  schedule: "0 */2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - args:
+              - sync
+              env:
+              - name: PLEX_BASEURL
+                value: http://plex.plex.svc.cluster.local:32400
+              - name: PLEX_LOCALURL
+                value: http://plex.plex.svc.cluster.local:32400
+              envFrom:
+              - secretRef:
+                  name: plex-trakt-sync
+              image: ghcr.io/taxel/plextraktsync:0.25.15
+              imagePullPolicy: IfNotPresent
+              name: plex-trakt-sync
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+              volumeMounts:
+              - mountPath: /app/config
+                name: config
+              - mountPath: /app/config/config.yml
+                name: config-yaml
+                readOnly: true
+                subPath: config.yml
+          volumes:
+            - name: config
+              persistentVolumeClaim:
+                claimName: plex-trakt-sync
+            - configMap:
+                defaultMode: 420
+                name: plex-trakt-sync
+              name: config-yaml
+          restartPolicy: OnFailure
