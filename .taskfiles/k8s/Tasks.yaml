@@ -54,8 +54,8 @@ tasks:
     vars:
       app: '{{.app | default .USER_WORKING_DIR}}'
     cmds:
-      - fd -t d charts --exec rm -rf {}
-      - fd -t f Chart.lock --exec rm -rf {}
+      - fd -I -t d charts --exec rm -rf {}
+      - fd -I -g Chart.lock --exec rm -rf {}
 
   debug:
     desc: Run a debugging container
