@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "${pod}"
+  namespace: "${namespace}"
+spec:
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: ${pvc}
+  containers:
+    - name: debian
+      image: debian:latest
+      command: [ "/bin/bash", "-c", "--" ]
+      args: [ "while true; do sleep 30; done;" ]
+      volumeMounts:
+        - mountPath: "/data"
+          name: data

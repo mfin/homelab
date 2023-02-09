@@ -15,6 +15,7 @@ vars:
   wipeJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/WipeJob.tmpl.yaml"
   waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volsync/wait-for-job.sh"
   listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/ListJob.tmpl.yaml"
+  attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/AttachPvc.tmpl.yaml"
   ts: '{{now | date "150405"}}'
 
 tasks:
@@ -55,6 +56,27 @@ tasks:
       - sh: test -f {{.waitForJobScript}}
       - sh: kubectl -n {{.namespace}} get replicationsources {{.rsrc}}
         msg: "ReplicationSource '{{.rsrc}}' not found in namespace '{{.namespace}}'"
+
+  attach:
+    desc: Attach a PVC to a Pod for debugging purposes (ex. task v:attach pvc=plex [namespace=default])
+    dir: '{{.app}}'
+    cmds:
+      - envsubst < <(cat {{.attachPvcTemplate}}) | kubectl apply -f -
+      - kubectl wait pods -n {{.namespace}} {{.pod}} --for condition=Ready --timeout=120s
+      - kubectl exec -it -n {{.namespace}} {{.pod}} -- bash
+      - kubectl delete -n {{.namespace}} pod {{.pod}}
+    vars:
+      app: '{{.app | default .USER_WORKING_DIR}}'
+      pvc: '{{.pvc | default (base .app)}}'
+      namespace: '{{.namespace | default (base .app)}}'
+      pod: 'attach-pvc-{{.pvc}}'
+    env:
+      pvc: '{{.pvc}}'
+      namespace: '{{.namespace}}'
+      pod: '{{.pod}}'
+    preconditions:
+      - sh: kubectl -n {{.namespace}} get pvc {{.pvc}}
+        msg: "PVC '{{.pvc}}' not found in namespace '{{.namespace}}'"
 
   restore:
     desc: Trigger a Restic ReplicationSource restore (ex. task v:restore rsrc=plex [namespace=default])
