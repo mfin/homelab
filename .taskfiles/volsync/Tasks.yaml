@@ -7,6 +7,7 @@ x-task-vars: &task-vars
   namespace: '{{.namespace}}'
   claim: '{{.claim}}'
   pvc: '{{.pvc}}'
+  offset: '{{.offset}}'
   ts: '{{.ts}}'
 
 vars:
@@ -73,6 +74,7 @@ tasks:
       namespace: '{{.namespace | default .rsrc}}'
       name: '{{.name | default (base .app)}}'
       pvc: '{{.pvc | default .claim}}'
+      offset: '{{.offset | default 0}}'
       claim:
         sh: |
           kubectl -n {{.namespace}} get replicationsource {{.rsrc}} \

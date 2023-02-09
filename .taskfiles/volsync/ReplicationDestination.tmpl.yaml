@@ -12,3 +12,4 @@ spec:
     destinationPVC: "${pvc}"
     copyMethod: Direct
     storageClassName: local-hostpath
+    previous: ${offset}
