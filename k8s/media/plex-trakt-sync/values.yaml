@@ -1,0 +1,51 @@
+app-template:
+  controller:
+    replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
+
+  image:
+    repository: ghcr.io/taxel/plextraktsync
+    tag: 0.25.15
+
+  args:
+    - watch
+
+  enableServiceLinks: false
+
+  env:
+    PLEX_BASEURL: http://plex.plex.svc.cluster.local:32400
+    PLEX_LOCALURL: http://plex.plex.svc.cluster.local:32400
+
+  envFrom:
+    - secretRef:
+        name: plex-trakt-sync # PLEX_TOKEN, PLEX_USERNAME, TRAKT_USERNAME
+
+  service:
+    main:
+      enabled: false
+
+  ingress:
+    main:
+      enabled: false
+
+  persistence:
+    config:
+      enabled: true
+      existingClaim: plex-trakt-sync
+      mountPath: /app/config
+    config-yaml:
+      enabled: true
+      mountPath: /app/config/config.yml
+      name: plex-trakt-sync
+      readOnly: true
+      subPath: config.yml
+      type: configMap
+
+  probes:
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
+    startup:
+      enabled: false

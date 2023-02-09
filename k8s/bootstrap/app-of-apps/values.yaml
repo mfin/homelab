@@ -123,3 +123,5 @@ helmApps:
     path: k8s/storage
   - name: democratic-csi-local
     path: k8s/storage
+  - name: plex-trakt-sync
+    path: k8s/media
