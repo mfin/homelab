@@ -1,4 +1,9 @@
 volsync:
   manageCRDs: true
+
   metrics:
     disableAuth: true
+
+  resources:
+    limits:
+      cpu: 500m
