@@ -64,7 +64,7 @@ tasks:
     vars:
       app: '{{.app | default .USER_WORKING_DIR}}'
       namespace: '{{.namespace | default (base .app)}}'
-      image: '{{.image | default "debian"}}'
+      image: '{{.image | default "nicolaka/netshoot"}}'
       command: '{{.command | default "bash"}}'
     cmds:
-      - kubectl run -n {{.namespace}} debug --image={{.image}} --restart=Never --rm -it --command -- {{.command}}
+      - kubectl run -n {{.namespace}} debug --image={{.image}} --restart=Never --rm -it
