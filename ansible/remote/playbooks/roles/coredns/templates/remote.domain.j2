@@ -7,8 +7,8 @@
    3600  IN  NS  ns1.{{ remote.domain }}.
    3600  IN  NS  ns2.{{ remote.domain }}.
 
-ns1             IN  A     {{ main_dns_ip }}
-ns2             IN  A     {{ main_dns_ip }}
+ns1             IN  A     {{ remote.main_dns_ip }}
+ns2             IN  A     {{ remote.main_dns_ip }}
 
 {% for record in remote.records %}
 {{ record.name }}           IN {{ record.type }} {{ record.ip }}

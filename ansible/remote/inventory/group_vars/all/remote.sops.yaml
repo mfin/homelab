@@ -1,6 +1,7 @@
 remote:
     domain: ENC[AES256_GCM,data:+GGzM1qRdbpvkw==,iv:7O3+suOMrPiNDfsPJM6DVXot8MyiL1od3P2+LikudVY=,tag:ufSnMe9o2jraBd058Pj1qg==,type:str]
     network_range: ENC[AES256_GCM,data:4+5pUEnpOpgYTXtWR44=,iv:A+pj7DLb/MgO+6bcInhNvWgzP07Ms/azEc042XIjt0M=,tag:xvr4swVrzTmMRkdOxrMC8Q==,type:str]
+    main_dns_ip: ENC[AES256_GCM,data:kfQVLOAlrN4eZo3V,iv:fb++b7WWrZ+4w/90nQgWFN8Kfcg1cSKnTRm7Y0zpO0M=,tag:WMLZkVOetiWzCXSElM6xKA==,type:str]
     records:
         - name: ENC[AES256_GCM,data:2UPfPg==,iv:6l2WT4DLnhWh/tvVydZhOIc8sfP4jSOdGYFjYYmkm1I=,tag:AgOX0VlJaMfSTXyqj5uvUA==,type:str]
           type: ENC[AES256_GCM,data:Wg==,iv:DFlPJIRZG8QOOtYxlsP7vg6ELXcEo1B8E/p/xZCmf1Y=,tag:khz72uuPX9ZG3XDFPfoUPA==,type:str]
@@ -65,8 +66,8 @@ sops:
             VndsN1FjbkVLemtheDY5LzB4Tll1VmcKdFtll4SbY426qL6iJkDSmgTrFPCTYcVr
             yxJ1t4bph3UR6+XbI/kmAKQTezZrlYq3eP5DwVjmJ34OpenrmkLVWA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-01-30T14:18:28Z"
-    mac: ENC[AES256_GCM,data:m4tMsnSKGDg3AvzIibN4O2/6Fgj5AVf4zAv0i7coEMUbbrkB5M+J9tUA8IcYf+tkWtEG73QYe/PuVtI4nSZYdTVf9kjoBLpPDdpDEx+rfCkmqwov7Q5v6I22YMpn3ZuZPUhd4T4mkER0aknR/s9FbPABUBLy27AaT8EsBNg6B5I=,iv:CyFgJoVBqi2AgtAAtCBQyTOFsfQuTHEA+fZ0tB5F6Q4=,tag:AL8I1v/F1GnsMLfyEW5FLQ==,type:str]
+    lastmodified: "2023-02-09T07:45:43Z"
+    mac: ENC[AES256_GCM,data:BrKb/yq9Na55iniI9FtdhHkPXrS0mcXBylF9AfF/vmVwDpRnQYCD0HgBhOLC2SgEOITvCxJNg6Lj4flOyPjGYfAuMQhk7FNbri8pKfU4nSrFjdyo9lQVF77BgcsFe4k3RrCUzFxaiBTv/BPHB6hT7pD3HaL8mPVRaANsjH41ryY=,iv:50i54qlA/ud/ePuW4EpRHLFkpxopirvwd+KW892505o=,tag:dH6Z+yJS25LN2SofhdNuzA==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

@@ -6,13 +6,13 @@
 
 - name: Download coredns archive from Github Releases
   ansible.builtin.get_url:
-    url: https://github.com/coredns/coredns/releases/download/{{ coredns_version }}/coredns_{{ coredns_version | regex_replace('^v','') }}_linux_arm64.tgz
-    checksum: sha256:https://github.com/coredns/coredns/releases/download/{{ coredns_version }}/coredns_{{ coredns_version | regex_replace('^v','') }}_linux_arm64.tgz.sha256
-    dest: /tmp/coredns_{{ coredns_version }}_linux_arm64.tgz
+    url: https://github.com/coredns/coredns/releases/download/{{ coredns_version }}/coredns_{{ coredns_version | regex_replace('^v','') }}_linux_amd64.tgz
+    checksum: sha256:https://github.com/coredns/coredns/releases/download/{{ coredns_version }}/coredns_{{ coredns_version | regex_replace('^v','') }}_linux_amd64.tgz.sha256
+    dest: /tmp/coredns_{{ coredns_version }}_linux_amd64.tgz
 
 - name: Extract coredns archive
   ansible.builtin.unarchive:
-    src: /tmp/coredns_{{ coredns_version }}_linux_arm64.tgz
+    src: /tmp/coredns_{{ coredns_version }}_linux_amd64.tgz
     dest: /usr/local/bin
     remote_src: true
     owner: root
@@ -34,10 +34,10 @@
     group: coredns
   notify: Restart coredns
 
-- name: Create zonefile for home domain
+- name: Create zonefile for remote domain
   ansible.builtin.template:
-    src: templates/home.domain.j2
-    dest: /var/lib/coredns/db.{{ home.domain }}
+    src: templates/remote.domain.j2
+    dest: /var/lib/coredns/db.{{ remote.domain }}
     owner: coredns
     group: coredns
   notify: Restart coredns
