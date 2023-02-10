@@ -32,10 +32,6 @@ pod-gateway:
           value: Frankfurt
         - name: SERVER_HOSTNAMES
           value: de10-wireguard
-        - name: DNS_ADDRESS
-          value: 1.1.1.1
-        - name: DNS_KEEP_NAMESERVER
-          value: "off"
       envFrom:
         - secretRef:
             name: mullvad
