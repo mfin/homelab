@@ -47,9 +47,9 @@ pod-gateway:
     - IP: 10
       hostname: qbittorrent
       ports:
-        - port: 56434
+        - port: 57464
           type: udp
-        - port: 56434
+        - port: 57464
           type: tcp
 
   routed_namespaces:

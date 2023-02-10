@@ -8,7 +8,7 @@ app-template:
   env:
     TZ: Europe/Ljubljana
     QBITTORRENT__PORT: &port 80
-    QBITTORRENT__BT_PORT: &port-bt 56434
+    QBITTORRENT__BT_PORT: &port-bt 57464
   hostname: qbittorrent
   service:
     main:
