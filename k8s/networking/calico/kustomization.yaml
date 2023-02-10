@@ -1,8 +1,12 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  name: calico
+namespace: kube-system
 resources:
-# renovate: datasource=github-releases depName=projectcalico/calico
-- https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/canal.yaml
+  # renovate: datasource=github-releases depName=projectcalico/calico
+  - https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/canal.yaml
 patches:
 - patch: |-
     - op: add
