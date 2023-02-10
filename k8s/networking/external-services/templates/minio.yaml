@@ -1,0 +1,61 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: minio
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+spec:
+  type: ExternalName
+  ports:
+  - port: 9000
+    name: s3
+  - port: 9001
+    name: http
+  externalName: {{ .Values.minio.hostname }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: minio.{{ .Values.minio.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: minio
+            port:
+              number: 9001
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ .Values.minio.domain }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: s3.{{ .Values.minio.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: minio
+            port:
+              number: 9000
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ .Values.minio.domain }}
