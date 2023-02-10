@@ -3,8 +3,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: minio
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
 spec:
   type: ExternalName
   ports:
