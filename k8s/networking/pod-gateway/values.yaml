@@ -31,7 +31,7 @@ pod-gateway:
         - name: SERVER_CITIES
           value: Frankfurt
         - name: SERVER_HOSTNAMES
-          value: de5-wireguard
+          value: de10-wireguard
         - name: LOG_LEVEL
           value: debug
       envFrom:
