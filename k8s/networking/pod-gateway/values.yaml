@@ -56,7 +56,7 @@ pod-gateway:
       enabled: true
 
   publicPorts:
-    - IP: 10
+    - IP: 100
       hostname: qbittorrent
       ports:
         - port: 57464
@@ -70,7 +70,6 @@ pod-gateway:
     - sabnzbd
 
   settings:
-    NOT_ROUTED_TO_GATEWAY_CIDRS: 10.0.0.0/8 192.168.0.0/16
     VPN_BLOCK_OTHER_TRAFFIC: true
     VPN_INTERFACE: wg0
     VPN_LOCAL_CIDRS: 10.0.0.0/8 192.168.0.0/16
