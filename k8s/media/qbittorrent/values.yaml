@@ -8,22 +8,14 @@ app-template:
   env:
     TZ: Europe/Ljubljana
     QBITTORRENT__PORT: &port 80
-    QBITTORRENT__BT_PORT: &port-bt 50413
+    QBITTORRENT__BT_PORT: &port-bt 56434
   service:
     main:
       ports:
         http:
           port: *port
-    bittorrent:
-      enabled: true
-      type: LoadBalancer
-      ports:
-        bittorrent:
-          enabled: true
+        bt:
           port: *port-bt
-          protocol: TCP
-          targetPort: *port-bt
-      externalTrafficPolicy: Local
   podAnnotations:
     setGateway: "true"
   ingress:
