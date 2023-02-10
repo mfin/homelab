@@ -35,7 +35,7 @@ pod-gateway:
         - name: DNS_ADDRESS
           value: 1.1.1.1
         - name: DNS_KEEP_NAMESERVER
-          value: "false"
+          value: "off"
       envFrom:
         - secretRef:
             name: mullvad
