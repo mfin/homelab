@@ -57,6 +57,10 @@ spec:
   - path: /metrics
     port: metrics
     scheme: http
+    metricRelabelings:
+    - action: replace
+      replacement: node-exporter
+      targetLabel: job
   selector:
     matchLabels:
       external: node-exporter
