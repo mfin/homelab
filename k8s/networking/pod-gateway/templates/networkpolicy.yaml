@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: wg-egress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: pod-gateway
+      app.kubernetes.io/name: pod-gateway
+  policyTypes:
+    - Egress
+  egress:
+    - toCIDR:
+        - 0.0.0.0/0
+      toPorts:
+        - ports:
+            - port: "51820"
+              protocol: UDP
+    - toEntities:
+        - cluster
