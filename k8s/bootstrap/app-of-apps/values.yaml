@@ -3,7 +3,7 @@ gitops:
   revision: main
   secretName: helm-secrets-private-keys#key.txt?secrets.yaml
 
-helmApps:
+apps:
   - name: argocd
     path: k8s/bootstrap
   - name: app-of-apps
@@ -129,8 +129,7 @@ helmApps:
     path: k8s/media
   - name: pod-gateway
     path: k8s/networking
-
-kustomizeApps:
   - name: calico
     path: k8s/networking
     namespace: kube-system
+    type: kustomize
