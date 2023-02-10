@@ -2,15 +2,39 @@
 kind: Service
 apiVersion: v1
 metadata:
+  name: node-exporter-nas
+  labels:
+    external: node-exporter
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: {{ .Values.nodeExporter.nas.port }}
+    targetPort: {{ .Values.nodeExporter.nas.port }}
+---
+kind: Service
+apiVersion: v1
+metadata:
   name: node-exporter-pi
   labels:
-    external: node-exporter-pi
+    external: node-exporter
 spec:
   type: ClusterIP
   ports:
   - name: metrics
     port: {{ .Values.nodeExporter.pi.port }}
     targetPort: {{ .Values.nodeExporter.pi.port }}
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: node-exporter-nas
+subsets:
+  - addresses:
+      - ip: {{ .Values.nodeExporter.nas.ip }}
+    ports:
+      - name: metrics
+        port: {{ .Values.nodeExporter.nas.port }}
 ---
 kind: Endpoints
 apiVersion: v1
@@ -27,7 +51,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-  name: node-exporter-pi
+  name: node-exporter
 spec:
   endpoints:
   - path: /metrics
@@ -35,4 +59,4 @@ spec:
     scheme: http
   selector:
     matchLabels:
-      external: node-exporter-pi
+      external: node-exporter
