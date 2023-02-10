@@ -34,6 +34,8 @@ pod-gateway:
           value: de10-wireguard
         - name: LOG_LEVEL
           value: debug
+        - name: DNS_ADDRESS
+          value: 1.1.1.1
       envFrom:
         - secretRef:
             name: mullvad
