@@ -20,17 +20,6 @@ resource "unifi_port_forward" "plex" {
   port_forward_interface = "wan"
 }
 
-resource "unifi_port_forward" "qbittorrent" {
-  enabled  = true
-  name     = "qbittorrent"
-  dst_port = data.sops_file.secrets.data["forward.qbittorrent.port"]
-  fwd_ip   = data.sops_file.secrets.data["forward.qbittorrent.ip"]
-  fwd_port = data.sops_file.secrets.data["forward.qbittorrent.port"]
-  protocol = "tcp"
-
-  port_forward_interface = "wan"
-}
-
 resource "unifi_port_forward" "wireguard" {
   enabled  = true
   name     = "wireguard"
