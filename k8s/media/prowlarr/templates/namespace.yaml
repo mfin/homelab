@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    routed-gateway: "true"
+  name: {{ .Release.Namespace }}
+spec:
+  finalizers:
+  - kubernetes
