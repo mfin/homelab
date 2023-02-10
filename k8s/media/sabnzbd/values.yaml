@@ -33,6 +33,8 @@ app-template:
     readiness: *probes
     startup:
       enabled: false
+  podAnnotations:
+    setGateway: "true"
   ingress:
     main:
       enabled: true
