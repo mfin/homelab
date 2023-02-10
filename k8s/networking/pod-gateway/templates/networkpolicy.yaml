@@ -10,11 +10,12 @@ spec:
   policyTypes:
     - Egress
   egress:
-    - toCIDR:
-        - 0.0.0.0/0
-      toPorts:
-        - ports:
-            - port: "51820"
-              protocol: UDP
-    - toEntities:
-        - cluster
+  - ports:
+    - port: 51820
+      protocol: UDP
+    to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/8
