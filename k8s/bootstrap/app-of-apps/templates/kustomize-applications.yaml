@@ -1,39 +1,42 @@
-# TODO: when a usecase for GitGenerated kustomize apps comes, this should work
-# apiVersion: argoproj.io/v1alpha1
-# kind: ApplicationSet
-# metadata:
-#   name: kustomize-applications
-#   namespace: {{ $.Release.Namespace }}
-# spec:
-#   generators:
-#   - git:
-#       repoURL: {{ $.Values.gitops.repo }}
-#       revision: {{ $.Values.gitops.revision }}
-#       files:
-#       - path: k8s/**/kustomization.yaml
-#   template:
-#     metadata:
-#       name: '{{ `{{path.basename}}` }}'
-#     spec:
-#       project: default
-#       source:
-#         repoURL: {{ $.Values.gitops.repo }}
-#         targetRevision: {{ $.Values.gitops.revision }}
-#         path: '{{ `{{path}}` }}'
-#       destination:
-#         name: in-cluster
-#         namespace: '{{ `{{path.basename}}` }}'
-#       syncPolicy:
-#         automated:
-#           prune: true
-#           selfHeal: true
-#         retry:
-#           limit: 10
-#           backoff:
-#             duration: 1m
-#             factor: 2
-#             maxDuration: 16m
-#         syncOptions:
-#           - CreateNamespace=true
-#           - ApplyOutOfSyncOnly=true
-#           - ServerSideApply=true
+{{- range $index, $app := .Values.kustomizeApps }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $app.name }}
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notifications.argoproj.io/subscribe.on-deployed.github: ""
+    notifications.argoproj.io/subscribe.on-sync-failed.github: ""
+    notifications.argoproj.io/subscribe.on-health-degraded.github: ""
+  {{- if not (default false $app.disableFinalizer) }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  destination:
+    name: in-cluster
+    namespace: '{{ default $app.name $app.namespace }}'
+  project: default
+  source:
+    repoURL: {{ $.Values.gitops.repo }}
+    path: {{ $app.path }}/{{ $app.name }}
+    targetRevision: {{ $.Values.gitops.revision }}
+  {{- if not (default false $app.disableSync) }}
+  syncPolicy:
+    automated:
+      prune: {{ default "true" $app.prune }}
+      selfHeal: {{ default "true" $app.selfHeal }}
+    retry:
+      limit: 10
+      backoff:
+        duration: 1m
+        factor: 2
+        maxDuration: 16m
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+  {{- end }}
+{{- end }}

@@ -129,3 +129,8 @@ helmApps:
     path: k8s/media
   - name: pod-gateway
     path: k8s/networking
+
+kustomizeApps:
+  - name: calico
+    path: k8s/networking
+    namespace: kube-system

@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/canal.yaml
+patches:
+- patch: |-
+    - op: add
+      path: "/spec/template/spec/containers/0/env/-"
+      value:
+        name: CALICO_IPV4POOL_CIDR
+        value: "10.42.0.0/16"
+  target:
+    kind: DaemonSet
+    namespace: kube-system
+    name: canal
