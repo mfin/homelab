@@ -127,3 +127,5 @@ helmApps:
     path: k8s/media
   - name: recyclarr
     path: k8s/media
+  - name: pod-gateway
+    path: k8s/networking

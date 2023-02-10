@@ -1,0 +1,7 @@
+apiVersion: v2
+name: pod-gateway
+version: 0.0.0
+dependencies:
+  - name: pod-gateway
+    version: 6.0.0
+    repository: https://angelnu.github.io/helm-charts
