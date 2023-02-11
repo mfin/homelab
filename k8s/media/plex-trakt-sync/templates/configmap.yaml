@@ -6,6 +6,7 @@ data:
   config.yml: |-
     sync:
       plex_to_trakt:
+        clear_collected: true
         watchlist: false
       trakt_to_plex:
         liked_lists: false
