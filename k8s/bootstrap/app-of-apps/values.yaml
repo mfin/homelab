@@ -140,3 +140,5 @@ apps:
     type: kustomize
   - name: yarr
     path: k8s/selfhosted
+  - name: readarr
+    path: k8s/media
