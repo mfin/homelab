@@ -138,3 +138,5 @@ apps:
     path: k8s/networking
     namespace: kube-system
     type: kustomize
+  - name: yarr
+    path: k8s/selfhosted
