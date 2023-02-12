@@ -129,6 +129,11 @@ apps:
     path: k8s/media
   - name: pod-gateway
     path: k8s/networking
+    ignoreDifferences:
+    - group: cert-manager.io
+      kind: Certificate
+      jsonPointers:
+      - /spec/duration
   - name: calico
     path: k8s/networking
     namespace: kube-system
