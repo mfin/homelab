@@ -25,3 +25,13 @@ tasks:
     env: *task-env
     cmds:
       - nix-shell -p restic
+
+  run:
+    # Ex. in Plex app dir: task r:run -- --verbose snapshots
+    # Ex. from root: app=k8s/media/plex task r:run -- --verbose snapshots
+    desc: Run command in restic shell
+    dir: '{{.app}}'
+    silent: true
+    env: *task-env
+    cmds:
+      - nix-shell -p restic --run "restic {{.CLI_ARGS}}"
