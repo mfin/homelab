@@ -48,7 +48,7 @@ spec:
       {{- end }}
     {{- end }}
   {{- end }}
-  {{- if not (default false $app.disableSync) }}
+  {{- if not (default false $app.disableSyncPolicy) }}
   syncPolicy:
     automated:
       prune: {{ default "true" $app.prune }}

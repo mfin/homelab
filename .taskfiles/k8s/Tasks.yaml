@@ -13,7 +13,7 @@ tasks:
       namespace: '{{.namespace | default (base .app)}}'
       name: '{{.name | default (base .app)}}'
     cmds:
-      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml
+      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml {{.CLI_ARGS}}
 
   apply:
     desc: Apply Helm chart from $app directory
