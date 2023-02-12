@@ -1,0 +1,27 @@
+---
+version: '3'
+
+vars:
+  app: '{{.app | default .USER_WORKING_DIR}}'
+  namespace: '{{.namespace | default (base .app)}}'
+  name: '{{.name | default (base .app)}}'
+  secret: '{{.secret | default (print .name "-restic-secret")}}'
+
+x-task-env: &task-env
+  AWS_ACCESS_KEY_ID:
+    sh: 'kubectl get secret {{.secret}} -n {{.namespace}} -o jsonpath="{.data.AWS_ACCESS_KEY_ID}" | base64 -d'
+  AWS_SECRET_ACCESS_KEY:
+    sh: 'kubectl get secret {{.secret}} -n {{.namespace}} -o jsonpath="{.data.AWS_SECRET_ACCESS_KEY}" | base64 -d'
+  RESTIC_REPOSITORY:
+    sh: 'kubectl get secret {{.secret}} -n {{.namespace}} -o jsonpath="{.data.RESTIC_REPOSITORY}" | base64 -d'
+  RESTIC_PASSWORD:
+    sh: 'kubectl get secret {{.secret}} -n {{.namespace}} -o jsonpath="{.data.RESTIC_PASSWORD}" | base64 -d'
+
+tasks:
+  shell:
+    desc: Launch temp shell with restic
+    dir: '{{.app}}'
+    silent: true
+    env: *task-env
+    cmds:
+      - nix-shell -p restic

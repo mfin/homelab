@@ -10,6 +10,7 @@ includes:
   t: .taskfiles/terraform/Tasks.yaml
   m: .taskfiles/misc/Tasks.yaml
   v: .taskfiles/volsync/Tasks.yaml
+  r: .taskfiles/restic/Tasks.yaml
 
 tasks:
   default:
