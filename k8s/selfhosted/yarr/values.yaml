@@ -32,8 +32,6 @@ app-template:
         hajimari.io/info: A web-based feed aggregator which can be used both as a desktop application and a personal self-hosted server.
 
   podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
     fsGroup: 100
     fsGroupChangePolicy: "OnRootMismatch"
 
