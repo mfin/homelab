@@ -36,4 +36,3 @@ spec:
   tls:
   - hosts:
     - drive.{{ .Values.default.domain }}
-    secretName: homelab-cert
