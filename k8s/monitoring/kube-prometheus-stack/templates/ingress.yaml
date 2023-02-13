@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: prometheus-metrics
   annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-nas-ip@kubernetescrd
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
@@ -15,7 +16,7 @@ spec:
             name: kube-prometheus-stack-prometheus
             port:
               name: http-web
-        path: /
+        path: /api/v1
         pathType: Prefix
   tls:
   - hosts:
