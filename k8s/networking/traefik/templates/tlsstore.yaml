@@ -6,4 +6,4 @@ metadata:
 
 spec:
   defaultCertificate:
-    secretName: le-cert
+    secretName: homelab-cert
