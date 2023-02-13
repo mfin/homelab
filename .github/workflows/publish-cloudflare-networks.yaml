@@ -35,6 +35,8 @@ jobs:
         uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4.2.3
         with:
           token: "${{ steps.generate-token.outputs.token }}"
+          committer: "mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>"
+          author: "mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>"
           branch: github-action/update-cloudflare-networks
           delete-branch: true
           title: "chore(github-action): update cloudflare networks"
