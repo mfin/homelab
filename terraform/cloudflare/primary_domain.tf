@@ -4,15 +4,6 @@ data "cloudflare_zones" "primary_domain" {
   }
 }
 
-resource "cloudflare_record" "unproxied_cname" {
-  name    = data.sops_file.secrets.data["primary_up_cname"]
-  zone_id = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
-  value   = data.sops_file.secrets.data["primary_p_cname"]
-  proxied = false
-  type    = "CNAME"
-  ttl     = 1
-}
-
 resource "cloudflare_record" "mx_main" {
   name     = data.sops_file.secrets.data["primary_zone"]
   zone_id  = lookup(data.cloudflare_zones.primary_domain.zones[0], "id")

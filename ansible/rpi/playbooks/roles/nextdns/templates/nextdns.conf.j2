@@ -3,7 +3,6 @@ timeout 5s
 debug false
 forwarder {{ home.domain }}.=127.0.0.1:1053
 forwarder {{ homelab_domain }}.={{ k8s_gateway_ip }}
-forwarder {{ temp_homelab_domain }}.={{ k8s_gateway_ip }}
 cache-max-age 0s
 report-client-info true
 discovery-dns {{ router_ip }}
