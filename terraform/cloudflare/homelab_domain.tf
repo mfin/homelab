@@ -5,9 +5,9 @@ data "cloudflare_zones" "homelab_domain" {
 }
 
 resource "cloudflare_record" "homelab_unproxied" {
-  name    = data.sops_file.secrets.data["homelab_proxied"]
+  name    = data.sops_file.secrets.data["homelab_unproxied"]
   zone_id = lookup(data.cloudflare_zones.homelab_domain.zones[0], "id")
-  value   = data.sops_file.secrets.data["homelab_unproxied"]
+  value   = data.sops_file.secrets.data["homelab_proxied"]
   proxied = false
   type    = "CNAME"
   ttl     = 1
