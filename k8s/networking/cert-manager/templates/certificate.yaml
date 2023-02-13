@@ -5,7 +5,6 @@ metadata:
 spec:
   dnsNames:
     - "*.{{ .Values.homelab_domain }}"
-{{ .Values.additional_domains | indent 4 }}
   secretName: homelab-cert
   issuerRef:
     name: letsencrypt-issuer
