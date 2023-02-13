@@ -23,7 +23,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: {{ .Values.photos.domain }}
+  - host: photos.{{ .Values.default.domain }}
     http:
       paths:
       - backend:
@@ -35,4 +35,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - {{ .Values.photos.domain }}
+    - photos.{{ .Values.default.domain }}
+    secretName: homelab-cert

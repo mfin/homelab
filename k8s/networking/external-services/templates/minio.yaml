@@ -21,7 +21,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: minio.{{ .Values.minio.domain }}
+  - host: minio.{{ .Values.default.domain }}
     http:
       paths:
       - backend:
@@ -33,7 +33,8 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - {{ .Values.minio.domain }}
+    - minio.{{ .Values.default.domain }}
+    secretName: homelab-cert
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -44,7 +45,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: s3.{{ .Values.minio.domain }}
+  - host: s3.{{ .Values.default.domain }}
     http:
       paths:
       - backend:
@@ -56,4 +57,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - {{ .Values.minio.domain }}
+    - s3.{{ .Values.default.domain }}
+    secretName: homelab-cert

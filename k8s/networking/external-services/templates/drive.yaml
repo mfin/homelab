@@ -23,7 +23,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: {{ .Values.drive.domain }}
+  - host: drive.{{ .Values.default.domain }}
     http:
       paths:
       - backend:
@@ -35,4 +35,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - {{ .Values.drive.domain }}
+    - drive.{{ .Values.default.domain }}
+    secretName: homelab-cert
