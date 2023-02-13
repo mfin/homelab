@@ -16,7 +16,7 @@ spec:
             name: kube-prometheus-stack-prometheus
             port:
               name: http-web
-        path: /api/v1
+        path: /
         pathType: Prefix
   tls:
   - hosts:
