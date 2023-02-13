@@ -28,14 +28,6 @@ subsets:
       - name: s3
         port: 9000
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: minio
-type: Opaque
-stringData:
-  bearer-token: "{{ .Values.minio.bearerToken }}"
----
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -45,9 +37,6 @@ spec:
   - path: /minio/v2/metrics/cluster
     port: s3
     scheme: http
-    bearerTokenSecret:
-      name: minio
-      key: bearer-token
   selector:
     matchLabels:
       external: minio
