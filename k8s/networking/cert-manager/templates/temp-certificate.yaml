@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: homelab
+  name: le-cert
 spec:
   dnsNames:
-    - "*.{{ .Values.homelab_domain }}"
-{{ .Values.additional_domains | indent 4 }}
-  secretName: homelab-cert
+    - "*.{{ .Values.temp_homelab_domain }}"
+{{ .Values.temp_additional_domains | indent 4 }}
+  secretName: le-cert
   issuerRef:
     name: letsencrypt-issuer
     kind: ClusterIssuer
