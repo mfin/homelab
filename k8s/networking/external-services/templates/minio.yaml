@@ -44,7 +44,7 @@ spec:
   endpoints:
   - path: /minio/v2/metrics/cluster
     port: s3
-    scheme: https
+    scheme: http
     bearerTokenSecret:
       name: minio
       key: bearer-token
