@@ -26,7 +26,6 @@ subsets:
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  labels:
   name: coredns
 spec:
   endpoints:
