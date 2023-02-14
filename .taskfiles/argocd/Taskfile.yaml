@@ -1,16 +1,10 @@
 ---
 version: '3'
 
-vars:
-  sopsFile: '{{.ROOT_DIR}}/.taskfiles/argocd/secret.sops.yaml'
-  app: '{{.app | default .USER_WORKING_DIR}}'
-  name: '{{.name | default (base .app)}}'
-  namespace: '{{.namespace | default "argocd"}}'
-
 tasks:
   login:
     desc: Login to ArgoCD
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
     silent: true
     vars:
       url:
@@ -21,7 +15,7 @@ tasks:
 
   sync:
     desc: Sync ArgoCD Application
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
     silent: true
     cmds:
       - echo "Syncing Application {{.name}} ..."
@@ -29,7 +23,7 @@ tasks:
 
   pause:
     desc: Pause ArgoCD Application
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
     silent: true
     cmds:
       - echo "Pausing Application {{.name}} ..."
@@ -38,7 +32,7 @@ tasks:
 
   resume:
     desc: Resume ArgoCD Application
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
     silent: true
     cmds:
       - echo "Resuming Application {{.name}} ..."
@@ -54,7 +48,7 @@ tasks:
     cmds:
       - task: pause
         vars:
-          name: '{{.resumed}}'
+          name: "{{.resumed}}"
     preconditions:
       - sh: test -n "{{.resumed}}"
         msg: "No apps to pause"
@@ -66,7 +60,6 @@ tasks:
       paused:
         sh: kubectl get application -n {{.namespace}} -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated == null) | .metadata.name' | tr '\n' ' '
     cmds:
-      - echo "{{.paused}}"
       - task: resume
         vars:
           name: '{{.paused}}'

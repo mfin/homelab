@@ -6,8 +6,6 @@ tasks:
     desc: Run terraform plan in $dir directory
     dir: '{{.dir}}'
     silent: true
-    vars:
-      dir: '{{.dir | default .USER_WORKING_DIR}}'
     cmds:
       - terraform plan -out=tfplan
 
@@ -15,8 +13,6 @@ tasks:
     desc: Run terraform apply in $dir directory
     dir: '{{.dir}}'
     silent: true
-    vars:
-      dir: '{{.dir | default .USER_WORKING_DIR}}'
     preconditions:
       - test -f tfplan
     cmds:

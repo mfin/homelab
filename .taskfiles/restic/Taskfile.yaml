@@ -1,10 +1,7 @@
 ---
-version: '3'
+version: "3"
 
-vars:
-  app: '{{.app | default .USER_WORKING_DIR}}'
-  namespace: '{{.namespace | default (base .app)}}'
-  name: '{{.name | default (base .app)}}'
+x-task-vars: &task-vars
   secret: '{{.secret | default (print .name "-restic-secret")}}'
 
 x-task-env: &task-env
@@ -17,21 +14,33 @@ x-task-env: &task-env
   RESTIC_PASSWORD:
     sh: 'kubectl get secret {{.secret}} -n {{.namespace}} -o jsonpath="{.data.RESTIC_PASSWORD}" | base64 -d'
 
+x-task-preconditions: &task-preconditions
+  - test -n "${AWS_ACCESS_KEY_ID}"
+  - test -n "${AWS_SECRET_ACCESS_KEY}"
+  - test -n "${RESTIC_REPOSITORY}"
+  - test -n "${RESTIC_PASSWORD}"
+
 tasks:
   shell:
     desc: Launch temp shell with restic
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
     silent: true
+    vars: *task-vars
     env: *task-env
     cmds:
+      - echo "Launching restic shell for ${RESTIC_REPOSITORY} ..."
       - nix-shell -p restic
+    preconditions: *task-preconditions
 
   run:
-    # Ex. in Plex app dir: task r:run -- --verbose snapshots
-    # Ex. from root: app=k8s/media/plex task r:run -- --verbose snapshots
+    # Ex. in Plex app dir: task r:run -- snapshots
+    # Ex. from root: dir=k8s/media/plex task r:run -- snapshots
     desc: Run command in restic shell
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
     silent: true
+    vars: *task-vars
     env: *task-env
     cmds:
+      - echo "Running restic command '{{.CLI_ARGS}}' for ${RESTIC_REPOSITORY} ..."
       - nix-shell -p restic --run "restic {{.CLI_ARGS}}"
+    preconditions: *task-preconditions

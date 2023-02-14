@@ -1,57 +1,29 @@
 ---
 version: "3"
 
-x-task-vars: &task-vars
-  rsrc: '{{.rsrc}}'
-  controller: '{{.controller}}'
-  namespace: '{{.namespace}}'
-  claim: '{{.claim}}'
-  pvc: '{{.pvc}}'
-  offset: '{{.offset}}'
-  ts: '{{.ts}}'
-
-vars:
-  destinationTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/ReplicationDestination.tmpl.yaml"
-  wipeJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/WipeJob.tmpl.yaml"
-  waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volsync/wait-for-job.sh"
-  listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/ListJob.tmpl.yaml"
-  attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/AttachPvc.tmpl.yaml"
-  ts: '{{now | date "150405"}}'
+x-task-env: &task-env
+  RSRC: '{{.rsrc}}'
+  NAMESPACE: '{{.namespace}}'
+  CONTROLLER: '{{.controller}}'
+  CLAIM: '{{.claim}}'
+  PVC: '{{.pvc}}'
+  OFFSET: '{{.offset}}'
+  TS: '{{.ts}}'
+  POD: '{{.pod}}'
 
 tasks:
-  list:
-    desc: List all snapshots taken by restic for a given ReplicationSource (ex. task v:list rsrc=plex [namespace=default])
-    dir: '{{.app}}'
-    silent: true
-    cmds:
-      - envsubst < <(cat {{.listJobTemplate}}) | kubectl apply -f -
-      - bash {{.waitForJobScript}} list-{{.rsrc}}-{{.ts}} {{.namespace}}
-      - kubectl -n {{.namespace}} wait job/list-{{.rsrc}}-{{.ts}} --for condition=complete --timeout=1m
-      - kubectl -n {{.namespace}} logs job/list-{{.rsrc}}-{{.ts}} --container list
-      - kubectl -n {{.namespace}} delete job list-{{.rsrc}}-{{.ts}}
-    vars:
-      app: '{{.app | default .USER_WORKING_DIR}}'
-      rsrc: '{{.rsrc | default (base .app)}}'
-      namespace: '{{.namespace | default .rsrc}}'
-    env: *task-vars
-    preconditions:
-      - sh: test -f {{.waitForJobScript}}
-      - sh: test -f {{.listJobTemplate}}
-
   snapshot:
     desc: Trigger a Restic ReplicationSource snapshot (ex. task v:snapshot rsrc=plex [namespace=default])
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
+    vars:
+      rsrc: '{{.rsrc | default (base .dir)}}'
+    env: *task-env
     cmds:
       - kubectl -n {{.namespace}} patch replicationsources {{.rsrc}} --type merge -p '{"spec":{"trigger":{"manual":"{{.ts}}"}}}'
       - bash {{.waitForJobScript}} volsync-src-{{.rsrc}} {{.namespace}}
       - kubectl -n {{.namespace}} wait job/volsync-src-{{.rsrc}} --for condition=complete --timeout=120m
       # TODO: Error from server (NotFound): jobs.batch "volsync-src-zzztest" not found
       # - kubectl -n {{.namespace}} logs job/volsync-src-{{.rsrc}}
-    vars:
-      app: '{{.app | default .USER_WORKING_DIR}}'
-      rsrc: '{{.rsrc | default (base .app)}}'
-      namespace: '{{.namespace | default .rsrc}}'
-    env: *task-vars
     preconditions:
       - sh: test -f {{.waitForJobScript}}
       - sh: kubectl -n {{.namespace}} get replicationsources {{.rsrc}}
@@ -59,60 +31,60 @@ tasks:
 
   attach:
     desc: Attach a PVC to a Pod for debugging purposes (ex. task v:attach pvc=plex [namespace=default])
-    dir: '{{.app}}'
+    dir: '{{.dir}}'
+    vars:
+      pvc: '{{.pvc | default (base .dir)}}'
+      pod: 'attach-pvc-{{.pvc}}'
+    env: *task-env
     cmds:
       - envsubst < <(cat {{.attachPvcTemplate}}) | kubectl apply -f -
       - kubectl wait pods -n {{.namespace}} {{.pod}} --for condition=Ready --timeout=120s
       - kubectl exec -it -n {{.namespace}} {{.pod}} -- bash
       - kubectl delete -n {{.namespace}} pod {{.pod}}
-    vars:
-      app: '{{.app | default .USER_WORKING_DIR}}'
-      pvc: '{{.pvc | default (base .app)}}'
-      namespace: '{{.namespace | default (base .app)}}'
-      pod: 'attach-pvc-{{.pvc}}'
-    env:
-      pvc: '{{.pvc}}'
-      namespace: '{{.namespace}}'
-      pod: '{{.pod}}'
     preconditions:
       - sh: kubectl -n {{.namespace}} get pvc {{.pvc}}
         msg: "PVC '{{.pvc}}' not found in namespace '{{.namespace}}'"
 
   restore:
     desc: Trigger a Restic ReplicationSource restore (ex. task v:restore rsrc=plex [namespace=default])
-    dir: '{{.app}}'
-    cmds:
-      - task: restore-suspend-app
-        vars: *task-vars
-      - task: restore-wipe-job
-        vars: *task-vars
-      - task: restore-volsync-job
-        vars: *task-vars
-      - task: restore-resume-app
-        vars: *task-vars
+    dir: '{{.dir}}'
     vars:
-      app: '{{.app | default .USER_WORKING_DIR}}'
-      rsrc: '{{.rsrc | default (base .app)}}'
-      namespace: '{{.namespace | default .rsrc}}'
-      name: '{{.name | default (base .app)}}'
-      pvc: '{{.pvc | default .claim}}'
+      rsrc: '{{.rsrc | default (base .dir)}}'
       offset: '{{.offset | default 0}}'
       claim:
         sh: |
           kubectl -n {{.namespace}} get replicationsource {{.rsrc}} \
             -o jsonpath="{.spec.sourcePVC}"
+      pvc: '{{.pvc | default .claim}}'
       controller:
         sh: |
           app=$(kubectl -n {{.namespace}} get persistentvolumeclaim {{.claim}} -o jsonpath="{.metadata.labels.argocd\.argoproj\.io/instance}")
-          if kubectl -n {{ .namespace }} get deployment.apps/$app >/dev/null 2>&1 ; then
+          if kubectl -n {{ .namespace }} get deployment.dirs/$app >/dev/null 2>&1 ; then
             echo "deployment.apps/$app"
           else
             echo "statefulset.apps/$app"
           fi
-    env: *task-vars
+    env: *task-env
+    cmds:
+      - task: restore-suspend-app
+        vars:
+          rsrc: '{{.rsrc}}'
+          controller: '{{.controller}}'
+      - task: restore-wipe-job
+        vars:
+          rsrc: '{{.rsrc}}'
+          pvc: '{{.pvc}}'
+          claim: '{{.claim}}'
+      - task: restore-volsync-job
+        vars:
+          rsrc: '{{.rsrc}}'
+          claim: '{{.claim}}'
+          pvc: '{{.pvc}}'
+          offset: '{{.offset}}'
+      - task: restore-resume-app
     preconditions:
-      - sh: kubectl get -n argocd application {{.name}} -o json | jq -e '.spec.syncPolicy == null'
-        msg: "Application resource for {{.name}} has syncPolicy defined. Disable it first."
+      # - sh: kubectl get -n argocd application {{.name}} -o json | jq -e '.spec.syncPolicy.automated == null'
+      #   msg: "Application resource for {{.name}} has syncPolicy.automated defined. Disable it first."
       - sh: test -f {{.wipeJobTemplate}}
       - sh: test -f {{.destinationTemplate}}
       - sh: test -f {{.waitForJobScript}}
@@ -120,19 +92,20 @@ tasks:
   restore-suspend-app:
     internal: true
     cmds:
+      - namespace={{.namespace}} name={{.name}} task ac:pause
       - kubectl -n {{.namespace}} scale {{.controller}} --replicas 0
       - kubectl -n {{.namespace}} wait pod --for delete --selector="app.kubernetes.io/name={{.rsrc}}" --timeout=2m
-    env: *task-vars
 
   restore-wipe-job:
     internal: true
     cmds:
+      - echo "{{.pvc}} {{.claim}}"
       - envsubst < <(cat {{.wipeJobTemplate}}) | kubectl apply -f -
       - bash {{.waitForJobScript}} wipe-{{.rsrc}}-{{.claim}}-{{.ts}} {{.namespace}}
       - kubectl -n {{.namespace}} wait job/wipe-{{.rsrc}}-{{.claim}}-{{.ts}} --for condition=complete --timeout=120m
       - kubectl -n {{.namespace}} logs job/wipe-{{.rsrc}}-{{.claim}}-{{.ts}} --container wipe
       - kubectl -n {{.namespace}} delete job wipe-{{.rsrc}}-{{.claim}}-{{.ts}}
-    env: *task-vars
+    env: *task-env
 
   restore-volsync-job:
     internal: true
@@ -141,10 +114,10 @@ tasks:
       - bash {{.waitForJobScript}} volsync-dst-{{.rsrc}}-{{.claim}}-{{.ts}} {{.namespace}}
       - kubectl -n {{.namespace}} wait job/volsync-dst-{{.rsrc}}-{{.claim}}-{{.ts}} --for condition=complete --timeout=120m
       - kubectl -n {{.namespace}} delete replicationdestination {{.rsrc}}-{{.claim}}-{{.ts}}
-    env: *task-vars
+    env: *task-env
 
   restore-resume-app:
     internal: true
     cmds:
-      - echo "Enable syncPolicy on {{.rsrc}} application!"
-    env: *task-vars
+      - namespace={{.namespace}} name={{.name}} task ac:resume
+    env: *task-env

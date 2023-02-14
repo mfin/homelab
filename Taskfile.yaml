@@ -2,17 +2,30 @@
 version: "3"
 
 vars:
-  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
-  ARGOCD_DIR: "{{.ROOT_DIR}}/argocd"
+  dir: '{{.dir | default .USER_WORKING_DIR}}'
+  name: '{{.name | default (base .dir)}}'
+  namespace: '{{.namespace | default (base .dir)}}'
+  ts: '{{now | date "150405"}}'
 
 includes:
-  a: .taskfiles/ansible/Tasks.yaml
-  k: .taskfiles/k8s/Tasks.yaml
-  t: .taskfiles/terraform/Tasks.yaml
-  m: .taskfiles/misc/Tasks.yaml
-  v: .taskfiles/volsync/Tasks.yaml
-  r: .taskfiles/restic/Tasks.yaml
-  ac: .taskfiles/argocd/Tasks.yaml
+  a: .taskfiles/ansible
+  k: .taskfiles/k8s
+  t: .taskfiles/terraform
+  m: .taskfiles/misc
+  r: .taskfiles/restic
+  v:
+    taskfile: .taskfiles/volsync/Taskfile.yaml
+    vars:
+      destinationTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/ReplicationDestination.tmpl.yaml"
+      wipeJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/WipeJob.tmpl.yaml"
+      waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volsync/scripts/wait-for-job.sh"
+      listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/ListJob.tmpl.yaml"
+      attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/AttachPvc.tmpl.yaml"
+  ac:
+    taskfile: .taskfiles/argocd/Taskfile.yaml
+    vars:
+      namespace: argocd
+      sopsFile: '{{.ROOT_DIR}}/.taskfiles/argocd/secret.sops.yaml'
 
 tasks:
   default:
@@ -30,9 +43,9 @@ tasks:
           namespace: argocd
       - task: k:apply
         vars:
-          app: k8s/bootstrap/argocd
+          dir: k8s/bootstrap/argocd
       - kubectl -n argocd wait --timeout=60s --for condition=Established crd/applications.argoproj.io crd/applicationsets.argoproj.io
       - task: k:apply
         vars:
-          app: k8s/bootstrap/app-of-apps
+          dir: k8s/bootstrap/app-of-apps
           namespace: argocd

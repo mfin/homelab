@@ -7,7 +7,6 @@ tasks:
     dir: '{{.dir}}'
     silent: true
     vars:
-      dir: '{{.dir | default .USER_WORKING_DIR}}'
       string: '{{.string}}'
     cmds:
       - fd -t f ".sops.yaml|secrets.yaml" --exec sh -c "(sops -d {} | rg {{.string}}) && echo '{}'"

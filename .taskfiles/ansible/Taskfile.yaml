@@ -1,6 +1,9 @@
 ---
 version: "3"
 
+vars:
+  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+
 tasks:
   deps:
     desc: Install/Upgrade Ansible deps
