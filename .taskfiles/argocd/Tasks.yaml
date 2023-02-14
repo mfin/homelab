@@ -5,6 +5,7 @@ vars:
   sopsFile: '{{.ROOT_DIR}}/.taskfiles/argocd/secret.sops.yaml'
   app: '{{.app | default .USER_WORKING_DIR}}'
   name: '{{.name | default (base .app)}}'
+  namespace: '{{.namespace | default "argocd"}}'
 
 tasks:
   login:
@@ -15,7 +16,7 @@ tasks:
       url:
         sh: sops -d {{.sopsFile}} | yq .argocd_url
     cmds:
-      - kubectl config set-context --current --namespace argocd
+      - kubectl config set-context --current --namespace {{.namespace}}
       - argocd login --core {{.url}}
 
   sync:
@@ -33,7 +34,7 @@ tasks:
     cmds:
       - echo "Pausing Application {{.name}} ..."
       - |
-        kubectl -n argocd patch application {{.name}} --type=json -p="[{'op': 'remove', 'path': '/spec/syncPolicy/automated'}]"
+        kubectl -n {{.namespace}} patch application {{.name}} --type=json -p="[{'op': 'remove', 'path': '/spec/syncPolicy/automated'}]"
 
   resume:
     desc: Resume ArgoCD Application
@@ -42,14 +43,14 @@ tasks:
     cmds:
       - echo "Resuming Application {{.name}} ..."
       - |
-        kubectl -n argocd patch application {{.name}} --type=json -p="[{'op': 'add', 'path': '/spec/syncPolicy/automated', 'value': {'prune': true, 'selfHeal': true}}]"
+        kubectl -n {{.namespace}} patch application {{.name}} --type=json -p="[{'op': 'add', 'path': '/spec/syncPolicy/automated', 'value': {'prune': true, 'selfHeal': true}}]"
 
   pause-all:
     desc: Pause all ArgoCD Applications
     silent: true
     vars:
       resumed:
-        sh: kubectl get application -n argocd -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated != null) | .metadata.name' | tr '\n' ' '
+        sh: kubectl get application -n {{.namespace}} -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated != null) | .metadata.name' | tr '\n' ' '
     cmds:
       - task: pause
         vars:
@@ -63,7 +64,7 @@ tasks:
     silent: true
     vars:
       paused:
-        sh: kubectl get application -n argocd -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated == null) | .metadata.name' | tr '\n' ' '
+        sh: kubectl get application -n {{.namespace}} -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated == null) | .metadata.name' | tr '\n' ' '
     cmds:
       - echo "{{.paused}}"
       - task: resume
