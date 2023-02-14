@@ -9,6 +9,11 @@ apps:
   - name: app-of-apps
     path: k8s/bootstrap
     namespace: argocd
+    ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      jsonPointers:
+      - /spec/syncPolicy/automated
   - name: authelia
     path: k8s/authentication
   - name: glauth
