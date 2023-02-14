@@ -13,7 +13,7 @@ apps:
     - group: argoproj.io
       kind: Application
       jsonPointers:
-      - /spec/syncPolicy/automated/selfHeal
+      - /spec/syncPolicy/automated
   - name: authelia
     path: k8s/authentication
   - name: glauth
