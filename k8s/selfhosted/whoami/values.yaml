@@ -1,6 +1,6 @@
 app-template:
   controller:
-    replicas: 3
+    replicas: 1
 
   image:
     repository: containous/whoami
