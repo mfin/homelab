@@ -13,19 +13,8 @@ includes:
   t: .taskfiles/terraform
   m: .taskfiles/misc
   r: .taskfiles/restic
-  v:
-    taskfile: .taskfiles/volsync/Taskfile.yaml
-    vars:
-      destinationTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/ReplicationDestination.tmpl.yaml"
-      wipeJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/WipeJob.tmpl.yaml"
-      waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volsync/scripts/wait-for-job.sh"
-      listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/ListJob.tmpl.yaml"
-      attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/AttachPvc.tmpl.yaml"
-  ac:
-    taskfile: .taskfiles/argocd/Taskfile.yaml
-    vars:
-      namespace: argocd
-      sopsFile: '{{.ROOT_DIR}}/.taskfiles/argocd/secret.sops.yaml'
+  v: .taskfiles/volsync
+  ac: .taskfiles/argocd
 
 tasks:
   default:

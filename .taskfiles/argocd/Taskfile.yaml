@@ -1,12 +1,17 @@
 ---
 version: '3'
 
+vars:
+  sopsFile: '{{.ROOT_DIR}}/.taskfiles/argocd/secret.sops.yaml'
+  applicationNamespace: 'argocd'
+
 tasks:
   login:
     desc: Login to ArgoCD
     dir: '{{.dir}}'
     silent: true
     vars:
+      namespace: '{{.applicationNamespace}}'
       url:
         sh: sops -d {{.sopsFile}} | yq .argocd_url
     cmds:
@@ -17,6 +22,8 @@ tasks:
     desc: Sync ArgoCD Application
     dir: '{{.dir}}'
     silent: true
+    vars:
+      namespace: '{{.applicationNamespace}}'
     cmds:
       - echo "Syncing Application {{.name}} ..."
       - argocd app sync {{.name}}
@@ -25,6 +32,8 @@ tasks:
     desc: Pause ArgoCD Application
     dir: '{{.dir}}'
     silent: true
+    vars:
+      namespace: '{{.applicationNamespace}}'
     cmds:
       - echo "Pausing Application {{.name}} ..."
       - |
@@ -33,6 +42,8 @@ tasks:
   resume:
     desc: Resume ArgoCD Application
     dir: '{{.dir}}'
+    vars:
+      namespace: '{{.applicationNamespace}}'
     silent: true
     cmds:
       - echo "Resuming Application {{.name}} ..."
@@ -43,6 +54,7 @@ tasks:
     desc: Pause all ArgoCD Applications
     silent: true
     vars:
+      namespace: '{{.applicationNamespace}}'
       resumed:
         sh: kubectl get application -n {{.namespace}} -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated != null) | .metadata.name' | tr '\n' ' '
     cmds:
@@ -57,6 +69,7 @@ tasks:
     desc: Resume all ArgoCD Applications
     silent: true
     vars:
+      namespace: '{{.applicationNamespace}}'
       paused:
         sh: kubectl get application -n {{.namespace}} -ojson | jq -r '.items[] | select(.spec.syncPolicy.automated == null) | .metadata.name' | tr '\n' ' '
     cmds:
