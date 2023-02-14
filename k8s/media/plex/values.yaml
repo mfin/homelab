@@ -1,7 +1,7 @@
 app-template:
   image:
     repository: ghcr.io/onedr0p/plex
-    tag: 1.30.2.6563-3d4dc0cce
+    tag: 1.31.0.6654-02189b09f
   controller:
     replicas: 1
     type: statefulset
