@@ -3,6 +3,7 @@ version: "3"
 
 vars:
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+  ARGOCD_DIR: "{{.ROOT_DIR}}/argocd"
 
 includes:
   a: .taskfiles/ansible/Tasks.yaml
@@ -11,6 +12,7 @@ includes:
   m: .taskfiles/misc/Tasks.yaml
   v: .taskfiles/volsync/Tasks.yaml
   r: .taskfiles/restic/Tasks.yaml
+  ac: .taskfiles/argocd/Tasks.yaml
 
 tasks:
   default:
