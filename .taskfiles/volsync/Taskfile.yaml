@@ -41,9 +41,6 @@ tasks:
       - kubectl wait pods -n {{.namespace}} {{.pod}} --for condition=Ready --timeout=120s
       - kubectl exec -it -n {{.namespace}} {{.pod}} -- bash
       - kubectl delete -n {{.namespace}} pod {{.pod}}
-    preconditions:
-      - sh: kubectl -n {{.namespace}} get pvc {{.pvc}}
-        msg: "PVC '{{.pvc}}' not found in namespace '{{.namespace}}'"
 
   restore:
     desc: Trigger a Restic ReplicationSource restore (ex. task v:restore rsrc=plex [namespace=default])
