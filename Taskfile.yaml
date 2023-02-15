@@ -13,7 +13,7 @@ includes:
   t: .taskfiles/terraform
   m: .taskfiles/misc
   r: .taskfiles/restic
-  v: .taskfiles/volsync
+  v: .taskfiles/volumes
   ac: .taskfiles/argocd
 
 tasks:

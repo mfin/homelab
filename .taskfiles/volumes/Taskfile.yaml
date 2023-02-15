@@ -12,11 +12,11 @@ x-task-env: &task-env
   POD: '{{.pod}}'
 
 vars:
-  destinationTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/ReplicationDestination.tmpl.yaml"
-  wipeJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/WipeJob.tmpl.yaml"
-  waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volsync/scripts/wait-for-job.sh"
-  listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/ListJob.tmpl.yaml"
-  attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volsync/templates/AttachPvc.tmpl.yaml"
+  destinationTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/ReplicationDestination.tmpl.yaml"
+  wipeJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/WipeJob.tmpl.yaml"
+  waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volumes/scripts/wait-for-job.sh"
+  listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/ListJob.tmpl.yaml"
+  attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/AttachPvc.tmpl.yaml"
 
 tasks:
   snapshot:
@@ -48,6 +48,22 @@ tasks:
       - kubectl wait pods -n {{.namespace}} {{.pod}} --for condition=Ready --timeout=120s
       - kubectl exec -it -n {{.namespace}} {{.pod}} -- bash
       - kubectl delete -n {{.namespace}} pod {{.pod}}
+
+  migrate:
+    desc: Migrate a PVC to a new, already existing, PVC (ex. task v:migrate dest=plex-new [namespace=default])
+    dir: '{{.dir}}'
+    vars:
+      src: '{{.src | default (base .dir)}}'
+      dest: '{{.dest}}'
+    cmds:
+      - kubectl pv-migrate migrate --source-namespace {{.namespace}} --dest-namespace {{.namespace}} {{.src}} {{.dest}}
+    preconditions:
+      - sh: test -n "{{.dest}}"
+        msg: "Destination PVC name must be specified (dest=plex-new)"
+      - sh: kubectl get pvc -n {{.namespace}} {{.src}}
+        msg: "PVC '{{.src}}' not found in namespace '{{.namespace}}'"
+      - sh: kubectl get pvc -n {{.namespace}} {{.dest}}
+        msg: "PVC '{{.dest}}' not found in namespace '{{.namespace}}'"
 
   restore:
     desc: Trigger a Restic ReplicationSource restore (ex. task v:restore rsrc=plex [namespace=default])
@@ -87,8 +103,6 @@ tasks:
           offset: '{{.offset}}'
       - task: restore-resume-app
     preconditions:
-      # - sh: kubectl get -n argocd application {{.name}} -o json | jq -e '.spec.syncPolicy.automated == null'
-      #   msg: "Application resource for {{.name}} has syncPolicy.automated defined. Disable it first."
       - sh: test -f {{.wipeJobTemplate}}
       - sh: test -f {{.destinationTemplate}}
       - sh: test -f {{.waitForJobScript}}
@@ -103,7 +117,6 @@ tasks:
   restore-wipe-job:
     internal: true
     cmds:
-      - echo "{{.pvc}} {{.claim}}"
       - envsubst < <(cat {{.wipeJobTemplate}}) | kubectl apply -f -
       - bash {{.waitForJobScript}} wipe-{{.rsrc}}-{{.claim}}-{{.ts}} {{.namespace}}
       - kubectl -n {{.namespace}} wait job/wipe-{{.rsrc}}-{{.claim}}-{{.ts}} --for condition=complete --timeout=120m
