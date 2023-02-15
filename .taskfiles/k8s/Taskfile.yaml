@@ -1,6 +1,9 @@
 ---
 version: '3'
 
+vars:
+  debugPodTemplate: '{{.ROOT_DIR}}/.taskfiles/k8s/templates/DebugPod.tmpl.yaml'
+
 tasks:
   template:
     desc: Template Helm chart in $app directory
@@ -42,11 +45,16 @@ tasks:
       - fd -I -g Chart.lock --exec rm -rf {}
 
   debug:
-    desc: Run a debugging container
+    desc: Run a debugging pod in the cluster
     dir: '{{.dir}}'
     silent: true
     vars:
       image: '{{.image | default "nicolaka/netshoot"}}'
-      command: '{{.command | default "bash"}}'
+    env:
+      IMAGE: '{{.image}}'
+      NAMESPACE: '{{.namespace}}'
     cmds:
-      - kubectl run -n {{.namespace}} debug --image={{.image}} --restart=Never --rm -it
+      - envsubst < <(cat {{.debugPodTemplate}}) | kubectl apply -f -
+      - kubectl wait pods -n {{.namespace}} debug --for condition=Ready --timeout=120s
+      - kubectl exec -it -n {{.namespace}} debug -- bash
+      - kubectl delete -n {{.namespace}} pod debug

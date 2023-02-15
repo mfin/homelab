@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "debug"
+  namespace: "${NAMESPACE}"
+spec:
+  containers:
+    - name: debug
+      image: ${IMAGE}
+      command: [ "/bin/bash", "-c", "--" ]
+      args: [ "while true; do sleep 30; done;" ]
