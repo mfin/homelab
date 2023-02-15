@@ -1,0 +1,53 @@
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/advplyr/audiobookshelf
+    tag: 2.2.14
+  env:
+    TZ: Europe/Ljubljana
+    AUDIOBOOKSHELF_UID: 1028
+    AUDIOBOOKSHELF_GID: 100
+    CONFIG_PATH: /config
+    METADATA_PATH: /config/metadata
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: mdi:podcast
+        hajimari.io/appName: audiobooksheld
+        hajimari.io/info: Self-hosted audiobook and podcast server
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: audiobookshelf
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      mountPath: /data
+    cache:
+      enabled: true
+      mountPath: /.npm
+      type: emptyDir
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      memory: 500Mi
