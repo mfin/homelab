@@ -1,0 +1,33 @@
+app-template:
+  image:
+    repository: docker.io/caronc/apprise
+    tag: v0.8.3
+
+  env:
+    TZ: Europe/Ljubljana
+
+  service:
+    main:
+      ports:
+        http:
+          port: 8000
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+  persistence:
+    config:
+      enabled: true
+      mountPath: /config
+      existingClaim: apprise-api
+
+  resources:
+    requests:
+      cpu: 15m
+      memory: 100Mi
+    limits:
+      memory: 1Gi
