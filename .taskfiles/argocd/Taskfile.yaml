@@ -15,7 +15,7 @@ tasks:
       url:
         sh: sops -d {{.sopsFile}} | yq .argocd_url
     cmds:
-      - kubectl config set-context --current --namespace {{.namespace}}
+      - kubens {{.namespace}}
       - argocd login --core {{.url}}
 
   sync:
