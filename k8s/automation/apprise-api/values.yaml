@@ -5,10 +5,7 @@ app-template:
 
   env:
     TZ: Europe/Ljubljana
-
-  envFrom:
-    - secretRef:
-        name: apprise-api
+    APPRISE_STATEFUL_MODE: disabled
 
   service:
     main:
