@@ -22,7 +22,6 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: mdi:podcast
         hajimari.io/appName: audiobooksheld
