@@ -24,7 +24,7 @@ app-template:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: mdi:podcast
-        hajimari.io/appName: audiobooksheld
+        hajimari.io/appName: audiobookshelf
         hajimari.io/info: Self-hosted audiobook and podcast server
   podSecurityContext:
     runAsUser: 1028
