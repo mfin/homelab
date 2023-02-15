@@ -6,6 +6,10 @@ app-template:
   env:
     TZ: Europe/Ljubljana
 
+  envFrom:
+    - secretRef:
+        name: apprise-api
+
   service:
     main:
       ports:
@@ -18,16 +22,3 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-
-  persistence:
-    config:
-      enabled: true
-      mountPath: /config
-      existingClaim: apprise-api
-
-  resources:
-    requests:
-      cpu: 15m
-      memory: 100Mi
-    limits:
-      memory: 1Gi
