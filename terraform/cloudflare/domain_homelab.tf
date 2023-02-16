@@ -4,6 +4,10 @@ data "cloudflare_zones" "homelab" {
   }
 }
 
+resource "cloudflare_zone_dnssec" "homelab" {
+  zone_id = lookup(data.cloudflare_zones.homelab.zones[0], "id")
+}
+
 resource "cloudflare_record" "homelab_unproxied" {
   name    = data.sops_file.secrets.data["homelab.unproxied"]
   zone_id = lookup(data.cloudflare_zones.homelab.zones[0], "id")
@@ -81,3 +85,39 @@ resource "cloudflare_record" "homelab_dkim_3" {
   type    = "CNAME"
   ttl     = 1
 }
+
+resource "cloudflare_filter" "homelab_github" {
+  zone_id     = lookup(data.cloudflare_zones.homelab.zones[0], "id")
+  description = "Requests originating from Github"
+  expression  = "(ip.geoip.asnum eq 36459)"
+}
+
+resource "cloudflare_firewall_rule" "homelab_github" {
+  zone_id     = lookup(data.cloudflare_zones.homelab.zones[0], "id")
+  description = "Allow requests originating from Github"
+  filter_id   = cloudflare_filter.homelab_github.id
+  action      = "allow"
+}
+
+resource "cloudflare_filter" "homelab_countries" {
+  zone_id     = lookup(data.cloudflare_zones.homelab.zones[0], "id")
+  description = "Requests originating from certain countries"
+  expression  = "(not ip.geoip.country in {\"AT\" \"HR\" \"DE\" \"IT\" \"SI\"})"
+}
+
+resource "cloudflare_firewall_rule" "homelab_countries" {
+  zone_id     = lookup(data.cloudflare_zones.homelab.zones[0], "id")
+  description = "Block requests originating from certain countries"
+  filter_id   = cloudflare_filter.homelab_countries.id
+  action      = "block"
+}
+
+# manual overrides:
+#   - strict ssl
+#   - min tls version 1.2
+#   - https rewrites
+#   - auto minify
+#   - http3
+#   - websockets
+#   - brotli
+#   - rocket loader off
