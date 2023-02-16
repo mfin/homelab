@@ -4,6 +4,10 @@ data "cloudflare_zones" "remote" {
   }
 }
 
+resource "cloudflare_zone_dnssec" "remote" {
+  zone_id = lookup(data.cloudflare_zones.remote.zones[0], "id")
+}
+
 resource "cloudflare_record" "remote_www" {
   name     = "www"
   zone_id  = lookup(data.cloudflare_zones.remote.zones[0], "id")
@@ -88,4 +92,30 @@ resource "cloudflare_record" "remote_dkim_3" {
   proxied = false
   type    = "CNAME"
   ttl     = 1
+}
+
+resource "cloudflare_filter" "remote_countries" {
+  zone_id     = lookup(data.cloudflare_zones.remote.zones[0], "id")
+  description = "Requests originating from certain countries"
+  expression  = "(not ip.geoip.country in {\"AT\" \"HR\" \"DE\" \"IT\" \"SI\"})"
+}
+
+resource "cloudflare_firewall_rule" "remote_countries" {
+  zone_id     = lookup(data.cloudflare_zones.remote.zones[0], "id")
+  description = "Block requests originating from certain countries"
+  filter_id   = cloudflare_filter.remote_countries.id
+  action      = "block"
+}
+
+resource "cloudflare_page_rule" "redirect" {
+  zone_id = lookup(data.cloudflare_zones.remote.zones[0], "id")
+  target = "www.${data.sops_file.secrets.data["remote.domain"]}/*"
+  priority = 1
+
+  actions {
+    forwarding_url {
+      url = "https://${data.sops_file.secrets.data["remote.domain"]}/$1"
+      status_code = 301
+    }
+  }
 }
