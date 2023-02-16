@@ -119,3 +119,13 @@ resource "cloudflare_page_rule" "redirect" {
     }
   }
 }
+
+# manual overrides:
+#   - strict ssl
+#   - min tls version 1.2
+#   - https rewrites
+#   - auto minify
+#   - http3
+#   - websockets
+#   - brotli
+#   - rocket loader off
