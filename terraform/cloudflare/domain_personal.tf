@@ -4,6 +4,10 @@ data "cloudflare_zones" "personal" {
   }
 }
 
+resource "cloudflare_zone_dnssec" "personal" {
+  zone_id = lookup(data.cloudflare_zones.personal.zones[0], "id")
+}
+
 resource "cloudflare_record" "personal_root" {
   name     = data.sops_file.secrets.data["personal.domain"]
   zone_id  = lookup(data.cloudflare_zones.personal.zones[0], "id")
@@ -89,3 +93,26 @@ resource "cloudflare_record" "personal_dkim_3" {
   type    = "CNAME"
   ttl     = 1
 }
+
+resource "cloudflare_page_rule" "personal_redirect" {
+  zone_id = lookup(data.cloudflare_zones.personal.zones[0], "id")
+  target = "www.${data.sops_file.secrets.data["personal.domain"]}/*"
+  priority = 1
+
+  actions {
+    forwarding_url {
+      url = "https://${data.sops_file.secrets.data["personal.domain"]}/$1"
+      status_code = 301
+    }
+  }
+}
+
+# manual overrides:
+#   - strict ssl
+#   - min tls version 1.2
+#   - https rewrites
+#   - auto minify
+#   - http3
+#   - websockets
+#   - brotli
+#   - rocket loader off

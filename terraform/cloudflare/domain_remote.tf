@@ -107,7 +107,7 @@ resource "cloudflare_firewall_rule" "remote_countries" {
   action      = "block"
 }
 
-resource "cloudflare_page_rule" "redirect" {
+resource "cloudflare_page_rule" "remote_redirect" {
   zone_id = lookup(data.cloudflare_zones.remote.zones[0], "id")
   target = "www.${data.sops_file.secrets.data["remote.domain"]}/*"
   priority = 1
