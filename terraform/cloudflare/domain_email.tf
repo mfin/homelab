@@ -4,43 +4,10 @@ data "cloudflare_zones" "email" {
   }
 }
 
-resource "cloudflare_record" "email_mx_main" {
+resource "cloudflare_record" "email_mx_primary" {
   name     = data.sops_file.secrets.data["email.domain"]
   zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "aspmx.l.google.com"
-  comment  = local.cf_comment
-  proxied  = false
-  type     = "MX"
-  ttl      = 1
-  priority = 1
-}
-
-resource "cloudflare_record" "email_mx_secondary_1" {
-  name     = data.sops_file.secrets.data["email.domain"]
-  zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "alt1.aspmx.l.google.com"
-  comment  = local.cf_comment
-  proxied  = false
-  type     = "MX"
-  ttl      = 1
-  priority = 5
-}
-
-resource "cloudflare_record" "email_mx_secondary_2" {
-  name     = data.sops_file.secrets.data["email.domain"]
-  zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "alt2.aspmx.l.google.com"
-  comment  = local.cf_comment
-  proxied  = false
-  type     = "MX"
-  ttl      = 1
-  priority = 5
-}
-
-resource "cloudflare_record" "email_mx_tertiary_1" {
-  name     = data.sops_file.secrets.data["email.domain"]
-  zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "aspmx2.googlemail.com"
+  value    = "in1-smtp.messagingengine.com"
   comment  = local.cf_comment
   proxied  = false
   type     = "MX"
@@ -48,15 +15,15 @@ resource "cloudflare_record" "email_mx_tertiary_1" {
   priority = 10
 }
 
-resource "cloudflare_record" "email_mx_tertiary_2" {
+resource "cloudflare_record" "email_mx_secondary" {
   name     = data.sops_file.secrets.data["email.domain"]
   zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "aspmx3.googlemail.com"
+  value    = "in2-smtp.messagingengine.com"
   comment  = local.cf_comment
   proxied  = false
   type     = "MX"
   ttl      = 1
-  priority = 10
+  priority = 20
 }
 
 resource "cloudflare_record" "email_dmarc" {
@@ -70,7 +37,37 @@ resource "cloudflare_record" "email_dmarc" {
 resource "cloudflare_record" "email_spf" {
   name     = data.sops_file.secrets.data["email.domain"]
   zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "v=spf1 include:_spf.google.com ~all"
+  value    = "v=spf1 include:spf.messagingengine.com ?all"
   comment  = local.cf_comment
   type     = "TXT"
+}
+
+resource "cloudflare_record" "email_dkim_1" {
+  name    = "fm1._domainkey"
+  zone_id = lookup(data.cloudflare_zones.email.zones[0], "id")
+  value   = "fm1.${data.sops_file.secrets.data["email.domain"]}.dkim.fmhosted.com"
+  comment = local.cf_comment
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
+
+resource "cloudflare_record" "email_dkim_2" {
+  name    = "fm2._domainkey"
+  zone_id = lookup(data.cloudflare_zones.email.zones[0], "id")
+  value   = "fm2.${data.sops_file.secrets.data["email.domain"]}.dkim.fmhosted.com"
+  comment = local.cf_comment
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
+
+resource "cloudflare_record" "email_dkim_3" {
+  name    = "fm3._domainkey"
+  zone_id = lookup(data.cloudflare_zones.email.zones[0], "id")
+  value   = "fm3.${data.sops_file.secrets.data["email.domain"]}.dkim.fmhosted.com"
+  comment = local.cf_comment
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
 }
