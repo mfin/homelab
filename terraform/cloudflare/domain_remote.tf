@@ -97,7 +97,7 @@ resource "cloudflare_record" "remote_dkim_3" {
 resource "cloudflare_filter" "remote_countries" {
   zone_id     = lookup(data.cloudflare_zones.remote.zones[0], "id")
   description = "Requests originating from certain countries"
-  expression  = "(not ip.geoip.country in {\"AT\" \"HR\" \"DE\" \"IT\" \"SI\"})"
+  expression  = "(not ip.geoip.country in {\"AT\" \"HR\" \"IT\" \"SI\"})"
 }
 
 resource "cloudflare_firewall_rule" "remote_countries" {
