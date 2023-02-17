@@ -33,7 +33,7 @@ resource "cloudflare_record" "email_mx_secondary" {
 resource "cloudflare_record" "email_dmarc" {
   name     = "_dmarc"
   zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = "v=DMARC1; p=none; rua=mailto:dmarc@${data.sops_file.secrets.data["email.domain"]}"
+  value    = "v=DMARC1; p=none; pct=100; rua=mailto:${data.sops_file.secrets.data["email.reportEmail"]}; sp=none; aspf=r;"
   comment  = local.cf_comment
   type     = "TXT"
 }
