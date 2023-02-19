@@ -47,6 +47,10 @@ metadata:
   name: minio-ui
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hajimari.io/enable: "true"
+    hajimari.io/icon: bucket
+    hajimari.io/appName: MinIO
+    hajimari.io/info: MinIO offers high-performance, S3 compatible object storage
 spec:
   ingressClassName: traefik
   rules:

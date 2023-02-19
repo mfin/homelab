@@ -20,6 +20,9 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hajimari.io/enable: "true"
+    hajimari.io/icon: image
+    hajimari.io/appName: Photos
 spec:
   ingressClassName: traefik
   rules:
