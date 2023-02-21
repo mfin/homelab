@@ -4,10 +4,6 @@ data "cloudflare_zones" "business" {
   }
 }
 
-resource "cloudflare_zone_dnssec" "business" {
-  zone_id = lookup(data.cloudflare_zones.business.zones[0], "id")
-}
-
 resource "cloudflare_record" "business_root" {
   name     = data.sops_file.secrets.data["business.domain"]
   zone_id  = lookup(data.cloudflare_zones.business.zones[0], "id")
@@ -108,6 +104,7 @@ resource "cloudflare_page_rule" "business_redirect" {
 }
 
 # manual overrides:
+#   - dnssec
 #   - strict ssl
 #   - min tls version 1.2
 #   - https rewrites

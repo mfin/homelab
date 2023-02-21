@@ -4,10 +4,6 @@ data "cloudflare_zones" "homelab" {
   }
 }
 
-resource "cloudflare_zone_dnssec" "homelab" {
-  zone_id = lookup(data.cloudflare_zones.homelab.zones[0], "id")
-}
-
 resource "cloudflare_record" "homelab_unproxied" {
   name    = data.sops_file.secrets.data["homelab.unproxied"]
   zone_id = lookup(data.cloudflare_zones.homelab.zones[0], "id")
@@ -113,6 +109,7 @@ resource "cloudflare_firewall_rule" "homelab_countries" {
 }
 
 # manual overrides:
+#   - dnssec
 #   - strict ssl
 #   - min tls version 1.2
 #   - https rewrites

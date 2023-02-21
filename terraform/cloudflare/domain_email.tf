@@ -4,10 +4,6 @@ data "cloudflare_zones" "email" {
   }
 }
 
-resource "cloudflare_zone_dnssec" "email" {
-  zone_id = lookup(data.cloudflare_zones.email.zones[0], "id")
-}
-
 resource "cloudflare_record" "email_mx_primary" {
   name     = data.sops_file.secrets.data["email.domain"]
   zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
@@ -75,3 +71,6 @@ resource "cloudflare_record" "email_dkim_3" {
   type    = "CNAME"
   ttl     = 1
 }
+
+# manual overrides
+#   - dnssec

@@ -4,10 +4,6 @@ data "cloudflare_zones" "catch" {
   }
 }
 
-resource "cloudflare_zone_dnssec" "catch" {
-  zone_id = lookup(data.cloudflare_zones.catch.zones[0], "id")
-}
-
 resource "cloudflare_record" "catch_mx_primary" {
   name     = data.sops_file.secrets.data["catch.domain"]
   zone_id  = lookup(data.cloudflare_zones.catch.zones[0], "id")
@@ -75,3 +71,6 @@ resource "cloudflare_record" "catch_dkim_3" {
   type    = "CNAME"
   ttl     = 1
 }
+
+# manual overrides:
+#   - dnssec

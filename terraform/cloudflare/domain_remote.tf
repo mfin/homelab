@@ -4,10 +4,6 @@ data "cloudflare_zones" "remote" {
   }
 }
 
-resource "cloudflare_zone_dnssec" "remote" {
-  zone_id = lookup(data.cloudflare_zones.remote.zones[0], "id")
-}
-
 resource "cloudflare_record" "remote_www" {
   name     = "www"
   zone_id  = lookup(data.cloudflare_zones.remote.zones[0], "id")
@@ -121,6 +117,7 @@ resource "cloudflare_page_rule" "remote_redirect" {
 }
 
 # manual overrides:
+#   - dnssec
 #   - strict ssl
 #   - min tls version 1.2
 #   - https rewrites
