@@ -1,0 +1,19 @@
+[Unit]
+Description=ControlD DNS
+Documentation=https://controld.com
+After=network.target
+
+[Service]
+PermissionsStartOnly=true
+LimitNOFILE=1048576
+LimitNPROC=512
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+WorkingDirectory=/var/lib/ctrld
+ExecStart=/usr/local/bin/ctrld run --config /var/lib/ctrld/config.toml
+ExecReload=/bin/kill -SIGUSR1 $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

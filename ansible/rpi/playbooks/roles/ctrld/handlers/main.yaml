@@ -1,0 +1,5 @@
+- name: Restart ctrld
+  ansible.builtin.systemd:
+    name: ctrld
+    daemon_reload: true
+    state: restarted

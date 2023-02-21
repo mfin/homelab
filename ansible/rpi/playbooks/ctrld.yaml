@@ -1,7 +1,7 @@
 ---
-- name: Play NextDNS role
+- name: Play ctrld role
   hosts: all
   gather_facts: true
   become: true
   roles:
-    - role: nextdns
+    - role: ctrld

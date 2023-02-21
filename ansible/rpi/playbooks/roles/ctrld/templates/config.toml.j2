@@ -1,0 +1,45 @@
+[service]
+  log_level = "debug"
+  log_path = ""
+  cache_enable = true
+  cache_size = 4096
+
+[network.0]
+  cidrs = ["{{ lan_range }}"]
+  name = "LAN"
+
+[upstream.0]
+  bootstrap_ip = ""
+  endpoint = "127.0.0.1:1053"
+  name = "CoreDNS"
+  timeout = 5000
+  type = "legacy"
+
+[upstream.1]
+  bootstrap_ip = ""
+  endpoint = "{{ k8s_gateway_ip }}"
+  name = "k8s_gateway"
+  timeout = 5000
+  type = "legacy"
+
+[upstream.2]
+  bootstrap_ip = "76.76.2.22"
+  endpoint = "https://dns.controld.com/{{ ctrld.profile.lan }}"
+  name = "Control D - LAN"
+  timeout = 5000
+  type = "doh"
+
+[listener.0]
+  ip = "{{ main_dns_ip }}"
+  port = 53
+  restricted = true
+
+[listener.0.policy]
+  name = "Listener 0 policy"
+  networks = [
+    {"network.0" = ["upstream.2"]},
+  ]
+  rules = [
+    {"*.{{ home.domain }}" = ["upstream.0"]},
+    {"*.{{ homelab_domain }}" = ["upstream.1"]},
+  ]
