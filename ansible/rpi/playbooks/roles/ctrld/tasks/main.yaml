@@ -1,11 +1,11 @@
 - name: Download ctrld archive from Github Releases
   ansible.builtin.get_url:
     url: https://github.com/Control-D-Inc/ctrld/releases/download/{{ ctrld_version }}/ctrld_{{ ctrld_version | regex_replace('^v','') }}_linux_arm64.tar.gz
-    dest: /tmp/ctrld_{{ coredns_version }}_linux_arm64.tgz
+    dest: /tmp/ctrld_{{ ctrld_version }}_linux_arm64.tgz
 
 - name: Extract ctrld archive
   ansible.builtin.unarchive:
-    src: /tmp/ctrld_{{ coredns_version }}_linux_arm64.tgz
+    src: /tmp/ctrld_{{ ctrld_version }}_linux_arm64.tgz
     dest: /usr/local/bin
     extra_opts: [--strip-components=1]
     remote_src: true
