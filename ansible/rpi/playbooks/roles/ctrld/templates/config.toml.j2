@@ -8,6 +8,10 @@
   cidrs = ["{{ lan_range }}"]
   name = "LAN"
 
+[network.1]
+  cidrs = ["{{ wg_range }}"]
+  name = "Wireguard"
+
 [upstream.0]
   bootstrap_ip = ""
   endpoint = "127.0.0.1:1053"
@@ -38,6 +42,7 @@
   name = "Listener 0 policy"
   networks = [
     {"network.0" = ["upstream.2"]},
+    {"network.1" = ["upstream.2"]},
   ]
   rules = [
     {"*.{{ home.domain }}" = ["upstream.0"]},
