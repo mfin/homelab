@@ -151,5 +151,3 @@ apps:
     path: k8s/media
   - name: apprise-api
     path: k8s/automation
-  - name: obsidian-sync
-    path: k8s/storage
