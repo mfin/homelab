@@ -30,7 +30,7 @@
       "fileMatch": [
         "ansible/.+\\.ya?ml$",
         "k8s/.+\\.ya?ml$",
-        ".bin/.+\\.sh$"
+        ".+\\.sh$"
       ],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value)(: |=)(\\\\?)(\"?)(?<currentValue>.+?)(\\\\?)(\"?)\\n"
