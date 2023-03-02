@@ -1,5 +1,4 @@
 resource "unifi_port_forward" "https" {
-  enabled  = true
   name     = "https"
   dst_port = 443
   fwd_ip   = data.sops_file.secrets.data["forward.https.ip"]
@@ -10,7 +9,6 @@ resource "unifi_port_forward" "https" {
 }
 
 resource "unifi_port_forward" "plex" {
-  enabled  = true
   name     = "plex"
   dst_port = 32400
   fwd_ip   = data.sops_file.secrets.data["forward.plex.ip"]
@@ -21,7 +19,6 @@ resource "unifi_port_forward" "plex" {
 }
 
 resource "unifi_port_forward" "wireguard" {
-  enabled  = true
   name     = "wireguard"
   dst_port = data.sops_file.secrets.data["forward.wireguard.port"]
   fwd_ip   = data.sops_file.secrets.data["forward.wireguard.ip"]
