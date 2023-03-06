@@ -102,7 +102,7 @@ argo-cd:
         env:
           - name: HELM_SECRETS_VERSION
             # renovate: datasource=github-releases depName=jkroepke/helm-secrets
-            value: "v4.4.0"
+            value: "v4.4.1"
           - name: KUBECTL_VERSION
             # renovate: datasource=github-releases depName=kubernetes/kubernetes
             value: "v1.26.2"
