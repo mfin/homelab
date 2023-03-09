@@ -4,7 +4,7 @@ app-template:
     replicas: 1
   image:
     repository: homeassistant/home-assistant
-    tag: 2023.3.1
+    tag: 2023.3.2
     pullPolicy: IfNotPresent
   strategy:
     type: Recreate
