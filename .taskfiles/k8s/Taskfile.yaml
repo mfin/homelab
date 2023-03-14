@@ -12,14 +12,14 @@ tasks:
     env:
       HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
     cmds:
-      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.yaml {{.CLI_ARGS}}
+      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.app}} . -f secrets://secrets.yaml {{.CLI_ARGS}}
 
   apply:
     desc: Apply Helm chart from $app directory
     dir: '{{.dir}}'
     silent: true
     cmds:
-      - namespace={{.namespace}} name={{.name}} task k:template | kubectl apply -n {{.namespace}} -f -
+      - namespace={{.namespace}} app={{.app}} task k:template | kubectl apply -n {{.namespace}} -f -
 
   create-namespace:
     desc: Create K8s namespace with name $namespace
@@ -34,7 +34,7 @@ tasks:
     env:
       HELM_SECRETS_IGNORE_MISSING_VALUES: 'true'
     cmds:
-      - bash {{.ROOT_DIR}}/.taskfiles/k8s/scripts/kubeconform.sh {{.namespace}} {{.name}}
+      - bash {{.ROOT_DIR}}/.taskfiles/k8s/scripts/kubeconform.sh {{.namespace}} {{.app}}
 
   clean:
     desc: Clean all the Helm artifacts from $app directory

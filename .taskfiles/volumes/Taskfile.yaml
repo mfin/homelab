@@ -110,7 +110,7 @@ tasks:
   restore-suspend-app:
     internal: true
     cmds:
-      - namespace={{.namespace}} name={{.name}} task ac:pause
+      - namespace={{.namespace}} app={{.app}} task ac:pause
       - kubectl -n {{.namespace}} scale {{.controller}} --replicas 0
       - kubectl -n {{.namespace}} wait pod --for delete --selector="app.kubernetes.io/name={{.rsrc}}" --timeout=2m
 
@@ -136,5 +136,5 @@ tasks:
   restore-resume-app:
     internal: true
     cmds:
-      - namespace={{.namespace}} name={{.name}} task ac:resume
+      - namespace={{.namespace}} app={{.app}} task ac:resume
     env: *task-env

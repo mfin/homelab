@@ -3,7 +3,7 @@ version: "3"
 
 vars:
   dir: '{{.dir | default .USER_WORKING_DIR}}'
-  name: '{{.name | default (base .dir)}}'
+  app: '{{.app | default (base .dir)}}'
   namespace: '{{.namespace | default (base .dir)}}'
   ts: '{{now | date "150405"}}'
 

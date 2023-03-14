@@ -2,7 +2,7 @@
 version: "3"
 
 x-task-vars: &task-vars
-  secret: '{{.secret | default (print .name "-restic-secret")}}'
+  secret: '{{.secret | default (print .app "-restic-secret")}}'
 
 x-task-env: &task-env
   AWS_ACCESS_KEY_ID:
