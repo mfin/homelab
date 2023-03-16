@@ -1,0 +1,21 @@
+hardened-privacy false
+timeout 5s
+debug false
+forwarder {{ home.domain }}.=127.0.0.1:1053
+forwarder {{ homelab_domain }}.={{ k8s_gateway_ip }}
+cache-max-age 0s
+report-client-info true
+discovery-dns {{ router_ip }}
+detect-captive-portals false
+max-inflight-requests 256
+cache-size 10MB
+auto-activate false
+control /var/run/nextdns.sock
+bogus-priv true
+log-queries true
+max-ttl 5s
+mdns all
+use-hosts true
+setup-router true
+listen :53
+profile {{ nextdns.profile }}
