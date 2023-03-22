@@ -21,6 +21,11 @@ data:
      api_key = "{{ .Values.keys.radarr4k }}"
      paths = ["/data/downloads"]
 
+    [[lidarr]]
+     url = "http://lidarr.lidarr.svc.cluster.local"
+     api_key = "{{ .Values.keys.lidarr }}"
+     paths = ["/data/downloads"]
+
     [[webhook]]
      template = "pushover"
      name = "Pushover"
