@@ -6,7 +6,7 @@ app-template:
     replicas: 1
   image:
     repository: ghcr.io/wakeful-cloud/yarr
-    tag: latest@sha256:7c6a796677028d9492b6e2ca3156faf9b79c2ad9963babf4e2df0f45d96afd29
+    tag: latest@sha256:1843890ac34e32dacfb58f5621d87449af5e257c4b3ee13e42287ed901c18c2f
 
   env:
     UID: 1028
