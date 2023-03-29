@@ -4,5 +4,6 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     nixFlakes
     go-task
+    envsubst
   ];
 }
