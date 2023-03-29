@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: sonarr
   trigger:
-    schedule: "15 * * * *"
+    schedule: "0 0 * * *"
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10

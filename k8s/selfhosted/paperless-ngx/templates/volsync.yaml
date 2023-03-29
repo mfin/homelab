@@ -17,7 +17,7 @@ metadata:
 spec:
   sourcePVC: paperless
   trigger:
-    schedule: '0 * * * *'
+    schedule: "0 0 * * *"
   restic:
     copyMethod: Clone
     pruneIntervalDays: 10
