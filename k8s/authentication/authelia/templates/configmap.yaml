@@ -33,6 +33,16 @@ data:
 
     access_control:
       default_policy: two_factor
+      networks:
+        - name: internal
+          networks: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+      rules:
+        - domain: ["{{ .Values.authelia.navidromeDomain }}"]
+          resources: ["^/rest.*$"]
+          policy: bypass
+        - domain: ["{{ .Values.authelia.navidromeDomain }}"]
+          resources: ["^/metrics.*$"]
+          policy: deny
 
     session:
       domain: {{ .Values.authelia.domain }}
