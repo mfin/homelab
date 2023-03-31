@@ -28,7 +28,6 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: music
         hajimari.io/appName: Navidrome
