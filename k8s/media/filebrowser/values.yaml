@@ -10,7 +10,8 @@ app-template:
       FB_DATABASE: "/config/filebrowser.db"
       FB_ROOT: "/data"
       FB_LOG: "stdout"
-      FB_NOAUTH: "true"
+      FB_AUTH_METHOD: "proxy"
+      FB_AUTH_HEADER: "Remote-User"
   service:
     main:
       ports:
