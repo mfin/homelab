@@ -1,0 +1,64 @@
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/filebrowser
+    tag: v2.23.0
+  env:
+      TZ: Europe/Ljubljana
+      FB_DATABASE: "/config/filebrowser.db"
+      FB_ROOT: "/data"
+      FB_LOG: "stdout"
+      FB_NOAUTH: "true"
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /health
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: mdi:folder-play-outline
+        hajimari.io/appName: Files
+        hajimari.io/info: Browser for media files
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: filebrowser
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
