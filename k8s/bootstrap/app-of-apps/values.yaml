@@ -153,3 +153,5 @@ apps:
     path: k8s/media
   - name: navidrome
     path: k8s/media
+  - name: filebrowser
+    path: k8s/media
