@@ -155,3 +155,5 @@ apps:
     path: k8s/media
   - name: filebrowser
     path: k8s/media
+  - name: roon
+    path: k8s/media

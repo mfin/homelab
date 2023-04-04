@@ -1,0 +1,31 @@
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/jmmaloney4/roon
+    tag: 2.0.1244
+  env:
+    TZ: Europe/Ljubljana
+  hostNetwork: true
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: roon
+      mountPath: /var/roon
+    music:
+      enabled: true
+      type: nfs
+      path: /volume1/data/music
+      mountPath: /music
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
