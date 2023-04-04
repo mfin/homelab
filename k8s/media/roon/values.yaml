@@ -8,6 +8,12 @@ app-template:
   env:
     TZ: Europe/Ljubljana
   hostNetwork: true
+  service:
+    main:
+      enabled: false
+  ingress:
+    main:
+      enabled: false
   podSecurityContext:
     runAsUser: 1028
     runAsGroup: 100
