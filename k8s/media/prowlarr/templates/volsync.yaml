@@ -25,6 +25,10 @@ spec:
     storageClassName: local-hostpath
     volumeSnapshotClassName: local-hostpath
     cacheCapacity: 2Gi
+    moverSecurityContext:
+      runAsUser: 1028
+      runAsGroup: 100
+      fsGroup: 100
     retain:
       daily: 10
       within: 3d
