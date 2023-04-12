@@ -32,7 +32,7 @@ pod-gateway:
         - name: SERVER_CITIES
           value: Frankfurt
         - name: SERVER_HOSTNAMES
-          value: de5-wireguard
+          value: de10-wireguard
       envFrom:
         - secretRef:
             name: mullvad
