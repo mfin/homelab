@@ -13,10 +13,10 @@ pod-gateway:
     vpn:
       enabled: true
       type: gluetun
-      image:
-        # TODO: Replace with ghcr.io/qdm12/gluetun when a versioned tag is available
-        repository: ghcr.io/qdm12/gluetun
-        tag: v3.33.0
+      gluetun:
+        image:
+          repository: ghcr.io/qdm12/gluetun
+          tag: v3.33.0
       env:
         - name: VPN_SERVICE_PROVIDER
           value: mullvad
