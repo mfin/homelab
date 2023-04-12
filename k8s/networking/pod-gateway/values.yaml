@@ -28,10 +28,11 @@ pod-gateway:
           value: "off"
         - name: DOT
           value: "off"
+        # Server list: https://github.com/qdm12/gluetun/wiki/Mullvad-servers
         - name: SERVER_CITIES
           value: Frankfurt
         - name: SERVER_HOSTNAMES
-          value: de-fra-wg-008
+          value: de5-wireguard
       envFrom:
         - secretRef:
             name: mullvad
