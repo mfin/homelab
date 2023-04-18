@@ -80,6 +80,11 @@ apps:
     path: k8s/storage
   - name: node-feature-discovery
     path: k8s/system
+    ignoreDifferences:
+    - group: apps
+      kind: DaemonSet
+      jsonPointers:
+      - /spec/metadata/annotations/deprecated.daemonset.template.generation
   - name: intel-device-plugins-gpu
     path: k8s/system
   - name: tautulli
