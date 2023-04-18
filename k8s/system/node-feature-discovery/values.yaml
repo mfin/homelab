@@ -1,4 +1,4 @@
-node-feature-discovery:
-  worker:
-    daemonsetAnnotations:
-      deprecated.daemonset.template.generation: "3"
+# node-feature-discovery:
+#  worker:
+#    daemonsetAnnotations:
+#      deprecated.daemonset.template.generation: "3"
