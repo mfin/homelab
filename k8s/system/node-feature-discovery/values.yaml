@@ -1,4 +1,5 @@
-# node-feature-discovery:
-#  worker:
-#    daemonsetAnnotations:
-#      deprecated.daemonset.template.generation: "3"
+node-feature-discovery:
+  worker:
+    daemonsetAnnotations:
+      # Add an annotation so that the diff succeeds.
+      workaround: "true"
