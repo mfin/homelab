@@ -1,6 +1,7 @@
 git:
-  name: homelab
-  url: https://github.com/mfin/homelab
+  public:
+    name: homelab
+    url: https://github.com/mfin/homelab
 
 secret:
   name: helm-secrets-private-keys

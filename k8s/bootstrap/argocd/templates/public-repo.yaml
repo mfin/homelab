@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.git.public.name }}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: {{ .Values.git.public.name }}
+  type: git
+  url: {{ .Values.git.public.url }}
+  password: {{ .Values.git.public.password }}
+  username: {{ .Values.git.public.username | default "user" | quote }}
