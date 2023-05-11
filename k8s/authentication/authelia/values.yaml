@@ -6,7 +6,7 @@ app-template:
   image:
     repository: ghcr.io/authelia/authelia
     # TODO Switch to Authelia release tag on next release
-    tag: master@sha256:0859b1abed13ed451db46441009b86156e20a9e3237048deab7ffd3197361490
+    tag: master@sha256:734444073e4af122e9336b77b3100472f8d07018fc5c7b39165ccfc85e7a21b4
   args: ["--config", "/etc/authelia/config.yaml"]
   env:
     TZ: Europe/Ljubljana
