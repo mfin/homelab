@@ -91,6 +91,8 @@ apps:
     path: k8s/media
   - name: kube-prometheus-stack
     path: k8s/monitoring
+  - name: cloudflared
+    path: k8s/networking
   - name: cloudflare-ddns
     path: k8s/networking
   - name: grafana
