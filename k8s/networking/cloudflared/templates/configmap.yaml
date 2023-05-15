@@ -14,4 +14,6 @@ data:
     ingress:
       - hostname: "*.{{ .Values.homelab.domain }}"
         service: "https://traefik.traefik.svc.cluster.local"
+        originRequest:
+          originServerName: {{ .Values.cloudflared.cname }}
       - service: http_status:404
