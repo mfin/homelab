@@ -6,6 +6,7 @@ data:
   config.yaml: |-
     tunnel: "{{ .Values.cloudflared.tunnelId }}"
     credentials-file: /etc/cloudflared/creds.json
+    metrics: "0.0.0.0:8080"
     no-autoupdate: true
     originRequest:
       connectTimeout: 30s
