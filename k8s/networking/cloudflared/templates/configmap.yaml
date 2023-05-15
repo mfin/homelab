@@ -11,4 +11,8 @@ data:
       connectTimeout: 30s
 
     ingress:
-{{ .Values.cloudflared.ingress | indent 6 }}
+      - hostname: *.{{ .Values.homelab.domain }}
+        service: https://traefik.traefik.svc.cluster.local
+        originRequest:
+            noTLSVerify: true
+      - service: http_status:404

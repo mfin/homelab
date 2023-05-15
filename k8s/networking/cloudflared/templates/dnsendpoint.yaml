@@ -1,0 +1,12 @@
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: cloudflared
+  annotations:
+    external-dns.alpha.kubernetes.io/target: {{ .Values.cloudflared.cname }}
+spec:
+  endpoints:
+    - dnsName: {{ .Values.cloudflared.cname }}
+      recordType: CNAME
+      targets: ["{{ .Values.cloudflared.tunnelId }}.cfargotunnel.com"]

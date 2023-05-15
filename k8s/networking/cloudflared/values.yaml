@@ -13,24 +13,17 @@ app-template:
     - tunnel
     - --config
     - /etc/cloudflared/config.yaml
-    - --metrics=0.0.0.0:3333
-    - --no-autoupdate
     - run
   service:
     main:
       ports:
         http:
-          enabled: false
-        metrics:
-          enabled: true
-          primary: true
-          port: 3333
-          protocol: TCP
+          port: 8080
   serviceMonitor:
     main:
       enabled: true
       endpoints:
-        - port: metrics
+        - port: http
           scheme: http
           path: /metrics
   persistence:
@@ -49,39 +42,17 @@ app-template:
       subPath: creds.json
       readOnly: true
   probes:
-    liveness:
+    liveness: &probes
       enabled: true
       custom: true
       spec:
+        httpGet:
+          path: /ready
+          port: http
         initialDelaySeconds: 0
         periodSeconds: 10
         timeoutSeconds: 1
         failureThreshold: 3
-        httpGet:
-          path: /ready
-          port: 3333
-          scheme: HTTP
-    readiness:
-      enabled: true
-      custom: true
-      spec:
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 3
-        httpGet:
-          path: /ready
-          port: 3333
-          scheme: HTTP
+    readiness: *probes
     startup:
-      enabled: true
-      custom: true
-      spec:
-        initialDelaySeconds: 0
-        timeoutSeconds: 1
-        periodSeconds: 5
-        failureThreshold: 30
-        httpGet:
-          path: /ready
-          port: 3333
-          scheme: HTTP
+      enabled: false
