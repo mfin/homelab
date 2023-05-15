@@ -7,7 +7,7 @@ namespace: system-upgrade-controller
 resources:
   # renovate: datasource=docker image=rancher/system-upgrade-controller
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.10.0/crd.yaml
-  - https://github.com/rancher/system-upgrade-controller?ref=v0.10.0
+  - https://github.com/rancher/system-upgrade-controller?ref=v0.11.0
 commonLabels:
   app.kubernetes.io/name: system-upgrade-controller
   app.kubernetes.io/instance: system-upgrade-controller
