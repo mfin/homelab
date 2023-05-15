@@ -11,8 +11,8 @@ data:
       connectTimeout: 30s
 
     ingress:
-      - hostname: *.{{ .Values.homelab.domain }}
-        service: https://traefik.traefik.svc.cluster.local
+      - hostname: "*.{{ .Values.homelab.domain }}"
+        service: "https://traefik.traefik.svc.cluster.local"
         originRequest:
             noTLSVerify: true
       - service: http_status:404
