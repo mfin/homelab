@@ -37,7 +37,7 @@ traefik:
       expose: true
     websecure:
       middlewares:
-        - traefik-restrict-ips@kubernetescrd
+        - traefik-local-ips@kubernetescrd
 
   providers:
     kubernetesCRD:
