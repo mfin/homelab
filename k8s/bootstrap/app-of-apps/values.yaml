@@ -162,3 +162,5 @@ apps:
     path: k8s/media
   - name: filebrowser
     path: k8s/media
+  - name: audiobookshelf
+    path: k8s/media
