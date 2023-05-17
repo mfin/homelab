@@ -45,6 +45,11 @@ app-template:
       path: /volume1/data
       mountPath: /data
       readOnly: true
+    dvr:
+      enabled: true
+      type: nfs
+      path: /volume1/data/dvr
+      mountPath: /mnt/dvr
     transcode:
       enabled: true
       type: emptyDir
