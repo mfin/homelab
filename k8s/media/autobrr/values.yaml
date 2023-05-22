@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/autobrr/autobrr
-    tag: v1.25.0
+    tag: v1.26.2
   env:
     TZ: Europe/Ljubljana
   service:
