@@ -1,0 +1,47 @@
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/autobrr/autobrr
+    tag: v1.25.0
+  env:
+    TZ: Europe/Ljubljana
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: rabbit
+        hajimari.io/appName: autobrr
+        hajimari.io/info: The modern autodl-irssi replacement
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: autobrr
+    config-file:
+      enabled: true
+      type: configMap
+      name: autobrr-config
+      subPath: config.toml
+      mountPath: /config/config.toml
+      readOnly: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
