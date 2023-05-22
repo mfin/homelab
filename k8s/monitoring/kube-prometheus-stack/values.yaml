@@ -30,6 +30,9 @@ kube-prometheus-stack:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
+  defaultRules:
+    additionalRuleLabels:
+      temp: true
   alertmanager:
     ingress:
       enabled: true
