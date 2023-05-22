@@ -1,0 +1,31 @@
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/autobrr/omegabrr
+    tag: v1.9.0
+  env:
+    TZ: Europe/Ljubljana
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: omegabrr
+      subPath: config.yaml
+      mountPath: /config/config.yaml
+      readOnly: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
