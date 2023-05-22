@@ -32,7 +32,7 @@ kube-prometheus-stack:
       probeSelectorNilUsesHelmValues: false
   defaultRules:
     additionalRuleLabels:
-      temp: true
+      temp: temp
   alertmanager:
     ingress:
       enabled: true
