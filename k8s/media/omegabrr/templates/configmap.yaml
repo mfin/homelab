@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: omegabrr-config
+  name: omegabrr
 data:
   config.yaml: |-
     ---
