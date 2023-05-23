@@ -1,0 +1,35 @@
+app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    type: statefulset
+    replicas: 1
+  image:
+    repository: thelounge/thelounge
+    tag: 4.4.0
+
+  env:
+    THELOUNGE_HOME: "/config"
+
+  service:
+    main:
+      ports:
+        http:
+          port: 9000
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: sofa
+        hajimari.io/appName: thelounge
+        hajimari.io/info: The self-hosted web IRC client
+
+  persistence:
+    config:
+      enabled: true
+      existingClaim: thelounge
