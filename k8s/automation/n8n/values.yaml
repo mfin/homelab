@@ -22,21 +22,21 @@ app-template:
         http:
           port: *port
 
-  probes:
-    liveness: &probes
-      enabled: true
-      custom: true
-      spec:
-        httpGet:
-          path: /healthz
-          port: *port
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 3
-    readiness: *probes
-    startup:
-      enabled: false
+  # probes:
+  #   liveness: &probes
+  #     enabled: true
+  #     custom: true
+  #     spec:
+  #       httpGet:
+  #         path: /healthz
+  #         port: *port
+  #       initialDelaySeconds: 0
+  #       periodSeconds: 10
+  #       timeoutSeconds: 1
+  #       failureThreshold: 3
+  #   readiness: *probes
+  #   startup:
+  #     enabled: false
 
   ingress:
     main:
