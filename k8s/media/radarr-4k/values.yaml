@@ -40,6 +40,11 @@ app-template:
       type: nfs
       path: /volume1/data
       mountPath: /data
+    remote:
+      enabled: true
+      type: hostPath
+      hostPath: /mnt/remote
+      mountPath: /mnt/remote
   resources:
     requests:
       cpu: 10m
