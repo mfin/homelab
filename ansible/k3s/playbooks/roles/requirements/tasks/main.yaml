@@ -36,6 +36,7 @@
       - nfs-common
       - smartmontools
       - sqlite3
+      - rclone
     state: present
 
 - name: Replace link to /etc/resolv.conf

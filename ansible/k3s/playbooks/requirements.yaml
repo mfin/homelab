@@ -1,9 +1,8 @@
 ---
 
-- name: Prepare machines
+- name: Install requirements
   hosts: cluster
   gather_facts: true
   become: true
   roles:
     - role: requirements
-    - role: download
