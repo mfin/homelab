@@ -1,5 +1,7 @@
 app-template:
   controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
     replicas: 1
     type: statefulset
   image:
