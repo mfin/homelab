@@ -65,3 +65,10 @@ data:
         url: https://api.autobrr.com/lists/trakt/popular-tv
         filters:
           - 7
+          
+      name: New Albums
+      type: metacritic
+      url: https://api.autobrr.com/lists/metacritic/new-albums
+      filters:
+        - 8
+
