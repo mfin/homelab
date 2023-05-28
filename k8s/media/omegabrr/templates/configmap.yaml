@@ -59,3 +59,9 @@ data:
         url: https://api.autobrr.com/lists/trakt/anticipated-tv
         filters:
           - 6
+          
+      - name: Popular TV
+        type: trakt
+        url: https://api.autobrr.com/lists/trakt/popular-tv
+        filters:
+          - 7
