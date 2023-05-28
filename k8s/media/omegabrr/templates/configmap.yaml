@@ -66,9 +66,9 @@ data:
         filters:
           - 7
           
-      name: New Albums
-      type: metacritic
-      url: https://api.autobrr.com/lists/metacritic/new-albums
-      filters:
-        - 8
+      - name: New Albums
+        type: metacritic
+        url: https://api.autobrr.com/lists/metacritic/new-albums
+        filters:
+          - 8
 
