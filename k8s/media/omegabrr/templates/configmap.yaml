@@ -46,3 +46,10 @@ data:
           apikey: {{ .Values.keys.lidarr }}
           filters:
             - 4 # music
+            
+      lists:
+        - name: StevenLu
+          type: trakt
+          url: https://api.autobrr.com/lists/stevenlu
+          filters:
+            - 5
