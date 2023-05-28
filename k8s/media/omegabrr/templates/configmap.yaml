@@ -53,3 +53,9 @@ data:
         url: https://api.autobrr.com/lists/stevenlu
         filters:
           - 5
+          
+      - name: Anticipated TV
+        type: trakt
+        url: https://api.autobrr.com/lists/trakt/anticipated-tv
+        filters:
+          - 6
