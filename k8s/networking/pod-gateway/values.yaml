@@ -16,7 +16,7 @@ pod-gateway:
       gluetun:
         image:
           repository: ghcr.io/qdm12/gluetun
-          tag: v3.34.1
+          tag: v3.34.2
       env:
         - name: VPN_SERVICE_PROVIDER
           value: mullvad
