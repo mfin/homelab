@@ -31,11 +31,6 @@ app-template:
         hajimari.io/appName: lldap
         hajimari.io/info: Light LDAP implementation for authentication
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     data:
       enabled: true
