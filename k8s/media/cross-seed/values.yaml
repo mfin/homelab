@@ -27,6 +27,11 @@ app-template:
       subPath: config.js
       mountPath: /config/config.js
       readOnly: true
+    torrents:
+      enabled: true
+      type: hostPath
+      hostPath: /mnt/torrents
+      mountPath: /mnt/torrents
   resources:
     requests:
       cpu: 10m

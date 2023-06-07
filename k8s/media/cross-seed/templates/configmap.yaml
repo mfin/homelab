@@ -20,6 +20,7 @@ data:
       includeNonVideos: true,
       duplicateCategories: true,
       outputDir: "/tmp",
+      torrentDir: "/mnt/torrents"
       qbittorrentUrl: "{{ .Values.qbittorrent.url }}",
       rssCadence: "15 minutes", // autobrr doesnt get every announcement
     };
