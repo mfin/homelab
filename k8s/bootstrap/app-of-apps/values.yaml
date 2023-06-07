@@ -166,6 +166,8 @@ apps:
     path: k8s/media
   - name: autobrr
     path: k8s/media
+  - name: cross-seed
+    path: k8s/media
   - name: omegabrr
     path: k8s/media
   - name: thelounge
