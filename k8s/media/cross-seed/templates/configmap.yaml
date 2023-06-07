@@ -22,6 +22,5 @@ data:
       outputDir: "/tmp",
       torrentDir: "/mnt/torrents",
       qbittorrentUrl: "{{ .Values.qbittorrent.url }}",
-      rssCadence: "15 minutes", // autobrr doesnt get every announcement,
-      notificationWebhookUrl: "http://n8n.n8n/webhook/cross-seed/notify"
+      rssCadence: "15 minutes", // autobrr doesnt get every announcement
     };
