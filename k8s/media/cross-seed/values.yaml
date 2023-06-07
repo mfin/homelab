@@ -1,0 +1,35 @@
+app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/cross-seed/cross-seed
+    tag: latest@sha256:dd1de4ed5dcebcf85e228d39bf3553942c3bf29d5469479fe033e6487e96fe95
+  env:
+    TZ: Europe/Ljubljana
+  args:
+    - daemon
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: cross-seed
+      subPath: config.js
+      mountPath: /config/config.js
+      readOnly: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
