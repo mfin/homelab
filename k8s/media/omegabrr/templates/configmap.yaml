@@ -46,29 +46,34 @@ data:
           apikey: {{ .Values.keys.lidarr }}
           filters:
             - 4 # music
-            
+
     lists:
       - name: StevenLu
         type: trakt
         url: https://api.autobrr.com/lists/stevenlu
         filters:
           - 5
-          
+
       - name: Anticipated TV
         type: trakt
         url: https://api.autobrr.com/lists/trakt/anticipated-tv
         filters:
           - 6
-          
+
       - name: Popular TV
         type: trakt
         url: https://api.autobrr.com/lists/trakt/popular-tv
         filters:
           - 7
-          
+
       - name: New Albums
         type: metacritic
         url: https://api.autobrr.com/lists/metacritic/new-albums
         filters:
           - 8
 
+      - name: Upcoming Albums
+        type: metacritic
+        url: https://api.autobrr.com/lists/metacritic/upcoming-albums
+        filters:
+          - 12
