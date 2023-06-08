@@ -74,6 +74,8 @@ apps:
     path: k8s/selfhosted
   - name: paperless-ngx
     path: k8s/selfhosted
+  - name: homebox
+    path: k8s/selfhosted
   - name: whoami
     path: k8s/selfhosted
   - name: redis
