@@ -14,7 +14,7 @@ app-template:
     HBOX_LOG_FORMAT: text
     HBOX_MEB_MAX_UPLOAD_SIZE: 10
     HBOX_WEB_PORT: &port 80
-    HBOX_OPTIONS_ALLOW_REGISTRATION: "false"
+    HBOX_OPTIONS_ALLOW_REGISTRATION: "true"
 
   service:
     main:
