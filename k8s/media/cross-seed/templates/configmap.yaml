@@ -10,7 +10,7 @@ data:
 
       torznab: [
         "http://prowlarr.prowlarr/3/api?apikey={{ .Values.prowlarr.apiKey }}",
-        "http://prowlarr.prowlarr/5/api?apikey={{ .Values.prowlarr.apiKey }}",
+        // "http://prowlarr.prowlarr/5/api?apikey={{ .Values.prowlarr.apiKey }}",
       ],
 
       action: "inject",
