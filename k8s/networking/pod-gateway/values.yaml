@@ -19,7 +19,7 @@ pod-gateway:
           tag: v3.34.3
       env:
         - name: VPN_SERVICE_PROVIDER
-          value: mullvad
+          value: airvpn
         - name: VPN_TYPE
           value: wireguard
         - name: VPN_INTERFACE
@@ -28,14 +28,14 @@ pod-gateway:
           value: "off"
         - name: DOT
           value: "off"
-        # Server list: https://github.com/qdm12/gluetun/wiki/Mullvad-servers
+        # Server list: https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+        - name: SERVER_COUNTRIES
+          value: Germany
         - name: SERVER_CITIES
           value: Frankfurt
-        - name: SERVER_HOSTNAMES
-          value: de4-wireguard
       envFrom:
         - secretRef:
-            name: mullvad
+            name: airvpn
       networkPolicy:
         enabled: true
         egress:
@@ -60,9 +60,9 @@ pod-gateway:
     - IP: 10
       hostname: qbittorrent-0
       ports:
-        - port: 57464
+        - port: 53392
           type: udp
-        - port: 57464
+        - port: 53392
           type: tcp
 
   routed_namespaces:
