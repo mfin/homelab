@@ -31,8 +31,6 @@ pod-gateway:
         # Server list: https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
         - name: SERVER_COUNTRIES
           value: Germany
-        - name: SERVER_CITIES
-          value: Frankfurt
       envFrom:
         - secretRef:
             name: airvpn
