@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/advplyr/audiobookshelf
-    tag: 2.2.22
+    tag: 2.2.23
   env:
     TZ: Europe/Ljubljana
     AUDIOBOOKSHELF_UID: 1028
