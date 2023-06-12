@@ -40,7 +40,7 @@ pod-gateway:
         enabled: true
         egress:
           - ports:
-            - port: 51820
+            - port: 1637
               protocol: UDP
             to:
             - ipBlock:
