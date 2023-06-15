@@ -6,7 +6,7 @@ app-template:
     replicas: 1
   image:
     repository: ghcr.io/n8n-io/n8n
-    tag: 0.232.0
+    tag: 0.233.0
   command: ["n8n"]
   env:
     GENERIC_TIMEZONE: Europe/Ljubljana
