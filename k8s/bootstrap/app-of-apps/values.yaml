@@ -176,3 +176,5 @@ apps:
     path: k8s/selfhosted
   - name: n8n
     path: k8s/automation
+  - name: postgres
+    path: k8s/storage
