@@ -23,7 +23,7 @@ app-template:
     # OAUTH2_CLIENT_ID: miniflux
     # OAUTH2_USER_CREATION: "1"
     # OAUTH2_PROVIDER: oidc
-    POLLING_SCHEDULER: entry_frequency
+    POLLING_SCHEDULER: round_robin
     POLLING_FREQUENCY: "15"
     RUN_MIGRATIONS: "1"
   envFrom:
