@@ -19,9 +19,9 @@ env:
   LOG_DATE_TIME: "1"
   METRICS_ALLOWED_NETWORKS: "10.42.0.0/16"
   METRICS_COLLECTOR: "1"
-  OAUTH2_CLIENT_ID: miniflux
-  OAUTH2_USER_CREATION: "1"
-  OAUTH2_PROVIDER: oidc
+  # OAUTH2_CLIENT_ID: miniflux
+  # OAUTH2_USER_CREATION: "1"
+  # OAUTH2_PROVIDER: oidc
   POLLING_SCHEDULER: entry_frequency
   POLLING_FREQUENCY: "15"
   RUN_MIGRATIONS: "1"
@@ -39,18 +39,13 @@ serviceMonitor:
 ingress:
   main:
     enabled: true
-    ingressClassName: nginx
+    ingressClassName: traefik
     annotations:
-      external-dns.alpha.kubernetes.io/target: ingress.devbu.io
-      hajimari.io/icon: mdi:rss
-    hosts:
-      - host: &host "{{ .Release.Name }}.devbu.io"
-        paths:
-          - path: /
-            pathType: Prefix
-    tls:
-      - hosts:
-          - *host
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      hajimari.io/enable: "true"
+      hajimari.io/icon: rss-box
+      hajimari.io/appName: miniflux
+      hajimari.io/info: Miniflux is a minimalist and opinionated feed reader.
 probes:
   liveness: &probes
     enabled: true
