@@ -26,6 +26,7 @@ tasks:
     env:
       NAMESPACE: '{{.namespace}}'
       DUMP_FILE: '{{.dump}}'
+      JOB_NAME: '{{.app}}-restore-{{now | unixEpoch}}'
     cmds:
       - envsubst < <(cat {{.restoreJobTemplate}}) | kubectl apply -f -
     preconditions:

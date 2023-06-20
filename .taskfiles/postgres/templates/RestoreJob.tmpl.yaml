@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pg-restore
+  name: "${JOB_NAME}"
   namespace: "${NAMESPACE}"
 spec:
   template:
