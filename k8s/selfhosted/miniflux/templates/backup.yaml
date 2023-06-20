@@ -12,7 +12,7 @@ spec:
             - envFrom:
               - secretRef:
                   name: postgres
-                secretRef:
+              - secretRef:
                   name: minio
               image: ghcr.io/mfin/postgres-minio-backup:rolling@sha256:1ca3163d7030e4d21dc98b0bf33ae7a39d9b97bcc992dfce0861a2f8d85a5614
               imagePullPolicy: IfNotPresent
