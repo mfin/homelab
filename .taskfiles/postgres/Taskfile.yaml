@@ -5,15 +5,27 @@ vars:
   restoreJobTemplate: '{{.ROOT_DIR}}/.taskfiles/postgres/templates/RestoreJob.tmpl.yaml'
 
 tasks:
+  backup:
+    desc: Backup a postgres database
+    dir: '{{.dir}}'
+    silent: true
+    cmds:
+      - kubectl create job --from=cronjob/{{.app}}-backup -n {{.namespace}} {{.app}}-backup-{{now | unixEpoch}}
+    preconditions:
+      - sh: kubectl -n {{.namespace}} get cronjob {{.app}}-backup
+        msg: "Backup cronjob missing!"
+
   restore:
     desc: Restore a postgres database
     dir: '{{.dir}}'
     silent: true
     vars:
+      dump: "{{.dump}}"
       running:
         sh: kubectl get deployment -n {{.namespace}} {{.app}} -ojson | jq -r 'select(.status.replicas == null) | .metadata.name'
     env:
       NAMESPACE: '{{.namespace}}'
+      DUMP_FILE: '{{.dump}}'
     cmds:
       - envsubst < <(cat {{.restoreJobTemplate}}) | kubectl apply -f -
     preconditions:
@@ -21,3 +33,18 @@ tasks:
         msg: "Missing Minio and postgres credentials!"
       - sh: test -n "{{.running}}"
         msg: "App is running, shut it down!"
+      - sh: test -n "{{.dump}}"
+        msg: "You need to provide a dump file to restore from!"
+
+  list-dumps:
+    desc: List possible restore files
+    dir: '{{.dir}}'
+    vars:
+      bucket:
+        sh: kubectl get -n {{.namespace}} secret minio -ojson | jq -r '.data.MINIO_BUCKET' | base64 -d
+    silent: true
+    cmds:
+      - mc ls minio/{{.bucket}}/ | grep {{.app}}
+    preconditions:
+      - sh: kubectl -n {{.namespace}} get secret minio
+        msg: Minio secret missing!

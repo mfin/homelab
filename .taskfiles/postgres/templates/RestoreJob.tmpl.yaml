@@ -5,19 +5,20 @@ metadata:
   name: pg-restore
   namespace: "${NAMESPACE}"
 spec:
-  jobTemplate:
+  template:
     spec:
-      template:
-        spec:
-          containers:
-            - envFrom:
-              - secretRef:
-                  name: postgres
-              - secretRef:
-                  name: minio
-              image: ghcr.io/mfin/postgres-minio-restore:rolling@sha256:2d169d42d01f60dbb48cdc2283313ca829d49b8a02f19b83ea5c6f78403d70d9
-              imagePullPolicy: IfNotPresent
-              name: pg-restore
-              terminationMessagePath: /dev/termination-log
-              terminationMessagePolicy: File
-          restartPolicy: Never
+      containers:
+      - envFrom:
+        - secretRef:
+            name: postgres
+        - secretRef:
+            name: minio
+        env:
+          - name: DUMP_FILE
+            value: "${DUMP_FILE}"
+        image: ghcr.io/mfin/postgres-minio-restore:rolling@sha256:2d169d42d01f60dbb48cdc2283313ca829d49b8a02f19b83ea5c6f78403d70d9
+        imagePullPolicy: IfNotPresent
+        name: pg-restore
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      restartPolicy: Never
