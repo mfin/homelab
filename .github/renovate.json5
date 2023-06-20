@@ -51,7 +51,10 @@
     }
   ],
   "kubernetes": {
-    "fileMatch": ["k8s/.+/templates/.+\\.yaml"]
+    "fileMatch": [
+      "k8s/.+/templates/.+\\.yaml",
+      ".taskfiles/.+/templates/.+\\.yaml"
+    ]
   },
   "packageRules": [
     {

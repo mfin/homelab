@@ -15,6 +15,7 @@ includes:
   r: .taskfiles/restic
   v: .taskfiles/volumes
   ac: .taskfiles/argocd
+  pg: .taskfiles/postgres
 
 tasks:
   default:

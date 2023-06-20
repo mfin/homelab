@@ -1,0 +1,23 @@
+---
+version: '3'
+
+vars:
+  restoreJobTemplate: '{{.ROOT_DIR}}/.taskfiles/postgres/templates/RestoreJob.tmpl.yaml'
+
+tasks:
+  restore:
+    desc: Restore a postgres database
+    dir: '{{.dir}}'
+    silent: true
+    vars:
+      running:
+        sh: kubectl get deployment -n {{.namespace}} {{.app}} -ojson | jq -r 'select(.status.replicas == null) | .metadata.name'
+    env:
+      NAMESPACE: '{{.namespace}}'
+    cmds:
+      - envsubst < <(cat {{.restoreJobTemplate}}) | kubectl apply -f -
+    preconditions:
+      - sh: kubectl -n {{.namespace}} get secret minio postgres
+        msg: "Missing Minio and postgres credentials!"
+      - sh: test -n "{{.running}}"
+        msg: "App is running, shut it down!"
