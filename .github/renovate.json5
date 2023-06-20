@@ -50,6 +50,9 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ],
+  "kubernetes": {
+    "fileMatch": ["k8s/.+/templates/.+\\.yaml"]
+  },
   "packageRules": [
     {
       "description": "Loose versioning for non-semver packages",
