@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: miniflux-backup
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - envFrom:
+              - secretRef:
+                  name: postgres
+                secretRef:
+                  name: minio
+              image: ghcr.io/mfin/postgres-minio-backup:rolling@sha256:c0a9f3d379f65cc7dee006710cc073a2963bb1428f0fe33fcb95837be49e4e86
+              imagePullPolicy: IfNotPresent
+              name: miniflux-backup
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          restartPolicy: OnFailure
