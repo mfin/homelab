@@ -6,7 +6,7 @@ app-template:
     replicas: 1
   image:
     repository: thelounge/thelounge
-    tag: 4.4.0
+    tag: 4.4.1
 
   env:
     THELOUNGE_HOME: "/config"
