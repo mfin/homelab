@@ -64,6 +64,7 @@ data:
 
     server:
       port: 80
+      disable_healthcheck: true
 
     telemetry:
       metrics:
