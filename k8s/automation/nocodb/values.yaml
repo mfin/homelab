@@ -1,0 +1,45 @@
+app-template:
+  initContainers:
+    01-init-db:
+      image: ghcr.io/onedr0p/postgres-init:14.8
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: postgres
+  controller:
+    type: statefulset
+    replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: nocodb/nocodb
+    tag: 0.104.2
+  envFrom:
+    - secretRef:
+        name: nocodb
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        # traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        hajimari.io/enable: "true"
+        hajimari.io/icon: mdi:database-eye
+        hajimari.io/appName: nocodb
+        hajimari.io/info: Open Source Airtable Alternative
+  persistence:
+    data:
+      enabled: true
+      existingClaim: nocodb
+      mountPath: /usr/app/data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 750Mi
