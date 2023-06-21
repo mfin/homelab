@@ -15,6 +15,9 @@ data:
         username: {{ .Values.authelia.postgres.user }}
         password: {{ .Values.authelia.postgres.password }}
 
+    log:
+      level: debug
+
     authentication_backend:
       password_reset:
         disable: true
