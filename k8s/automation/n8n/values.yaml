@@ -1,4 +1,11 @@
 app-template:
+  initContainers:
+    01-init-db:
+      image: ghcr.io/onedr0p/postgres-init:14.8
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: postgres
   controller:
     annotations:
       reloader.stakater.com/auto: "true"
