@@ -8,7 +8,6 @@ app-template:
             name: postgres
   controller:
     replicas: 1
-    strategy: RollingUpdate
     annotations:
       reloader.stakater.com/auto: "true"
   image:
