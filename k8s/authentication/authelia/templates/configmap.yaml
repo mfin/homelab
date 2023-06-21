@@ -12,8 +12,8 @@ data:
       postgres:
         host: postgres.postgres.svc.cluster.local
         database: authelia
-        username: "{{ .Values.authelia.postgres.user }}"
-        password: "{{ .Values.authelia.postgres.password }}"
+        username: {{ .Values.authelia.postgres.user }}
+        password: {{ .Values.authelia.postgres.password }}
 
     log:
       level: debug
