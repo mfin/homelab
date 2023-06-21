@@ -9,8 +9,11 @@ data:
     jwt_secret: "{{ .Values.authelia.jwtSecret }}"
     storage:
       encryption_key: "{{ .Values.authelia.encryptionKey }}"
-      local:
-        path: /db/db.sqlite3
+      postgres:
+        host: postgres.postgres.svc.cluster.local
+        database: authelia
+        username: {{ .Values.authelia.postgres.user }}
+        password: {{ .Values.authelia.postgres.password }}
 
     authentication_backend:
       password_reset:

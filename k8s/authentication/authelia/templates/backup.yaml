@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: authelia-backup
+spec:
+  schedule: "0 23 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - envFrom:
+              - secretRef:
+                  name: postgres
+              - secretRef:
+                  name: minio
+              image: ghcr.io/mfin/postgres-minio-backup:rolling@sha256:3c782181ca9de25cc0961267ccb436349a6112a6b52610167ee8d983480fc08e
+              imagePullPolicy: IfNotPresent
+              name: authelia-backup
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          restartPolicy: OnFailure
