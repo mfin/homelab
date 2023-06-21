@@ -9,6 +9,7 @@ app-template:
   controller:
     annotations:
       reloader.stakater.com/auto: "true"
+    type: statefulset
   image:
     repository: ghcr.io/authelia/authelia
     # TODO Switch to Authelia release tag on next release
