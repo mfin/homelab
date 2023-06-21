@@ -13,7 +13,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: nocodb/nocodb
-    tag: 0.104.2
+    tag: 0.109.1
   envFrom:
     - secretRef:
         name: nocodb
