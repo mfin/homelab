@@ -58,8 +58,3 @@ app-template:
         hajimari.io/icon: mdi:workflow
         hajimari.io/appName: n8n
         hajimari.io/info: Workflow automation for technical people
-
-  # persistence:
-  #   config:
-  #     enabled: true
-  #     existingClaim: n8n
