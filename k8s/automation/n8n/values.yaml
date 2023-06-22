@@ -12,8 +12,8 @@ app-template:
     type: statefulset
     replicas: 1
   image:
-    repository: ghcr.io/n8n-io/n8n
-    tag: 0.234.0
+    repository: ghcr.io/mfin/n8n
+    tag: rolling@sha256:4c9fdc235f79d53695c5af8ae5fdefc4b7b2dc52c971009c6c387bd114f3cfdf
   command: ["n8n"]
   env:
     GENERIC_TIMEZONE: Europe/Ljubljana
