@@ -26,8 +26,6 @@ apps:
     path: k8s/automation
   - name: mosquitto
     path: k8s/automation
-  - name: node-red
-    path: k8s/automation
   - name: tika
     path: k8s/automation
   - name: zigbee2mqtt
