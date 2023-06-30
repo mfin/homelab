@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/target: {{ .Values.n8n.ingressTarget }}
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-prefix-webhooks@kubernetescrd
+  name: external-n8n
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: {{ .Values.n8n.externalUrl }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: n8n
+            port:
+              name: http
+        path: /external/
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ .Values.n8n.externalUrl }}
