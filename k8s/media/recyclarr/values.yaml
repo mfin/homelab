@@ -7,7 +7,7 @@ app-template:
   restartPolicy: OnFailure
   image:
     repository: ghcr.io/recyclarr/recyclarr
-    tag: 5.1.0
+    tag: 5.1.1
   command: ["/app/recyclarr/recyclarr"]
   args: ["sync"]
   envFrom:
