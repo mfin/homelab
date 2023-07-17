@@ -3,6 +3,7 @@ democratic-csi:
     name: "org.democratic-csi.local-hostpath"
     storageCapacity: true
     fsGroupPolicy: File
+    attachRequired: false
 
   storageClasses:
   - name: local-hostpath
@@ -14,6 +15,8 @@ democratic-csi:
   controller:
     enabled: true
     strategy: node
+    externalAttacher:
+      enabled: false
     externalProvisioner:
       extraArgs:
       - --leader-election=false
