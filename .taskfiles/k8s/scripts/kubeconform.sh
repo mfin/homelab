@@ -6,7 +6,7 @@ namespace=$1
 app=$2
 
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-kubernetes_version="v1.27.3"
+kubernetes_version="v1.27.4"
 
 schema_location="https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json"
 
