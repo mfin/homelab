@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/onedr0p/filebrowser
-    tag: v2.24.1
+    tag: v2.24.2
   env:
       TZ: Europe/Ljubljana
       FB_DATABASE: "/config/filebrowser.db"
