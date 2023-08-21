@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/jmmaloney4/roon
-    tag: 2.0.1277
+    tag: 2.0.1303
   env:
     TZ: Europe/Ljubljana
   hostNetwork: true
