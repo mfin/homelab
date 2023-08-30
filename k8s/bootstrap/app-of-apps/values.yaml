@@ -97,8 +97,6 @@ apps:
     path: k8s/networking
   - name: grafana
     path: k8s/monitoring
-  - name: actions-runner-controller
-    path: k8s/system
   - name: k8s-gateway
     path: k8s/networking
   - name: unpoller
