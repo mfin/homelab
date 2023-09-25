@@ -3,5 +3,5 @@ name: node-feature-discovery
 version: 0.0.0
 dependencies:
   - name: node-feature-discovery
-    version: 0.13.4
+    version: 0.14.1
     repository: https://kubernetes-sigs.github.io/node-feature-discovery/charts
