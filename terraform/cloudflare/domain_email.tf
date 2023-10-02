@@ -72,36 +72,5 @@ resource "cloudflare_record" "email_dkim_3" {
   ttl     = 1
 }
 
-resource "cloudflare_record" "email_root" {
-  name     = data.sops_file.secrets.data["email.domain"]
-  zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = data.sops_file.secrets.data["email.page"]
-  comment  = local.cf_comment
-  proxied  = true
-  type     = "CNAME"
-}
-
-resource "cloudflare_record" "email_www" {
-  name     = "www"
-  zone_id  = lookup(data.cloudflare_zones.email.zones[0], "id")
-  value    = data.sops_file.secrets.data["email.page"]
-  comment  = local.cf_comment
-  proxied  = true
-  type     = "CNAME"
-}
-
-resource "cloudflare_page_rule" "email_redirect" {
-  zone_id = lookup(data.cloudflare_zones.email.zones[0], "id")
-  target = "www.${data.sops_file.secrets.data["email.domain"]}/*"
-  priority = 1
-
-  actions {
-    forwarding_url {
-      url = "https://${data.sops_file.secrets.data["email.domain"]}/$1"
-      status_code = 301
-    }
-  }
-}
-
 # manual overrides
 #   - dnssec
