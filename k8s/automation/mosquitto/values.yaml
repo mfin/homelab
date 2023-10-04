@@ -5,11 +5,11 @@ app-template:
 
   image:
     repository: eclipse-mosquitto
-    tag: 2.0.17
+    tag: 2.0.18
 
   initContainers:
     copy-config:
-      image: eclipse-mosquitto:2.0.17
+      image: eclipse-mosquitto:2.0.18
       command:
         - "/bin/sh"
         - -c
