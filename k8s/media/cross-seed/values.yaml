@@ -6,7 +6,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/cross-seed/cross-seed
-    tag: latest@sha256:cecc854fc906cdaf471feab507fd860dff62049da9fb32e83250c887b5da8c42
+    tag: 5.5.4
   env:
     TZ: Europe/Ljubljana
   args:
