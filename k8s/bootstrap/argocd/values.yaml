@@ -109,7 +109,7 @@ argo-cd:
             value: "v1.28.1"
           - name: SOPS_VERSION
             # renovate: datasource=github-releases depName=mozilla/sops
-            value: "v3.7.3"
+            value: "v3.8.0"
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
