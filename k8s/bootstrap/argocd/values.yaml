@@ -96,7 +96,7 @@ argo-cd:
             DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y wget
             mkdir -p /custom-tools/helm-plugins
             wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-
-            wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux
+            wget -qO /custom-tools/sops https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux
             wget -qO /custom-tools/kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
             chmod +x /custom-tools/*
 
@@ -108,7 +108,7 @@ argo-cd:
             # renovate: datasource=github-releases depName=kubernetes/kubernetes
             value: "v1.28.2"
           - name: SOPS_VERSION
-            # renovate: datasource=github-releases depName=mozilla/sops
+            # renovate: datasource=github-releases depName=getsops/sops
             value: "v3.8.0"
         volumeMounts:
           - mountPath: /custom-tools
