@@ -106,7 +106,7 @@ argo-cd:
             value: "v4.5.0"
           - name: KUBECTL_VERSION
             # renovate: datasource=github-releases depName=kubernetes/kubernetes
-            value: "v1.28.1"
+            value: "v1.28.2"
           - name: SOPS_VERSION
             # renovate: datasource=github-releases depName=mozilla/sops
             value: "v3.7.3"
