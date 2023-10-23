@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/onedr0p/readarr-develop
-    tag: 0.3.6.2232@sha256:3f52afecfce13f17ce17d0e06f7c200d6f0b59e74efb586f2210251c07492e2b
+    tag: 0.3.8.2267@sha256:b844031cf2e1ee3ac332ac5b64f1ba628157097748a405a3a11aea8c5c803561
   env:
     TZ: Europe/Ljubljana
     READARR__INSTANCE_NAME: Readarr
