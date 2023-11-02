@@ -1,7 +1,7 @@
 app-template:
   controller:
     type: statefulset
-    replicas: 1
+    replicas: 0
     annotations:
       reloader.stakater.com/auto: "true"
   image:
@@ -33,11 +33,6 @@ app-template:
       enabled: true
       existingClaim: zigbee2mqtt
       mountPath: "/data"
-    usb:
-      enabled: true
-      type: hostPath
-      hostPath: /dev/ttyUSB0
-      hostPathType: CharDevice
   resources:
     requests:
       cpu: 10m
