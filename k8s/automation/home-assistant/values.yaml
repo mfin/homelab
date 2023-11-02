@@ -54,6 +54,9 @@ app-template:
             name: home-assistant-token
             key: token
 
+  securityContext:
+    privileged: true
+
   persistence:
     config:
       enabled: true
