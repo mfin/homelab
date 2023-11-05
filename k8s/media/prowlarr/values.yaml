@@ -6,7 +6,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: ghcr.io/onedr0p/prowlarr-develop
-    tag: 1.10.0.4047
+    tag: 1.10.1.4059
   env:
     TZ: Europe/Ljubljana
     PROWLARR__INSTANCE_NAME: Prowlarr
