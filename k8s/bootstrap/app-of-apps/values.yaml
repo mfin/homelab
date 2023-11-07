@@ -136,8 +136,8 @@ apps:
     ignoreDifferences:
     - group: storage.k8s.io
       kind: CSIDriver
-      jqPathExpressions:
-        - .spec.seLinuxMount
+      jsonPointers:
+        - /spec/seLinuxMount
   - name: plex-trakt-sync
     path: k8s/media
   - name: recyclarr
