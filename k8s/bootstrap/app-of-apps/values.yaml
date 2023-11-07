@@ -125,8 +125,6 @@ apps:
     path: k8s/media
   - name: sabnzbd
     path: k8s/media
-  - name: snapshot-validation-webhook
-    path: k8s/storage
   - name: snapshot-controller
     path: k8s/storage
   - name: volsync
