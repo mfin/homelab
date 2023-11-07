@@ -4,7 +4,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/onedr0p/lidarr-develop
-    tag: 1.4.5.3639@sha256:8afcbef8d7867849cecfe7a4b3e9db3f02231b0351c73edb2af7c09b892dee23
+    tag: 2.0.1.3769@sha256:66cd16bf734e3ad372fe48ca13edbd43f7785323d5bc13ef2283a28341428b97
   env:
     TZ: Europe/Ljubljana
     LIDARR__INSTANCE_NAME: Lidarr
