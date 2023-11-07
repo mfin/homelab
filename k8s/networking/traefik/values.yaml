@@ -32,7 +32,8 @@ traefik:
       expose: true
       exposedPort: 465
     web:
-      redirectTo: websecure
+      redirectTo:
+        port: websecure
     metrics:
       expose: true
     websecure:
