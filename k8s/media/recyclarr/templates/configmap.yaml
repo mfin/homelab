@@ -5,7 +5,7 @@ metadata:
 data:
   recyclarr.yml: |-
     sonarr:
-      main:
+      sonarr:
         base_url: http://sonarr.sonarr
         api_key: !env_var SONARR_API_KEY
         delete_old_custom_formats: true
@@ -66,7 +66,7 @@ data:
               - name: HD-1080p
 
     radarr:
-      main:
+      radarr:
         base_url: http://radarr.radarr
         api_key: !env_var RADARR_API_KEY
         delete_old_custom_formats: true
@@ -143,7 +143,7 @@ data:
             quality_profiles:
               - name: HD-1080p
                 score: -10000
-      4k:
+      radarr-4k:
         base_url: http://radarr-4k.radarr-4k
         api_key: !env_var RADARR4K_API_KEY
         delete_old_custom_formats: true
