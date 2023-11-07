@@ -133,6 +133,11 @@ apps:
     path: k8s/storage
   - name: democratic-csi-local
     path: k8s/storage
+    ignoreDifferences:
+    - group: storage.k8s.io
+      kind: CSIDriver
+      jqPathExpressions:
+        - .spec.seLinuxMount
   - name: plex-trakt-sync
     path: k8s/media
   - name: recyclarr
