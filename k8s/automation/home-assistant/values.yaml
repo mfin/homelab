@@ -54,10 +54,18 @@ app-template:
             name: home-assistant-token
             key: token
 
+  securityContext:
+    privileged: true
+
   persistence:
     config:
       enabled: true
       existingClaim: home-assistant
+    usb:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/ttyUSB0
+      hostPathType: CharDevice
 
   resources:
     limits:
