@@ -1,0 +1,58 @@
+app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+
+  image:
+    repository: eclipse-mosquitto
+    tag: 2.0.18
+
+  initContainers:
+    copy-config:
+      image: eclipse-mosquitto:2.0.18
+      command:
+        - "/bin/sh"
+        - -c
+      args:
+        - cp /data/mosquitto_passwords/* /data/external_config/ && mosquitto_passwd -U /data/external_config/mosquitto_pwd
+      volumeMounts:
+        - name: mosquitto-passwords
+          mountPath: /data/mosquitto_passwords
+        - name: external-config
+          mountPath: /data/external_config
+
+  service:
+    main:
+      type: LoadBalancer
+      ports:
+        http:
+          enabled: false
+        mqtt:
+          enabled: true
+          primary: true
+          port: 1883
+          protocol: TCP
+
+  persistence:
+    mosquitto-config:
+      enabled: true
+      type: configMap
+      name: mosquitto-config
+      mountPath: /mosquitto/config/mosquitto.conf
+      subPath: mosquitto.conf
+    mosquitto-passwords:
+      enabled: true
+      type: secret
+      name: mosquitto-passwords
+      mountPath: "-"
+    external-config:
+      enabled: true
+      type: emptyDir
+      mountPath: /mosquitto/external_config
+
+  resources:
+    requests:
+      cpu: 15m
+      memory: 64M
+    limits:
+      memory: 124M
