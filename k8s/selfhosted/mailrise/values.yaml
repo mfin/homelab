@@ -1,11 +1,19 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-  image:
-    repository: ghcr.io/yoryan/mailrise
-    tag: 1.4.0
-
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/yoryan/mailrise
+            tag: 1.4.0
+          resources:
+            requests:
+              cpu: 20m
+              memory: 50m
+            limits:
+              memory: 100M
   service:
     main:
       ports:
@@ -16,26 +24,18 @@ app-template:
           primary: true
           port: 25
           protocol: TCP
-
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-
   persistence:
     notifier:
       enabled: true
       type: configMap
       name: mailrise-config
-      subPath: mailrise.conf
-      mountPath: /etc/mailrise.conf
-      readOnly: true
-
-  resources:
-    requests:
-      cpu: 20m
-      memory: 50m
-    limits:
-      memory: 100M
+      globalMounts:
+        - path: /etc/mailrise.conf
+          subPath: mailrise.conf
+          readOnly: true
