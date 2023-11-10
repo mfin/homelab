@@ -1,51 +1,50 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    type: statefulset
-    replicas: 1
-  image:
-    repository: ghcr.io/hay-kot/homebox
-    tag: v0.10.1
-
-  env:
-    TZ: Europe/Ljubljana
-    HBOX_LOG_LEVEL: info
-    HBOX_LOG_FORMAT: text
-    HBOX_MEB_MAX_UPLOAD_SIZE: 10
-    HBOX_WEB_PORT: &port 80
-    HBOX_OPTIONS_ALLOW_REGISTRATION: "false"
-
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: ghcr.io/hay-kot/homebox
+            tag: v0.10.1
+          env:
+            TZ: Europe/Ljubljana
+            HBOX_LOG_LEVEL: info
+            HBOX_LOG_FORMAT: text
+            HBOX_MEB_MAX_UPLOAD_SIZE: 10
+            HBOX_WEB_PORT: &port 80
+            HBOX_OPTIONS_ALLOW_REGISTRATION: "false"
+          resources:
+            requests:
+              cpu: 23m
+              memory: 2975M
+            limits:
+              memory: 6572M
+      pod:
+        securityContext:
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
         http:
           port: *port
-
   ingress:
     main:
       enabled: true
-      ingressClassName: "traefik"
+      className: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: notebook-multiple
         hajimari.io/appName: homebox
         hajimari.io/info: Homebox is the inventory and organization system built for the Home User!
-
-  podSecurityContext:
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
-
   persistence:
     data:
       enabled: true
       existingClaim: homebox
-      mountPath: /data
-
-  resources:
-    requests:
-      cpu: 23m
-      memory: 2975M
-    limits:
-      memory: 6572M
+      globalMounts:
+        - path: /data
