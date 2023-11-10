@@ -1,19 +1,27 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    type: statefulset
-    replicas: 1
-  image:
-    repository: homeassistant/home-assistant
-    tag: 2023.11.1
-    pullPolicy: IfNotPresent
-  strategy:
-    type: Recreate
-  env:
-    TZ: "Europe/Ljubljana"
-  hostNetwork: true
-  dnsPolicy: ClusterFirstWithHostNet
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: homeassistant/home-assistant
+            tag: 2023.11.1
+          env:
+            TZ: Europe/Ljubljana
+          resources:
+            limits:
+              memory: 3000Mi
+            requests:
+              cpu: 100m
+              memory: 1000Mi
+          securityContext:
+            privileged: true
+      pod:
+        hostNetwork: true
   service:
     main:
       ports:
@@ -29,18 +37,16 @@ app-template:
           port: 5353
           protocol: UDP
           targetPort: 5353
-
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: home-assistant
         hajimari.io/appName: Home Assistant
         hajimari.io/info: Home automation that puts local control and privacy first
-
   serviceMonitor:
     main:
       enabled: true
@@ -53,10 +59,6 @@ app-template:
           bearerTokenSecret:
             name: home-assistant-token
             key: token
-
-  securityContext:
-    privileged: true
-
   persistence:
     config:
       enabled: true
@@ -66,10 +68,3 @@ app-template:
       type: hostPath
       hostPath: /dev/ttyUSB0
       hostPathType: CharDevice
-
-  resources:
-    limits:
-      memory: 3000Mi
-    requests:
-      cpu: 100m
-      memory: 1000Mi
