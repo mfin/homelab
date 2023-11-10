@@ -12,7 +12,6 @@ app-template:
             tag: 0.27.11
           args:
             - watch
-          enableServiceLinks: false
           env:
             PLEX_BASEURL: http://plex.plex.svc.cluster.local:32400
             PLEX_LOCALURL: http://plex.plex.svc.cluster.local:32400
