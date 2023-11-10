@@ -1,22 +1,32 @@
 app-template:
-  initContainers:
-    01-init-db:
-      image: ghcr.io/onedr0p/postgres-init:14.9
-      imagePullPolicy: IfNotPresent
-      envFrom:
-        - secretRef:
-            name: postgres
-  controller:
-    type: statefulset
-    replicas: 1
-    annotations:
-      reloader.stakater.com/auto: "true"
-  image:
-    repository: nocodb/nocodb
-    tag: 0.202.5
-  envFrom:
-    - secretRef:
-        name: nocodb
+  controllers:
+    main:
+      type: statefulset
+      replicas: 1
+      annotations:
+        reloader.stakater.com/auto: "true"
+      initContainers:
+        01-init-db:
+          image:
+            repository: ghcr.io/onedr0p/postgres-init
+            tag: 14.9
+          envFrom:
+            - secretRef:
+                name: postgres
+      containers:
+        main:
+          image:
+            repository: nocodb/nocodb
+            tag: 0.202.5
+          envFrom:
+            - secretRef:
+                name: nocodb
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+            limits:
+              memory: 750Mi
   service:
     main:
       ports:
@@ -25,7 +35,7 @@ app-template:
   ingress:
     main:
       enabled: true
-      ingressClassName: "traefik"
+      className: "traefik"
       annotations:
         # traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
@@ -36,10 +46,5 @@ app-template:
     data:
       enabled: true
       existingClaim: nocodb
-      mountPath: /usr/app/data
-  resources:
-    requests:
-      cpu: 10m
-      memory: 100Mi
-    limits:
-      memory: 750Mi
+      globalMounts:
+        - path: /usr/app/data
