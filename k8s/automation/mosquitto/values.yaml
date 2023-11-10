@@ -12,12 +12,7 @@ app-template:
             - "/bin/sh"
             - -c
           args:
-            - cp /data/mosquitto_passwords/* /data/external_config/ && mosquitto_passwd -U /data/external_config/mosquitto_pwd
-          volumeMounts:
-            - name: mosquitto-passwords
-              mountPath: /data/mosquitto_passwords
-            - name: external-config
-              mountPath: /data/external_config
+            - cp /-/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd
       containers:
         main:
           image:
