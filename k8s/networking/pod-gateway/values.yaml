@@ -35,17 +35,7 @@ pod-gateway:
         - secretRef:
             name: airvpn
       networkPolicy:
-        enabled: true
-        egress:
-          - ports:
-            - port: 1637
-              protocol: UDP
-            to:
-            - ipBlock:
-                cidr: 0.0.0.0/0
-          - to:
-            - ipBlock:
-                cidr: 10.0.0.0/8
+        enabled: false
       securityContext:
         capabilities:
           add:

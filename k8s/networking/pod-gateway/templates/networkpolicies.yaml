@@ -1,0 +1,71 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: pod-gateway-wg
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: pod-gateway
+  egress:
+    - toEntities:
+        - world
+    - toPorts:
+        - ports:
+            - port: "1637"
+              protocol: UDP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: pod-gateway-cluster-dns
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: pod-gateway
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            "k8s:io.kubernetes.pod.namespace": kube-system
+            "k8s:k8s-app": kube-dns
+    - toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: pod-gateway-vxlan
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: pod-gateway
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: sabnzbd
+        - matchLabels:
+            app.kubernetes.io/name: prowlarr
+        - matchLabels:
+            app.kubernetes.io/name: qbittorrent
+    - toPorts:
+        - ports:
+            - port: "8472"
+              protocol: UDP
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: sabnzbd
+        - matchLabels:
+            app.kubernetes.io/name: prowlarr
+        - matchLabels:
+            app.kubernetes.io/name: qbittorrent
+    - toPorts:
+        - ports:
+            - port: "8472"
+              protocol: UDP
+    - icmps:
+        - fields:
+            - type: 8
+              family: IPv4
