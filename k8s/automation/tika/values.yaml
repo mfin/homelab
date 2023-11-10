@@ -1,34 +1,33 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-
-  image:
-    repository: apache/tika
-    tag: 2.9.1.0
-
-  args:
-    - -c
-    - /etc/tika-config.xml
-
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: apache/tika
+            tag: 2.9.1.0
+          args:
+            - -c
+            - /etc/tika-config.xml
+          resources:
+            requests:
+              cpu: 23m
+              memory: 64M
+            limits:
+              memory: 256M
   service:
     main:
       ports:
         http:
           port: 9998
-
   persistence:
     config:
       enabled: true
       type: configMap
       name: tika-config
-      mountPath: /etc/tika-config.xml
-      subPath: tika-config.xml
-      readOnly: true
-
-  resources:
-    requests:
-      cpu: 23m
-      memory: 64M
-    limits:
-      memory: 256M
+      globalMounts:
+        - path: /etc/tika-config.xml
+          subPath: tika-config.xml
+          readOnly: true
