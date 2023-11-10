@@ -1,16 +1,25 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    replicas: 1
-    type: statefulset
-  image:
-    repository: ghcr.io/cross-seed/cross-seed
-    tag: 5.8.1
-  env:
-    TZ: Europe/Ljubljana
-  args:
-    - daemon
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/cross-seed/cross-seed
+            tag: 5.8.1
+          env:
+            TZ: Europe/Ljubljana
+          args:
+            - daemon
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
   service:
     main:
       ports:
@@ -24,17 +33,13 @@ app-template:
       enabled: true
       type: configMap
       name: cross-seed
-      subPath: config.js
-      mountPath: /config/config.js
-      readOnly: true
+      globalMounts:
+        - subPath: config.js
+          path: /config/config.js
+          readOnly: true
     torrents:
       enabled: true
       type: hostPath
       hostPath: /mnt/torrents
-      mountPath: /mnt/torrents
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 1000Mi
+      globalMounts:
+        - path: /mnt/torrents
