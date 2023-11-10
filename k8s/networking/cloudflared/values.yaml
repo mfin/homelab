@@ -1,19 +1,38 @@
 app-template:
-  priorityClassName: system-cluster-critical
-  controller:
-    replicas: 1
-    annotations:
-      reloader.stakater.com/auto: "true"
-  image:
-    repository: cloudflare/cloudflared
-    tag: 2023.10.0
-  env:
-    TZ: "Europe/Ljubljana"
-  args:
-    - tunnel
-    - --config
-    - /etc/cloudflared/config.yaml
-    - run
+  controllers:
+    main:
+      replicas: 1
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: cloudflare/cloudflared
+            tag: 2023.10.0
+          env:
+            TZ: "Europe/Ljubljana"
+          args:
+            - tunnel
+            - --config
+            - /etc/cloudflared/config.yaml
+            - run
+          probes:
+            liveness: &probes
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /ready
+                  port: http
+                initialDelaySeconds: 0
+                periodSeconds: 10
+                timeoutSeconds: 1
+                failureThreshold: 3
+            readiness: *probes
+            startup:
+              enabled: false
+      pod:
+        priorityClassName: system-cluster-critical
   service:
     main:
       ports:
@@ -31,28 +50,15 @@ app-template:
       enabled: true
       type: configMap
       name: cloudflared-config
-      mountPath: /etc/cloudflared/config.yaml
-      subPath: config.yaml
-      readOnly: true
+      globalMounts:
+        - path: /etc/cloudflared/config.yaml
+          subPath: config.yaml
+          readOnly: true
     tunnel:
       enabled: true
       type: secret
       name: cloudflared-secret
-      mountPath: /etc/cloudflared/creds.json
-      subPath: creds.json
-      readOnly: true
-  probes:
-    liveness: &probes
-      enabled: true
-      custom: true
-      spec:
-        httpGet:
-          path: /ready
-          port: http
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 3
-    readiness: *probes
-    startup:
-      enabled: false
+      globalMounts:
+        - path: /etc/cloudflared/creds.json
+          subPath: creds.json
+          readOnly: true
