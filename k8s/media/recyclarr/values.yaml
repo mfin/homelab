@@ -1,18 +1,22 @@
 app-template:
-  controller:
-    type: cronjob
-    cronjob:
-      schedule: "@daily"
-      ttlSecondsAfterFinished: 86400
-  restartPolicy: OnFailure
-  image:
-    repository: ghcr.io/recyclarr/recyclarr
-    tag: 6.0.2
-  command: ["/app/recyclarr/recyclarr"]
-  args: ["sync"]
-  envFrom:
-    - secretRef:
-        name: recyclarr
+  controllers:
+    main:
+      type: cronjob
+      cronjob:
+        schedule: "@daily"
+        ttlSecondsAfterFinished: 86400
+      containers:
+        main:
+          image:
+            repository: ghcr.io/recyclarr/recyclarr
+            tag: 6.0.2
+          command: ["/app/recyclarr/recyclarr"]
+          args: ["sync"]
+          envFrom:
+            - secretRef:
+                name: recyclarr
+      pod:
+        restartPolicy: OnFailure
   service:
     main:
       enabled: false
@@ -21,7 +25,8 @@ app-template:
       enabled: true
       type: configMap
       name: recyclarr
-      subPath: recyclarr.yml
-      mountPath: /config/recyclarr.yml
-      defaultMode: 0775
-      readOnly: true
+      globalMounts:
+        - path: /config/recyclarr.yml
+          readOnly: true
+          defaultMode: 0775
+          subPath: recyclarr.yml
