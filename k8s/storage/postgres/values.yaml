@@ -1,32 +1,32 @@
 app-template:
-  image:
-    repository: postgres
-    tag: 15.4
-
-  env:
-    PGDATA: /var/lib/postgresql/data/pgdata
-
-  envFrom:
-    - secretRef:
-        name: postgres
-
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: postgres
+            tag: 15.4
+          env:
+            PGDATA: /var/lib/postgresql/data/pgdata
+          envFrom:
+            - secretRef:
+                name: postgres
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              cpu: 300m
+              memory: 300Mi
   service:
     main:
       ports:
         http:
           port: 5432
           protocol: TCP
-
   persistence:
     data:
       enabled: true
       existingClaim: postgres
-      mountPath: "/var/lib/postgresql/data"
-
-  resources:
-    requests:
-      cpu: 200m
-      memory: 200Mi
-    limits:
-      cpu: 300m
-      memory: 300Mi
+      globalMounts:
+        - path: /var/lib/postgresql/data
