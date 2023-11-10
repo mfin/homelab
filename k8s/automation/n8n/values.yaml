@@ -7,8 +7,9 @@ app-template:
       replicas: 1
       initContainers:
         01-init-db:
-          image: ghcr.io/onedr0p/postgres-init:14.9
-          imagePullPolicy: IfNotPresent
+          image:
+            repository: ghcr.io/onedr0p/postgres-init
+            tag: 14.9
           envFrom:
             - secretRef:
                 name: postgres
