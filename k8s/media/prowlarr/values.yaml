@@ -1,31 +1,46 @@
 app-template:
-  controller:
-    replicas: 1
-    type: statefulset
-    annotations:
-      reloader.stakater.com/auto: "true"
-  image:
-    repository: ghcr.io/onedr0p/prowlarr-develop
-    tag: 1.10.1.4059
-  env:
-    TZ: Europe/Ljubljana
-    PROWLARR__INSTANCE_NAME: Prowlarr
-    PROWLARR__PORT: &port 80
-    PROWLARR__LOG_LEVEL: info
-  envFrom:
-    - secretRef:
-        name: prowlarr-secret
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/onedr0p/prowlarr-develop
+            tag: 1.10.1.4059
+          env:
+            TZ: Europe/Ljubljana
+            PROWLARR__INSTANCE_NAME: Prowlarr
+            PROWLARR__PORT: &port 80
+            PROWLARR__LOG_LEVEL: info
+          envFrom:
+            - secretRef:
+                name: prowlarr-secret
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+            limits:
+              memory: 500Mi
+      pod:
+        annotations:
+          setGateway: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
         http:
           port: *port
-  podAnnotations:
-    setGateway: "true"
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
@@ -33,18 +48,7 @@ app-template:
         hajimari.io/icon: movie-search
         hajimari.io/appName: Prowlarr
         hajimari.io/info: Indexer manager/proxy built on the popular *arr .net/reactjs base stack
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     config:
       enabled: true
       existingClaim: prowlarr
-  resources:
-    requests:
-      cpu: 10m
-      memory: 100Mi
-    limits:
-      memory: 500Mi
