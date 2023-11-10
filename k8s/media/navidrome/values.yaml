@@ -1,22 +1,37 @@
 app-template:
-  controller:
-    replicas: 1
-    type: statefulset
-  image:
-    repository: ghcr.io/navidrome/navidrome
-    tag: 0.49.3
-  env:
-    TZ: Europe/Ljubljana
-    ND_DATAFOLDER: /config
-    ND_ENABLEGRAVATAR: true
-    ND_ENABLESHARING: true
-    ND_LOGLEVEL: info
-    ND_MUSICFOLDER: /data/music
-    ND_PORT: &port 80
-    ND_PROMETHEUS_ENABLED: true
-    ND_REVERSEPROXYUSERHEADER: "Remote-User"
-    ND_REVERSEPROXYWHITELIST: "10.42.0.0/16"
-    ND_SCANSCHEDULE: "@every 1h"
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/navidrome/navidrome
+            tag: 0.49.3
+          env:
+            TZ: Europe/Ljubljana
+            ND_DATAFOLDER: /config
+            ND_ENABLEGRAVATAR: true
+            ND_ENABLESHARING: true
+            ND_LOGLEVEL: info
+            ND_MUSICFOLDER: /data/music
+            ND_PORT: &port 80
+            ND_PROMETHEUS_ENABLED: true
+            ND_REVERSEPROXYUSERHEADER: "Remote-User"
+            ND_REVERSEPROXYWHITELIST: "10.42.0.0/16"
+            ND_SCANSCHEDULE: "@every 1h"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
@@ -25,18 +40,13 @@ app-template:
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: music
         hajimari.io/appName: Navidrome
         hajimari.io/info: enjoy your music collection from anywhere
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     config:
       enabled: true
@@ -45,10 +55,5 @@ app-template:
       enabled: true
       type: nfs
       path: /volume1/data
-      mountPath: /data
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 1000Mi
+      globalMounts:
+        - path: /data
