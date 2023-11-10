@@ -69,58 +69,58 @@ home-assistant:
       hostPath: /dev/ttyUSB0
       hostPathType: CharDevice
 
-# hass-config:
-#   fullnameOverride: hass-config
-#   controllers:
-#     main:
-#       annotations:
-#         reloader.stakater.com/auto: "true"
-#       containers:
-#         main:
-#           image:
-#             repository: ghcr.io/coder/code-server
-#             tag: 4.18.0
-#           env:
-#             TZ: Europe/Ljubljana
-#           args:
-#             - --auth
-#             - "none"
-#             - --user-data-dir
-#             - "/config/.vscode"
-#             - --extensions-dir
-#             - "/config/.vscode"
-#             - "--port"
-#             - "80"
-#             - /config
-#           resources:
-#             requests:
-#               cpu: 10m
-#               memory: 128Mi
-#             limits:
-#               memory: 1Gi
-#       pod:
-#         securityContext:
-#           runAsUser: 1028
-#           runAsGroup: 100
-#           fsGroup: 100
-#           fsGroupChangePolicy: OnRootMismatch
-#   service:
-#     main:
-#       ports:
-#         http:
-#           port: 80
-#   ingress:
-#     main:
-#       enabled: true
-#       className: traefik
-#       annotations:
-#         hajimari.io/appName: "HASS Config"
-#         hajimari.io/icon: cib:visual-studio-code
-#         hajimari.io/enable: "true"
-#         hajimari.io/info: VS Code for HASS configuration editing
-#         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
-#   persistence:
-#     config:
-#       enabled: true
-#       existingClaim: home-assistant
+hass-config:
+  fullnameOverride: hass-config
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/coder/code-server
+            tag: 4.18.0
+          env:
+            TZ: Europe/Ljubljana
+          args:
+            - --auth
+            - "none"
+            - --user-data-dir
+            - "/config/.vscode"
+            - --extensions-dir
+            - "/config/.vscode"
+            - "--port"
+            - "80"
+            - /config
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              memory: 1Gi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: OnRootMismatch
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      className: traefik
+      annotations:
+        hajimari.io/appName: "HASS Config"
+        hajimari.io/icon: cib:visual-studio-code
+        hajimari.io/enable: "true"
+        hajimari.io/info: VS Code for HASS configuration editing
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+  persistence:
+    config:
+      enabled: true
+      existingClaim: home-assistant
