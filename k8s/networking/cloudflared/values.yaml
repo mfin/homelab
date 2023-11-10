@@ -23,7 +23,7 @@ app-template:
               spec:
                 httpGet:
                   path: /ready
-                  port: http
+                  port: &port 8080
                 initialDelaySeconds: 0
                 periodSeconds: 10
                 timeoutSeconds: 1
@@ -37,7 +37,7 @@ app-template:
     main:
       ports:
         http:
-          port: 8080
+          port: *port
   serviceMonitor:
     main:
       enabled: true
