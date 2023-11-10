@@ -1,3 +1,34 @@
 cilium:
   operator:
     replicas: 1
+  containerRuntime:
+    integration: containerd
+    socketPath: /var/run/k3s/containerd/containerd.sock
+  autoDirectNodeRoutes: true
+  tunnel: disabled
+  bandwidthManager:
+    enabled: true
+    bbr: false
+  bpf:
+    masquerade: true
+  bgp:
+    enabled: false
+  cluster:
+    name: kubernetes
+    id: 1
+  ipam:
+    mode: kubernetes
+  endpointRoutes:
+    enabled: true
+  ipv4:
+    enabled: true
+  ipv6:
+    enabled: false
+  ipv4NativeRoutingCIDR: 10.42.0.0/16
+  kubeProxyReplacement: true
+  kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+  l2announcements:
+    enabled: true
+    leaseDuration: 120s
+    leaseRenewDeadline: 60s
+    leaseRetryPeriod: 1s
