@@ -3,29 +3,29 @@ app-template:
     main:
       replicas: 1
       type: statefulset
-    containers:
-      main:
-        image:
-          repository: ghcr.io/advplyr/audiobookshelf
-          tag: 2.5.0
-        env:
-          TZ: Europe/Ljubljana
-          AUDIOBOOKSHELF_UID: 1028
-          AUDIOBOOKSHELF_GID: 100
-          CONFIG_PATH: /config
-          METADATA_PATH: /config/metadata
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            memory: 500Mi
-  pod:
-    securityContext:
-      runAsUser: 1028
-      runAsGroup: 100
-      fsGroup: 100
-      fsGroupChangePolicy: "OnRootMismatch"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/advplyr/audiobookshelf
+            tag: 2.5.0
+          env:
+            TZ: Europe/Ljubljana
+            AUDIOBOOKSHELF_UID: 1028
+            AUDIOBOOKSHELF_GID: 100
+            CONFIG_PATH: /config
+            METADATA_PATH: /config/metadata
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              memory: 500Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
