@@ -18,11 +18,10 @@ app-template:
             requests:
               cpu: 100m
               memory: 1000Mi
+          securityContext:
+            privileged: true
       pod:
         hostNetwork: true
-        dnsPolicy: ClusterFirstWithHostNet
-        securityContext:
-          privileged: true
   service:
     main:
       ports:
