@@ -1,22 +1,23 @@
 app-template:
-  image:
-    repository: docker.io/caronc/apprise
-    tag: v0.9.5
-
-  env:
-    TZ: Europe/Ljubljana
-    APPRISE_STATEFUL_MODE: disabled
-
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: docker.io/caronc/apprise
+            tag: v0.9.5
+          env:
+            TZ: Europe/Ljubljana
+            APPRISE_STATEFUL_MODE: disabled
   service:
     main:
       ports:
         http:
           port: 8000
-
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
