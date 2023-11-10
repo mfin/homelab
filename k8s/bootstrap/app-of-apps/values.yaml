@@ -24,6 +24,9 @@ apps:
     path: k8s/automation
   - name: home-assistant
     path: k8s/automation
+  - name: ha-config
+    path: k8s/automation
+    namespace: home-assistant
   - name: tika
     path: k8s/automation
   - name: zigbee2mqtt
