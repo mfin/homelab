@@ -1,33 +1,32 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    type: statefulset
-    replicas: 1
-  image:
-    repository: thelounge/thelounge
-    tag: 4.4.1
-
-  env:
-    THELOUNGE_HOME: "/config"
-
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: thelounge/thelounge
+            tag: 4.4.1
+          env:
+            THELOUNGE_HOME: "/config"
   service:
     main:
       ports:
         http:
           port: 9000
-
   ingress:
     main:
       enabled: true
-      ingressClassName: "traefik"
+      className: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: sofa
         hajimari.io/appName: thelounge
         hajimari.io/info: The self-hosted web IRC client
-
   persistence:
     config:
       enabled: true
