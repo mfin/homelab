@@ -7,7 +7,9 @@ app-template:
       replicas: 1
       initContainers:
         copy-scripts:
-          image: ubuntu:22.04
+          image:
+            repository: ubuntu
+            tag: 22.04
           command:
             - /bin/bash
             - -c
