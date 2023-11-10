@@ -30,6 +30,18 @@ cilium:
         enabled: true
         annotations:
           grafana_folder: Cilium
+    relay:
+      enabled: true
+      rollOutPods: true
+      prometheus:
+        serviceMonitor:
+          enabled: true
+    ui:
+      enabled: true
+      rollOutPods: true
+      ingress:
+        enabled: true
+        className: traefik
   cluster:
     name: kubernetes
     id: 1
