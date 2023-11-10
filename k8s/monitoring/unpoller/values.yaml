@@ -1,10 +1,20 @@
 app-template:
-  image:
-    repository: ghcr.io/unpoller/unpoller
-    tag: v2.9.4
-  env:
-    TZ: Europe/Ljubljana
-    UP_INFLUXDB_DISABLE: true
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/unpoller/unpoller
+            tag: v2.9.4
+          env:
+            TZ: Europe/Ljubljana
+            UP_INFLUXDB_DISABLE: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+            limits:
+              memory: 500Mi
   service:
     main:
       ports:
@@ -17,9 +27,3 @@ app-template:
         - port: http
           scheme: http
           path: /metrics
-  resources:
-    requests:
-      cpu: 10m
-      memory: 100Mi
-    limits:
-      memory: 500Mi
