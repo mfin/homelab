@@ -1,17 +1,19 @@
 app-template:
-  image:
-    repository: gotenberg/gotenberg
-    tag: 7.9.2
-
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: gotenberg/gotenberg
+            tag: 7.9.2
+          resources:
+            requests:
+              cpu: 23m
+              memory: 64M
+            limits:
+              memory: 64M
   service:
     main:
       ports:
         http:
           port: 3000
-
-  resources:
-    requests:
-      cpu: 23m
-      memory: 64M
-    limits:
-      memory: 64M
