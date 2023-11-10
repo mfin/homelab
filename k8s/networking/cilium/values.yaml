@@ -13,6 +13,23 @@ cilium:
     masquerade: true
   bgp:
     enabled: false
+  hubble:
+    enabled: true
+    metrics:
+      enabled:
+        - dns:query
+        - drop
+        - tcp
+        - flow
+        - port-distribution
+        - icmp
+        - http
+      serviceMonitor:
+        enabled: true
+      dashboards:
+        enabled: true
+        annotations:
+          grafana_folder: Cilium
   cluster:
     name: kubernetes
     id: 1
