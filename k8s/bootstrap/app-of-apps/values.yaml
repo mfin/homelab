@@ -142,10 +142,6 @@ apps:
       kind: Certificate
       jsonPointers:
       - /spec/duration
-  - name: calico
-    path: k8s/networking
-    namespace: kube-system
-    type: kustomize
   - name: readarr
     path: k8s/media
   - name: apprise-api
