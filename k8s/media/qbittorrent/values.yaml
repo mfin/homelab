@@ -1,15 +1,32 @@
 app-template:
-  controller:
-    replicas: 1
-    type: statefulset
-  image:
-    repository: ghcr.io/onedr0p/qbittorrent
-    tag: 4.6.0
-  env:
-    TZ: Europe/Ljubljana
-    QBITTORRENT__PORT: &port 80
-    QBITTORRENT__BT_PORT: &port-bt 53392
-  hostname: qbittorrent
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/onedr0p/qbittorrent
+            tag: 4.6.0
+          env:
+            TZ: Europe/Ljubljana
+            QBITTORRENT__PORT: &port 80
+            QBITTORRENT__BT_PORT: &port-bt 53392
+          hostname: qbittorrent
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 6000Mi
+      pod:
+        annotations:
+          setGateway: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
@@ -17,12 +34,10 @@ app-template:
           port: *port
         bt:
           port: *port-bt
-  podAnnotations:
-    setGateway: "true"
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
@@ -30,11 +45,6 @@ app-template:
         hajimari.io/icon: download
         hajimari.io/appName: qBittorrent
         hajimari.io/info: Open-source software alternative to µTorrent
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     config:
       enabled: true
@@ -43,10 +53,5 @@ app-template:
       enabled: true
       type: nfs
       path: /volume1/data
-      mountPath: /data
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 6000Mi
+      globalMounts:
+        - path: /data
