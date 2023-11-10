@@ -1,39 +1,53 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    type: statefulset
-  image:
-    repository: ghcr.io/authelia/authelia
-    # TODO Switch to Authelia release tag on next release
-    tag: master@sha256:13fc1c2ef111f541723bb919e9183e7121699e7f58ea2d6237ab1fea74354224
-  args: ["--config", "/etc/authelia/config.yaml"]
-  env:
-    TZ: Europe/Ljubljana
-  enableServiceLinks: false
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/authelia/authelia
+            # TODO Switch to Authelia release tag on next release
+            tag: master@sha256:13fc1c2ef111f541723bb919e9183e7121699e7f58ea2d6237ab1fea74354224
+          args: ["--config", "/etc/authelia/config.yaml"]
+          env:
+            TZ: Europe/Ljubljana
+          probes:
+            liveness: &probes
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/health
+                  port: &port 80
+                initialDelaySeconds: 0
+                periodSeconds: 10
+                timeoutSeconds: 1
+                failureThreshold: 3
+            readiness: *probes
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
         http:
-          port: &port 80
+          port: *port
         metrics:
           enabled: true
           port: 8080
-  probes:
-    liveness: &probes
-      enabled: true
-      custom: true
-      spec:
-        httpGet:
-          path: /api/health
-          port: *port
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 3
-    readiness: *probes
-    startup:
-      enabled: false
   serviceMonitor:
     main:
       enabled: true
@@ -46,32 +60,22 @@ app-template:
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: lock
         hajimari.io/appName: Authelia
         hajimari.io/info: Authentication and authorization, MFA and SSO
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     config:
       enabled: true
       type: configMap
       name: authelia-config
-      subPath: config.yaml
-      mountPath: /etc/authelia/config.yaml
-      readOnly: false
+      globalMounts:
+        - path: /etc/authelia/config.yaml
+          subPath: config.yaml
+          readOnly: false
     db:
       enabled: true
       existingClaim: authelia
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 1000Mi
