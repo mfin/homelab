@@ -3,5 +3,10 @@ name: home-assistant
 version: 0.0.0
 dependencies:
   - name: app-template
+    alias: home-assistant
+    version: 2.0.3
+    repository: https://bjw-s.github.io/helm-charts
+  - name: app-template
+    alias: hass-config
     version: 2.0.3
     repository: https://bjw-s.github.io/helm-charts
