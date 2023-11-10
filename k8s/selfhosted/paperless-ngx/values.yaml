@@ -1,64 +1,66 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    type: statefulset
-    replicas: 1
-  image:
-    repository: ghcr.io/paperless-ngx/paperless-ngx
-    tag: 1.17.4
-
-  initContainers:
-    copy-scripts:
-      image: ubuntu:22.04
-      command:
-        - /bin/bash
-        - -c
-        - |
-          cp /scripts/pushover-notifier.sh /mnt/scripts
-          chmod +x /mnt/scripts/*
-      volumeMounts:
-        - name: scripts
-          mountPath: /mnt/scripts
-        - name: notifier
-          mountPath: /scripts/pushover-notifier.sh
-          subPath: pushover-notifier.sh
-
-  env:
-    COMPOSE_PROJECT_NAME: paperless
-    PAPERLESS_CONSUMER_POLLING: "60"
-    PAPERLESS_CONSUMER_RECURSIVE: "true"
-    PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
-    PAPERLESS_OCR_LANGUAGES: slv eng
-    PAPERLESS_OCR_LANGUAGE: slv+eng
-    PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
-    PAPERLESS_PORT: 8000
-    PAPERLESS_REDIS: redis://redis.redis.svc.cluster.local:6379
-    PAPERLESS_TIKA_ENABLED: 1
-    PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg.gotenberg.svc.cluster.local:3000
-    PAPERLESS_TIKA_ENDPOINT: http://tika.tika.svc.cluster.local:9998
-    PAPERLESS_TASK_WORKERS: 2
-    PAPERLESS_TIME_ZONE: "Europe/Ljubljana"
-    PAPERLESS_CONSUMPTION_DIR: /mnt/inbox
-    PAPERLESS_MEDIA_ROOT: /mnt/paperless
-    PAPERLESS_POST_CONSUME_SCRIPT: /mnt/scripts/pushover-notifier.sh
-    USERMAP_UID: 1028
-    USERMAP_GID: 100
-
-  envFrom:
-    - secretRef:
-        name: paperless-secret
-
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      replicas: 1
+      initContainers:
+        copy-scripts:
+          image: ubuntu:22.04
+          command:
+            - /bin/bash
+            - -c
+            - |
+              cp /scripts/pushover-notifier.sh /mnt/scripts
+              chmod +x /mnt/scripts/*
+      containers:
+        main:
+          image:
+            repository: ghcr.io/paperless-ngx/paperless-ngx
+            tag: 1.17.4
+          env:
+            COMPOSE_PROJECT_NAME: paperless
+            PAPERLESS_CONSUMER_POLLING: "60"
+            PAPERLESS_CONSUMER_RECURSIVE: "true"
+            PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
+            PAPERLESS_OCR_LANGUAGES: slv eng
+            PAPERLESS_OCR_LANGUAGE: slv+eng
+            PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
+            PAPERLESS_PORT: 8000
+            PAPERLESS_REDIS: redis://redis.redis.svc.cluster.local:6379
+            PAPERLESS_TIKA_ENABLED: 1
+            PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg.gotenberg.svc.cluster.local:3000
+            PAPERLESS_TIKA_ENDPOINT: http://tika.tika.svc.cluster.local:9998
+            PAPERLESS_TASK_WORKERS: 2
+            PAPERLESS_TIME_ZONE: "Europe/Ljubljana"
+            PAPERLESS_CONSUMPTION_DIR: /mnt/inbox
+            PAPERLESS_MEDIA_ROOT: /mnt/paperless
+            PAPERLESS_POST_CONSUME_SCRIPT: /mnt/scripts/pushover-notifier.sh
+            USERMAP_UID: 1028
+            USERMAP_GID: 100
+          envFrom:
+            - secretRef:
+                name: paperless-secret
+          resources:
+            requests:
+              cpu: 23m
+              memory: 2975M
+            limits:
+              memory: 6572M
+      pod:
+        securityContext:
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
         http:
           port: 8000
-
   ingress:
     main:
       enabled: true
-      ingressClassName: "traefik"
+      className: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
@@ -66,41 +68,35 @@ app-template:
         hajimari.io/icon: file-document
         hajimari.io/appName: Paperless
         hajimari.io/info: Document management system that transforms your physical documents into a searchable online archive
-
-  podSecurityContext:
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
-
   persistence:
     data:
       enabled: true
       existingClaim: paperless
-      mountPath: /usr/src/paperless/data
+      globalMounts:
+        - path: /usr/src/paperless/data
     media:
       enabled: true
-      mountPath: /mnt/paperless
       type: nfs
       path: /volume1/paperless
+      globalMounts:
+        - path: /mnt/paperless
     inbox:
       enabled: true
-      mountPath: /mnt/inbox
       type: nfs
       path: /volume1/paperless_inbox
+      globalMounts:
+        - path: /mnt/inbox
     notifier:
       enabled: true
       type: configMap
       name: pushover-notifier
-      subPath: pushover-notifier.sh
-      mountPath: /scripts/pushover-notifier.sh
-      readOnly: true
+      globalMounts:
+        - path: /scripts/pushover-notifier.sh
+          subPath: pushover-notifier.sh
+          readOnly: true
     scripts:
       enabled: true
       type: emptyDir
       mountPath: /mnt/scripts
-
-  resources:
-    requests:
-      cpu: 23m
-      memory: 2975M
-    limits:
-      memory: 6572M
+      globalMounts:
+        - path: /mnt/scripts
