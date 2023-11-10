@@ -1,43 +1,49 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-  image:
-    repository: ghcr.io/onedr0p/unpackerr
-    tag: 0.12.0
-  env:
-    TZ: Europe/Ljubljana
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/onedr0p/unpackerr
+            tag: 0.12.0
+          env:
+            TZ: Europe/Ljubljana
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       enabled: false
-  probes:
-    liveness:
-      enabled: false
-    readiness:
-      enabled: false
-    startup:
-      enabled: false
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     config:
       enabled: true
       type: configMap
       name: unpackerr-config
-      mountPath: /config/unpackerr.conf
-      subPath: unpackerr.conf
-      readOnly: true
+      globalMounts:
+        - subPath: unpackerr.conf
+          path: /config/unpackerr.conf
+          readOnly: true
     data:
       enabled: true
       type: nfs
       path: /volume1/data
-      mountPath: /data
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 1000Mi
+      globalMounts:
+        - path: /data
