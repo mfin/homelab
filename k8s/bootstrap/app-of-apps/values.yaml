@@ -15,7 +15,7 @@ apps:
       jsonPointers:
       - /spec/syncPolicy/automated
   - name: cilium
-    path: networking/cilium
+    path: k8s/networking
   - name: authelia
     path: k8s/authentication
   - name: glauth
