@@ -70,6 +70,7 @@ home-assistant:
       hostPathType: CharDevice
 
 hass-config:
+  nameOverride: hass-config
   controllers:
     main:
       annotations:
