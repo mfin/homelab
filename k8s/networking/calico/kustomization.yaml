@@ -6,7 +6,7 @@ metadata:
 namespace: kube-system
 resources:
   # renovate: datasource=github-releases depName=projectcalico/calico
-  - https://raw.githubusercontent.com/projectcalico/calico/v3.26.3/manifests/canal.yaml
+  - https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/canal.yaml
 patches:
 - patch: |-
     - op: add
