@@ -1,14 +1,29 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    replicas: 1
-    type: statefulset
-  image:
-    repository: ghcr.io/autobrr/autobrr
-    tag: v1.33.0
-  env:
-    TZ: Europe/Ljubljana
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/autobrr/autobrr
+            tag: v1.33.0
+          env:
+            TZ: Europe/Ljubljana
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
@@ -17,18 +32,13 @@ app-template:
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      className: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: rabbit
         hajimari.io/appName: autobrr
         hajimari.io/info: The modern autodl-irssi replacement
-  podSecurityContext:
-    runAsUser: 1028
-    runAsGroup: 100
-    fsGroup: 100
-    fsGroupChangePolicy: "OnRootMismatch"
   persistence:
     config:
       enabled: true
@@ -37,12 +47,7 @@ app-template:
       enabled: true
       type: configMap
       name: autobrr-config
-      subPath: config.toml
-      mountPath: /config/config.toml
-      readOnly: true
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 1000Mi
+      globalMounts:
+        - subPath: config.toml
+          path: /config/config.toml
+          readOnly: true
