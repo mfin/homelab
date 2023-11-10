@@ -1,13 +1,31 @@
 app-template:
-  controller:
-    replicas: 3
-    strategy: RollingUpdate
-    annotations:
-      reloader.stakater.com/auto: "true"
-  image:
-    repository: quay.io/oriedge/k8s_gateway
-    tag: v0.3.4
-  args: ["-conf", "/etc/coredns/Corefile"]
+  controllers:
+    main:
+      replicas: 3
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: quay.io/oriedge/k8s_gateway
+            tag: v0.3.4
+          args: ["-conf", "/etc/coredns/Corefile"]
+          probes:
+            readiness:
+              custom: true
+              spec:
+                httpGet:
+                  path: /ready
+                  port: 8181
+            liveness:
+              custom: true
+              spec:
+                httpGet:
+                  path: /health
+                  port: 8080
+            startup:
+              enabled: false
   service:
     main:
       type: LoadBalancer
@@ -30,21 +48,6 @@ app-template:
         - port: metrics
           scheme: http
           path: /metrics
-  probes:
-    readiness:
-      custom: true
-      spec:
-        httpGet:
-          path: /ready
-          port: 8181
-    liveness:
-      custom: true
-      spec:
-        httpGet:
-          path: /health
-          port: 8080
-    startup:
-      enabled: false
   serviceAccount:
     create: true
     name: k8s-gateway
@@ -53,6 +56,7 @@ app-template:
       enabled: true
       type: configMap
       name: k8s-gateway-config
-      subPath: Corefile
-      mountPath: /etc/coredns/Corefile
-      readOnly: true
+      globalMounts:
+        - path: /etc/coredns/Corefile
+          subPath: Corefile
+          readOnly: true
