@@ -21,7 +21,7 @@ app-template:
               spec:
                 httpGet:
                   path: /health
-                  port: *port
+                  port: &port 80
                 initialDelaySeconds: 0
                 periodSeconds: 10
                 timeoutSeconds: 1
@@ -46,7 +46,7 @@ app-template:
     main:
       ports:
         http:
-          port: &port 80
+          port: *port
   ingress:
     main:
       enabled: true
