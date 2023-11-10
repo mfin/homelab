@@ -3,25 +3,25 @@ app-template:
     main:
       replicas: 1
       type: statefulset
-    containers:
-      main:
-        image:
-          repository: ghcr.io/onedr0p/bazarr
-          tag: 1.3.1
-        env:
-          TZ: Europe/Ljubljana
-        resources:
-          requests:
-            cpu: 10m
-            memory: 250Mi
-          limits:
-            memory: 1000Mi
-    pod:
-      securityContext:
-        runAsUser: 1028
-        runAsGroup: 100
-        fsGroup: 100
-        fsGroupChangePolicy: "OnRootMismatch"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/onedr0p/bazarr
+            tag: 1.3.1
+          env:
+            TZ: Europe/Ljubljana
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
