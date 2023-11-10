@@ -1,14 +1,23 @@
 app-template:
-  controller:
-    annotations:
-      reloader.stakater.com/auto: "true"
-    replicas: 1
-    type: statefulset
-  image:
-    repository: ghcr.io/autobrr/omegabrr
-    tag: v1.10.0
-  env:
-    TZ: Europe/Ljubljana
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/autobrr/omegabrr
+            tag: v1.10.0
+          env:
+            TZ: Europe/Ljubljana
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
   service:
     main:
       ports:
@@ -22,12 +31,7 @@ app-template:
       enabled: true
       type: configMap
       name: omegabrr
-      subPath: config.yaml
-      mountPath: /config/config.yaml
-      readOnly: true
-  resources:
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 1000Mi
+      globalMounts:
+        - subPath: config.yaml
+          path: /config/config.yaml
+          readOnly: true
