@@ -6,7 +6,7 @@ traefik:
     spec:
       externalTrafficPolicy: Local
     annotations:
-      metallb.universe.tf/allow-shared-ip: traefik
+      io.cilium/lb-ipam-ips: 10.10.0.241
 
   metrics:
     prometheus:

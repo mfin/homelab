@@ -4,4 +4,4 @@ metadata:
   name: pool
 spec:
   cidrs:
-    - cidr: {{ .Values.l2.pool }}
+    - cidr: 10.10.0.240/28

@@ -27,6 +27,8 @@ app-template:
   service:
     main:
       type: LoadBalancer
+      annotations:
+        io.cilium/lb-ipam-ips: 10.10.0.244
       ports:
         http:
           enabled: false

@@ -32,6 +32,8 @@ app-template:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
+      annotations:
+        io.cilium/lb-ipam-ips: 10.10.0.243
       ports:
         http:
           port: 32400

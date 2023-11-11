@@ -1,7 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: main-pool
-spec:
-  addresses:
-  - {{ .Values.ipPool }}
