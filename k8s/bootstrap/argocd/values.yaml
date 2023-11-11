@@ -29,10 +29,8 @@ argo-cd:
       - --insecure
     ingress:
       enabled: true
-      ingressClassName: traefik
+      ingressClassName: internal
       annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
         hajimari.io/enable: "true"
         hajimari.io/icon: robot
         hajimari.io/appName: ArgoCD

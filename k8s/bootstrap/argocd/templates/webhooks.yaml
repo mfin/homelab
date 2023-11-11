@@ -3,10 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.custom.target }}
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: argocd-server-webhook
 spec:
-  ingressClassName: traefik
+  ingressClassName: external
   rules:
   - host: {{ .Values.custom.externalWebhookHostname }}
     http:

@@ -12,12 +12,8 @@ data:
       connectTimeout: 30s
 
     ingress:
-      - hostname: "argocd-webhook.{{ .Values.homelab.domain }}"
-        service: "https://traefik.traefik.svc.cluster.local"
-        originRequest:
-          originServerName: {{ .Values.cloudflared.cname }}
       - hostname: "*.{{ .Values.homelab.domain }}"
         service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
         originRequest:
-          originServerName: {{ .Values.cloudflared.tempCname }}
+          originServerName: {{ .Values.cloudflared.cname }}
       - service: http_status:404
