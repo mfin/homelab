@@ -168,3 +168,5 @@ apps:
     path: k8s/storage
   - name: miniflux
     path: k8s/selfhosted
+  - name: nginx-internal
+    path: k8s/networking
