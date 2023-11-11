@@ -3,9 +3,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: photos
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: external-services-skip-tls@kubernetescrd
 spec:
   type: ExternalName
   ports:
@@ -19,6 +16,7 @@ metadata:
   name: photos
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     hajimari.io/enable: "true"
     hajimari.io/icon: image
     hajimari.io/appName: Photos

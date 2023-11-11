@@ -3,9 +3,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: drive
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: external-services-skip-tls@kubernetescrd
 spec:
   type: ExternalName
   ports:
