@@ -12,6 +12,10 @@ data:
       connectTimeout: 30s
 
     ingress:
+      - hostname: "hass.{{ .Values.homelab.domain }}"
+        service: "http://nginx-external.nginx-external.svc.cluster.local
+        originRequest:
+          originServerName: {{ .Values.cloudflared.tempCname }}
       - hostname: "*.{{ .Values.homelab.domain }}"
         service: "https://traefik.traefik.svc.cluster.local"
         originRequest:
