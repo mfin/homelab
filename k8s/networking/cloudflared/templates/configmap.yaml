@@ -13,7 +13,7 @@ data:
 
     ingress:
       - hostname: "hass.{{ .Values.homelab.domain }}"
-        service: "http://nginx-external-controller.nginx-external.svc.cluster.local"
+        service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
         originRequest:
           originServerName: {{ .Values.cloudflared.tempCname }}
       - hostname: "*.{{ .Values.homelab.domain }}"
