@@ -19,7 +19,7 @@ metadata:
   name: drive
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
-    nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     hajimari.io/enable: "true"
     hajimari.io/icon: file
     hajimari.io/appName: Drive
