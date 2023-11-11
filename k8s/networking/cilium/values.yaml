@@ -13,6 +13,9 @@ cilium:
     masquerade: true
   bgp:
     enabled: false
+  loadBalancer:
+    algorithm: maglev
+    mode: dsr
   hubble:
     enabled: true
     metrics:
