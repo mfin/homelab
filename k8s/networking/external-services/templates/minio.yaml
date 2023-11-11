@@ -71,10 +71,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minio-s3
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
-  ingressClassName: traefik
+  ingressClassName: internal
   rules:
   - host: s3.{{ .Values.default.domain }}
     http:
