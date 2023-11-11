@@ -19,12 +19,11 @@ metadata:
   name: drive
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hajimari.io/enable: "true"
     hajimari.io/icon: file
     hajimari.io/appName: Drive
 spec:
-  ingressClassName: traefik
+  ingressClassName: external
   rules:
   - host: drive.{{ .Values.default.domain }}
     http:

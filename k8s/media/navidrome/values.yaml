@@ -40,9 +40,8 @@ app-template:
   ingress:
     main:
       enabled: true
-      className: traefik
+      className: external
       annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: music
         hajimari.io/appName: Navidrome

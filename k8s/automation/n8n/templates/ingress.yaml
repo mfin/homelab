@@ -3,11 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.n8n.ingressTarget }}
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-prefix-webhooks@kubernetescrd
   name: external-n8n
 spec:
-  ingressClassName: traefik
+  ingressClassName: external
   rules:
   - host: {{ .Values.n8n.externalUrl }}
     http:
