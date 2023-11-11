@@ -12,12 +12,12 @@ data:
       connectTimeout: 30s
 
     ingress:
-      - hostname: "hass.{{ .Values.homelab.domain }}"
-        service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
-        originRequest:
-          originServerName: {{ .Values.cloudflared.tempCname }}
-      - hostname: "*.{{ .Values.homelab.domain }}"
+      - hostname: "argocd-webhook.{{ .Values.homelab.domain }}"
         service: "https://traefik.traefik.svc.cluster.local"
         originRequest:
           originServerName: {{ .Values.cloudflared.cname }}
+      - hostname: "*.{{ .Values.homelab.domain }}"
+        service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
+        originRequest:
+          originServerName: {{ .Values.cloudflared.tempCname }}
       - service: http_status:404
