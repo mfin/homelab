@@ -36,6 +36,10 @@ ingress-nginx:
       proxy-body-size: 0
       proxy-buffer-size: 16k
       ssl-protocols: TLSv1.3 TLSv1.2
+      whitelist-source-range:
+        - "10.0.0.0/8"
+        - "192.168.0.0/16"
+        - "172.16.0.0/12"
     metrics:
       enabled: true
       serviceMonitor:

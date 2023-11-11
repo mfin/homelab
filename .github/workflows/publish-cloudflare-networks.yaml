@@ -8,7 +8,7 @@ on:
 
 env:
   DEFAULT_CLOUDFLARE_NETWORKS_FILE: |-
-    k8s/networking/traefik/templates/mw-restrict-ips.yaml
+    k8s/networking/nginx-external/values.yaml
 
 jobs:
   cloudflare-networks:
