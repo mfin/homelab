@@ -39,7 +39,6 @@ ingress-nginx:
       enabled: true
       serviceMonitor:
         enabled: true
-        namespace: networking
         namespaceSelector:
           any: true
     extraArgs:
