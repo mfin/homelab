@@ -35,9 +35,8 @@ app-template:
   ingress:
     main:
       enabled: true
-      className: "traefik"
+      className: internal
       annotations:
-        # traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hajimari.io/enable: "true"
         hajimari.io/icon: mdi:database-eye
         hajimari.io/appName: nocodb

@@ -22,6 +22,4 @@ app-template:
   ingress:
     main:
       enabled: true
-      className: traefik
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      className: internal
