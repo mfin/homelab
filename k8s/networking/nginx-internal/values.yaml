@@ -5,6 +5,7 @@ ingress-nginx:
     service:
       annotations:
         io.cilium/lb-ipam-ips: 10.10.0.245
+      externalTrafficPolicy: Local
     ingressClassResource:
       name: internal
       default: true
