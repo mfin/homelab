@@ -18,9 +18,8 @@ grafana:
     existingClaim: grafana
   ingress:
     enabled: true
-    ingressClassName: traefik
+    ingressClassName: internal
     annotations:
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hajimari.io/enable: "true"
       hajimari.io/appName: Grafana
       hajimari.io/info: Open source analytics & monitoring solution for every database

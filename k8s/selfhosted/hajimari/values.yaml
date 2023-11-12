@@ -18,11 +18,13 @@ hajimari:
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik
+      ingressClassName: internal
       annotations:
+        nginx.ingress.kubernetes.io/auth-method: GET
+        nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
+        nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+        nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
         hajimari.io/enable: "false"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
   podAnnotations:
     configmap.reloader.stakater.com/reload: "hajimari-settings"
   persistence:
