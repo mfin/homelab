@@ -1,4 +1,5 @@
 external-dns:
+  fullnameOverride: dns-external
   provider: cloudflare
 
   env:
