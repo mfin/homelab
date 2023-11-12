@@ -3,7 +3,7 @@ goldilocks:
     replicaCount: 1
     ingress:
       enabled: true
-      ingressClassName: traefik
+      ingressClassName: internal
       annotations:
         nginx.ingress.kubernetes.io/auth-method: GET
         nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
