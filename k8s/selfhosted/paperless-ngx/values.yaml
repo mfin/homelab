@@ -9,7 +9,7 @@ app-template:
         copy-scripts:
           image:
             repository: ubuntu
-            tag: "22.10"
+            tag: 22.04
           command:
             - /bin/bash
             - -c
