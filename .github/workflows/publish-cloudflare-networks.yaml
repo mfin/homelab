@@ -3,8 +3,6 @@ name: "Publish Cloudflare Networks"
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * *"
 
 env:
   DEFAULT_CLOUDFLARE_NETWORKS_FILE: |-
