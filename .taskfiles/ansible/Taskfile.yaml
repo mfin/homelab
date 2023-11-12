@@ -27,5 +27,4 @@ tasks:
     dir: '{{.ANSIBLE_DIR}}/k3s'
     silent: true
     cmds:
-      - ansible-playbook playbooks/prepare.yaml
-      - ansible-playbook playbooks/k3s.yaml
+      - ansible-playbook playbooks/all.yaml
