@@ -1,0 +1,37 @@
+external-dns:
+  fullnameOverride: dns-internal
+  provider: rfc2136
+
+  env:
+    - name: EXTERNAL_DNS_RFC2136_HOST
+      value: "10.10.0.3"
+    - name: EXTERNAL_DNS_RFC2136_PORT
+      value: "53"
+    - name: EXTERNAL_DNS_RFC2136_ZONE
+      valueFrom:
+        secretKeyRef:
+          name: dns-internal-secret
+          key: rndc-zone
+    - name: EXTERNAL_DNS_RFC2136_TSIG_AXFR
+      value: "true"
+    - name: EXTERNAL_DNS_RFC2136_TSIG_KEYNAME
+      value: externaldns
+    - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
+      valueFrom:
+        secretKeyRef:
+          name: dns-internal-secret
+          key: rndc-algorithm
+    - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: dns-internal-secret
+          key: rndc-secret
+
+  policy: sync
+  sources: ["ingress", "service"]
+  txtOwnerId: default
+  txtPrefix: k8s.
+  serviceMonitor:
+    enabled: true
+  podAnnotations:
+    secret.reloader.stakater.com/reload: dns-internal-secret

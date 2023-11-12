@@ -108,6 +108,8 @@ apps:
     path: k8s/monitoring
   - name: dns-external
     path: k8s/networking
+  - name: dns-internal
+    path: k8s/networking
   - name: prom-misc
     path: k8s/monitoring
   - name: smartctl-exporter
