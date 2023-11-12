@@ -4,6 +4,7 @@ ingress-nginx:
     replicaCount: 1
     service:
       annotations:
+        external-dns.alpha.kubernetes.io/hostname: external.devbu.io
         io.cilium/lb-ipam-ips: 10.10.0.246
       externalTrafficPolicy: Local
     ingressClassResource:
