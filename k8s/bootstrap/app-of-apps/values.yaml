@@ -106,7 +106,7 @@ apps:
     path: k8s/monitoring
   - name: blackbox-exporter
     path: k8s/monitoring
-  - name: external-dns
+  - name: dns-external
     path: k8s/networking
   - name: prom-misc
     path: k8s/monitoring
