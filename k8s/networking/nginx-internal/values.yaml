@@ -4,7 +4,7 @@ ingress-nginx:
     replicaCount: 1
     service:
       annotations:
-        io.cilium/lb-ipam-ips: 10.10.0.245
+        io.cilium/lb-ipam-ips: 10.10.0.241
       externalTrafficPolicy: Local
     ingressClassResource:
       name: internal
