@@ -3,10 +3,9 @@ kind: Ingress
 metadata:
   name: prometheus-metrics
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-nas-ip@kubernetescrd
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    nginx.ingress.kubernetes.io/whitelist-source-range: "{{ .Values.default.nasIp }}"
 spec:
-  ingressClassName: traefik
+  ingressClassName: internal
   rules:
   - host: prometheus-metrics.{{ .Values.default.domain }}
     http:

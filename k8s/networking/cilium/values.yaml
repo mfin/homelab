@@ -44,7 +44,12 @@ cilium:
       rollOutPods: true
       ingress:
         enabled: true
-        className: traefik
+        className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
   cluster:
     name: kubernetes
     id: 1
