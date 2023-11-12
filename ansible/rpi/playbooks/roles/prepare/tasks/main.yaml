@@ -4,6 +4,7 @@
       - avahi-daemon
       - avahi-utils
       - bash-completion
+      - dnsutils
       - curl
       - git
       - iperf3

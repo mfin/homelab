@@ -1,0 +1,14 @@
+acl LAN {
+10.0.0.0/8;
+};
+options {
+        directory "/var/cache/bind";
+        allow-query { localhost; LAN; };
+        listen-on port 5353 { any; };
+        recursion yes;
+};
+
+key "externaldns" {
+	algorithm {{ bind9.algorithm }};
+	secret "{{ bind9.secret }}";
+};

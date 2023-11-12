@@ -1,0 +1,43 @@
+- name: Install bind9
+  ansible.builtin.package:
+    name:
+      - bind9
+      - bind9utils
+      - bind9-doc
+    state: present
+
+- name: Create bind9 local configuration file
+  ansible.builtin.template:
+    src: templates/named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: Restart bind9
+
+- name: Create bind9 options configuration file
+  ansible.builtin.template:
+    src: templates/named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: Restart bind9
+
+- name: Create zone directory
+  ansible.builtin.file:
+    path: /etc/bind/zones
+    state: directory
+    owner: bind
+
+- name: Create bind9 homelab zone
+  ansible.builtin.template:
+    src: templates/homelab.j2
+    dest: /etc/bind/zones/homelab
+  notify: Restart bind9
+
+- name: Create bind9 network zone
+  ansible.builtin.template:
+    src: templates/network.j2
+    dest: /etc/bind/zones/network
+  notify: Restart bind9
+
+- name: Enable and start bind9 service
+  ansible.builtin.systemd:
+    name: bind9
+    state: started
+    enabled: true

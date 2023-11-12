@@ -1,3 +1,0 @@
----
-# renovate: datasource=github-releases depName=Control-D-Inc/ctrld
-ctrld_version: v1.3.1

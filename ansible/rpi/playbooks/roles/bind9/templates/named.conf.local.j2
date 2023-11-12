@@ -1,0 +1,15 @@
+zone "{{ homelab.domain }}" {
+    type master;
+    file "/etc/bind/zones/homelab";
+    allow-transfer {
+        key "externaldns";
+    };
+    update-policy {
+        grant externaldns zonesub ANY;
+    };
+};
+
+zone "{{ network.domain }}" {
+    type master;
+    file "/etc/bind/zones/network";
+};

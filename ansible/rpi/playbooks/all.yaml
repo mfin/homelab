@@ -5,7 +5,7 @@
   become: true
   roles:
     - role: prepare
-    - role: coredns
+    - role: bind9
     - role: nextdns
     - role: wireguard
     - role: ufw

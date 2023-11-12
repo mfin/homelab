@@ -1,7 +1,7 @@
 ---
-- name: Play ctrld role
+- name: Play bind9 role
   hosts: all
   gather_facts: true
   become: true
   roles:
-    - role: ctrld
+    - role: bind9

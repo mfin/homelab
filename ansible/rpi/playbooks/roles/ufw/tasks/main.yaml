@@ -18,6 +18,18 @@
     rule: allow
     name: DNS
 
+- name: Allow temp DNS udp
+  community.general.ufw:
+    rule: allow
+    port: 5353
+    proto: udp
+
+- name: Allow temp DNS tcp
+  community.general.ufw:
+    rule: allow
+    port: 5353
+    proto: tcp
+
 - name: Allow WWW
   community.general.ufw:
     rule: allow
