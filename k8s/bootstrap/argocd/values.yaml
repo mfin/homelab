@@ -86,7 +86,7 @@ argo-cd:
 
     initContainers:
       - name: download-tools
-        image: ubuntu:22.04
+        image: ubuntu:22.10
         command:
           - /bin/bash
           - -c
