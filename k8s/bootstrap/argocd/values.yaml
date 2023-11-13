@@ -46,9 +46,6 @@ argo-cd:
   controller:
     metrics: *metrics
   repoServer:
-    image:
-      repository: ghcr.io/mfin/argocd
-      tag: 2.9.0@sha256:a36580dabd26ea7aff07f5ded23e38acce8dc14a630fec9e86eb3fe601b41862
     metrics: *metrics
     rbac:
     - apiGroups:
@@ -57,14 +54,63 @@ argo-cd:
       - secrets
       verbs:
       - get
+    env:
+      - name: HELM_PLUGINS
+        value: /custom-tools/helm-plugins/
+      - name: HELM_SECRETS_SOPS_PATH
+        value: /custom-tools/sops
+      - name: HELM_SECRETS_KUBECTL_PATH
+        value: /custom-tools/kubectl
+      - name: HELM_SECRETS_CURL_PATH
+        value: /custom-tools/curl
+      - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
+        value: "false"
+      - name: HELM_SECRETS_IGNORE_MISSING_VALUES
+        value: "true"
     volumes:
+      - name: custom-tools
+        emptyDir: {}
       - name: helm-secrets-private-keys
         secret:
           secretName: helm-secrets-private-keys
 
     volumeMounts:
+      - mountPath: /custom-tools
+        name: custom-tools
       - mountPath: /helm-secrets-private-keys/
         name: helm-secrets-private-keys
+
+    initContainers:
+      - name: download-tools
+        image: ubuntu:22.04
+        command:
+          - /bin/bash
+          - -c
+          - |
+            DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y wget
+            mkdir -p /custom-tools/helm-plugins
+            wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-
+            wget -qO /custom-tools/sops https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64
+            wget -qO /custom-tools/kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+            chmod +x /custom-tools/*
+
+        env:
+          - name: HELM_SECRETS_VERSION
+            # renovate: datasource=github-releases depName=jkroepke/helm-secrets
+            value: "v4.5.1"
+          - name: KUBECTL_VERSION
+            # renovate: datasource=github-releases depName=kubernetes/kubernetes
+            value: "v1.28.3"
+          - name: SOPS_VERSION
+            # renovate: datasource=github-releases depName=getsops/sops
+            value: "v3.8.1"
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
 
   redis:
     metrics: *metrics
