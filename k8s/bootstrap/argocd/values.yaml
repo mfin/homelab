@@ -66,6 +66,10 @@ argo-cd:
       - mountPath: /helm-secrets-private-keys/
         name: helm-secrets-private-keys
 
+  applicationSet:
+    extraArgs:
+      - --loglevel=debug
+
   redis:
     metrics: *metrics
 
