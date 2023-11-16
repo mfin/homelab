@@ -36,6 +36,12 @@
     dest: /etc/bind/zones/network
   notify: Restart bind9
 
+- name: Create bind9 remote zone
+  ansible.builtin.template:
+    src: templates/remote.j2
+    dest: /etc/bind/zones/remote
+  notify: Restart bind9
+
 - name: Enable and start bind9 service
   ansible.builtin.systemd:
     name: bind9

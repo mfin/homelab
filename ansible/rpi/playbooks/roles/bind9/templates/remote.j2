@@ -1,0 +1,17 @@
+$ORIGIN {{ remote.domain }}.
+$TTL 86400
+@	IN	SOA	ns.{{ remote.domain }}.	hostmaster.{{ remote.domain }}. (
+			2001062501 ; serial
+			21600      ; refresh after 6 hours
+			3600       ; retry after 1 hour
+			604800     ; expire after 1 week
+			86400 )    ; minimum TTL of 1 day
+
+
+	IN	NS	ns.{{ remote.domain }}.
+
+ns	  IN	A	{{ main_dns_ip }}
+
+{% for record in remote.records %}
+{{ record.name }}           IN {{ record.type }} {{ record.ip }}
+{% endfor %}

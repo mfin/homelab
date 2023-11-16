@@ -13,3 +13,8 @@ zone "{{ network.domain }}" {
     type master;
     file "/etc/bind/zones/network";
 };
+
+zone "{{ remote.domain }}" {
+    type master;
+    file "/etc/bind/zones/remote";
+};

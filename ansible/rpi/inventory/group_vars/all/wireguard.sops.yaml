@@ -6,8 +6,6 @@ wireguard:
     private_key: ENC[AES256_GCM,data:EYrDj45jmORPk2r4AJVKZBz0RSlCcrqKx09bNsPWT66fxd96KrGPZeSbDqU=,iv:u2w/t7+fTCrKyvfcMw85lLQETt5aOSwqvz/ijUC7/Po=,tag:pkpnktvLkqLN09CYGFeSMQ==,type:str]
     public_key: ENC[AES256_GCM,data:N140MVAz4Sx9FQLcFOp2LXHky7G2TcUtjLmAS/uRezUtLsPEz/rXYYhfDsE=,iv:ZmcGQeLa8CEdMQl0HsYAQTy+MlHITiKAV5rYEsycjaM=,tag:UGAlNrWACr5u2x17tu2RaQ==,type:str]
     preshared_key: ENC[AES256_GCM,data:o6MwVr74vWbDUqaVkP0nEiOeN8HKqJao9DBeHQSGv1k2huMQlV6KL7qpMek=,iv:Nd1PZ6jyT4l8f/cGQCUrumw9UIjFXg5DB/AoYkLYIXw=,tag:RMQRgVt4okokaplVG7LN/A==,type:str]
-remote:
-    network_range: ENC[AES256_GCM,data:7f7eZ7NrB1GLFgfwmrg=,iv:/kHsrE7s6VPPV4FKSMynMipNHxpymQMQMwK5ZsQpLjg=,tag:tWpIXYcuSM4zwuH40XsFEQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,8 +21,8 @@ sops:
             bHl3NjhnVHI2MUdQb29BMlZ4NnZBVHMKO7c57Ge4z5NZLPC8Sbq6Lh7TysAR4I0z
             8Cutf2nRnRv6VfnQed+rX7fPgavY3TkhtjUfhoWeni7uApqvsSsGaA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-02-13T09:48:17Z"
-    mac: ENC[AES256_GCM,data:ANziVF9r7gOwA3kzew3/8EvvhF3VCL2SmH0/dZPI7eUyFFx9xmMJIBEPOWcJv3XCsnW5477HLw7JlnWZ0rgCPcdBLlpCBA2LJn+KdSZNkl5dQ6io88PdkigYwPZQ9FlBzjJoWshweNE7ZzWwXiI58tKxzonmQ9j9ZApNDQMUdOU=,iv:FAyhioZkplclfZrVmXD0GnjhrqRWFjOpxoErbJcMBDc=,tag:S1Y4u+po912pLjryrT7WGQ==,type:str]
+    lastmodified: "2023-11-15T22:16:58Z"
+    mac: ENC[AES256_GCM,data:pLVMucUiX5rQVXzEaVql+mxWdYlAOOEy4gZe5q6+WA627fWRmktC3o8hWL9HUWA/iUyoDGigdsQ4as9kpO7uYMkVqibjGkbiC6/rSyrKWvY7BxgSYdjHStiljhHxzCTVCQgvWKDO9R0mdfAYai83V1kFq042ljcWUNQU84LRO8M=,iv:YDSSHmeuhpnskuPbId0LRB1SdpXIeBQIRvPwK+Ul9Xs=,tag:1MeYig1hLlkaQCFntmEAgQ==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
-    version: 3.7.3
+    version: 3.8.0

@@ -3,6 +3,7 @@ timeout 5s
 debug false
 forwarder {{ network.domain }}.=127.0.0.1:5353
 forwarder {{ homelab.domain }}.=127.0.0.1:5353
+forwarder {{ remote.domain }}.=127.0.0.1:5353
 cache-max-age 0s
 report-client-info true
 discovery-dns {{ router_ip }}
