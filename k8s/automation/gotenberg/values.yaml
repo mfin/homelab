@@ -8,10 +8,14 @@ app-template:
             tag: 7.9.2
           resources:
             requests:
-              cpu: 23m
-              memory: 64M
+              cpu: 200m
+              memory: 512M
             limits:
-              memory: 64M
+              memory: 1024M
+      pod:
+        securityContext:
+          privileged: false
+          runAsUser: 1001
   service:
     main:
       ports:
