@@ -12,9 +12,10 @@ app-template:
               memory: 512M
             limits:
               memory: 1024M
+          securityContext:
+            privileged: false
       pod:
         securityContext:
-          privileged: false
           runAsUser: 1001
   service:
     main:
