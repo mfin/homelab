@@ -170,5 +170,5 @@ apps:
     path: k8s/networking
   - name: nginx-external
     path: k8s/networking
-  - name: k8s/it-tools
+  - name: it-tools
     path: k8s/selfhosted
