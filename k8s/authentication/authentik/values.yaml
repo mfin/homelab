@@ -1,0 +1,81 @@
+authentik:
+  annotations:
+    secret.reloader.stakater.com/reload: authentik,postgres
+
+  initContainers:
+    01-init-db:
+      image:
+        repository: ghcr.io/onedr0p/postgres-init
+        tag: 14.9
+      envFrom:
+        - secretRef:
+            name: postgres
+
+  authentik:
+    log_level: info
+    email:
+      use_tls: true
+    error_reporting:
+      enabled: false
+      send_pii: false
+
+  envValueFrom:
+    AUTHENTIK_SECRET_KEY:
+      secretKeyRef:
+        name: authentik
+        key: AUTHENTIK_SECRET_KEY
+    AUTHENTIK_EMAIL__HOST:
+      secretKeyRef:
+        name: authentik
+        key: AUTHENTIK_EMAIL__HOST
+    AUTHENTIK_EMAIL__USERNAME:
+      secretKeyRef:
+        name: authentik
+        key: AUTHENTIK_EMAIL__USERNAME
+    AUTHENTIK_EMAIL__PASSWORD:
+      secretKeyRef:
+        name: authentik
+        key: AUTHENTIK_EMAIL__PASSWORD
+    AUTHENTIK_EMAIL__FROM:
+      secretKeyRef:
+        name: authentik
+        key: AUTHENTIK_EMAIL__FROM
+    AUTHENTIK_POSTGRESQL__HOST:
+      secretKeyRef:
+        name: postgres
+        key: INIT_POSTGRES_HOST
+    AUTHENTIK_POSTGRESQL__NAME:
+      secretKeyRef:
+        name: postgres
+        key: INIT_POSTGRES_DBNAME
+    AUTHENTIK_POSTGRESQL__USER:
+      secretKeyRef:
+        name: postgres
+        key: INIT_POSTGRES_USER
+    AUTHENTIK_POSTGRESQL__PASSWORD:
+      secretKeyRef:
+        name: postgres
+        key: INIT_POSTGRES_PASS
+
+  ingress:
+    enabled: true
+    ingressClassName: internal
+    annotations:
+      hajimari.io/enable: "true"
+      hajimari.io/icon: account-key
+      hajimari.io/appName: Authentik
+      hajimari.io/info: Identity Provider focused on flexibility and versatility
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+
+  postgresql:
+    enabled: false
+
+  prometheus:
+    rules:
+      create: true
+    serviceMonitor:
+      create: true
+
+  redis:
+    enabled: true
