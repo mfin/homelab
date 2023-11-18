@@ -20,23 +20,23 @@ authentik:
   envValueFrom:
     AUTHENTIK_SECRET_KEY:
       secretKeyRef:
-        name: authentik
+        name: authentik-env
         key: AUTHENTIK_SECRET_KEY
     AUTHENTIK_EMAIL__HOST:
       secretKeyRef:
-        name: authentik
+        name: authentik-env
         key: AUTHENTIK_EMAIL__HOST
     AUTHENTIK_EMAIL__USERNAME:
       secretKeyRef:
-        name: authentik
+        name: authentik-env
         key: AUTHENTIK_EMAIL__USERNAME
     AUTHENTIK_EMAIL__PASSWORD:
       secretKeyRef:
-        name: authentik
+        name: authentik-env
         key: AUTHENTIK_EMAIL__PASSWORD
     AUTHENTIK_EMAIL__FROM:
       secretKeyRef:
-        name: authentik
+        name: authentik-env
         key: AUTHENTIK_EMAIL__FROM
     AUTHENTIK_POSTGRESQL__HOST:
       secretKeyRef:
