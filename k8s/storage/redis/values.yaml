@@ -1,5 +1,7 @@
 redis-paperless:
   fullnameOverride: redis-paperless
+  labels:
+    app.kubernetes.io/name: redis-paperless
   controllers:
     main:
       containers:
@@ -15,6 +17,8 @@ redis-paperless:
               memory: 64M
   service:
     main:
+      extraSelectorLabels:
+        app.kubernetes.io/name: redis-paperless
       ports:
         http:
           enabled: false
@@ -24,6 +28,8 @@ redis-paperless:
 
 redis-authentik:
   fullnameOverride: redis-authentik
+  labels:
+    app.kubernetes.io/name: redis-authentik
   controllers:
     main:
       containers:
@@ -39,6 +45,8 @@ redis-authentik:
               memory: 64M
   service:
     main:
+      extraSelectorLabels:
+        app.kubernetes.io/name: redis-authentik
       ports:
         http:
           enabled: false
