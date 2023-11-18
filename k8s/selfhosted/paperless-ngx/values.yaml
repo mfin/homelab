@@ -30,7 +30,7 @@ app-template:
             PAPERLESS_OCR_LANGUAGE: slv+eng
             PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
             PAPERLESS_PORT: 8000
-            PAPERLESS_REDIS: redis://redis.redis.svc.cluster.local:6379
+            PAPERLESS_REDIS: redis://redis-paperless.redis.svc.cluster.local:6379
             PAPERLESS_TIKA_ENABLED: 1
             PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg.gotenberg.svc.cluster.local:3000
             PAPERLESS_TIKA_ENDPOINT: http://tika.tika.svc.cluster.local:9998
