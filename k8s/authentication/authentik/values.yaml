@@ -16,6 +16,9 @@ authentik:
     error_reporting:
       enabled: false
       send_pii: false
+    redis:
+      host: "redis-authentik.redis.svc.cluster.local"
+      password: ""
 
   envValueFrom:
     AUTHENTIK_SECRET_KEY:
@@ -76,4 +79,4 @@ authentik:
       create: true
 
   redis:
-    enabled: true
+    enabled: false

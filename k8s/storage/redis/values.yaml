@@ -1,4 +1,27 @@
-app-template:
+redis-paperless:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: docker.io/library/redis
+            tag: 7.2.3
+          resources:
+            requests:
+              cpu: 23m
+              memory: 64M
+            limits:
+              memory: 64M
+  service:
+    main:
+      ports:
+        http:
+          enabled: false
+        redis:
+          enabled: true
+          port: 6379
+
+redis-authentik:
   controllers:
     main:
       containers:
