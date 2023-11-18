@@ -1,4 +1,5 @@
 redis-paperless:
+  fullnameOverride: redis-paperless
   controllers:
     main:
       containers:
@@ -22,6 +23,7 @@ redis-paperless:
           port: 6379
 
 redis-authentik:
+  fullnameOverride: redis-authentik
   controllers:
     main:
       containers:
