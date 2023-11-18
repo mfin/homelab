@@ -1,7 +1,7 @@
 redis-paperless:
   fullnameOverride: redis-paperless
   labels:
-    app.kubernetes.io/name: redis-paperless
+    app.kubernetes.io/deployment: redis-paperless
   controllers:
     main:
       containers:
@@ -18,7 +18,7 @@ redis-paperless:
   service:
     main:
       extraSelectorLabels:
-        app.kubernetes.io/name: redis-paperless
+        app.kubernetes.io/deployment: redis-paperless
       ports:
         http:
           enabled: false
@@ -29,7 +29,7 @@ redis-paperless:
 redis-authentik:
   fullnameOverride: redis-authentik
   labels:
-    app.kubernetes.io/name: redis-authentik
+    app.kubernetes.io/deployment: redis-authentik
   controllers:
     main:
       containers:
@@ -46,7 +46,7 @@ redis-authentik:
   service:
     main:
       extraSelectorLabels:
-        app.kubernetes.io/name: redis-authentik
+        app.kubernetes.io/deployment: redis-authentik
       ports:
         http:
           enabled: false
