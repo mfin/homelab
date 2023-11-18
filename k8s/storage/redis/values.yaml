@@ -1,7 +1,5 @@
 redis-paperless:
   fullnameOverride: redis-paperless
-  labels:
-    app.kubernetes.io/deployment: redis-paperless
   controllers:
     main:
       containers:
@@ -15,6 +13,9 @@ redis-paperless:
               memory: 64M
             limits:
               memory: 64M
+      pod:
+        labels:
+          app.kubernetes.io/deployment: redis-paperless
   service:
     main:
       extraSelectorLabels:
@@ -28,8 +29,6 @@ redis-paperless:
 
 redis-authentik:
   fullnameOverride: redis-authentik
-  labels:
-    app.kubernetes.io/deployment: redis-authentik
   controllers:
     main:
       containers:
@@ -43,6 +42,9 @@ redis-authentik:
               memory: 64M
             limits:
               memory: 64M
+      pod:
+        labels:
+          app.kubernetes.io/deployment: redis-authentik
   service:
     main:
       extraSelectorLabels:
