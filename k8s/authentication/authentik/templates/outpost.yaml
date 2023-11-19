@@ -108,7 +108,7 @@ metadata:
     app.kubernetes.io/managed-by: goauthentik.io
     app.kubernetes.io/name: authentik-proxy
     app.kubernetes.io/version: 2021.12.3
-  name: authentik-outpost
+  name: nginx-outpost
 spec:
   rules:
   - host: "{{ .Values.custom.authentik.outpost.host }}"
