@@ -14,7 +14,7 @@ spec:
             path: "/outpost.goauthentik.io"
             backend:
               service:
-                name: authentik
+                name: nginx-outpost
                 port:
                   name: http
   tls:
