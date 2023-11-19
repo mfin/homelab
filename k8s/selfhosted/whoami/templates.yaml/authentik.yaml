@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami-authentik
+  namespace: authentik
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "{{ .Values.authentik.host }}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/outpost.goauthentik.io"
+            backend:
+              service:
+                name: authentik
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - "{{ .Values.authentik.host }}"
