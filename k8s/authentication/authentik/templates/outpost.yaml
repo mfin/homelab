@@ -121,3 +121,6 @@ spec:
               name: http
         path: /outpost.goauthentik.io
         pathType: Prefix
+    tls:
+    - hosts:
+        - "{{ .Values.custom.authentik.outpost.host }}"
