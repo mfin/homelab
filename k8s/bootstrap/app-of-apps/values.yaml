@@ -172,5 +172,3 @@ apps:
     path: k8s/networking
   - name: it-tools
     path: k8s/selfhosted
-  - name: authentik
-    path: k8s/authentication
