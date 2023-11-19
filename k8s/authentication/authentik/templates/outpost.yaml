@@ -119,5 +119,5 @@ spec:
             name: nginx-outpost
             port:
               name: http
-        path: /outpost.goauthentik.io
+        path: /
         pathType: Prefix
