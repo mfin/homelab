@@ -110,6 +110,7 @@ metadata:
     app.kubernetes.io/version: 2021.12.3
   name: nginx-outpost
 spec:
+  ingressClassName: internal
   rules:
   - host: "{{ .Values.custom.authentik.outpost.host }}"
     http:
