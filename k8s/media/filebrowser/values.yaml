@@ -64,6 +64,14 @@ app-template:
     config:
       enabled: true
       existingClaim: filebrowser
+    configmap:
+      enabled: true
+      type: configMap
+      name: filebrowser
+      globalMounts:
+        - path: /.filebrowser.json
+          subPath: .filebrowser.json
+          readOnly: true
     data:
       enabled: true
       type: nfs
