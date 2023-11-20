@@ -6,7 +6,7 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/onedr0p/filebrowser
+            repository: docker.io/filebrowser/filebrowser
             tag: v2.26.0
           env:
               TZ: Europe/Ljubljana
