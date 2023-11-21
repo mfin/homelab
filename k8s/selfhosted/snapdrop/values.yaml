@@ -12,6 +12,10 @@ app-template:
             PUID: 1000
             PGID: 1000
             TZ: Europe/Ljubljana
+      pod:
+        securityContext:
+          fsGroup: 1000
+          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
