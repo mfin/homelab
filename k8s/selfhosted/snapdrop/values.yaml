@@ -1,5 +1,7 @@
 app-template:
   controllers:
+    type: statefulset
+    replicas: 1
     main:
       containers:
         main:
