@@ -1,0 +1,29 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: lscr.io/linuxserver/snapdrop
+            tag: latest@sha256:8b68fadb49fa532210c75117ffa4b26a052fda0166296c757d1dbadea0504e79
+          env:
+            PUID: 1000
+            PGID: 1000
+            TZ: Europe/Ljubljana
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      className: internal
+      annotations:
+        hajimari.io/enable: "false"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: snapdrop
+      globalMounts:
+        - path: /config
