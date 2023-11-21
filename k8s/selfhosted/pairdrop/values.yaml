@@ -6,8 +6,8 @@ app-template:
       containers:
         main:
           image:
-            repository: lscr.io/linuxserver/snapdrop
-            tag: latest@sha256:8b68fadb49fa532210c75117ffa4b26a052fda0166296c757d1dbadea0504e79
+            repository: linuxserver/pairdrop
+            tag: latest@sha256:6bb473ac22ff7f2bc843688b79af22e4795d86cc5855213e7cea168d9ac5b0ad
           env:
             PUID: 1000
             PGID: 1000
@@ -30,6 +30,6 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: snapdrop
+      existingClaim: pairdrop
       globalMounts:
         - path: /config

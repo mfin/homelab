@@ -172,5 +172,5 @@ apps:
     path: k8s/networking
   - name: it-tools
     path: k8s/selfhosted
-  - name: snapdrop
+  - name: pairdrop
     path: k8s/selfhosted
