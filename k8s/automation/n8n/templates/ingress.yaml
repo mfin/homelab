@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.n8n.ingressTarget }}
+    nginx.ingress.kubernetes.io/rewrite-target: /webhook/external/$1
   name: external-n8n
 spec:
   ingressClassName: external
@@ -15,8 +16,8 @@ spec:
             name: n8n
             port:
               name: http
-        path: /external/
-        pathType: Prefix
+        path: /(.*)
+        pathType: ImplementationSpecific
   tls:
   - hosts:
     - {{ .Values.n8n.externalUrl }}
