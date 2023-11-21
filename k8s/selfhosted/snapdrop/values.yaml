@@ -1,8 +1,8 @@
 app-template:
   controllers:
-    type: statefulset
-    replicas: 1
     main:
+      type: statefulset
+      replicas: 1
       containers:
         main:
           image:
