@@ -1,0 +1,46 @@
+app-template:
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: ghcr.io/bjw-s/calibre-web
+            tag: 0.6.21@sha256:7cceb5aa8586ab40b2c4fa79240025b57696d643337d0630076b6113c9078754
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 8083
+  ingress:
+    main:
+      enabled: true
+      className: internal
+      annotations:
+        nginx.ingress.kubernetes.io/auth-method: GET
+        nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
+        nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+        nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+        hajimari.io/enable: "true"
+        hajimari.io/icon: file-document
+        hajimari.io/appName: Paperless
+        hajimari.io/info: Document management system that transforms your physical documents into a searchable online archive
+  persistence:
+    config:
+      enabled: true
+      existingClaim: calibre-web
+    data:
+      enabled: true
+      type: nfs
+      path: /volume1/data
+      globalMounts:
+        - path: /data
