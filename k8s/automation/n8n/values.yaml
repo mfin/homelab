@@ -17,7 +17,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/mfin/n8n
-            tag: rolling@sha256:4754627eeb150793bd80aaeeddbd8076541010aa5a87d4f291fef00d9105472a
+            tag: rolling@sha256:aa9315acf468776179a91e5daaf0a714a48b6ccf4661ce4e8a759ca1911a26cb
           command: ["n8n"]
           env:
             GENERIC_TIMEZONE: Europe/Ljubljana
