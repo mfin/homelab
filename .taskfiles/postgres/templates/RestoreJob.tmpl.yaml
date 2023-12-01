@@ -16,7 +16,7 @@ spec:
         env:
           - name: DUMP_FILE
             value: "${DUMP_FILE}"
-        image: ghcr.io/mfin/postgres-minio-restore:rolling@sha256:05d5b51fca1e05c66aad211c81efa1de69d305005a4d2f268292ced58b8796c1
+        image: ghcr.io/mfin/postgres-minio-restore:rolling@sha256:3ff049cd20ee9c017e9d5584712b533de3456acd9cc34a3ce579de942a1bb7dc
         imagePullPolicy: IfNotPresent
         name: pg-restore
         terminationMessagePath: /dev/termination-log
