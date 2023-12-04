@@ -24,7 +24,7 @@ app-template:
   ingress:
     main:
       enabled: true
-      className: internal
+      className: external
       annotations:
         hajimari.io/appName: "PairDrop"
         hajimari.io/icon: water
