@@ -27,4 +27,4 @@ app-template:
       type: nfs
       path: /volume1/data/drop
       globalMounts:
-        - path: /usr/share/nginx/www
+        - path: /usr/share/nginx/html
