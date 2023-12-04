@@ -27,4 +27,12 @@ app-template:
       type: nfs
       path: /volume1/data/drop
       globalMounts:
-        - path: /usr/share/nginx/html
+        - path: /data
+    configmap:
+      enabled: true
+      type: configMap
+      name: nginx-config
+      globalMounts:
+        - path: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
