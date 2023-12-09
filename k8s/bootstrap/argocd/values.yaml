@@ -16,6 +16,7 @@ argo-cd:
       reloader.stakater.com/auto: "true"
   configs:
     cm:
+      kustomize.buildOptions: --enable-helm
       exec.enabled: 'true'
       statusbadge.enabled: 'true'
       timeout.reconciliation: 0s
