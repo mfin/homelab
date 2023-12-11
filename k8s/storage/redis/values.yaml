@@ -26,32 +26,3 @@ redis-paperless:
         redis:
           enabled: true
           port: 6379
-
-redis-authentik:
-  fullnameOverride: redis-authentik
-  controllers:
-    main:
-      containers:
-        main:
-          image:
-            repository: docker.io/library/redis
-            tag: 7.2.3
-          resources:
-            requests:
-              cpu: 23m
-              memory: 64M
-            limits:
-              memory: 64M
-      pod:
-        labels:
-          app.kubernetes.io/deployment: redis-authentik
-  service:
-    main:
-      extraSelectorLabels:
-        app.kubernetes.io/deployment: redis-authentik
-      ports:
-        http:
-          enabled: false
-        redis:
-          enabled: true
-          port: 6379
