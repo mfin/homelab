@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: nginx
-            tag: 1.25.3@sha256:3c4c1f42a89e343c7b050c5e5d6f670a0e0b82e70e0e7d023f10092a04bbb5a7
+            tag: 1.25.3@sha256:08262e7a01055bd33920b3f59e2249f438eea5d25cc67b8d8c7f5854437786d2
       pod:
         securityContext:
           fsGroup: 1000
