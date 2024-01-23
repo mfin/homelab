@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/hay-kot/homebox
-            tag: v0.10.2
+            tag: v0.10.3
           env:
             TZ: Europe/Ljubljana
             HBOX_LOG_LEVEL: info
