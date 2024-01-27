@@ -14,7 +14,7 @@ spec:
                   name: postgres
               - secretRef:
                   name: minio
-              image: ghcr.io/mfin/postgres-minio-backup:rolling@sha256:8027d2705d81261cef6194f76d0898652d71380814bad6def2b916d1d95daa6f
+              image: ghcr.io/mfin/postgres-minio-backup:rolling@sha256:1d2e34dcc95bf511c6891839565e084c9d851b9c62641be0a4bcfa3dc0a92b50
               imagePullPolicy: IfNotPresent
               name: nocodb-backup
               terminationMessagePath: /dev/termination-log
