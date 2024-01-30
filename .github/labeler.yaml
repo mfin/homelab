@@ -1,11 +1,16 @@
 ---
 area/ansible:
-  - "ansible/**/*"
+  - changed-files:
+    - "ansible/**/*"
 area/github:
-  - ".github/**/*"
+  - changed-files:
+    - ".github/**/*"
 area/k8s:
-  - "k8s/**/*"
+  - changed-files:
+    - "k8s/**/*"
 area/hack:
-  - "hack/**/*"
+  - changed-files:
+    - "hack/**/*"
 area/terraform:
-  - "terraform/**/*"
+  - changed-files:
+    - "terraform/**/*"
