@@ -1,11 +1,29 @@
 cilium:
   operator:
     replicas: 1
+    rollOutPods: true
+    prometheus:
+      serviceMonitor:
+        enabled: true
+    dashboards:
+      enabled: true
+      annotations:
+        grafana_folder: Cilium
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      trustCRDsExist: true
+  dashboards:
+    enabled: true
+    annotations:
+      grafana_folder: Cilium
+  rollOutCiliumPods: true
   containerRuntime:
     integration: containerd
     socketPath: /var/run/k3s/containerd/containerd.sock
   autoDirectNodeRoutes: true
-  tunnel: disabled
+  routingMode: native
   bandwidthManager:
     enabled: true
     bbr: false
@@ -28,7 +46,7 @@ cilium:
         - icmp
         - http
       serviceMonitor:
-        enabled: false
+        enabled: true
       dashboards:
         enabled: true
         annotations:
@@ -38,7 +56,7 @@ cilium:
       rollOutPods: true
       prometheus:
         serviceMonitor:
-          enabled: false
+          enabled: true
     ui:
       enabled: true
       rollOutPods: true
