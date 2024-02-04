@@ -4,18 +4,18 @@ cilium:
     rollOutPods: true
     prometheus:
       serviceMonitor:
-        enabled: true
+        enabled: false
     dashboards:
-      enabled: true
+      enabled: false
       annotations:
         grafana_folder: Cilium
   prometheus:
-    enabled: true
+    enabled: false
     serviceMonitor:
-      enabled: true
+      enabled: false
       trustCRDsExist: true
   dashboards:
-    enabled: true
+    enabled: false
     annotations:
       grafana_folder: Cilium
   rollOutCiliumPods: true
@@ -46,9 +46,9 @@ cilium:
         - icmp
         - http
       serviceMonitor:
-        enabled: true
+        enabled: false
       dashboards:
-        enabled: true
+        enabled: false
         annotations:
           grafana_folder: Cilium
     relay:
@@ -56,7 +56,7 @@ cilium:
       rollOutPods: true
       prometheus:
         serviceMonitor:
-          enabled: true
+          enabled: false
     ui:
       enabled: true
       rollOutPods: true
