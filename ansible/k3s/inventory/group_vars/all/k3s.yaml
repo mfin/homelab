@@ -1,6 +1,6 @@
 ---
 # renovate: datasource=github-releases depName=k3s-io/k3s versioning=loose
-k3s_version: v1.28.3+k3s2
+k3s_version: v1.29.0+k3s1
 ansible_user: mfin
 systemd_dir: /etc/systemd/system
 master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
