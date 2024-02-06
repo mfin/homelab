@@ -18,6 +18,18 @@
     rule: allow
     name: DNS
 
+- name: Allow bind9 endpoint tcp
+  community.general.ufw:
+    rule: allow
+    port: 5353
+    proto: tcp
+
+- name: Allow bind9 endpoint udp
+  community.general.ufw:
+    rule: allow
+    port: 5353
+    proto: udp
+
 - name: Allow node-exporter metrics
   community.general.ufw:
     rule: allow

@@ -13,3 +13,17 @@ key "externaldns" {
 	algorithm {{ bind9.algorithm }};
 	secret "{{ bind9.secret }}";
 };
+
+logging {
+  channel my_syslog {
+    syslog daemon;
+    severity info;
+
+    print-time yes;
+    print-category yes;
+    print-severity yes;
+  };
+
+  category default { my_syslog; };
+  category queries { null; };
+};
