@@ -144,7 +144,11 @@ apps:
     path: k8s/automation
   - name: lidarr
     path: k8s/media
+  - name: navidrome
+    path: k8s/media
   - name: filebrowser
+    path: k8s/media
+  - name: audiobookshelf
     path: k8s/media
   - name: autobrr
     path: k8s/media
