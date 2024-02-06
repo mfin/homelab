@@ -5,6 +5,7 @@ options {
         directory "/var/cache/bind";
         allow-query { localhost; LAN; };
         listen-on port 5353 { any; };
+        listen-on-v6 port 5353 { any; };
         recursion yes;
 };
 

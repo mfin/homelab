@@ -7,6 +7,5 @@
     - role: prepare
     - role: bind9
     - role: nextdns
-    - role: wireguard
     - role: ufw
     - role: systemd

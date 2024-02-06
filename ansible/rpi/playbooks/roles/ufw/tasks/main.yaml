@@ -18,41 +18,11 @@
     rule: allow
     name: DNS
 
-- name: Allow temp DNS udp
-  community.general.ufw:
-    rule: allow
-    port: 5353
-    proto: udp
-
-- name: Allow temp DNS tcp
-  community.general.ufw:
-    rule: allow
-    port: 5353
-    proto: tcp
-
-- name: Allow WWW
-  community.general.ufw:
-    rule: allow
-    name: WWW
-
-- name: Allow CoreDNS metrics
-  community.general.ufw:
-    rule: allow
-    port: 9153
-    proto: tcp
-
 - name: Allow node-exporter metrics
   community.general.ufw:
     rule: allow
     port: 9100
     proto: tcp
-
-- name: Allow site-to-site route
-  community.general.ufw:
-    rule: allow
-    route: true
-    interface_in: eth0
-    interface_out: wg0
 
 - name: Allow outgoing
   community.general.ufw:
