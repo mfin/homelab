@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: linuxserver/pairdrop
-            tag: latest@sha256:808dd09c6d3392ff70c8225cb10cb68918598ade6283da9dd8f89f4d01cafb19
+            tag: latest@sha256:3dbdda473e1e7557fcd1b31833c94d50fb2591b0f65b60ae499eb6da525547a2
           env:
             PUID: 1000
             PGID: 1000
