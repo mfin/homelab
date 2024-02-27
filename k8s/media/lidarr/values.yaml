@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/lidarr-develop
-            tag: 2.1.6.3993@sha256:36b75d721cca61d1a24c3882c253ae14952a6fad45c8e6dede23af79b61096f7
+            tag: 2.2.0.4045@sha256:c325ecc0a9a5ee604d06d21c6dab5bf4506c29622f108205b2f3eb42e0792a2e
           env:
             TZ: Europe/Ljubljana
             LIDARR__INSTANCE_NAME: Lidarr
