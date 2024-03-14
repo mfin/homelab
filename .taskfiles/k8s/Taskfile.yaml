@@ -58,3 +58,10 @@ tasks:
       - kubectl wait pods -n {{.namespace}} debug --for condition=Ready --timeout=120s
       - kubectl exec -it -n {{.namespace}} debug -- bash
       - kubectl delete -n {{.namespace}} pod debug
+
+  delete-jobs:
+    desc: Delete all jobs in k8s
+    dir: '{{.dir}}'
+    silent: true
+    cmds:
+      - bash {{.ROOT_DIR}}/.taskfiles/k8s/scripts/delete-jobs.sh
