@@ -1,6 +1,8 @@
 prometheus-snmp-exporter:
   fullnameOverride: &app snmp-exporter
 
+  replicas: 0
+
   extraArgs:
     - "--config.file=/config/snmp.yaml"
 
