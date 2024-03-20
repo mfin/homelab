@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/readarr-develop
-            tag: 0.3.18.2411@sha256:a1d9eb2001d499322e00876106a675c36b6f750cd253843595bb8e022a54f37a
+            tag: 0.3.20.2452@sha256:0a9941206dacb75a9415a196819af618140933cd91374932d2b93b95df9af42d
           env:
             TZ: Europe/Ljubljana
             READARR__INSTANCE_NAME: Readarr
