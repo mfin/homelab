@@ -30,7 +30,7 @@ jobs:
           bash ./.github/scripts/cloudflare-networks.sh $DEFAULT_CLOUDFLARE_NETWORKS_FILE
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # v5.0.2
+        uses: peter-evans/create-pull-request@4e1beaa7521e8b457b572c090b25bd3db56bf1c5 # v5.0.3
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           committer: "mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>"
