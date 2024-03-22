@@ -17,7 +17,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/miniflux/miniflux
-            tag: 2.1.0
+            tag: 2.1.1
           env:
             CREATE_ADMIN: "1"
             # DEBUG: "1"
