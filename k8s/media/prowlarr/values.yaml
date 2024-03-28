@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/prowlarr-develop
-            tag: 1.14.3.4333
+            tag: 1.15.0.4361
           env:
             TZ: Europe/Ljubljana
             PROWLARR__INSTANCE_NAME: Prowlarr
