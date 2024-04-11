@@ -63,8 +63,6 @@ apps:
     path: k8s/system
   - name: vpa
     path: k8s/system
-  - name: goldilocks
-    path: k8s/monitoring
   - name: cert-manager
     path: k8s/networking
   - name: external-services
@@ -138,8 +136,6 @@ apps:
       kind: Certificate
       jsonPointers:
       - /spec/duration
-  - name: readarr
-    path: k8s/media
   - name: apprise-api
     path: k8s/automation
   - name: lidarr
