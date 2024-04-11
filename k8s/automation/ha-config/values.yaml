@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/coder/code-server
-            tag: 4.21.1
+            tag: 4.23.0
           env:
             TZ: Europe/Ljubljana
           args:
