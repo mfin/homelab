@@ -1,0 +1,38 @@
+app-template:
+  controllers:
+    main:
+      type: statefulset
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: linuxserver/pairdrop
+            tag: latest@sha256:862709d5d444dd8653d1a8d94ae454642e5225fedebada27d6ac98d49799e753
+          env:
+            PUID: 1000
+            PGID: 1000
+            TZ: Europe/Ljubljana
+      pod:
+        securityContext:
+          fsGroup: 1000
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 3000
+  ingress:
+    main:
+      enabled: true
+      className: external
+      annotations:
+        hajimari.io/appName: "PairDrop"
+        hajimari.io/icon: water
+        hajimari.io/enable: "true"
+        hajimari.io/info: Local file sharing in your browser. Inspired by Apple's AirDrop.
+  persistence:
+    config:
+      enabled: true
+      existingClaim: pairdrop
+      globalMounts:
+        - path: /config

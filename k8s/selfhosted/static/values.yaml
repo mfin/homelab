@@ -25,7 +25,7 @@ app-template:
     data:
       enabled: true
       type: nfs
-      path: /volume1/data/static
+      path: /volume1/data/drop
       globalMounts:
         - path: /data
     configmap:
