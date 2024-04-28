@@ -36,11 +36,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: notebook-multiple
-        hajimari.io/appName: homebox
-        hajimari.io/info: Homebox is the inventory and organization system built for the Home User!
   persistence:
     data:
       enabled: true

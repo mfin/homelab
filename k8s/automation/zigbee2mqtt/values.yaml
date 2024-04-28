@@ -35,10 +35,6 @@ app-template:
         nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
         nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
         nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
-        hajimari.io/enable: "true"
-        hajimari.io/icon: zigbee
-        hajimari.io/appName: Zigbee2MQTT
-        hajimari.io/info: Zigbee to MQTT bridge
   persistence:
     config:
       enabled: true

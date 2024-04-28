@@ -64,8 +64,3 @@ app-template:
     main:
       enabled: true
       className: external
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: rss-box
-        hajimari.io/appName: miniflux
-        hajimari.io/info: Miniflux is a minimalist and opinionated feed reader.

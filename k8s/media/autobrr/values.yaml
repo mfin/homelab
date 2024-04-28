@@ -33,11 +33,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: rabbit
-        hajimari.io/appName: autobrr
-        hajimari.io/info: The modern autodl-irssi replacement
   persistence:
     config:
       enabled: true

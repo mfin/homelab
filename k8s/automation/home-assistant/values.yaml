@@ -41,11 +41,6 @@ app-template:
     main:
       enabled: true
       className: external
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: home-assistant
-        hajimari.io/appName: Home Assistant
-        hajimari.io/info: Home automation that puts local control and privacy first
   serviceMonitor:
     main:
       enabled: true

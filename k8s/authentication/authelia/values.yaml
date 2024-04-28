@@ -61,11 +61,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: lock
-        hajimari.io/appName: Authelia
-        hajimari.io/info: Authentication and authorization, MFA and SSO
   persistence:
     config:
       enabled: true

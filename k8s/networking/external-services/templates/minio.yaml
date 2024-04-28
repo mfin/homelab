@@ -45,11 +45,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minio-ui
-  annotations:
-    hajimari.io/enable: "true"
-    hajimari.io/icon: bucket
-    hajimari.io/appName: MinIO
-    hajimari.io/info: MinIO offers high-performance, S3 compatible object storage
 spec:
   ingressClassName: internal
   rules:

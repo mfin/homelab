@@ -41,11 +41,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: plex
-        hajimari.io/appName: Plex
-        hajimari.io/info: Personal media server
   persistence:
     config:
       enabled: true

@@ -67,8 +67,6 @@ apps:
     path: k8s/networking
   - name: external-services
     path: k8s/networking
-  - name: hajimari
-    path: k8s/selfhosted
   - name: paperless-ngx
     path: k8s/selfhosted
   - name: homebox

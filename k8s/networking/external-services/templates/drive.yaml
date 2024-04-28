@@ -17,9 +17,6 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    hajimari.io/enable: "true"
-    hajimari.io/icon: file
-    hajimari.io/appName: Drive
 spec:
   ingressClassName: external
   rules:

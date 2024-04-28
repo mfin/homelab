@@ -36,11 +36,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: mdi:database-eye
-        hajimari.io/appName: nocodb
-        hajimari.io/info: Open Source Airtable Alternative
   persistence:
     data:
       enabled: true

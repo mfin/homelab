@@ -25,11 +25,6 @@ app-template:
     main:
       enabled: true
       className: external
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: bookshelf
-        hajimari.io/appName: calibre-web
-        hajimari.io/info: Web app that offers a clean and intuitive interface for browsing, reading, and downloading eBooks using a valid Calibre database
   persistence:
     config:
       enabled: true

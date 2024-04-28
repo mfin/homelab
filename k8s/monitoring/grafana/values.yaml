@@ -19,11 +19,6 @@ grafana:
   ingress:
     enabled: true
     ingressClassName: internal
-    annotations:
-      hajimari.io/enable: "true"
-      hajimari.io/appName: Grafana
-      hajimari.io/info: Open source analytics & monitoring solution for every database
-      hajimari.io/icon: simple-icons:grafana
   testFramework:
     enabled: false
   grafana.ini:

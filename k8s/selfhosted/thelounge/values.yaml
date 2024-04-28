@@ -21,11 +21,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: sofa
-        hajimari.io/appName: thelounge
-        hajimari.io/info: The self-hosted web IRC client
   persistence:
     config:
       enabled: true

@@ -31,11 +31,6 @@ app-template:
     main:
       enabled: true
       className: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: chart-bar
-        hajimari.io/appName: Tautulli
-        hajimari.io/info: Monitor your Plex Media Server
   persistence:
     config:
       enabled: true

@@ -12,10 +12,6 @@ kube-prometheus-stack:
         nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
         nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
         nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
-        hajimari.io/enable: "true"
-        hajimari.io/icon: simple-icons:prometheus
-        hajimari.io/appName: Prometheus
-        hajimari.io/info: Open-source monitoring system with a dimensional data model, flexible query language, efficient time series database and modern alerting approach
     prometheusSpec:
       retention: 2d
       retentionSize: 6GB
@@ -44,10 +40,6 @@ kube-prometheus-stack:
         nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
         nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
         nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
-        hajimari.io/enable: "true"
-        hajimari.io/icon: alert-decagram-outline
-        hajimari.io/appName: alertmanager
-        hajimari.io/info: Handles alerts sent by client applications such as the Prometheus server
     config:
       global:
         resolve_timeout: 5m

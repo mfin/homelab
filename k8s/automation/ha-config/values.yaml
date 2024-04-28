@@ -46,10 +46,6 @@ app-template:
         nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local/api/verify
         nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
         nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
-        hajimari.io/appName: "HASS Config"
-        hajimari.io/icon: cib:visual-studio-code
-        hajimari.io/enable: "true"
-        hajimari.io/info: VS Code for HASS configuration editing
   persistence:
     config:
       enabled: true

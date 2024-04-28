@@ -31,11 +31,6 @@ argo-cd:
     ingress:
       enabled: true
       ingressClassName: internal
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: robot
-        hajimari.io/appName: ArgoCD
-        hajimari.io/info: Declarative, GitOps continuous delivery tool for Kubernetes
     metrics: &metrics
       enabled: true
       serviceMonitor:
