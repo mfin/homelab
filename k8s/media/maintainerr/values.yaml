@@ -1,0 +1,40 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/jorenn92/maintainerr
+            tag: 2.0.3
+          env:
+            TZ: Europe/Ljubljana
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 6246
+  ingress:
+    main:
+      enabled: true
+      className: internal
+  persistence:
+    config:
+      enabled: true
+      existingClaim: maintainerr
+      globalMounts:
+        - path: /opt/data
+
