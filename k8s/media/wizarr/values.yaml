@@ -1,0 +1,41 @@
+app-template:
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/wizarrrr/wizarr
+            tag: 3.5.1
+          env:
+            TZ: Europe/Ljubljana
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+  service:
+    main:
+      ports:
+        http:
+          port: 5690
+  ingress:
+    main:
+      enabled: true
+      className: internal
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: eye-circle
+        hajimari.io/appName: Wizarr
+        hajimari.io/info: The Free Media Invitation System
+  persistence:
+    config:
+      enabled: true
+      existingClaim: wizarr
+      globalMounts:
+        - path: /data/database
+

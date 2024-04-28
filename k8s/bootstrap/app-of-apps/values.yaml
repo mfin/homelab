@@ -168,3 +168,5 @@ apps:
     path: k8s/media
   - name: static
     path: k8s/selfhosted
+  - name: wizarr
+    path: k8s/media
