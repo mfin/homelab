@@ -6,7 +6,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/corentinth/it-tools
-            tag: latest@sha256:90b943818dd14a2cbfa57e91e276c7ff6081051fcc81b2a38bb5405ed66e87c7
+            tag: latest@sha256:b700015a43249e5370cbf167b79c373f488929d55128336015ccf2ec5bf9e7ec
           env:
             TZ: Europe/Ljubljana
           probes:
