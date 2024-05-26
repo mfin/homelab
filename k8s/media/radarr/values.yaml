@@ -49,9 +49,3 @@ app-template:
       path: /volume1/data
       globalMounts:
         - path: /data
-    remote:
-      enabled: true
-      type: hostPath
-      hostPath: /mnt/remote
-      globalMounts:
-        - path: /mnt/remote

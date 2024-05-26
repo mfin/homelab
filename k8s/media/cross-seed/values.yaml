@@ -3,7 +3,7 @@ app-template:
     main:
       annotations:
         reloader.stakater.com/auto: "true"
-      replicas: 1
+      replicas: 0
       type: statefulset
       containers:
         main:
@@ -37,9 +37,3 @@ app-template:
         - subPath: config.js
           path: /config/config.js
           readOnly: true
-    torrents:
-      enabled: true
-      type: hostPath
-      hostPath: /mnt/torrents
-      globalMounts:
-        - path: /mnt/torrents
