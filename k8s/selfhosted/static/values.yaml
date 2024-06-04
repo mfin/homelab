@@ -4,8 +4,9 @@ app-template:
       containers:
         main:
           image:
-            repository: nginx
-            tag: 1.25.5@sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c
+            repository: sigoden/dufs
+            tag: v0.41.0@sha256:d7b763283808bdcd44ab02cb83da149098a03d46d2ce3e7b720d401bb2c8f618
+          args: ["/data"]
       pod:
         securityContext:
           fsGroup: 1000
@@ -14,7 +15,7 @@ app-template:
     main:
       ports:
         http:
-          port: 80
+          port: 5000
   ingress:
     main:
       enabled: true
@@ -26,11 +27,3 @@ app-template:
       path: /volume1/data/static
       globalMounts:
         - path: /data
-    configmap:
-      enabled: true
-      type: configMap
-      name: nginx-config
-      globalMounts:
-        - path: /etc/nginx/nginx.conf
-          subPath: nginx.conf
-          readOnly: true
