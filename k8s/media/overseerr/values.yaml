@@ -32,7 +32,7 @@ app-template:
   ingress:
     main:
       enabled: true
-      className: external
+      className: media
   persistence:
     config:
       enabled: true
