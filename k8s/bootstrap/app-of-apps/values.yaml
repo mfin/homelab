@@ -172,3 +172,5 @@ apps:
     path: k8s/media
   - name: dns-media
     path: k8s/networking
+  - name: nginx-media
+    path: k8s/networking
