@@ -1,0 +1,7 @@
+apiVersion: v2
+name: dns-media
+version: 0.0.0
+dependencies:
+  - name: external-dns
+    version: 1.14.4
+    repository: https://kubernetes-sigs.github.io/external-dns/
