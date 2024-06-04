@@ -43,6 +43,9 @@ data:
         - domain: ["{{ .Values.authelia.navidromeDomain }}"]
           resources: ["^/metrics.*$"]
           policy: deny
+        - domain: ["{{ .Values.authelia.filebrowserDomain }}"]
+          resources: ["^/share.*$"]
+          policy: bypass
 
     session:
       domain: {{ .Values.authelia.domain }}
