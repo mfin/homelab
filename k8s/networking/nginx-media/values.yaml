@@ -9,7 +9,7 @@ ingress-nginx:
     ingressClassResource:
       name: media
       default: false
-      controllerValue: k8s.io/external
+      controllerValue: k8s.io/media
     admissionWebhooks:
       objectSelector:
         matchExpressions:
