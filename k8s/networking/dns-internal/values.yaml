@@ -12,8 +12,6 @@ external-dns:
         secretKeyRef:
           name: dns-internal-secret
           key: zone
-    - name: EXTERNAL_DNS_RFC2136_TSIG_AXFR
-      value: "false"
     - name: EXTERNAL_DNS_RFC2136_TSIG_KEYNAME
       value: externaldns
     - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
