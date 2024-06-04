@@ -1,0 +1,45 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dns
+  labels:
+    external: dns
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: dns
+subsets:
+  - addresses:
+      - ip: {{ .Values.dns.ip }}
+    ports:
+      - name: http
+        port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dns
+spec:
+  ingressClassName: internal
+  rules:
+  - host: dns.{{ .Values.default.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: dns
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - dns.{{ .Values.default.domain }}
