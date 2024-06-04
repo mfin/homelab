@@ -6,7 +6,7 @@ external-dns:
     - name: EXTERNAL_DNS_RFC2136_HOST
       value: "10.10.0.3"
     - name: EXTERNAL_DNS_RFC2136_PORT
-      value: "5355"
+      value: "5353"
     - name: EXTERNAL_DNS_RFC2136_ZONE
       valueFrom:
         secretKeyRef:
