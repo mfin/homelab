@@ -170,3 +170,5 @@ apps:
     path: k8s/media
   - name: maintainerr
     path: k8s/media
+  - name: public
+    path: k8s/selfhosted
