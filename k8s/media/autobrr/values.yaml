@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/autobrr/autobrr
-            tag: v1.41.0
+            tag: v1.42.0
           env:
             TZ: Europe/Ljubljana
           resources:
