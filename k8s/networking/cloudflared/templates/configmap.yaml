@@ -16,6 +16,10 @@ data:
         service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
         originRequest:
           originServerName: {{ .Values.homelab.cname }}
+      - hostname: "{{ .Values.media.domain }}"
+        service: "https://nginx-media-controller.nginx-media.svc.cluster.local"
+        originRequest:
+          originServerName: {{ .Values.media.cname }}
       - hostname: "*.{{ .Values.media.domain }}"
         service: "https://nginx-media-controller.nginx-media.svc.cluster.local"
         originRequest:
