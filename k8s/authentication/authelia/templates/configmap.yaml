@@ -44,7 +44,7 @@ data:
           resources: ["^/metrics.*$"]
           policy: deny
         - domain: ["{{ .Values.authelia.filebrowserDomain }}"]
-          resources: ["^/share.*$"]
+          resources: ["^/share.*$", "^/static.*$"]
           policy: bypass
 
     session:
