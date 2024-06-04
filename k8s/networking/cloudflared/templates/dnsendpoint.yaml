@@ -2,11 +2,23 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: cloudflared
+  name: cloudflared-external
   annotations:
-    external-dns.alpha.kubernetes.io/target: {{ .Values.cloudflared.cname }}
+    external-dns.alpha.kubernetes.io/target: {{ .Values.homelab.cname }}
 spec:
   endpoints:
-    - dnsName: {{ .Values.cloudflared.cname }}
+    - dnsName: {{ .Values.homelab.cname }}
+      recordType: CNAME
+      targets: ["{{ .Values.cloudflared.tunnelId }}.cfargotunnel.com"]
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: cloudflared-media
+  annotations:
+    external-dns.alpha.kubernetes.io/target: {{ .Values.media.cname }}
+spec:
+  endpoints:
+    - dnsName: {{ .Values.media.cname }}
       recordType: CNAME
       targets: ["{{ .Values.cloudflared.tunnelId }}.cfargotunnel.com"]

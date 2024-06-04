@@ -15,5 +15,11 @@ data:
       - hostname: "*.{{ .Values.homelab.domain }}"
         service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
         originRequest:
-          originServerName: {{ .Values.cloudflared.cname }}
+          originServerName: {{ .Values.homelab.cname }}
+      - service: http_status:404
+
+      - hostname: "*.{{ .Values.media.domain }}"
+        service: "https://nginx-media-controller.nginx-media.svc.cluster.local"
+        originRequest:
+          originServerName: {{ .Values.media.cname }}
       - service: http_status:404
