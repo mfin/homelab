@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/taxel/plextraktsync
-            tag: 0.29.14
+            tag: 0.30.10
           args:
             - watch
           env:
