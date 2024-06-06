@@ -17,8 +17,8 @@ argo-cd:
   configs:
     cm:
       kustomize.buildOptions: --enable-helm
-      exec.enabled: 'true'
-      statusbadge.enabled: 'true'
+      exec.enabled: true
+      statusbadge.enabled: true
       timeout.reconciliation: 0s
       helm.valuesFileSchemes: >-
         secrets+gpg-import, secrets+gpg-import-kubernetes,
