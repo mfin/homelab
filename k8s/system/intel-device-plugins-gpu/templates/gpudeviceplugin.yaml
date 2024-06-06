@@ -4,7 +4,7 @@ metadata:
   name: intel-gpu-plugin
 spec:
   image: intel/intel-gpu-plugin:0.30.0
-  initImage: intel/intel-gpu-initcontainer:0.29.0
+  initImage: intel/intel-gpu-initcontainer:0.30.0
   logLevel:  2
   sharedDevNum: 1
   preferredAllocationPolicy: none
