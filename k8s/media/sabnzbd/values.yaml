@@ -38,8 +38,6 @@ app-template:
             limits:
               memory: 6000Mi
       pod:
-        annotations:
-          setGateway: "true"
         securityContext:
           runAsUser: 1028
           runAsGroup: 100
