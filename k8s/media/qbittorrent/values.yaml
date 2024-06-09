@@ -30,6 +30,8 @@ app-template:
       ports:
         http:
           port: *port
+    bt:
+      ports:
         bt:
           type: LoadBalancer
           port: *port-bt
