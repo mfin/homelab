@@ -31,6 +31,7 @@ app-template:
         http:
           port: *port
         bt:
+          type: LoadBalancer
           port: *port-bt
   ingress:
     main:
