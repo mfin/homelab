@@ -31,9 +31,14 @@ app-template:
         http:
           port: *port
     bt:
+      controller: qbittorrent
+      type: LoadBalancer
       ports:
-        bt:
-          type: LoadBalancer
+        tcp:
+          protocol: TCP
+          port: *port-bt
+        udp:
+          protocol: UDP
           port: *port-bt
   ingress:
     main:
