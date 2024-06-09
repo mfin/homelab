@@ -57,8 +57,3 @@ app-template:
     config:
       enabled: true
       existingClaim: home-assistant
-    usb:
-      enabled: true
-      type: hostPath
-      hostPath: /dev/ttyUSB0
-      hostPathType: CharDevice
