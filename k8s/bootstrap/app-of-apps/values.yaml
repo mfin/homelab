@@ -31,10 +31,6 @@ apps:
     namespace: home-assistant
   - name: tika
     path: k8s/automation
-  - name: zigbee2mqtt
-    path: k8s/automation
-  - name: mosquitto
-    path: k8s/automation
   - name: bazarr
     path: k8s/media
   - name: overseerr

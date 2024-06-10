@@ -1,0 +1,47 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hass
+  labels:
+    external: hass
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8123
+    targetPort: 8123
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: hass
+subsets:
+  - addresses:
+      - ip: {{ .Values.hass.ip }}
+    ports:
+      - name: http
+        port: 8123
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hass
+  annotations:
+    external-dns.alpha.kubernetes.io/target: {{ .Values.default.target }}
+spec:
+  ingressClassName: external
+  rules:
+  - host: hass.{{ .Values.default.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: hass
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - hass.{{ .Values.default.domain }}
