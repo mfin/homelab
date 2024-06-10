@@ -40,7 +40,7 @@ app-template:
   ingress:
     main:
       enabled: true
-      className: external
+      className: internal
   serviceMonitor:
     main:
       enabled: true
