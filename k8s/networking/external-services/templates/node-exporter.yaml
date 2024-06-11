@@ -25,6 +25,19 @@ spec:
     port: {{ .Values.nodeExporter.pi.port }}
     targetPort: {{ .Values.nodeExporter.pi.port }}
 ---
+kind: Service
+apiVersion: v1
+metadata:
+  name: node-exporter-pve
+  labels:
+    external: node-exporter
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: {{ .Values.nodeExporter.pve.port }}
+    targetPort: {{ .Values.nodeExporter.pve.port }}
+---
 kind: Endpoints
 apiVersion: v1
 metadata:
@@ -46,6 +59,17 @@ subsets:
     ports:
       - name: metrics
         port: {{ .Values.nodeExporter.pi.port }}
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: node-exporter-pve
+subsets:
+  - addresses:
+      - ip: {{ .Values.nodeExporter.pve.ip }}
+    ports:
+      - name: metrics
+        port: {{ .Values.nodeExporter.pve.port }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
