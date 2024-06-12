@@ -41,18 +41,6 @@ app-template:
     main:
       enabled: true
       className: internal
-  serviceMonitor:
-    main:
-      enabled: true
-      endpoints:
-        - port: http
-          scheme: http
-          path: /api/prometheus
-          interval: 10s
-          scrapeTimeout: 10s
-          bearerTokenSecret:
-            name: home-assistant-token
-            key: token
   persistence:
     config:
       enabled: true

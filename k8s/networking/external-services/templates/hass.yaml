@@ -45,3 +45,27 @@ spec:
   tls:
   - hosts:
     - hass.{{ .Values.default.domain }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hass-token
+type: Opaque
+stringData:
+  token: {{ .Values.hass.token }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hass
+spec:
+  endpoints:
+  - bearerTokenSecret:
+      key: token
+      name: hass-token
+    path: /api/prometheus
+    port: http
+    scheme: http
+  selector:
+    matchLabels:
+      external: hass
