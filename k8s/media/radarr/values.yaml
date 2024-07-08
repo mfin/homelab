@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/radarr-develop
-            tag: 5.6.0.8846
+            tag: 5.8.1.8906
           env:
             TZ: Europe/Ljubljana
             RADARR__INSTANCE_NAME: Radarr
