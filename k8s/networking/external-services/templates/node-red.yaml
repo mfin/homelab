@@ -18,7 +18,7 @@ metadata:
   name: node-red
 subsets:
   - addresses:
-      - ip: {{ .Values.node-red.ip }}
+      - ip: {{ .Values."node-red".ip }}
     ports:
       - name: http
         port: 1880
