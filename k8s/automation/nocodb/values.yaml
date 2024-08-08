@@ -17,7 +17,7 @@ app-template:
         main:
           image:
             repository: nocodb/nocodb
-            tag: 0.251.1
+            tag: 0.252.0
           envFrom:
             - secretRef:
                 name: nocodb
