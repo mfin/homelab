@@ -44,7 +44,7 @@ argo-cd:
   repoServer:
     image:
       repository: ghcr.io/mfin/argocd
-      tag: 2.12.0@sha256:233292b64f55cfb5213c72f4c16146406876c22b4b73edbdfc3a94dda0d84fb3
+      tag: 2.12.0@sha256:899d50927182ca6d798422ddf7ceeb4e8d3540b07c97c65f2e6713e1a17ad742
     metrics: *metrics
     rbac:
     - apiGroups:
