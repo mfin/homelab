@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/bazarr
-            tag: 1.4.3
+            tag: 1.4.4
           env:
             TZ: Europe/Ljubljana
           resources:
