@@ -30,8 +30,6 @@ apps:
     path: k8s/media
   - name: overseerr
     path: k8s/media
-  - name: plex
-    path: k8s/media
   - name: prowlarr
     path: k8s/media
   - name: qbittorrent
