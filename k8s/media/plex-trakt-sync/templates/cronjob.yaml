@@ -13,9 +13,9 @@ spec:
               - sync
               env:
               - name: PLEX_BASEURL
-                value: http://plex.plex.svc.cluster.local:32400
+                value: "{{ .Values.plex.baseurl }}"
               - name: PLEX_LOCALURL
-                value: http://plex.plex.svc.cluster.local:32400
+                value: "{{ .Values.plex.baseurl }}"
               envFrom:
               - secretRef:
                   name: plex-trakt-sync
