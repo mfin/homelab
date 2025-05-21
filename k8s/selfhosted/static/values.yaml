@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: sigoden/dufs
-            tag: v0.42.0@sha256:2d1070cab68881111caf367136a6a10fc9c8353b548d4429c0b2e250d45a0b0b
+            tag: v0.43.0@sha256:484b37b767e8066addea620ff40011a28a8709b6f8114405c8c974927411fb68
           args: ["/data"]
       pod:
         securityContext:
