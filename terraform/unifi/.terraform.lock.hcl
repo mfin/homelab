@@ -2,23 +2,23 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/carlpett/sops" {
-  version     = "1.0.0"
-  constraints = "1.0.0"
+  version     = "1.2.1"
+  constraints = "1.2.1"
   hashes = [
-    "h1:Ef2u9JLvoQv2TNT6rpuaKQu7Ps5teZKfGSxpoBMMEOk=",
-    "h1:KxBW+RXcglqQv01N0fn/ei7kWgHF4kE3+Yc7a7ggfWI=",
-    "h1:TH4f9LP2BmNitUL0c7I5aRMc8J31aetxTNDnFPYTllc=",
-    "h1:eZHDYGcrxRCePZ+YnQD5774/LD7aROyiJb56ypsQFfA=",
-    "h1:eyhWU7mN5Q++hYu7j/w8aACehkiaFcdYp84pEF1n7XM=",
-    "h1:tnN2Mgl0NUF3cg7a0HtGmtOhHcG+tkaT6ncOPRuA9l8=",
-    "h1:xkTdN4nYt3PM5Sx09j/g+vnFWU2njQCO6CXza034R1I=",
-    "zh:064e63ea800cd1a8e575064097bc7de6fd5faa8ad50dbb3f2f9d8a3ebc9d7b97",
-    "zh:0663900085949d2faf24c170c7cdfbf76e545797915cc331da8304144c02bf27",
-    "zh:2ff26c7e5ee356c30791a12dd8e114c6237bd873d09e52805cb30dd5d758ed23",
-    "zh:44211fa474112ad0c9fcdae03f13ec7c75cdefd3ab29979b99cb834208055593",
-    "zh:6c3ab441c12b9679ad1dcac580d1ee7782f0d94efe6da6e983435ed39335cd3f",
-    "zh:8924cc939b52382ef042dc38bde93cdf438ff0aeab5e1801fbd198f05b80cd47",
-    "zh:ebc189ce22c23b903399f71e33d465001a79d7de7f7bf115c7763fcf794f4b58",
+    "h1:///S56GB06MUj2vDPOwBk55jskBu4iWsw68WsCDd71g=",
+    "h1:H+eGZINW9G2+sqUK/W/pdK8K/XAeC9OOLcM/2IO0yxs=",
+    "h1:K9mA/Gc4hsPJllLlX0jn1Ow33/lx8CTr07XC37J9fjw=",
+    "h1:MRTir9C2SjaCxTP30gy3C+9DXvbsARglCUMEfaDNAUk=",
+    "h1:N3MLxsF5pKyXTaP4NklxZ/kVEB1cp5O5UPPPPgyVUmk=",
+    "h1:c/KxiJtTPvHgsiFVGCTC4qRRyY7WjlDtHLjB+R5coFY=",
+    "h1:ke45CBhaWr+Pp8TeSv9Vfl4auvAUQyhFbHH4/RiGj0A=",
+    "zh:0d8d77073b46f92231dca5fa96bda3ccfefe7a92f976ee79abf4ca63430a83bf",
+    "zh:4d618d46b83354e37679219f6181a86789e89d7900f39fa582d59a9a233c5c37",
+    "zh:4ee8ef5241be752ae7ab3096f772a0714ce905572439e2381d5302c9818c4e3d",
+    "zh:5a6a880ba939d10d14068ace595ddf0c132add407a4a8b56af3e882171a554af",
+    "zh:79e36cdf201c8d32f18ae00fbde2286d1b6dcb4f8d4186725bdb2c69126b7a54",
+    "zh:7c3a90a71d968bc962d469b70c36cb08a64e654d606bec0a20c9eab4b8fcc9e9",
+    "zh:9cb28d0175c88a6c51943049963a70f2df8150e06f948cf22822e5e773e66164",
   ]
 }
 
