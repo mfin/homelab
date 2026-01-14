@@ -20,7 +20,7 @@ cilium:
       grafana_folder: Cilium
   rollOutCiliumPods: true
   containerRuntime:
-    integration: containerd
+    # integration: containerd
     socketPath: /var/run/k3s/containerd/containerd.sock
   autoDirectNodeRoutes: true
   routingMode: native
