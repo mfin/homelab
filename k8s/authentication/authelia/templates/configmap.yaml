@@ -26,7 +26,7 @@ data:
           display_name: givenName
           username: uid
           mail: mail
-        implementation: custom
+        implementation: glauth
         address: ldap://glauth.glauth.svc.cluster.local
         timeout: 5s
         start_tls: false
