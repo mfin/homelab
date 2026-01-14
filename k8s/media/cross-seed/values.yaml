@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/cross-seed/cross-seed
-            tag: 5.9.2
+            tag: 6.13.6
           env:
             TZ: Europe/Ljubljana
           args:
