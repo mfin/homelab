@@ -21,7 +21,7 @@ data:
       password_reset:
         disable: true
       ldap:
-        attributes;
+        attributes:
           group_name: cn
           display_name: givenName
           username: uid
