@@ -2,7 +2,7 @@
 pkgs.mkShell {
   name = "dev";
   nativeBuildInputs = with pkgs; [
-    nixFlakes
+    nixVersions.stable
     go-task
     envsubst
   ];
