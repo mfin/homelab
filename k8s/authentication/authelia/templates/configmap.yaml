@@ -73,8 +73,10 @@ data:
 
     identity_providers:
       oidc:
-        jwks: |-
-{{ .Values.authelia.issuerPrivateKey | indent 10 }}
+        jwks:
+          - key_id: default
+            key: |-
+{{ .Values.authelia.issuerPrivateKey | indent 12 }}
         cors:
           endpoints: ["authorization", "token", "revocation", "introspection"]
           allowed_origins_from_client_redirect_uris: true
