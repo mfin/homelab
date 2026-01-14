@@ -45,3 +45,11 @@ data:
         primarygroup = 5002
         othergroups = [ 5001 ]
         passbcrypt = "{{ .Values.glauth.mfinPassword }}"
+    [[users]]
+        name = "{{ .Values.glauth.authelia.userName }}"
+        mail = "{{ .Values.glauth.authelia.email }}"
+        givenname = "{{ .Values.glauth.authelia.firstName }}"
+        sn = "{{ .Values.glauth.authelia.lastName }}"
+        uidnumber = 6002
+        primarygroup = 5001
+        passbcrypt = "{{ .Values.glauth.authelia.password }}"
