@@ -15,12 +15,12 @@ terraform {
 
     http = {
       source  = "hashicorp/http"
-      version = "3.4.5"
+      version = "3.5.0"
     }
 
     sops = {
       source  = "carlpett/sops"
-      version = "1.0.0"
+      version = "1.3.0"
     }
   }
   required_version = ">= 1.3.0"
