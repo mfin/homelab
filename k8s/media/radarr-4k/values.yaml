@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/radarr-develop
-            tag: 5.11.0.9244
+            tag: 5.20.1.9773
           env:
             TZ: Europe/Ljubljana
             RADARR__INSTANCE_NAME: Radarr 4K
