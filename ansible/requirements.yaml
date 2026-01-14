@@ -3,6 +3,6 @@ collections:
   - name: community.general
     version: 9.2.0
   - name: community.sops
-    version: 1.8.1
+    version: 1.9.5
   - name: ansible.posix
     version: 1.6.0
