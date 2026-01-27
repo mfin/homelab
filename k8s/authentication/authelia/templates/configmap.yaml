@@ -36,6 +36,7 @@ data:
         groups_filter: (&(memberUid={username})(objectClass=posixGroup))
         user: "{{ .Values.authelia.user }}"
         password: "{{ .Values.authelia.password }}"
+        permit_unauthenticated_bind: false
 
     access_control:
       default_policy: two_factor
