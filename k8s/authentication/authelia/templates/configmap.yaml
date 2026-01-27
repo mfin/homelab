@@ -14,6 +14,9 @@ data:
       local:
         path: /db/db.sqlite3
 
+    log:
+      level: debug
+
     server:
       port: 80
       disable_healthcheck: true
