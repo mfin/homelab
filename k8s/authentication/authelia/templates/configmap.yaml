@@ -20,23 +20,9 @@ data:
     authentication_backend:
       password_reset:
         disable: true
-      ldap:
-        attributes:
-          group_name: cn
-          display_name: givenName
-          username: uid
-          mail: mail
-        implementation: custom
-        address: ldap://glauth.glauth.svc.cluster.local
-        timeout: 5s
-        start_tls: false
-        base_dn: "{{ .Values.authelia.baseDN }}"
-        additional_users_dn: OU=users
-        users_filter: (&({username_attribute}={input})(objectClass=posixAccount))
-        groups_filter: (&(memberUid={username})(objectClass=posixGroup))
-        user: "{{ .Values.authelia.user }}"
-        password: "{{ .Values.authelia.password }}"
-        permit_unauthenticated_bind: false
+      file:
+        path: /app/config/users.yaml
+        watch: false
 
     access_control:
       default_policy: two_factor

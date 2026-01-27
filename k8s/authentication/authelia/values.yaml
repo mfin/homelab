@@ -69,6 +69,14 @@ app-template:
         - path: /etc/authelia/config.yaml
           subPath: config.yaml
           readOnly: false
+    users:
+      enabled: true
+      name: authelia-users
+      type: configMap
+      globalMounts:
+        - subPath: users.yaml
+          path: /app/config/users.yaml
+          readOnly: true
     db:
       enabled: true
       existingClaim: authelia
