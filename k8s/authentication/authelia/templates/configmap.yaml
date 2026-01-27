@@ -6,9 +6,11 @@ data:
   config.yaml: |-
     theme: auto
     default_2fa_method: totp
+
     identity_validation:
       reset_password:
         jwt_secret: "{{ .Values.authelia.jwtSecret }}"
+
     storage:
       encryption_key: "{{ .Values.authelia.encryptionKey }}"
       local:
@@ -18,15 +20,11 @@ data:
       level: debug
 
     server:
-      port: 80
-      disable_healthcheck: true
+      address: tcp://:9091
 
     authentication_backend:
-      password_reset:
-        disable: false
       file:
         path: /etc/authelia/users.yaml
-        watch: false
 
     access_control:
       default_policy: two_factor
