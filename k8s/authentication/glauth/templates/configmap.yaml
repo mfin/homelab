@@ -47,9 +47,9 @@ data:
         passbcrypt = "{{ .Values.glauth.mfinPassword }}"
     [[users]]
         name = "{{ .Values.glauth.authelia.username }}"
-        mail = "{{ .Values.glauth.authelia.email }}"
-        givenname = "{{ .Values.glauth.authelia.firstName }}"
-        sn = "{{ .Values.glauth.authelia.lastName }}"
-        uidnumber = 6002
-        primarygroup = 5001
+        uidnumber = 6000
+        primarygroup = 5000
         passbcrypt = "{{ .Values.glauth.authelia.password }}"
+        [[users.capabilities]]
+            action = "search"
+            object = "*"
