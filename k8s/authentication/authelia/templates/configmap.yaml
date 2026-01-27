@@ -15,7 +15,7 @@ data:
         path: /db/db.sqlite3
 
     server:
-      address: tcp://:80/
+      port: 80
       disable_healthcheck: true
 
     authentication_backend:
