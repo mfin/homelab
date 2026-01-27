@@ -11,7 +11,7 @@ app-template:
             tag: v2.2.0@sha256:84d20a801692b9635f481522df2672a7aae522726c30953dae52e17fc2696b27
           env:
             TZ: Europe/Ljubljana
-            TRUST_PROXY: "false"
+            TRUST_PROXY: "true"
             MAXMIND_LICENSE_KEY: ""
             PUID: "1028"
             PGID: "100"
