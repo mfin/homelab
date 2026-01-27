@@ -73,7 +73,7 @@ argo-cd:
     metrics: *metrics
 
   redisSecretInit:
-    enabled: false
+    enabled: true
 
   notifications:
     metrics: *metrics
