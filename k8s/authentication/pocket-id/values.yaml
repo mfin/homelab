@@ -34,6 +34,8 @@ app-template:
       enabled: true
       className: internal
   persistence:
-    db:
+    data:
       enabled: true
       existingClaim: pocket-id
+      globalMounts:
+        - path: /app/data
