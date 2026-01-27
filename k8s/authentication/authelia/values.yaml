@@ -18,7 +18,7 @@ app-template:
               spec:
                 httpGet:
                   path: /api/health
-                  port: &port 9091
+                  port: &port 80
                 initialDelaySeconds: 0
                 periodSeconds: 10
                 timeoutSeconds: 1
