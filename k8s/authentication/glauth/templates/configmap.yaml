@@ -46,7 +46,7 @@ data:
         othergroups = [ 5001 ]
         passbcrypt = "{{ .Values.glauth.mfinPassword }}"
     [[users]]
-        name = "{{ .Values.glauth.authelia.userName }}"
+        name = "{{ .Values.glauth.authelia.username }}"
         mail = "{{ .Values.glauth.authelia.email }}"
         givenname = "{{ .Values.glauth.authelia.firstName }}"
         sn = "{{ .Values.glauth.authelia.lastName }}"
