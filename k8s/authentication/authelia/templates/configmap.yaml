@@ -15,7 +15,7 @@ data:
         path: /db/db.sqlite3
 
     server:
-      port: 80
+      address: tcp://:80/
 
     authentication_backend:
       password_reset:
