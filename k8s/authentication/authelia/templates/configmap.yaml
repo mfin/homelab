@@ -6,6 +6,7 @@ data:
   config.yaml: |-
     server:
       port: 80
+      address: 0.0.0.0
 
     default_2fa_method: totp
 
