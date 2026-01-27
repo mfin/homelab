@@ -27,7 +27,7 @@ argo-cd:
         https
       rbac:
         policy.csv: |
-          g, admin, role:admin
+          g, argocd_admins, role:admin
   server:
     extraArgs:
       - --insecure
