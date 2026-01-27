@@ -14,13 +14,13 @@ data:
       local:
         path: /db/db.sqlite3
 
-    # server:
-    #   port: 80
-    #   disable_healthcheck: true
+    server:
+      port: 80
+      disable_healthcheck: true
 
     authentication_backend:
       password_reset:
-        disable: true
+        disable: false
       file:
         path: /etc/authelia/users.yaml
         watch: false
