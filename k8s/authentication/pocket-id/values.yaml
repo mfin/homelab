@@ -1,0 +1,55 @@
+app-template:
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/pocket-id/pocket-id
+            tag: v2.2.0@sha256:84d20a801692b9635f481522df2672a7aae522726c30953dae52e17fc2696b27
+          env:
+            TZ: Europe/Ljubljana
+            TRUST_PROXY: "false"
+            MAXMIND_LICENSE_KEY: ""
+            PUID: "1028"
+            PGID: "100"
+          envFrom:
+            - secretRef:
+                name: pocket-id-secret
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 1411
+  ingress:
+    main:
+      enabled: true
+      className: internal
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: authelia-config
+      globalMounts:
+        - path: /config/configuration.yml
+          subPath: config.yaml
+          readOnly: false
+    users:
+      enabled: true
+      name: authelia-users
+      type: configMap
+      globalMounts:
+        - subPath: users.yaml
+          path: /config/users.yml
+          readOnly: true
+    db:
+      enabled: true
+      existingClaim: pocket-id

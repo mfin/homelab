@@ -20,6 +20,8 @@ apps:
     path: k8s/authentication
   - name: glauth
     path: k8s/authentication
+  - name: pocket-id
+    path: k8s/authentication
   - name: flaresolverr
     path: k8s/automation
   - name: gotenberg
