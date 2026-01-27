@@ -23,7 +23,7 @@ data:
 
     authentication_backend:
       file:
-        path: /etc/authelia/users.yaml
+        path: /config/users.yml
 
     access_control:
       default_policy: two_factor

@@ -9,7 +9,6 @@ app-template:
           image:
             repository: ghcr.io/authelia/authelia
             tag: 4.39.15@sha256:d23ee3c721d465b4749cc58541cda4aebe5aa6f19d7b5ce0afebb44ebee69591
-          args: ["--config", "/etc/authelia/config.yaml"]
           env:
             TZ: Europe/Ljubljana
           probes:
@@ -66,7 +65,7 @@ app-template:
       type: configMap
       name: authelia-config
       globalMounts:
-        - path: /etc/authelia/config.yaml
+        - path: /config/configuration.yml
           subPath: config.yaml
           readOnly: false
     users:
@@ -75,7 +74,7 @@ app-template:
       type: configMap
       globalMounts:
         - subPath: users.yaml
-          path: /etc/authelia/users.yaml
+          path: /config/users.yml
           readOnly: true
     db:
       enabled: true
