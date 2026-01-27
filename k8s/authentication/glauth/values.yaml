@@ -12,8 +12,8 @@ app-template:
       containers:
         main:
           image:
-            repository: docker.io/glauth/glauth
-            tag: v2.2.0-RC1 # TODO: does it match renovate?
+            repository: ghcr.io/glauth/glauth
+            tag: v2.4.0@sha256:66095183015481f8c2ac45d79cfceedf3b12a308659cb863e0de3b80995a29ad
           command: ["/app/glauth", "-c", "/etc/glauth/config.toml"]
           resources:
             requests:
