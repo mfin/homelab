@@ -20,8 +20,8 @@ app-template:
                   path: /api/health
                   port: &port 80
                 initialDelaySeconds: 0
-                periodSeconds: 10
-                timeoutSeconds: 1
+                periodSeconds: 20
+                timeoutSeconds: 5
                 failureThreshold: 3
             readiness: *probes
             startup:
