@@ -75,7 +75,7 @@ app-template:
       type: configMap
       globalMounts:
         - subPath: users.yaml
-          path: /app/config/users.yaml
+          path: /etc/authelia/users.yaml
           readOnly: true
     db:
       enabled: true

@@ -21,7 +21,7 @@ data:
       password_reset:
         disable: true
       file:
-        path: /app/config/users.yaml
+        path: /etc/authelia/users.yaml
         watch: false
 
     access_control:
