@@ -16,6 +16,7 @@ data:
 
     server:
       address: tcp://:80/
+      disable_healthcheck: true
 
     authentication_backend:
       password_reset:
