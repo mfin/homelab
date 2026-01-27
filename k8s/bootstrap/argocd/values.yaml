@@ -25,6 +25,9 @@ argo-cd:
         secrets+age-import, secrets+age-import-kubernetes,
         secrets,secrets+literal,
         https
+      rbac:
+        policy.csv: |
+          g, admin, role:admin
   server:
     extraArgs:
       - --insecure
