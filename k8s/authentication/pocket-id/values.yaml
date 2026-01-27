@@ -34,22 +34,6 @@ app-template:
       enabled: true
       className: internal
   persistence:
-    config:
-      enabled: true
-      type: configMap
-      name: authelia-config
-      globalMounts:
-        - path: /config/configuration.yml
-          subPath: config.yaml
-          readOnly: false
-    users:
-      enabled: true
-      name: authelia-users
-      type: configMap
-      globalMounts:
-        - subPath: users.yaml
-          path: /config/users.yml
-          readOnly: true
     db:
       enabled: true
       existingClaim: pocket-id
