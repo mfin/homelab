@@ -4,7 +4,9 @@ metadata:
   name: authelia-config
 data:
   config.yaml: |-
-    theme: auto
+    server:
+      address: tcp://:9091
+
     default_2fa_method: totp
 
     identity_validation:
@@ -18,9 +20,6 @@ data:
 
     log:
       level: debug
-
-    server:
-      address: tcp://:9091
 
     authentication_backend:
       file:
