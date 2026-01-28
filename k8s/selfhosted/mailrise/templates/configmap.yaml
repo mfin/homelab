@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mailrise-config
-data:
-  mailrise.conf: |
-{{ .Values.mailrise.config | indent 4 }}
