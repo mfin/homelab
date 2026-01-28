@@ -50,8 +50,6 @@ apps:
     path: k8s/system
   - name: cert-manager
     path: k8s/networking
-  - name: external-services
-    path: k8s/networking
   - name: paperless-ngx
     path: k8s/selfhosted
   - name: homebox
