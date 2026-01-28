@@ -6,8 +6,8 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/onedr0p/sonarr-develop
-            tag: 4.0.14.2938
+            repository: ghcr.io/home-operations/sonarr
+            tag: 4.0.16.2946@sha256:22651c750eedb091f6d76ade95dbecae0eeafe2b55432c3b8d8b042e8745f344
           env:
             TZ: Europe/Ljubljana
             SONARR__INSTANCE_NAME: Sonarr
