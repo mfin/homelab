@@ -1,0 +1,35 @@
+app-template:
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/steveiliop56/tinyauth
+            tag: v4.1.0@sha256:402ee231204757a3e01b4aaba9e4aa09a3c7c4680a82bc47135632ec8864b8c8
+          env:
+            TZ: Europe/Ljubljana
+          envFrom:
+            - secretRef:
+                name: tinyauth-secret
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 3000
+  ingress:
+    main:
+      enabled: true
+      className: internal
+  persistence:
+    data:
+      enabled: true
+      existingClaim: tinyauth
