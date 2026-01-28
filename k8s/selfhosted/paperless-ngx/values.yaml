@@ -28,10 +28,7 @@ app-template:
             PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
             PAPERLESS_OCR_LANGUAGES: slv eng
             PAPERLESS_OCR_LANGUAGE: slv+eng
-            # PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
-            PAPERLESS_APPS: allauth.socialaccount.providers.pocketid
-            PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
-            PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
+            PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
             PAPERLESS_PORT: 8000
             PAPERLESS_REDIS: redis://redis-paperless.redis.svc.cluster.local:6379
             PAPERLESS_TIKA_ENABLED: 1
