@@ -1,0 +1,3 @@
+external-secrets:
+  bitwarden-sdk-server:
+    enabled: true

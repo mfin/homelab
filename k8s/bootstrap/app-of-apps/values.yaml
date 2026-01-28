@@ -48,6 +48,8 @@ apps:
     path: k8s/system
   - name: vpa
     path: k8s/system
+  - name: external-secrets
+    path: k8s/system
   - name: cert-manager
     path: k8s/networking
   - name: paperless-ngx
