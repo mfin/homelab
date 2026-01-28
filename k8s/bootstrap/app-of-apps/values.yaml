@@ -122,8 +122,6 @@ apps:
     path: k8s/media
   - name: cross-seed
     path: k8s/media
-  - name: omegabrr
-    path: k8s/media
   - name: thelounge
     path: k8s/selfhosted
   - name: n8n
