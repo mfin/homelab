@@ -66,6 +66,8 @@ app-template:
       annotations:
         nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
         nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
+        nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+        nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
   persistence:
     data:
       enabled: true
