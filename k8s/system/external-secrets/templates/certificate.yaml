@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: bitwarden-tls-certs
+  name: external-secrets-bitwarden-cert
 spec:
   secretName: external-secrets-bitwarden-cert
   dnsNames:
-    - bitwarden-sdk-server.default.svc.cluster.local
-    - external-secrets-bitwarden-sdk-server.default.svc.cluster.local
+    - bitwarden-sdk-server.external-secrets.svc.cluster.local
+    - external-secrets-bitwarden-sdk-server.external-secrets.svc.cluster.local
     - localhost
   ipAddresses:
     - 127.0.0.1
