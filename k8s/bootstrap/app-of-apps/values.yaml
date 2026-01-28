@@ -75,6 +75,9 @@ apps:
       - /metadata/annotations/deprecated.daemonset.template.generation
   - name: intel-device-plugins-gpu
     path: k8s/system
+  - name: kro
+    path: k8s/system
+    namespace: kro-system
   - name: tautulli
     path: k8s/media
   - name: kube-prometheus-stack
