@@ -34,6 +34,16 @@ app-template:
     main:
       enabled: true
       className: internal
+      hosts:
+        - host: pocket.mfin.app
+          paths:
+            - path: /
+              service:
+                identifier: main
+                port: http
+      tls:
+        - hosts:
+          - pocket.mfin.app
   persistence:
     data:
       enabled: true
