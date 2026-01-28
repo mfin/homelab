@@ -4,7 +4,7 @@ metadata:
   name: bitwarden-tls-certs
   namespace: default
 spec:
-  secretName: bitwarden-tls-certs
+  secretName: external-secrets-bitwarden-cert
   dnsNames:
     - bitwarden-sdk-server.default.svc.cluster.local
     - external-secrets-bitwarden-sdk-server.default.svc.cluster.local
