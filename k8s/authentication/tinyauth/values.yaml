@@ -34,6 +34,16 @@ app-template:
     main:
       enabled: true
       className: internal
+      hosts:
+        - host: auth.mfin.app
+          paths:
+            - path: /
+              service:
+                identifier: main
+                port: http
+      tls:
+        - hosts:
+          - auth.mfin.app
   persistence:
     data:
       enabled: true
