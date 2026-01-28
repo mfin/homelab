@@ -12,7 +12,7 @@ metadata:
 spec:
   commonName: cert-manager-bitwarden-tls
   isCA: true
-  secretName: bitwarden-tls-certs
+  secretName: bitwarden-bootstrap-certificate
   subject:
     organizations:
       - external-secrets.io
@@ -38,4 +38,5 @@ metadata:
   name: bitwarden-certificate-issuer
 spec:
   ca:
-    secretName: bitwarden-tls-certs
+    secretName: bitwarden-bootstrap-certificate
+    namespace: external-secrets
