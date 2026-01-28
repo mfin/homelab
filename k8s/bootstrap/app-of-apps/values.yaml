@@ -74,8 +74,6 @@ apps:
     path: k8s/monitoring
   - name: cloudflared
     path: k8s/networking
-  - name: cloudflare-ddns
-    path: k8s/networking
   - name: grafana
     path: k8s/monitoring
   - name: unpoller
