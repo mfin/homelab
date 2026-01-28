@@ -44,19 +44,8 @@ pod-gateway:
     netshoot:
       enabled: true
 
-  publicPorts:
-    - IP: 10
-      hostname: qbittorrent-0
-      ports:
-        - port: 53392
-          type: udp
-        - port: 53392
-          type: tcp
-
   routed_namespaces:
-    - qbittorrent
     - prowlarr
-    - sabnzbd
 
   settings:
     NOT_ROUTED_TO_GATEWAY_CIDRS: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16

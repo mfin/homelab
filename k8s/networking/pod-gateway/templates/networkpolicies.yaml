@@ -44,11 +44,7 @@ spec:
   egress:
     - toEndpoints:
         - matchLabels:
-            app.kubernetes.io/name: sabnzbd
-        - matchLabels:
             app.kubernetes.io/name: prowlarr
-        - matchLabels:
-            app.kubernetes.io/name: qbittorrent
     - toPorts:
         - ports:
             - port: "8472"
@@ -56,11 +52,7 @@ spec:
   ingress:
     - fromEndpoints:
         - matchLabels:
-            app.kubernetes.io/name: sabnzbd
-        - matchLabels:
             app.kubernetes.io/name: prowlarr
-        - matchLabels:
-            app.kubernetes.io/name: qbittorrent
     - toPorts:
         - ports:
             - port: "8472"

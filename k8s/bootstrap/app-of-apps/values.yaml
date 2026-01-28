@@ -32,8 +32,6 @@ apps:
     path: k8s/media
   - name: prowlarr
     path: k8s/media
-  - name: qbittorrent
-    path: k8s/media
   - name: radarr
     path: k8s/media
   - name: radarr-4k
@@ -44,8 +42,6 @@ apps:
     path: k8s/media
   - name: intel-device-plugins-operator
     path: k8s/system
-  - name: mailrise
-    path: k8s/selfhosted
   - name: reflector
     path: k8s/system
   - name: reloader
@@ -59,8 +55,6 @@ apps:
   - name: paperless-ngx
     path: k8s/selfhosted
   - name: homebox
-    path: k8s/selfhosted
-  - name: whoami
     path: k8s/selfhosted
   - name: redis
     path: k8s/storage
@@ -100,10 +94,6 @@ apps:
     path: k8s/monitoring
   - name: smartctl-exporter
     path: k8s/monitoring
-  - name: xteve
-    path: k8s/media
-  - name: sabnzbd
-    path: k8s/media
   - name: snapshot-controller
     path: k8s/storage
   - name: volsync
@@ -126,8 +116,6 @@ apps:
       kind: Certificate
       jsonPointers:
       - /spec/duration
-  - name: apprise-api
-    path: k8s/automation
   - name: lidarr
     path: k8s/media
   - name: filebrowser
@@ -152,14 +140,6 @@ apps:
     path: k8s/networking
   - name: nginx-external
     path: k8s/networking
-  - name: it-tools
-    path: k8s/selfhosted
-  - name: static
-    path: k8s/selfhosted
-  - name: wizarr
-    path: k8s/media
-  - name: maintainerr
-    path: k8s/media
   - name: dns-media
     path: k8s/networking
   - name: nginx-media
