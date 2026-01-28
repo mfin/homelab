@@ -6,8 +6,8 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/onedr0p/radarr-develop
-            tag: 5.20.1.9773
+            repository: ghcr.io/home-operations/radarr
+            tag: 6.1.1@sha256:5e08c0eefd2770d1d29395c4f84fe5bf7dfc3a986598021306a5d8ac017a3989
           env:
             TZ: Europe/Ljubljana
             RADARR__INSTANCE_NAME: Radarr

@@ -8,7 +8,7 @@
       "automergeType": "branch",
       "ignoreTests": true,
       "matchUpdateTypes": ["digest"],
-      "matchPackagePattern": ["ghcr.io/onedr0p"]
+      "matchPackagePattern": ["ghcr.io/home-operations"]
     },
     {
       "description": "Auto merge GitHub Actions",
