@@ -39,4 +39,3 @@ metadata:
 spec:
   ca:
     secretName: bitwarden-bootstrap-certificate
-    namespace: external-secrets
