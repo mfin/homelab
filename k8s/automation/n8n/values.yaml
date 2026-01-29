@@ -48,7 +48,10 @@ app-template:
       ports:
         http:
           port: *port
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - n8n.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway

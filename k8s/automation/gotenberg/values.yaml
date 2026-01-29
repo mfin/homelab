@@ -22,7 +22,10 @@ app-template:
       ports:
         http:
           port: 3000
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - gotenberg.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
