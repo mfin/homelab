@@ -6,7 +6,7 @@ spec:
   targetSelectors:
     - kind: HTTPRoute
       matchLabels:
-        auth.mfin.app/enabled: true
+        auth.mfin.app/enabled: "true"
   oidc:
     provider:
       issuer: "https://accounts.google.com"
