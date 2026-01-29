@@ -29,10 +29,13 @@ app-template:
       ports:
         http:
           port: 80
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - autobrr.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
