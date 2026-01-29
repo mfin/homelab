@@ -32,10 +32,13 @@ app-template:
       ports:
         http:
           port: 80
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - nocodb.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     data:
       enabled: true
