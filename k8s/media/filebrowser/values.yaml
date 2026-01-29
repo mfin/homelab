@@ -51,7 +51,7 @@ app-template:
   route:
     main:
       hostnames:
-        - filebrowser.mfin.app
+        - files.mfin.app
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
