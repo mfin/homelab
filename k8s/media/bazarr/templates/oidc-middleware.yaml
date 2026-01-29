@@ -4,7 +4,8 @@ metadata:
   name: oidc-middleware
 spec:
   targetRefs:
-    - kind: HTTPRoute
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
       name: bazarr
   oidc:
     provider:
