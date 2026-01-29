@@ -30,9 +30,16 @@ app-template:
       ports:
         http:
           port: 3000
+  route:
+    main:
+      hostnames:
+        - auth.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   ingress:
     main:
-      enabled: true
+      enabled: false
       className: internal
       hosts:
         - host: auth.mfin.app

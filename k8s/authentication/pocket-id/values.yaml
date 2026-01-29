@@ -30,9 +30,16 @@ app-template:
       ports:
         http:
           port: 1411
+  route:
+    main:
+      hostnames:
+        - pocket.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   ingress:
     main:
-      enabled: true
+      enabled: false
       className: internal
       hosts:
         - host: pocket.mfin.app
