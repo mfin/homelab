@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: oidc-middleware
+spec:
+  targetSelectors:
+    - kind: HTTPRoute
+      matchLabels:
+        auth.mfin.app/enabled: true
+  oidc:
+    provider:
+      issuer: "https://accounts.google.com"
+    clientID: "envoy-gateway"
+    clientSecret:
+      name: "my-app-client-secret"
+    redirectURL: "https://www.example.com:8443/myapp/oauth2/callback"
+    logoutPath: "/myapp/logout"
+    cookieDomain: "mfin.app"
