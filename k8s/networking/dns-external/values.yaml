@@ -12,11 +12,10 @@ external-dns:
   extraArgs:
     - --cloudflare-proxied
     - --managed-record-types=CNAME
-    - --annotation-filter=external-dns.alpha.kubernetes.io/target
     - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
     - --crd-source-kind=DNSEndpoint
 
-  sources: ["crd", "ingress", "gateway-httproute"]
+  sources: ["crd", "ingress", "gateway-httproute", "service"]
   txtPrefix: k8s.
   txtOwnerId: default
 
