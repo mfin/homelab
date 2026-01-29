@@ -29,6 +29,8 @@ app-template:
           port: 6767
   route:
     main:
+      labels:
+        auth.mfin.app/enabled: "true"
       hostnames:
         - bazarr.mfin.app
       parentRefs:
