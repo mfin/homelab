@@ -40,6 +40,7 @@ app-template:
       existingClaim: bazarr
     data:
       enabled: true
+      server: synology.mfin.casa
       type: nfs
       path: /volume1/data
       globalMounts:
