@@ -3,10 +3,9 @@ kind: SecurityPolicy
 metadata:
   name: oidc-middleware
 spec:
-  targetSelectors:
+  targetRefs:
     - kind: HTTPRoute
-      matchLabels:
-        auth.mfin.app/enabled: "true"
+      name: bazarr
   oidc:
     provider:
       issuer: "https://accounts.google.com"
