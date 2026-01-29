@@ -140,3 +140,5 @@ apps:
     path: k8s/networking
   - name: nginx-media
     path: k8s/networking
+  - name: envoy-gateway
+    path: k8s/networking
