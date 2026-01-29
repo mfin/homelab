@@ -27,9 +27,16 @@ app-template:
       ports:
         http:
           port: 6767
+  route:
+    main:
+      hostnames:
+        - bazarr.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   ingress:
     main:
-      enabled: true
+      enabled: false
       className: internal
       annotations:
         nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
