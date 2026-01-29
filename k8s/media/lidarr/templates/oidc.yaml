@@ -33,5 +33,5 @@ spec:
     clientID: "envoy-gateway"
     clientSecret:
       name: "oidc-client-secret"
-    redirectURI: "https://lidarr.mfin.app"
+    redirectURL: "https://lidarr.mfin.app"
 ---
