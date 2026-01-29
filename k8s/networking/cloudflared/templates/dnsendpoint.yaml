@@ -22,3 +22,15 @@ spec:
     - dnsName: {{ .Values.media.cname }}
       recordType: CNAME
       targets: ["{{ .Values.cloudflared.tunnelId }}.cfargotunnel.com"]
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: cloudflared-external-new
+  annotations:
+    external-dns.alpha.kubernetes.io/target: ext.mfin.app
+spec:
+  endpoints:
+    - dnsName: ext.mfin.app
+      recordType: CNAME
+      targets: ["{{ .Values.cloudflared.tunnelId }}.cfargotunnel.com"]
