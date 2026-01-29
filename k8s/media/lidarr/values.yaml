@@ -30,19 +30,20 @@ app-template:
       ports:
         http:
           port: *port
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
+      hostnames:
+        - lidarr.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
       existingClaim: lidarr
     data:
       enabled: true
+      server: synology.mfin.casa
       type: nfs
       path: /volume1/data
       globalMounts:
