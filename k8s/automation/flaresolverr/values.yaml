@@ -19,7 +19,10 @@ app-template:
       ports:
         http:
           port: 8191
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - flaresolverr.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
