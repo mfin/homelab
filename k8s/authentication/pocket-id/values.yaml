@@ -15,6 +15,7 @@ app-template:
             MAXMIND_LICENSE_KEY: ""
             PUID: "1028"
             PGID: "100"
+            APP_URL: "https://pocket.mfin.app"
           envFrom:
             - secretRef:
                 name: pocket-id-secret

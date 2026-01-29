@@ -15,6 +15,7 @@ app-template:
             PROVIDERS_POCKETID_SCOPES: openid email profile groups
             PROVIDERS_POCKETID_NAME: Pocket ID
             OAUTH_AUTO_REDIRECT: "pocketid"
+            APP_URL: "https://auth.mfin.app"
           envFrom:
             - secretRef:
                 name: tinyauth-secret
