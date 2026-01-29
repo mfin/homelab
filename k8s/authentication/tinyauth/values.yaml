@@ -16,6 +16,10 @@ app-template:
             PROVIDERS_POCKETID_NAME: Pocket ID
             OAUTH_AUTO_REDIRECT: "pocketid"
             APP_URL: "https://auth.mfin.app"
+            PROVIDERS_POCKETID_AUTH_URL: "https://pocket.mfin.app/authorize"
+            PROVIDERS_POCKETID_TOKEN_URL: "https://pocket.mfin.app/api/oidc/token"
+            PROVIDERS_POCKETID_USER_INFO_URL: "https://pocket.mfin.app/api/oidc/userinfo"
+            PROVIDERS_POCKETID_REDIRECT_URL: "https://auth.mfin.app/api/oauth/callback/pocketid"
           envFrom:
             - secretRef:
                 name: tinyauth-secret
