@@ -1,3 +1,5 @@
 external-secrets:
+  genericTargets:
+    enabled: true
   bitwarden-sdk-server:
     enabled: true
