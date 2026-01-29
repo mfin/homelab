@@ -2,17 +2,17 @@
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: pocket-id-restic-secret
+  name: bazarr-restic-secret
 spec:
   refreshInterval: 1h0m0s
   secretStoreRef:
     kind: ClusterSecretStore
     name: bitwarden-secrets-manager
   target:
-    name: pocket-id-restic-secret
+    name: bazarr-restic-secret
     template:
       data:
-        RESTIC_REPOSITORY: '{{ `{{ .repository }}` }}/pocket-id'
+        RESTIC_REPOSITORY: '{{ `{{ .repository }}` }}/bazarr'
         RESTIC_PASSWORD: '{{ `{{ .password }}` }}'
         AWS_ACCESS_KEY_ID: '{{ `{{ .accessKey }}` }}'
         AWS_SECRET_ACCESS_KEY: '{{ `{{ .secretKey }}` }}'
