@@ -25,9 +25,13 @@ app-template:
       ports:
         http:
           port: 80
-  ingress:
+  route:
     main:
-      enabled: false
+      hostnames:
+        - cross-seed.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
