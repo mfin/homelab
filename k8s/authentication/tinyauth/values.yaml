@@ -37,20 +37,6 @@ app-template:
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
-  ingress:
-    main:
-      enabled: false
-      className: internal
-      hosts:
-        - host: auth.mfin.app
-          paths:
-            - path: /
-              service:
-                identifier: main
-                port: http
-      tls:
-        - hosts:
-          - auth.mfin.app
   persistence:
     data:
       enabled: true

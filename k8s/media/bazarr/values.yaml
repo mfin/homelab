@@ -34,13 +34,6 @@ app-template:
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
-  ingress:
-    main:
-      enabled: false
-      className: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
   persistence:
     config:
       enabled: true

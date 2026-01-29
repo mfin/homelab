@@ -37,20 +37,6 @@ app-template:
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
-  ingress:
-    main:
-      enabled: false
-      className: internal
-      hosts:
-        - host: pocket.mfin.app
-          paths:
-            - path: /
-              service:
-                identifier: main
-                port: http
-      tls:
-        - hosts:
-          - pocket.mfin.app
   persistence:
     data:
       enabled: true
