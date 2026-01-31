@@ -565,7 +565,7 @@ spec:
             privileged: false
             runAsNonRoot: true
             runAsUser: 1000
-          image: "registry.k8s.io/kro/kro:v0.8.1"
+          image: "registry.k8s.io/kro/kro:v0.8.4"
           imagePullPolicy: IfNotPresent
           ports:
             - name: metricsport
