@@ -98,6 +98,5 @@ app-template:
     scripts:
       enabled: true
       type: emptyDir
-      mountPath: /mnt/scripts
       globalMounts:
         - path: /mnt/scripts
