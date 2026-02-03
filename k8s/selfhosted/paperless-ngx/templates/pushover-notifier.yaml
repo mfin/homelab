@@ -1,0 +1,50 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: pushover-notifier
+spec:
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secrets-manager
+  target:
+    name: pushover-notifier
+    manifest:
+      apiVersion: v1
+      kind: ConfigMap
+    template:
+      data:
+        pushover-notifier.sh: |
+          #!/usr/bin/env bash
+
+          DOCUMENT_ID=${1}
+          DOCUMENT_FILE_NAME=${2}
+          DOCUMENT_SOURCE_PATH=${3}
+          DOCUMENT_THUMBNAIL_PATH=${4}
+          DOCUMENT_DOWNLOAD_URL=${5}
+          DOCUMENT_THUMBNAIL_URL=${6}
+          DOCUMENT_CORRESPONDENT=${7}
+          DOCUMENT_TAGS=${8}
+
+          DOCUMENT_URL=https://paperless.mfin.app/documents/${DOCUMENT_ID}
+
+          read -r -d '' MESSAGE << EOM
+          🖊️ ${DOCUMENT_FILE_NAME}
+          👨‍💼 ${DOCUMENT_CORRESPONDENT}
+          🏷️ ${DOCUMENT_TAGS}
+          EOM
+
+          curl -s \
+            --form-string "token={{ `{{ .pushoverToken }}` }}" \
+            --form-string "user={{ `{{ .pushoverUser }}` }}" \
+            --form-string "message=$MESSAGE" \
+            --form-string "url=$DOCUMENT_URL" \
+            --form-string "title=Document #$DOCUMENT_ID in INBOX" \
+            https://api.pushover.net/1/messages.json
+  data:
+  - secretKey: pushoverToken
+    remoteRef:
+      key: "PAPERLESS_PUSHOVER_TOKEN"
+  - secretKey: pushoverUser
+    remoteRef:
+      key: "PAPERLESS_PUSHOVER_USER"

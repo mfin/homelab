@@ -23,6 +23,7 @@ app-template:
             tag: 2.20.5
           env:
             COMPOSE_PROJECT_NAME: paperless
+            PAPERLESS_URL: "https://paperless.mfin.app"
             PAPERLESS_CONSUMER_POLLING: "60"
             PAPERLESS_CONSUMER_RECURSIVE: "true"
             PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
@@ -59,15 +60,13 @@ app-template:
       ports:
         http:
           port: 8000
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
-        nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-        nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+      hostnames:
+        - paperless.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     data:
       enabled: true
@@ -77,12 +76,14 @@ app-template:
     media:
       enabled: true
       type: nfs
+      server: synology.mfin.casa
       path: /volume1/paperless
       globalMounts:
         - path: /mnt/paperless
     inbox:
       enabled: true
       type: nfs
+      server: synology.mfin.casa
       path: /volume1/paperless_inbox
       globalMounts:
         - path: /mnt/inbox
