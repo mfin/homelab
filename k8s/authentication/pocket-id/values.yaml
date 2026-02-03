@@ -3,8 +3,6 @@ app-template:
     main:
       annotations:
         reloader.stakater.com/auto: "true"
-      labels:
-        foo: "bar"
       type: statefulset
       containers:
         main:
