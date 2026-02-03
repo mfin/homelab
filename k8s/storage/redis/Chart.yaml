@@ -4,5 +4,5 @@ version: 0.0.0
 dependencies:
   - name: app-template
     alias: redis-paperless
-    version: 2.5.0
+    version: 2.6.0
     repository: https://bjw-s-labs.github.io/helm-charts
