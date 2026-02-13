@@ -6,7 +6,7 @@ redis-paperless:
         main:
           image:
             repository: docker.io/library/redis
-            tag: 8.4.0
+            tag: 8.6.0
           resources:
             requests:
               cpu: 23m
