@@ -21,6 +21,8 @@ app-template:
             HBOX_OIDC_ISSUER_URL: https://pocket.mfin.app
             HBOX_OIDC_CLIENT_ID: homebox
             HBOX_OPTIONS_TRUST_PROXY: "true"
+            HBOX_OPTIONS_ALLOW_LOCAL_LOGIN: "false"
+            HBOX_OIDC_VERIFY_EMAIL: "true"
           envFrom:
             - secretRef:
                 name: homebox-secret
