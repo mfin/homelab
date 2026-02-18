@@ -32,10 +32,13 @@ app-template:
       ports:
         http:
           port: *port
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - inventory.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     data:
       enabled: true
