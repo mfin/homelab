@@ -4,12 +4,13 @@ kube-prometheus-stack:
     enabled: false
     forceDeployDashboards: true
   prometheus:
-    ingress:
+    route:
       enabled: true
-      ingressClassName: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
+      hostnames:
+        - prometheus.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
     prometheusSpec:
       retention: 2d
       retentionSize: 6GB
@@ -30,12 +31,13 @@ kube-prometheus-stack:
     additionalRuleLabels:
       temp: temp
   alertmanager:
-    ingress:
+    route:
       enabled: true
-      ingressClassName: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
+      hostnames:
+        - alertmanager.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
     config:
       global:
         resolve_timeout: 5m
