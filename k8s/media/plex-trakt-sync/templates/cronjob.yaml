@@ -19,7 +19,7 @@ spec:
               envFrom:
               - secretRef:
                   name: plex-trakt-sync
-              image: ghcr.io/taxel/plextraktsync:0.34.21
+              image: ghcr.io/taxel/plextraktsync:0.35.0
               imagePullPolicy: IfNotPresent
               name: plex-trakt-sync
               terminationMessagePath: /dev/termination-log
