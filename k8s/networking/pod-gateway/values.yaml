@@ -1,4 +1,5 @@
 pod-gateway:
+  enabled: false
   controller:
     annotations:
       reloader.stakater.com/auto: "true"
