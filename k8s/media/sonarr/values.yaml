@@ -11,8 +11,12 @@ app-template:
           env:
             TZ: Europe/Ljubljana
             SONARR__INSTANCE_NAME: Sonarr
+            SONARR__APPLICATION_URL: https://sonarr.mfin.app
             SONARR__PORT: &port 80
             SONARR__LOG_LEVEL: info
+          envFrom:
+            - secretRef:
+                name: sonarr-secret
           probes:
             liveness: &probes
               enabled: true
@@ -35,6 +39,8 @@ app-template:
             limits:
               memory: 1000Mi
       pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
         securityContext:
           runAsUser: 1028
           runAsGroup: 100
@@ -45,13 +51,13 @@ app-template:
       ports:
         http:
           port: *port
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
+      hostnames:
+        - sonarr.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
@@ -59,6 +65,7 @@ app-template:
     data:
       enabled: true
       type: nfs
+      server: synology.mfin.casa
       path: /volume1/data
       globalMounts:
         - path: /data

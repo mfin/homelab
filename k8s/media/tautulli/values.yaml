@@ -27,10 +27,13 @@ app-template:
       ports:
         http:
           port: 8181
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - tautulli.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true

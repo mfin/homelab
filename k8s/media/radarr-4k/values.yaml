@@ -11,8 +11,12 @@ app-template:
           env:
             TZ: Europe/Ljubljana
             RADARR__INSTANCE_NAME: Radarr 4K
+            RADARR__APPLICATION_URL: https://radarr-4k.mfin.app
             RADARR__PORT: &port 80
             RADARR__LOG_LEVEL: info
+          envFrom:
+            - secretRef:
+                name: radarr-4k-secret
           resources:
             requests:
               cpu: 10m
@@ -20,6 +24,8 @@ app-template:
             limits:
               memory: 1000Mi
       pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
         securityContext:
           runAsUser: 1028
           runAsGroup: 100
@@ -30,13 +36,13 @@ app-template:
       ports:
         http:
           port: *port
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
+      hostnames:
+        - radarr-4k.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
@@ -44,6 +50,7 @@ app-template:
     data:
       enabled: true
       type: nfs
+      server: synology.mfin.casa
       path: /volume1/data
       globalMounts:
         - path: /data

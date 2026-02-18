@@ -1,35 +1,65 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
 metadata:
-  name: unpackerr-config
-data:
-  unpackerr.conf: |-
-    debug = true
+  name: unpackerr
+spec:
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secrets-manager
+  target:
+    name: unpacker-config
+    manifest:
+      apiVersion: v1
+      kind: ConfigMap
+    template:
+      data:
+        unpacker.conf: |
+          debug = true
 
-    [[sonarr]]
-     url = "http://sonarr.sonarr.svc.cluster.local"
-     api_key = "{{ .Values.keys.sonarr }}"
-     paths = ["/data/downloads"]
+          [[sonarr]]
+          url = "http://sonarr.sonarr.svc.cluster.local"
+          api_key = "{{ `{{ .sonarrApiKey }}` }}"
+          paths = ["/data/downloads"]
 
-    [[radarr]]
-     url = "http://radarr.radarr.svc.cluster.local"
-     api_key = "{{ .Values.keys.radarr }}"
-     paths = ["/data/downloads"]
+          [[radarr]]
+          url = "http://radarr.radarr.svc.cluster.local"
+          api_key = "{{ `{{ .radarrApiKey }}` }}"
+          paths = ["/data/downloads"]
 
-    [[radarr]]
-     url = "http://radarr-4k.radarr-4k.svc.cluster.local"
-     api_key = "{{ .Values.keys.radarr4k }}"
-     paths = ["/data/downloads"]
+          [[radarr]]
+          url = "http://radarr-4k.radarr-4k.svc.cluster.local"
+          api_key = "{{ `{{ .radarr4kApiKey }}` }}"
+          paths = ["/data/downloads"]
 
-    [[lidarr]]
-     url = "http://lidarr.lidarr.svc.cluster.local"
-     api_key = "{{ .Values.keys.lidarr }}"
-     paths = ["/data/downloads"]
+          [[lidarr]]
+          url = "http://lidarr.lidarr.svc.cluster.local"
+          api_key = "{{ `{{ .lidarrApiKey }}` }}"
+          paths = ["/data/downloads"]
 
-    [[webhook]]
-     template = "pushover"
-     name = "Pushover"
-     url = "https://api.pushover.net/1/messages.json"
-     channel = "{{ .Values.keys.pushoverUserKey }}"
-     token = "{{ .Values.keys.pushoverApiToken }}"
-     events = [3, 7]
+          [[webhook]]
+          template = "pushover"
+          name = "Pushover"
+          url = "https://api.pushover.net/1/messages.json"
+          channel = "{{ `{{ .pushoverUserKey }}` }}"
+          token = "{{ `{{ .pushoverToken }}` }}"
+          events = [3, 7]
+  data:
+  - secretKey: sonarrApiKey
+    remoteRef:
+      key: "SONARR_API_KEY"
+  - secretKey: radarrApiKey
+    remoteRef:
+      key: "RADARR_API_KEY"
+  - secretKey: radarr4kApiKey
+    remoteRef:
+      key: "RADARR_4K_API_KEY"
+  - secretKey: lidarrApiKey
+    remoteRef:
+      key: "LIDARR_API_KEY"
+  - secretKey: pushoverUserKey
+    remoteRef:
+      key: "PUSHOVER_USER_KEY"
+  - secretKey: pushoverToken
+    remoteRef:
+      key: "UNPACKERR_PUSHOVER_TOKEN"

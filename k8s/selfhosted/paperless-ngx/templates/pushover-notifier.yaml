@@ -47,4 +47,4 @@ spec:
       key: "PAPERLESS_PUSHOVER_TOKEN"
   - secretKey: pushoverUser
     remoteRef:
-      key: "PAPERLESS_PUSHOVER_USER"
+      key: "PUSHOVER_USER_KEY"

@@ -13,6 +13,9 @@ app-template:
             LIDARR__INSTANCE_NAME: Lidarr
             LIDARR__PORT: &port 80
             LIDARR__LOG_LEVEL: info
+          envFrom:
+            - secretRef:
+                name: lidarr-secret
           resources:
             requests:
               cpu: 10m
