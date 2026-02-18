@@ -14,7 +14,7 @@ spec:
       kind: ConfigMap
     template:
       data:
-        unpacker.conf: |
+        unpackerr.conf: |
           debug = true
 
           [[sonarr]]
