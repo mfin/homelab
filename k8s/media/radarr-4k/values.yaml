@@ -10,10 +10,11 @@ app-template:
             tag: 6.1.1@sha256:5e08c0eefd2770d1d29395c4f84fe5bf7dfc3a986598021306a5d8ac017a3989
           env:
             TZ: Europe/Ljubljana
-            RADARR__INSTANCE_NAME: Radarr 4K
-            RADARR__APPLICATION_URL: https://radarr-4k.mfin.app
-            RADARR__PORT: &port 80
-            RADARR__LOG_LEVEL: info
+            RADARR__APP__INSTANCENAME: Radarr 4K
+            RADARR__AUTH__METHOD: External
+            RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+            RADARR__SERVER__PORT: &port 80
+            RADARR__LOG__LEVEL: info
           envFrom:
             - secretRef:
                 name: radarr-4k-secret
