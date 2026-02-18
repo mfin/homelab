@@ -10,9 +10,11 @@ app-template:
             tag: 3.1.2@sha256:dab0e07502a34436fc50c3e789388f0a29f8cbf681fb7a02ed703ad7c368a22c
           env:
             TZ: Europe/Ljubljana
-            LIDARR__INSTANCE_NAME: Lidarr
-            LIDARR__PORT: &port 80
-            LIDARR__LOG_LEVEL: info
+            LIDARR__APP__INSTANCENAME: Lidarr
+            LIDARR__AUTH__METHOD: External
+            LIDARR__AUTH__REQUIRED: DisabledForLocalAddresses
+            LIDARR__SERVER__PORT: &port 80
+            LIDARR__LOG__LEVEL: info
           envFrom:
             - secretRef:
                 name: lidarr-secret
@@ -23,6 +25,8 @@ app-template:
             limits:
               memory: 1000Mi
       pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
         securityContext:
           runAsUser: 1028
           runAsGroup: 100
