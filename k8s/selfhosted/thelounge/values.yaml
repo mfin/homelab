@@ -17,10 +17,13 @@ app-template:
       ports:
         http:
           port: 9000
-  ingress:
+  route:
     main:
-      enabled: true
-      className: internal
+      hostnames:
+        - lounge.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
