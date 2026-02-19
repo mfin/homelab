@@ -3,8 +3,8 @@ kind: GpuDevicePlugin
 metadata:
   name: intel-gpu-plugin
 spec:
-  image: intel/intel-gpu-plugin:0.34.1
-  initImage: intel/intel-gpu-initcontainer:0.34.1
+  image: intel/intel-gpu-plugin:0.35.0
+  initImage: intel/intel-gpu-initcontainer:0.35.0
   logLevel: 2
   sharedDevNum: 1
   preferredAllocationPolicy: none
