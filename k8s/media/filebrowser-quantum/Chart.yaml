@@ -3,5 +3,6 @@ name: filebrowser-quantum
 version: 0.0.0
 dependencies:
   - name: app-template
+    condition: app-template.enabled
     version: 4.6.2
     repository: oci://ghcr.io/bjw-s-labs/helm
