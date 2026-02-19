@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/unpoller/unpoller
-            tag: v2.33.0
+            tag: v2.34.0
           env:
             TZ: Europe/Ljubljana
             UP_INFLUXDB_DISABLE: true
