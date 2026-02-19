@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebrowser-quantum
+data:
+  config.yaml: |-
+    server:
+      sources:
+        - path: /home/filebrowser/data/public
+          config:
+            defaultEnabled: true

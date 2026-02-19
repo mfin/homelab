@@ -10,10 +10,10 @@ apps:
     path: k8s/bootstrap
     namespace: argocd
     ignoreDifferences:
-    - group: argoproj.io
-      kind: Application
-      jsonPointers:
-      - /spec/syncPolicy/automated
+      - group: argoproj.io
+        kind: Application
+        jsonPointers:
+          - /spec/syncPolicy/automated
   - name: cilium
     path: k8s/networking
   - name: pocket-id
@@ -61,10 +61,10 @@ apps:
   - name: node-feature-discovery
     path: k8s/system
     ignoreDifferences:
-    - group: apps
-      kind: DaemonSet
-      jsonPointers:
-      - /metadata/annotations/deprecated.daemonset.template.generation
+      - group: apps
+        kind: DaemonSet
+        jsonPointers:
+          - /metadata/annotations/deprecated.daemonset.template.generation
   - name: intel-device-plugins-gpu
     path: k8s/system
   - name: kro
@@ -99,10 +99,10 @@ apps:
   - name: democratic-csi-local
     path: k8s/storage
     ignoreDifferences:
-    - group: storage.k8s.io
-      kind: CSIDriver
-      jsonPointers:
-        - /spec/seLinuxMount
+      - group: storage.k8s.io
+        kind: CSIDriver
+        jsonPointers:
+          - /spec/seLinuxMount
   - name: plex-trakt-sync
     path: k8s/media
   - name: recyclarr
@@ -110,10 +110,10 @@ apps:
   - name: pod-gateway
     path: k8s/networking
     ignoreDifferences:
-    - group: cert-manager.io
-      kind: Certificate
-      jsonPointers:
-      - /spec/duration
+      - group: cert-manager.io
+        kind: Certificate
+        jsonPointers:
+          - /spec/duration
   - name: lidarr
     path: k8s/media
   - name: filebrowser
@@ -142,3 +142,5 @@ apps:
     path: k8s/networking
   - name: envoy-gateway
     path: k8s/networking
+  - name: filebrowser-quantum
+    path: k8s/media

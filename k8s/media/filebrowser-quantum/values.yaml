@@ -1,0 +1,74 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/gtsteffaniak/filebrowser
+            tag: 1.1.2-stable@sha256:24b80967bea15d5595c28065146ff7a931f0538c110f34748c037979ef2d634e
+          env:
+            TZ: Europe/Ljubljana
+          probes:
+            liveness: &probes
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /health
+                  port: &port 80
+                initialDelaySeconds: 0
+                periodSeconds: 10
+                timeoutSeconds: 1
+                failureThreshold: 3
+            readiness: *probes
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: *port
+  route:
+    main:
+      hostnames:
+        - files2.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    data:
+      enabled: true
+      existingClaim: filebrowser-quantum
+      globalMounts:
+        - path: /home/filebrowser/data
+    configmap:
+      enabled: true
+      type: configMap
+      name: filebrowser-quantum
+      globalMounts:
+        - path: /home/filebrowser/config.yaml
+          subPath: config.yaml
+          readOnly: true
+    # data:
+    #   enabled: true
+    #   server: synology.mfin.casa
+    #   type: nfs
+    #   path: /volume1/data
+    #   globalMounts:
+    #     - path: /data
