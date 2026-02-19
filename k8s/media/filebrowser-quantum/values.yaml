@@ -10,6 +10,7 @@ app-template:
             tag: 1.1.2-stable@sha256:24b80967bea15d5595c28065146ff7a931f0538c110f34748c037979ef2d634e
           env:
             TZ: Europe/Ljubljana
+            FILEBROWSER_CONFIG: "/etc/filebrowser/config.yaml"
           probes:
             liveness: &probes
               enabled: true
@@ -55,14 +56,12 @@ app-template:
     data:
       enabled: true
       existingClaim: filebrowser-quantum
-      globalMounts:
-        - path: /home/filebrowser/data
     configmap:
       enabled: true
       type: configMap
       name: filebrowser-quantum
       globalMounts:
-        - path: /home/filebrowser/config.yaml
+        - path: /etc/filebrowser/config.yaml
           subPath: config.yaml
           readOnly: true
     # data:

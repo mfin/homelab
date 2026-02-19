@@ -5,7 +5,9 @@ metadata:
 data:
   config.yaml: |-
     server:
+      database: /data/database.db
+      cacheDir: /data/cache
       sources:
-        - path: /home/filebrowser/data/public
+        - path: /data/public
           config:
             defaultEnabled: true
