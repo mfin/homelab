@@ -4,7 +4,7 @@ metadata:
   name: allow-extauth
 spec:
   from:
-    - group: gateway.networking.k8s.io
+    - group: gateway.envoyproxy.io
       kind: SecurityPolicy
       namespace: hello
   to:
