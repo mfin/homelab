@@ -8,3 +8,8 @@ data:
     port = 80
     logLevel = "INFO"
     sessionSecret = "secret-session-key"
+    oidcEnabled = true
+    oidcIssuer = "https://pocket.mfin.app"
+    oidcClientId = "autobrr"
+    oidcRedirectUrl = "https://autobrr.mfin.app/api/auth/oidc/callback"
+    oidcDisableBuiltInLogin = true

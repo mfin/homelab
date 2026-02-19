@@ -12,6 +12,9 @@ app-template:
             tag: v1.73.0
           env:
             TZ: Europe/Ljubljana
+          envFrom:
+            - secretRef:
+                name: autobrr-secret
           resources:
             requests:
               cpu: 10m
