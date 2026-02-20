@@ -1,0 +1,108 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/slskd/slskd
+            tag: 0.24.4@sha256:4031fc99b824ed2eec3bdbd92914fe6071539f3f71f0742052276afc2c69353d
+          env:
+            TZ: Europe/Ljubljana
+            DOTNET_BUNDLE_EXTRACT_BASE_DIR: /tmp/.net
+            SLSKD_APP_DIR: /config
+            SLSKD_HTTP_PORT: &port 80
+            SLSKD_NO_AUTH: true
+            SLSKD_NO_HTTPS: true
+            SLSKD_NO_VERSION_CHECK: true
+            SLSKD_SLSK_LISTEN_PORT: &soulseekPort 51530
+          envFrom:
+            - secretRef:
+                name: slskd-secret
+          probes:
+            liveness:
+              enabled: true
+              spec:
+                periodSeconds: 30
+                timeoutSeconds: 5
+                failureThreshold: 5
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /health
+                  port: *port
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+            startup:
+              enabled: true
+              spec:
+                failureThreshold: 30
+                periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }
+      pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+    soulseek:
+      type: LoadBalancer
+      annotations:
+        lbipam.cilium.io/ips: 10.10.0.254
+      externalTrafficPolicy: Local
+      ports:
+        soulseek-tcp:
+          port: *soulseekPort
+          protocol: TCP
+  route:
+    main:
+      hostnames:
+        - slskd.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  configMaps:
+    config:
+      data:
+        slskd.yml: |-
+          directories:
+            downloads: /data/soulseek/complete
+            incomplete: /data/soulseek/incomplete
+          permissions:
+            file:
+              mode: 750
+          shares:
+            directories:
+              - /data/soulseek/shared
+            filters:
+              - \.ini$
+              - Thumbs.db$
+              - \.DS_Store$
+  persistence:
+    config:
+      type: configMap
+      identifier: config
+      globalMounts:
+        - path: /config/slskd.yml
+          subPath: slskd.yml
+    data:
+      enabled: true
+      type: nfs
+      server: synology.mfin.casa
+      path: /volume1/data
+      globalMounts:
+        - path: /data

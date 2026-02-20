@@ -146,3 +146,5 @@ apps:
     path: k8s/storage
   - name: qui
     path: k8s/media
+  - name: slskd
+    path: k8s/media
