@@ -1,0 +1,28 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-upgrade-${FROM}-to-${TO}
+  namespace: "${NAMESPACE}"
+spec:
+  template:
+    spec:
+      containers:
+        - name: upgrade
+          image: tianon/postgres-upgrade:${FROM}-to-${TO}
+          # command: ["sleep"]
+          # args: ["3600"]
+          env:
+            - name: PGDATAOLD
+              value: /var/lib/postgresql/data/${FROM}
+            - name: PGDATANEW
+              value: /var/lib/postgresql/data/${TO}
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+      restartPolicy: Never
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: postgres
+  backoffLimit: 0

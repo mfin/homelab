@@ -1,13 +1,13 @@
 ---
-version: '3'
+version: "3"
 
 vars:
-  restoreJobTemplate: '{{.ROOT_DIR}}/.taskfiles/postgres/templates/RestoreJob.tmpl.yaml'
+  restoreJobTemplate: "{{.ROOT_DIR}}/.taskfiles/postgres/templates/RestoreJob.tmpl.yaml"
 
 tasks:
   backup:
     desc: Backup a postgres database
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     silent: true
     cmds:
       - kubectl create job --from=cronjob/{{.app}}-backup -n {{.namespace}} {{.app}}-backup-{{now | unixEpoch}}
@@ -17,16 +17,16 @@ tasks:
 
   restore:
     desc: Restore a postgres database
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     silent: true
     vars:
       dump: "{{.dump}}"
       running:
         sh: kubectl get deployment -n {{.namespace}} {{.app}} -ojson | jq -r 'select(.status.replicas == null) | .metadata.name'
     env:
-      NAMESPACE: '{{.namespace}}'
-      DUMP_FILE: '{{.dump}}'
-      JOB_NAME: '{{.app}}-restore-{{now | unixEpoch}}'
+      NAMESPACE: "{{.namespace}}"
+      DUMP_FILE: "{{.dump}}"
+      JOB_NAME: "{{.app}}-restore-{{now | unixEpoch}}"
     cmds:
       - envsubst < <(cat {{.restoreJobTemplate}}) | kubectl apply -f -
     preconditions:
@@ -39,7 +39,7 @@ tasks:
 
   list-dumps:
     desc: List possible restore files
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     vars:
       bucket:
         sh: kubectl get -n {{.namespace}} secret minio -ojson | jq -r '.data.MINIO_BUCKET' | base64 -d
@@ -49,3 +49,21 @@ tasks:
     preconditions:
       - sh: kubectl -n {{.namespace}} get secret minio
         msg: Minio secret missing!
+
+  upgrade:
+    desc: Upgrade a postgres database
+    dir: "{{.dir}}"
+    silent: true
+    vars:
+      from: "{{.from}}"
+      to: "{{.to}}"
+      running:
+        sh: kubectl get statefulset -n postgres postgres -ojson | jq -r 'select(.status.replicas == null) | .metadata.name'
+    env:
+      FROM: "{{.from}}"
+      TO: "{{.to}}"
+    cmds:
+      - envsubst < <(cat {{.restoreJobTemplate}}) | kubectl apply -f -
+    preconditions:
+      - sh: test -n "{{.running}}"
+        msg: "Postgres is running, shut it down!"
