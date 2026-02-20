@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-upgrade-15-to-16
+spec:
+  template:
+    spec:
+      containers:
+      - name: upgrade
+        image: tianon/postgres-upgrade:15-to-16
+        env:
+        # These reflect the paths inside the container
+        - name: PGDATAOLD
+          value: /var/lib/postgresql/15/data
+        - name: PGDATANEW
+          value: /var/lib/postgresql/16/data
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/postgresql/15/data
+          subPath: data  # Change this to match your current PVC subpath (often 'data')
+        - name: db-data
+          mountPath: /var/lib/postgresql/16/data
+          subPath: data-v16 # This is where the new version will be created
+      restartPolicy: Never
+      volumes:
+      - name: db-data
+        persistentVolumeClaim:
+          claimName: postgres-pvc # Your existing PVC
+  backoffLimit: 0
