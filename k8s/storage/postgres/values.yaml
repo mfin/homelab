@@ -2,12 +2,12 @@ app-template:
   controllers:
     main:
       type: statefulset
-      replicas: 0
+      replicas: 1
       containers:
         main:
           image:
             repository: postgres
-            tag: 16.12
+            tag: 15.16
           env:
             PGDATA: /var/lib/postgresql/data/pgdata
           envFrom:
