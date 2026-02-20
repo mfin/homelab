@@ -1,8 +1,9 @@
 app-template:
   controllers:
     main:
+      type: statefulset
+      replicas: 0
       containers:
-        type: statefulset
         main:
           image:
             repository: postgres
