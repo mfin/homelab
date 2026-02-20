@@ -2,6 +2,7 @@ app-template:
   controllers:
     main:
       containers:
+        type: statefulset
         main:
           image:
             repository: postgres
