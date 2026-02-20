@@ -2,14 +2,14 @@ app-template:
   controllers:
     main:
       type: statefulset
-      replicas: 0
+      replicas: 1
       containers:
         main:
           image:
             repository: postgres
             tag: 15.16
           env:
-            PGDATA: /var/lib/postgresql/data/pgdata
+            PGDATA: /var/lib/postgresql/data/15
           envFrom:
             - secretRef:
                 name: postgres
