@@ -3,9 +3,14 @@ kind: ConfigMap
 metadata:
   name: dbgate-config
 data:
-  CONNECTIONS: postgres_k8s
+  CONNECTIONS: postgres_k8s,postgres_pm
   LABEL_postgres_k8s: Postgres K8s
   SERVER_postgres_k8s: postgres.postgres.svc.cluster.local
   USER_postgres_k8s: postgres
   PORT_postgres_k8s: "5432"
   ENGINE_postgres_k8s: postgres@dbgate-plugin-postgres
+  LABEL_postgres_pm: Postgres Proxmox
+  SERVER_postgres_pm: 10.10.0.104
+  USER_postgres_pm: mfin
+  PORT_postgres_pm: "5432"
+  ENGINE_postgres_pm: postgres@dbgate-plugin-postgres
