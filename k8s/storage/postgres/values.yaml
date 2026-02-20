@@ -10,6 +10,7 @@ app-template:
             tag: 15.16
           env:
             PGDATA: /var/lib/postgresql/data/15
+            POSTGRES_HOST_AUTH_METHOD: md5
           envFrom:
             - secretRef:
                 name: postgres
