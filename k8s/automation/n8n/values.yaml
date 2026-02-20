@@ -8,8 +8,8 @@ app-template:
       initContainers:
         01-init-db:
           image:
-            repository: ghcr.io/onedr0p/postgres-init
-            tag: 14.9
+            repository: ghcr.io/home-operations/postgres-init
+            tag: 18.2@sha256:ae89578925b480f5972f237dda2f7a37efe36aff500d3e7bd1d3a6a3181e4191
           envFrom:
             - secretRef:
                 name: postgres
