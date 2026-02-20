@@ -3,6 +3,8 @@ app-template:
     main:
       replicas: 1
       type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
       containers:
         main:
           image:
@@ -46,14 +48,13 @@ app-template:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities: { drop: ["ALL"] }
-      pod:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        securityContext:
-          runAsUser: 1028
-          runAsGroup: 100
-          fsGroup: 100
-          fsGroupChangePolicy: "OnRootMismatch"
+  defaultPodOptions:
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1028
+      runAsGroup: 100
+      fsGroup: 100
+      fsGroupChangePolicy: OnRootMismatch
   service:
     main:
       primary: true
@@ -99,7 +100,7 @@ app-template:
               - Thumbs.db$
               - \.DS_Store$
   persistence:
-    config:
+    config-file:
       type: configMap
       identifier: config
       globalMounts:
@@ -112,5 +113,8 @@ app-template:
       path: /volume1/data
       globalMounts:
         - path: /data
+    config:
+      enabled: true
+      existingClaim: sonarr
     tmp:
       type: emptyDir
