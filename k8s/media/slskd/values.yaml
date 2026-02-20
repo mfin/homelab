@@ -56,6 +56,8 @@ app-template:
           fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
+      primary: true
+      forceRename: slskd
       ports:
         http:
           port: *port
@@ -75,6 +77,10 @@ app-template:
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
+      rules:
+        - backendRefs:
+            - identifier: main
+              port: *port
   configMaps:
     config:
       data:
