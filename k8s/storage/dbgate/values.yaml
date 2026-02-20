@@ -33,3 +33,5 @@ app-template:
     config:
       enabled: true
       existingClaim: dbgate
+      globalMounts:
+        - path: /root/.dbgate
