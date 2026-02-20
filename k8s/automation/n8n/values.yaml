@@ -21,7 +21,6 @@ app-template:
           command: ["n8n"]
           env:
             GENERIC_TIMEZONE: Europe/Ljubljana
-            N8N_USER_FOLDER: /config
             N8N_PORT: &port 80
             N8N_EMAIL_MODE: smtp
             N8N_METRICS: true
@@ -55,3 +54,8 @@ app-template:
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
+  persistence:
+    data:
+      existingClaim: n8n
+      globalMounts:
+        - path: /home/node/.n8n
