@@ -1,0 +1,33 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: dbgate/dbgate
+            tag: 7.0.6-alpine
+          env:
+            TZ: Europe/Ljubljana
+          envFrom:
+            - secretRef:
+                name: dbgate-secret
+            - configMapRef:
+                name: dbgate-config
+  service:
+    main:
+      ports:
+        http:
+          port: 3000
+  route:
+    main:
+      hostnames:
+        - db.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    config:
+      enabled: true
+      existingClaim: dbgate

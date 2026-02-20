@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbgate-config
+data:
+  CONNECTIONS: postgres_k8s
+  LABEL_postgres_k8s: Postgres K8s
+  SERVER_postgres_k8s: postgres.postgres.svc.cluster.local
+  USER_postgres_k8s: postgres
+  PORT_postgres_k8s: "5432"
+  ENGINE_postgres_k8s: postgres@dbgate-plugin-postgres
