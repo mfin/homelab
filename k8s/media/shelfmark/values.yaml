@@ -1,0 +1,88 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/calibrain/shelfmark
+            tag: v1.0.4@sha256:53e80dc62c1720d15ee59e44c8b98c4aea2a9a456fdd978e87e882c14eb55361
+          command:
+            - gunicorn
+          args:
+            # - --log-level=debug
+            - --access-logfile=-
+            - --error-logfile=-
+            - --worker-class=geventwebsocket.gunicorn.workers.GeventWebSocketWorker
+            - --workers=1
+            - -t
+            - "300"
+            - -b
+            - 0.0.0.0:8084
+            - shelfmark.main:app
+          env:
+            TZ: Europe/Ljubljana
+          envFrom:
+            - secretRef:
+                name: sonarr-secret
+          probes:
+            liveness: &probes
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/health
+                  port: &port 8084
+                initialDelaySeconds: 0
+                periodSeconds: 10
+                timeoutSeconds: 1
+                failureThreshold: 3
+            readiness: *probes
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  route:
+    main:
+      hostnames:
+        - shelfmark.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    config:
+      enabled: true
+      existingClaim: shelfmark
+    data:
+      enabled: true
+      type: nfs
+      server: synology.mfin.casa
+      path: /volume1/data
+      globalMounts:
+        - path: /data
+    tmpfs:
+      type: emptyDir
+      sizeLimit: 1Gi
+      globalMounts:
+        - path: /tmp
+          subPath: tmp
+        - path: /var/log
+          subPath: var-log

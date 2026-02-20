@@ -148,3 +148,5 @@ apps:
     path: k8s/media
   - name: slskd
     path: k8s/media
+  - name: shelfmark
+    path: k8s/media
