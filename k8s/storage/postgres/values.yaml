@@ -7,9 +7,9 @@ app-template:
         main:
           image:
             repository: postgres
-            tag: 15.16
+            tag: 18.2
           env:
-            PGDATA: /var/lib/postgresql/data/15
+            PGDATA: /var/lib/postgresql/data/18
             POSTGRES_HOST_AUTH_METHOD: md5
           envFrom:
             - secretRef:
