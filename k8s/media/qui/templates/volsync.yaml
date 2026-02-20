@@ -1,0 +1,54 @@
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: qui-restic-secret
+spec:
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secrets-manager
+  target:
+    name: qui-restic-secret
+    template:
+      data:
+        RESTIC_REPOSITORY: "{{ `{{ .repository }}` }}/qui"
+        RESTIC_PASSWORD: "{{ `{{ .password }}` }}"
+        AWS_ACCESS_KEY_ID: "{{ `{{ .accessKey }}` }}"
+        AWS_SECRET_ACCESS_KEY: "{{ `{{ .secretKey }}` }}"
+  data:
+    - secretKey: repository
+      remoteRef:
+        key: "VOLSYNC_REPOSITORY"
+    - secretKey: password
+      remoteRef:
+        key: "VOLSYNC_PASSWORD"
+    - secretKey: accessKey
+      remoteRef:
+        key: "VOLSYNC_ACCESS_KEY"
+    - secretKey: secretKey
+      remoteRef:
+        key: "VOLSYNC_SECRET_KEY"
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: qui
+spec:
+  sourcePVC: qui
+  trigger:
+    schedule: "0 0 * * *"
+  restic:
+    copyMethod: Clone
+    pruneIntervalDays: 10
+    repository: qui-restic-secret
+    storageClassName: local-hostpath
+    volumeSnapshotClassName: local-hostpath
+    cacheCapacity: 2Gi
+    moverSecurityContext:
+      runAsUser: 1028
+      runAsGroup: 100
+      fsGroup: 100
+    retain:
+      daily: 10
+      within: 3d

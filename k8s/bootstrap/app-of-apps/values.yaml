@@ -144,3 +144,5 @@ apps:
     path: k8s/networking
   - name: dbgate
     path: k8s/storage
+  - name: qui
+    path: k8s/media

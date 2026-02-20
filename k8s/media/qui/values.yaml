@@ -1,0 +1,71 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+      containers:
+        main:
+          image:
+            repository: ghcr.io/autobrr/qui
+            tag: v1.13.1@sha256:05b9badae10d21f54722464e8b51abc9487ba93f9bb2fff649fbc09944d0d111
+          env:
+            TZ: Europe/Ljubljana
+            QUI__HOST: 0.0.0.0
+            QUI__PORT: &port 80
+          envFrom:
+            - secretRef:
+                name: qui-secret
+          probes:
+            liveness: &probes
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /ping
+                  port: *port
+                initialDelaySeconds: 0
+                periodSeconds: 10
+                timeoutSeconds: 1
+                failureThreshold: 3
+            readiness: *probes
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  route:
+    main:
+      hostnames:
+        - qui.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    config:
+      enabled: true
+      existingClaim: qui
+    data:
+      enabled: true
+      type: nfs
+      server: synology.mfin.casa
+      path: /volume1/data
+      globalMounts:
+        - path: /data
