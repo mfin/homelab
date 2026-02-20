@@ -115,6 +115,6 @@ app-template:
         - path: /data
     config:
       enabled: true
-      existingClaim: sonarr
+      existingClaim: slskd
     tmp:
       type: emptyDir
