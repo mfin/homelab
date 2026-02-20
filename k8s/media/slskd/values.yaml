@@ -112,3 +112,5 @@ app-template:
       path: /volume1/data
       globalMounts:
         - path: /data
+    tmp:
+      type: emptyDir
