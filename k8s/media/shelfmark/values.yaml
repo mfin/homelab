@@ -23,9 +23,6 @@ app-template:
             - shelfmark.main:app
           env:
             TZ: Europe/Ljubljana
-          envFrom:
-            - secretRef:
-                name: sonarr-secret
           probes:
             liveness: &probes
               enabled: true
