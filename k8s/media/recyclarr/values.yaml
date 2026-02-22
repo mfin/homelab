@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/recyclarr/recyclarr
-            tag: 6.0.2
+            tag: 8.2.1
           command: ["/app/recyclarr/recyclarr"]
           args: ["sync"]
           envFrom:
