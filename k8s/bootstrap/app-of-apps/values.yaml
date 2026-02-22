@@ -150,3 +150,5 @@ apps:
     path: k8s/media
   - name: shelfmark
     path: k8s/media
+  - name: actual
+    path: k8s/selfhosted
