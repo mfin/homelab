@@ -152,3 +152,5 @@ apps:
     path: k8s/media
   - name: actual
     path: k8s/selfhosted
+  - name: qbittorrent
+    path: k8s/media
