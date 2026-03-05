@@ -64,6 +64,10 @@ app-template:
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
+      rules:
+          - backendRefs:
+              - identifier: main
+                port: *port
   persistence:
     config:
       enabled: true
