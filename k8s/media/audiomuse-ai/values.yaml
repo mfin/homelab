@@ -1,0 +1,98 @@
+app-template:
+  controllers:
+    server:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/neptunehub/audiomuse-ai
+            tag: 0.8.12@sha256:3e90dd5d6e70690ee3fd65ecdc0a15ce65a2bf3f8e22732ad8036e2edaa1cb8b
+          env:
+            SERVICE_TYPE: flask
+          envFrom:
+            - configMapRef:
+                name: audiomuse-config
+            - secretRef:
+                name: audiomuse-secret
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+
+    worker:
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: ghcr.io/neptunehub/audiomuse-ai
+            tag: 0.8.12@sha256:3e90dd5d6e70690ee3fd65ecdc0a15ce65a2bf3f8e22732ad8036e2edaa1cb8b
+          env:
+            SERVICE_TYPE: worker
+          envFrom:
+            - configMapRef:
+                name: audiomuse-config
+            - secretRef:
+                name: audiomuse-secret
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+
+  service:
+    server:
+      ports:
+        http:
+          port: 8000
+
+  route:
+    server:
+      hostnames:
+        - audiomuse.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+      rules:
+        - backendRefs:
+            - identifier: server
+              port: 8000
+
+  persistence:
+    tmp:
+      type: emptyDir
+      globalMounts:
+        - mountPath: /app/temp_audio

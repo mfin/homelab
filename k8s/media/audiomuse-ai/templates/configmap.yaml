@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: audiomuse-config
+data:
+  MEDIASERVER_TYPE: "navidrome"
+  NAVIDROME_URL: "http://navidrome.navidrome:4533"
+  POSTGRES_HOST: "postgres.postgres"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: audiomuse
+  POSTGRES_USER: audiomuse
+  REDIS_URL: "redis://redis-audiomuse.redis:6379/0"
+  CLAP_ENABLED: "true" # Enable CLAP text search (set to "false" for slower systems)
+  TEMP_DIR: "/app/temp_audio"
+  TZ: Europe/Ljubljana
+  AI_MODEL_PROVIDER: OPENAI
+  OPENAI_MODEL_NAME: openrouter/google/gemini-2.5-flash
+  OPENAI_SERVER_URL: http://litellm.litellm:4000/v1/chat/completions
