@@ -75,6 +75,7 @@ app-template:
 
   service:
     server:
+      primary: true
       ports:
         http:
           port: 8000
