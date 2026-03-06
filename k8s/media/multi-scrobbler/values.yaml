@@ -10,8 +10,6 @@ app-template:
             tag: 0.11.5
           env:
             TZ: Europe/Ljubljana
-            PUID: "1028"
-            PGID: "100"
             BASE_URL: https://multi-scrobbler.mfin.app
             SUBSONIC_URL: http://navidrome.navidrome:4533
             MALOJA_URL: http://maloja.maloja:42010
@@ -38,11 +36,6 @@ app-template:
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
-        securityContext:
-          runAsUser: 1028
-          runAsGroup: 100
-          fsGroup: 100
-          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
