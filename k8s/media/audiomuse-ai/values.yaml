@@ -95,4 +95,4 @@ app-template:
     tmp:
       type: emptyDir
       globalMounts:
-        - mountPath: /app/temp_audio
+        - path: /app/temp_audio
