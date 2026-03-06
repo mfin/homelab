@@ -26,3 +26,31 @@ redis-paperless:
         redis:
           enabled: true
           port: 6379
+redis-audiomuse:
+  fullnameOverride: redis-audiomuse
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: docker.io/library/redis
+            tag: 8.6.0
+          resources:
+            requests:
+              cpu: 23m
+              memory: 64M
+            limits:
+              memory: 64M
+      pod:
+        labels:
+          app.kubernetes.io/deployment: redis-audiomuse
+  service:
+    main:
+      extraSelectorLabels:
+        app.kubernetes.io/deployment: redis-audiomuse
+      ports:
+        http:
+          enabled: false
+        redis:
+          enabled: true
+          port: 6379
