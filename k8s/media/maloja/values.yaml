@@ -30,11 +30,6 @@ app-template:
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
-        securityContext:
-          runAsUser: 1028
-          runAsGroup: 100
-          fsGroup: 100
-          fsGroupChangePolicy: "OnRootMismatch"
   service:
     main:
       ports:
