@@ -65,9 +65,9 @@ app-template:
         - name: envoy-internal
           namespace: envoy-gateway
       rules:
-          - backendRefs:
-              - identifier: main
-                port: *port
+        - backendRefs:
+            - identifier: main
+              port: *port
   persistence:
     config:
       enabled: true
@@ -75,7 +75,7 @@ app-template:
     data:
       enabled: true
       type: nfs
-      server: synology.mfin.casa
+      server: synology.mfin.internal
       path: /volume1/data
       globalMounts:
         - path: /data

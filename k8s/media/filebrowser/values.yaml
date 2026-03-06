@@ -9,11 +9,11 @@ app-template:
             repository: docker.io/filebrowser/filebrowser
             tag: v2.61.1
           env:
-              TZ: Europe/Ljubljana
-              FB_DATABASE: "/config/filebrowser.db"
-              FB_ROOT: "/data"
-              FB_LOG: "stdout"
-              FB_NOAUTH: "true"
+            TZ: Europe/Ljubljana
+            FB_DATABASE: "/config/filebrowser.db"
+            FB_ROOT: "/data"
+            FB_LOG: "stdout"
+            FB_NOAUTH: "true"
           probes:
             liveness: &probes
               enabled: true
@@ -69,7 +69,7 @@ app-template:
           readOnly: true
     data:
       enabled: true
-      server: synology.mfin.casa
+      server: synology.mfin.internal
       type: nfs
       path: /volume1/data
       globalMounts:

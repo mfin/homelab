@@ -76,14 +76,14 @@ app-template:
     media:
       enabled: true
       type: nfs
-      server: synology.mfin.casa
+      server: synology.mfin.internal
       path: /volume1/paperless
       globalMounts:
         - path: /mnt/paperless
     inbox:
       enabled: true
       type: nfs
-      server: synology.mfin.casa
+      server: synology.mfin.internal
       path: /volume1/paperless_inbox
       globalMounts:
         - path: /mnt/inbox

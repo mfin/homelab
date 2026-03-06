@@ -51,7 +51,7 @@ app-template:
     data:
       enabled: true
       type: nfs
-      server: synology.mfin.casa
+      server: synology.mfin.internal
       path: /volume1/data
       globalMounts:
         - path: /data
