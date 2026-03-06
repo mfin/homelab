@@ -38,7 +38,7 @@ app-template:
           fsGroupChangePolicy: "OnRootMismatch"
 
     worker:
-      replicas: 1
+      replicas: 4
       containers:
         worker:
           image:
