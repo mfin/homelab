@@ -64,11 +64,9 @@ app-template:
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
-
-  defaultPodOptions:
-    resourceClaims:
-      - name: gpu
-        resourceClaimTemplateName: audiomuse-ai
+        resourceClaims:
+          - name: gpu
+            resourceClaimTemplateName: audiomuse-ai
 
   service:
     server:
