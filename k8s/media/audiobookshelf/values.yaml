@@ -1,0 +1,86 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/advplyr/audiobookshelf
+            tag: 2.32.1@sha256:a52dc5db694a5bf041ce38f285dd6c6a660a4b1b21e37ad6b6746433263b2ae5
+          env:
+            TZ: Europe/Ljubljana
+            AUDIOBOOKSHELF_UID: 1028
+            AUDIOBOOKSHELF_GID: 100
+            CONFIG_PATH: /config
+            METADATA_PATH: /config/metadata
+          probes:
+            liveness:
+              enabled: true
+              spec:
+                periodSeconds: 30
+                timeoutSeconds: 5
+                failureThreshold: 5
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /healthcheck
+                  port: 80
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+            startup:
+              enabled: true
+              spec:
+                failureThreshold: 30
+                periodSeconds: 10
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  route:
+    main:
+      hostnames:
+        - audiobookshelf.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    config:
+      enabled: true
+      existingClaim: audiobookshelf
+    tmpfs:
+      type: emptyDir
+      advancedMounts:
+        audiobookshelf:
+          app:
+            - path: /.npm
+              subPath: cache
+            - path: /metadata/logs
+              subPath: logs
+            - path: /tmp
+              subPath: tmp
+    data:
+      enabled: true
+      type: nfs
+      server: synology.mfin.internal
+      path: /volume1/data
+      globalMounts:
+        - path: /data
