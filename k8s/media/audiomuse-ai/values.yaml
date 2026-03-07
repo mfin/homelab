@@ -33,7 +33,7 @@ app-template:
           reloader.stakater.com/auto: "true"
 
     worker:
-      replicas: 4
+      replicas: 1
       containers:
         worker:
           image:
@@ -54,14 +54,21 @@ app-template:
             startup:
               enabled: false
           resources:
+            claims:
+              - name: gpu
             requests:
               cpu: 10m
-              memory: 250Mi
+              memory: 1Gi
             limits:
-              memory: 1000Mi
+              memory: 2Gi
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
+
+  defaultPodOptions:
+    resourceClaims:
+      - name: gpu
+        resourceClaimTemplateName: audiomuse-ai
 
   service:
     server:
