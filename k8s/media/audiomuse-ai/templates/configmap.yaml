@@ -10,7 +10,7 @@ data:
   POSTGRES_DB: audiomuse
   POSTGRES_USER: audiomuse
   REDIS_URL: "redis://redis-audiomuse.redis:6379/0"
-  CLAP_ENABLED: "true" # Enable CLAP text search (set to "false" for slower systems)
+  CLAP_ENABLED: "false"
   TEMP_DIR: "/app/temp_audio"
   TZ: Europe/Ljubljana
   AI_MODEL_PROVIDER: OPENAI
