@@ -31,11 +31,6 @@ app-template:
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
-        securityContext:
-          runAsUser: 1028
-          runAsGroup: 100
-          fsGroup: 100
-          fsGroupChangePolicy: "OnRootMismatch"
 
     worker:
       replicas: 4
@@ -67,11 +62,6 @@ app-template:
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
-        securityContext:
-          runAsUser: 1028
-          runAsGroup: 100
-          fsGroup: 100
-          fsGroupChangePolicy: "OnRootMismatch"
 
   service:
     server:
