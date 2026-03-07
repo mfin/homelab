@@ -156,8 +156,6 @@ apps:
     path: k8s/media
   - name: navidrome
     path: k8s/media
-  - name: maloja
-    path: k8s/media
   - name: multi-scrobbler
     path: k8s/media
   - name: audiomuse-ai

@@ -12,7 +12,6 @@ app-template:
             TZ: Europe/Ljubljana
             BASE_URL: https://multi-scrobbler.mfin.app
             SUBSONIC_URL: http://navidrome.navidrome:4533
-            MALOJA_URL: http://maloja.maloja:42010
             KOITO_USER: mfin
             KOITO_URL: http://koito.koito:4110
             LASTFM_REDIRECT_URI: https://multi-scrobbler.mfin.app/lastfm/callback
