@@ -54,8 +54,8 @@ app-template:
             startup:
               enabled: false
           resources:
-            claims:
-              - name: gpu
+            # claims:
+            #   - name: gpu
             requests:
               cpu: 10m
               memory: 1Gi
@@ -64,9 +64,9 @@ app-template:
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
-        resourceClaims:
-          - name: gpu
-            resourceClaimTemplateName: audiomuse-ai
+        # resourceClaims:
+        #   - name: gpu
+        #     resourceClaimTemplateName: audiomuse-ai
 
   service:
     server:
