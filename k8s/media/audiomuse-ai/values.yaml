@@ -1,4 +1,5 @@
 app-template:
+  enabled: false
   controllers:
     server:
       replicas: 1
@@ -25,9 +26,9 @@ app-template:
           resources:
             requests:
               cpu: 10m
-              memory: 250Mi
+              memory: 1Gi
             limits:
-              memory: 1000Mi
+              memory: 6Gi
       pod:
         annotations:
           reloader.stakater.com/auto: "true"
