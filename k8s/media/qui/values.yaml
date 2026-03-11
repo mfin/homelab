@@ -58,6 +58,8 @@ app-template:
           port: *port
   route:
     main:
+      annotations:
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
       hostnames:
         - qui.mfin.app
       parentRefs:

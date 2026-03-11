@@ -52,6 +52,8 @@ app-template:
           port: *port
   route:
     main:
+      annotations:
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
       hostnames:
         - music.mfin.app
       parentRefs:
