@@ -31,22 +31,13 @@ app-template:
       ports:
         http:
           port: 1411
-  ingress:
+  route:
     main:
-      enabled: true
-      className: external
-      annotations:
-        external-dns.alpha.kubernetes.io/target: external.mfin.app
-      hosts:
-        - host: pocket.mfin.app
-          paths:
-            - path: /
-              service:
-                name: pocket-id
-                port: 1411
-      tls:
-        - hosts:
-            - pocket.mfin.app
+      hostnames:
+        - pocket.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
   persistence:
     data:
       enabled: true
