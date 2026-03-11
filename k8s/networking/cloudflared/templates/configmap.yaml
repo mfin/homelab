@@ -15,7 +15,15 @@ data:
       - hostname: "pocket.mfin.app"
         service: "https://envoy-external.envoy-gateway.svc.cluster.local"
         originRequest:
-          originServerName: external.mfin.app
+          originServerName: ext.mfin.app
+      - hostname: "qui.mfin.app"
+        service: "https://envoy-external.envoy-gateway.svc.cluster.local"
+        originRequest:
+          originServerName: ext.mfin.app
+      - hostname: "music.mfin.app"
+        service: "https://envoy-external.envoy-gateway.svc.cluster.local"
+        originRequest:
+          originServerName: ext.mfin.app
       - hostname: "*.{{ .Values.homelab.domain }}"
         service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
         originRequest:
