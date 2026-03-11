@@ -4,6 +4,7 @@ kind: DNSEndpoint
 metadata:
   name: cloudflared-external
   annotations:
+    external.mfin.app/managed: "true"
     external-dns.alpha.kubernetes.io/target: {{ .Values.homelab.cname }}
 spec:
   endpoints:
@@ -16,6 +17,7 @@ kind: DNSEndpoint
 metadata:
   name: cloudflared-media
   annotations:
+    external.mfin.app/managed: "true"
     external-dns.alpha.kubernetes.io/target: {{ .Values.media.cname }}
 spec:
   endpoints:
@@ -28,6 +30,7 @@ kind: DNSEndpoint
 metadata:
   name: cloudflared-external-new
   annotations:
+    external.mfin.app/managed: "true"
     external-dns.alpha.kubernetes.io/target: ext.mfin.app
 spec:
   endpoints:
