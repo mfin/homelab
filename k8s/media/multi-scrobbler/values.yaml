@@ -15,6 +15,8 @@ app-template:
             KOITO_URL: http://koito.koito:4110
             LASTFM_REDIRECT_URI: https://multi-scrobbler.mfin.app/lastfm/callback
             LZENDPOINT_ENABLE: "true"
+            MB_PRESETS: "default,sensible,native"
+            LZE_TRANSFORMS: "musicbrainz"
           envFrom:
             - secretRef:
                 name: multi-scrobbler-secret
