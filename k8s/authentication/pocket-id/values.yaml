@@ -33,6 +33,8 @@ app-template:
           port: 1411
   route:
     main:
+      annotations:
+        external.mfin.app/managed: "true"
       hostnames:
         - pocket.mfin.app
       parentRefs:
