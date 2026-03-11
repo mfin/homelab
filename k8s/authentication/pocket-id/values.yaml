@@ -43,7 +43,7 @@ app-template:
             - path: /
               service:
                 name: main
-                port: http
+                port: 1411
       tls:
         - hosts:
             - pocket.mfin.app
