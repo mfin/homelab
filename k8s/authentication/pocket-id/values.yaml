@@ -42,7 +42,7 @@ app-template:
           paths:
             - path: /
               service:
-                name: main
+                name: pocket-id
                 port: 1411
       tls:
         - hosts:
