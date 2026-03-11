@@ -21,6 +21,7 @@ app-template:
             ND_PORT: &port 4533
             ND_SCANSCHEDULE: 30m
             ND_BASEURL: https://music.mfin.app
+            ND_LISTENBRAINZ_BASEURL: "http://multi-scrobbler.multi-scrobbler:9078/1"
           probes:
             liveness:
               enabled: true

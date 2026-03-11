@@ -11,10 +11,10 @@ app-template:
           env:
             TZ: Europe/Ljubljana
             BASE_URL: https://multi-scrobbler.mfin.app
-            SUBSONIC_URL: http://navidrome.navidrome:4533
             KOITO_USER: mfin
             KOITO_URL: http://koito.koito:4110
             LASTFM_REDIRECT_URI: https://multi-scrobbler.mfin.app/lastfm/callback
+            LZENDPOINT_ENABLE: "true"
           envFrom:
             - secretRef:
                 name: multi-scrobbler-secret
