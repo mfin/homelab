@@ -13,9 +13,7 @@ app-template:
             ND_ENABLEINSIGHTSCOLLECTOR: "false"
             ND_DATAFOLDER: /config
             ND_ENABLEDOWNLOADS: "true"
-            ND_ENABLEEXTERNALSERVICES: "false"
             ND_ENABLESHARING: "false"
-            ND_ENABLESTARRATING: "false"
             ND_LOGLEVEL: info
             ND_MUSICFOLDER: /data/music
             ND_PORT: &port 4533
