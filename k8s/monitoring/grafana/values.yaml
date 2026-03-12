@@ -16,14 +16,11 @@ grafana:
   persistence:
     enabled: true
     existingClaim: grafana
-  ingress:
-    enabled: true
-    ingressClassName: internal
   route:
     main:
       enabled: true
       hostnames:
-        - grafana-new.mfin.app
+        - grafana.mfin.app
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
