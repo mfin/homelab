@@ -14,7 +14,7 @@ spec:
     - backendRefs:
         - group: gateway.envoyproxy.io
           kind: Service
-          name: calibre
+          name: blackbox-exporter
           port: 9115
       matches:
         - path:
