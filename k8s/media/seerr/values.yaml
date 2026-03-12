@@ -1,0 +1,42 @@
+app-template:
+  enabled: false
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/seerr-team/seerr
+            tag: v3.1.0@sha256:b35ba0461c4a1033d117ac1e5968fd4cbe777899e4cbfbdeaf3d10a42a0eb7e9
+          env:
+            TZ: Europe/Ljubljana
+            PORT: &port 80
+            LOG_LEVEL: info
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  ingress:
+    main:
+      enabled: true
+      className: media
+  persistence:
+    config:
+      enabled: true
+      existingClaim: overseerr
+      globalMounts:
+        - path: /app/config
