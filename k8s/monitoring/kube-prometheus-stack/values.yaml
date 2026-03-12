@@ -4,6 +4,14 @@ kube-prometheus-stack:
     enabled: false
     forceDeployDashboards: true
   prometheus:
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - prometheus-temp.mfin.app
+        parentRefs:
+          - name: envoy-internal
+            namespace: envoy-gateway
     ingress:
       enabled: true
       ingressClassName: internal
@@ -30,6 +38,14 @@ kube-prometheus-stack:
     additionalRuleLabels:
       temp: temp
   alertmanager:
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - alertmanager-temp.mfin.app
+        parentRefs:
+          - name: envoy-internal
+            namespace: envoy-gateway
     ingress:
       enabled: true
       ingressClassName: internal
