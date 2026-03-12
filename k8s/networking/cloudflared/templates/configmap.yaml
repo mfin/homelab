@@ -4,7 +4,7 @@ metadata:
   name: cloudflared-config
 data:
   config.yaml: |-
-    tunnel: "{{ .Values.cloudflared.tunnelId }}"
+    tunnel: "af89b57c-344b-40d2-972b-f03084dae14e"
     credentials-file: /etc/cloudflared/creds.json
     metrics: "0.0.0.0:8080"
     no-autoupdate: true
@@ -12,22 +12,16 @@ data:
       connectTimeout: 30s
 
     ingress:
-    {{ range $route := .Values.homelab.routes }}
-      - hostname: {{ $route | quote }}
+      - hostname: "*.mfin.app"
         service: "https://envoy-external.envoy-gateway.svc.cluster.local"
         originRequest:
           originServerName: ext.mfin.app
-    {{ end }}
-      - hostname: "*.{{ .Values.homelab.domain }}"
-        service: "https://nginx-external-controller.nginx-external.svc.cluster.local"
-        originRequest:
-          originServerName: {{ .Values.homelab.cname }}
-      - hostname: "{{ .Values.media.domain }}"
+      - hostname: "dnevna.com"
         service: "https://envoy-media.envoy-gateway.svc.cluster.local"
         originRequest:
-          originServerName: {{ .Values.media.cname }}
-      - hostname: "*.{{ .Values.media.domain }}"
+          originServerName: ext.dnevna.com
+      - hostname: "*.dnevna.com"
         service: "https://envoy-media.envoy-gateway.svc.cluster.local"
         originRequest:
-          originServerName: {{ .Values.media.cname }}
+          originServerName: ext.dnevna.com
       - service: http_status:404
