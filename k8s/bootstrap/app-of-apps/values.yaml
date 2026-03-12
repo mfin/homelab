@@ -164,5 +164,5 @@ apps:
     path: k8s/media
   - name: audiobookshelf
     path: k8s/media
-  - mame: seerr
+  - name: seerr
     path: k8s/media
