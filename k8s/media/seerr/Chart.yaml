@@ -1,8 +1,7 @@
 apiVersion: v2
-name: overseerr
+name: seerr
 version: 0.0.0
 dependencies:
   - name: app-template
-    condition: app-template.enabled
     version: 2.5.0
     repository: https://bjw-s-labs.github.io/helm-charts
