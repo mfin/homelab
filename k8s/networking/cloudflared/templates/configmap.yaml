@@ -23,11 +23,11 @@ data:
         originRequest:
           originServerName: {{ .Values.homelab.cname }}
       - hostname: "{{ .Values.media.domain }}"
-        service: "https://nginx-media-controller.nginx-media.svc.cluster.local"
+        service: "https://envoy-media.envoy-gateway.svc.cluster.local"
         originRequest:
           originServerName: {{ .Values.media.cname }}
       - hostname: "*.{{ .Values.media.domain }}"
-        service: "https://nginx-media-controller.nginx-media.svc.cluster.local"
+        service: "https://envoy-media.envoy-gateway.svc.cluster.local"
         originRequest:
           originServerName: {{ .Values.media.cname }}
       - service: http_status:404
