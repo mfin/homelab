@@ -34,13 +34,10 @@ argo-cd:
     httproute:
       enabled: true
       hostnames:
-        - argocd-new.mfin.app
+        - argocd.mfin.app
       parentRefs:
         - name: envoy-internal
           namespace: envoy-gateway
-    ingress:
-      enabled: true
-      ingressClassName: internal
     metrics: &metrics
       enabled: true
       serviceMonitor:
