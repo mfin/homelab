@@ -29,10 +29,15 @@ app-template:
       ports:
         http:
           port: *port
-  ingress:
+  route:
     main:
-      enabled: true
-      className: media
+      annotations:
+        external.mfin.app/managed: "true"
+      hostnames:
+        - dnevna.com
+      parentRefs:
+        - name: envoy-media
+          namespace: envoy-gateway
   persistence:
     config:
       enabled: true
