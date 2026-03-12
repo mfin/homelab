@@ -16,14 +16,14 @@ spec:
   rules:
     - matches:
         - path:
-            type: PathPrefix
-            value: /
+            type: RegularExpression
+            value: "/(.*)"
       filters:
         - type: URLRewrite
           urlRewrite:
             path:
               type: ReplacePrefixMatch
-              replacePrefixMatch: "/webhook/external"
+              replacePrefixMatch: "/webhook/external/"
       backendRefs:
         - name: n8n
           port: 80
