@@ -60,7 +60,12 @@ app-template:
   serviceMonitor:
     main:
       enabled: false
-  ingress:
+  route:
     main:
-      enabled: true
-      className: external
+      annotations:
+        external.mfin.app/managed: "true"
+      hostnames:
+        - rss.mfin.app
+      parentRefs:
+        - name: envoy-external
+          namespace: envoy-gateway
