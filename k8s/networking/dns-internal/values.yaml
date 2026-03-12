@@ -28,7 +28,7 @@ external-dns:
           key: secret
 
   policy: sync
-  sources: ["ingress", "service", "gateway-httproute"]
+  sources: ["service", "gateway-httproute"]
   txtOwnerId: default
   txtPrefix: k8s.
   serviceMonitor:
