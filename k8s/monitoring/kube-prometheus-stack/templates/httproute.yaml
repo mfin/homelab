@@ -1,0 +1,46 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: prometheus
+spec:
+  hostnames:
+    - prometheus.mfin.app
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-internal
+      namespace: envoy-gateway
+  rules:
+    - backendRefs:
+        - group: gateway.envoyproxy.io
+          kind: Service
+          name: kube-prometheus-stack-prometheus
+          port: 9090
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: alertmanager
+spec:
+  hostnames:
+    - alertmanager.mfin.app
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-internal
+      namespace: envoy-gateway
+  rules:
+    - backendRefs:
+        - group: gateway.envoyproxy.io
+          kind: Service
+          name: kube-prometheus-stack-alertmanager
+          port: 9093
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
