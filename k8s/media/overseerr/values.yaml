@@ -1,4 +1,5 @@
 app-template:
+  enabled: false
   controllers:
     main:
       replicas: 1
