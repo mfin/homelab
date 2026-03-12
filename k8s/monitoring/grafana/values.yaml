@@ -19,6 +19,13 @@ grafana:
   ingress:
     enabled: true
     ingressClassName: internal
+  route:
+    enabled: true
+    hostnames:
+      - grafana-new.mfin.app
+    parentRefs:
+      - name: envoy-internal
+        namespace: envoy-gateway
   testFramework:
     enabled: false
   grafana.ini:
