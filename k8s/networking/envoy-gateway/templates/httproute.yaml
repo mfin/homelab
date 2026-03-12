@@ -12,6 +12,9 @@ spec:
     - name: envoy-internal
       namespace: envoy-gateway
       sectionName: http
+    - name: envoy-media
+      namespace: envoy-gateway
+      sectionName: http
   rules:
     - filters:
         - type: RequestRedirect
