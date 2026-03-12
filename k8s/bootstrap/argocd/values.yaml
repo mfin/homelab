@@ -31,6 +31,13 @@ argo-cd:
   server:
     extraArgs:
       - --insecure
+    httproute:
+      enabled: true
+      hostnames:
+        - argocd-new.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
     ingress:
       enabled: true
       ingressClassName: internal
@@ -50,12 +57,12 @@ argo-cd:
       tag: 3.2.6@sha256:859aaa7a5561e1d07a53e1417e7d98a14ee40519b5ae26e35eca19c9e6a2d258
     metrics: *metrics
     rbac:
-    - apiGroups:
-      - ""
-      resources:
-      - secrets
-      verbs:
-      - get
+      - apiGroups:
+          - ""
+        resources:
+          - secrets
+        verbs:
+          - get
     volumes:
       - name: helm-secrets-private-keys
         secret:
