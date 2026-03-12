@@ -1,12 +1,6 @@
 prometheus-blackbox-exporter:
   fullnameOverride: blackbox-exporter
   pspEnabled: false
-  ingress:
-    enabled: true
-    className: internal
-    annotations:
-      nginx.ingress.kubernetes.io/auth-url: http://tinyauth.tinyauth.svc.cluster.local:3000/api/auth/nginx
-      nginx.ingress.kubernetes.io/auth-signin-redirect-param: redirect_uri
   securityContext:
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
