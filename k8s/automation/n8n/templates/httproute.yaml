@@ -16,14 +16,27 @@ spec:
   rules:
     - matches:
         - path:
-            type: RegularExpression
-            value: "/(.*)"
+            type: PathPrefix
+            value: "/"
       filters:
-        - type: URLRewrite
-          urlRewrite:
-            path:
-              type: ReplacePrefixMatch
-              replacePrefixMatch: "/webhook/external/"
+        - type: ExtensionRef
+          extensionRef:
+            group: gateway.envoyproxy.io
+            kind: HTTPRouteFilter
+            name: external-n8n-url-rewrite
       backendRefs:
         - name: n8n
           port: 80
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: HTTPRouteFilter
+metadata:
+  name: external-n8n-url-rewrite
+spec:
+  urlRewrite:
+    path:
+      type: ReplaceRegexMatch
+      replaceRegexMatch:
+        pattern: '^/(.*)$'
+        substitution: '/webhook/external/\1'
+---
