@@ -23,7 +23,7 @@ spec:
           urlRewrite:
             path:
               type: ReplacePrefixMatch
-              replacePrefixMatch: "/webhook/external/"
+              replacePrefixMatch: "/webhook/external"
       backendRefs:
         - name: n8n
           port: 80
