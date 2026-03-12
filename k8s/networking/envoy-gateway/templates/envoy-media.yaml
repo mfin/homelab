@@ -4,12 +4,12 @@ metadata:
   name: envoy-media
   annotations:
     external.mfin.app/managed: "true"
-    external-dns.alpha.kubernetes.io/target: ext.mfin.app
+    external-dns.alpha.kubernetes.io/target: ext.dnevna.com
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: ext.mfin.app
+      external-dns.alpha.kubernetes.io/hostname: ext.dnevna.com
       external.mfin.app/managed: "true"
       lbipam.cilium.io/ips: 10.10.0.253
   listeners:
