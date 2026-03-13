@@ -1,0 +1,46 @@
+app-template:
+  controllers:
+    main:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      type: statefulset
+      replicas: 1
+      containers:
+        main:
+          image:
+            repository: ghcr.io/dani-garcia/vaultwarden
+            tag: 1.35.4@sha256:43498a94b22f9563f2a94b53760ab3e710eefc0d0cac2efda4b12b9eb8690664
+          env:
+            DOMAIN: https://vault.mfin.app
+            TZ: Europe/Ljubljana
+            SIGNUPS_ALLOWED: false
+            WEBSOCKET_ENABLED: true
+          envFrom:
+            - secretRef:
+                name: vaultwarden-secret
+      pod:
+        securityContext:
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            memory: 500Mi
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  route:
+    main:
+      hostnames:
+        - vault.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    data:
+      enabled: true
+      existingClaim: vaultwarden
