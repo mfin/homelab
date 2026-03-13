@@ -1,0 +1,42 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: envoy
+spec:
+  clientIPDetection:
+    xForwardedFor:
+      trustedCIDRs:
+        - 10.42.0.0/16
+  http2:
+    onInvalidMessage: TerminateStream
+  http3: {}
+  targetSelectors:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+  tcpKeepalive: {}
+  tls:
+    minVersion: "1.2"
+    alpnProtocols:
+      - h2
+      - http/1.1
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: transform-headers
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+  headers:
+    earlyRequestHeaders:
+      set:
+        - name: "X-Forwarded-Uri"
+          value: "%REQ(:PATH)%"
+        - name: "X-Forwarded-Host"
+          value: "%REQ(Host)%"
+        - name: "X-Forwarded-Method"
+          value: "%REQ(:METHOD)%"
+        - name: "X-Forwarded-Proto"
+          value: "https"
