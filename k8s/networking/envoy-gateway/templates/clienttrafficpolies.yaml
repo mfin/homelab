@@ -4,7 +4,6 @@ kind: ClientTrafficPolicy
 metadata:
   name: envoy
 spec:
-  enableProxyProtocol: true
   clientIPDetection:
     xForwardedFor:
       trustedCIDRs:
@@ -21,6 +20,19 @@ spec:
     alpnProtocols:
       - h2
       - http/1.1
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: enable-proxy-protocol-policy-client
+spec:
+  clientIPDetection:
+    xForwardedFor:
+      numTrustedHops: 1
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+  enableProxyProtocol: true
 ---
 # apiVersion: gateway.envoyproxy.io/v1alpha1
 # kind: ClientTrafficPolicy
