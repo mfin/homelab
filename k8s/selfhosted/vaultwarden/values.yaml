@@ -35,10 +35,12 @@ app-template:
           port: 80
   route:
     main:
+      annotations:
+        external.mfin.app/managed: "true"
       hostnames:
         - vault.mfin.app
       parentRefs:
-        - name: envoy-internal
+        - name: envoy-external
           namespace: envoy-gateway
   persistence:
     data:
