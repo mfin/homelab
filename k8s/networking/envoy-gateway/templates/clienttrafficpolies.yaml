@@ -26,9 +26,10 @@ kind: ClientTrafficPolicy
 metadata:
   name: transform-headers
 spec:
-  targetRef:
-    group: gateway.networking.k8s.io
-    kind: Gateway
+  targetSelectors:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-internal
   headers:
     earlyRequestHeaders:
       set:
