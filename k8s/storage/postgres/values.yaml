@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: postgres
-            tag: 18.2
+            tag: 18.3
           env:
             PGDATA: /var/lib/postgresql/data/18
             POSTGRES_HOST_AUTH_METHOD: md5
