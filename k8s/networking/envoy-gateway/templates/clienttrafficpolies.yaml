@@ -29,7 +29,8 @@ spec:
   targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: envoy-internal
+      matchLabels:
+        transform-headers: "true"
   headers:
     earlyRequestHeaders:
       set:

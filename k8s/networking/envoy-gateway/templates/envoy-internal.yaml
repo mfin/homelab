@@ -4,6 +4,8 @@ metadata:
   name: envoy-internal
   annotations:
     external-dns.alpha.kubernetes.io/target: int.mfin.app
+  labels:
+    transform-headers: "true"
 spec:
   gatewayClassName: envoy
   infrastructure:
