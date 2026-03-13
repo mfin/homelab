@@ -42,3 +42,5 @@ spec:
           value: "%REQ(:METHOD)%"
         - name: "X-Forwarded-Proto"
           value: "https"
+        - name: "X-Test"
+          value: "test"
