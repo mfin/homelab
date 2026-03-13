@@ -6,7 +6,7 @@ redis-paperless:
         main:
           image:
             repository: docker.io/library/redis
-            tag: 8.6.0
+            tag: 8.6.1
           resources:
             requests:
               cpu: 23m
@@ -32,7 +32,7 @@ redis-audiomuse:
         main:
           image:
             repository: docker.io/library/redis
-            tag: 8.6.0
+            tag: 8.6.1
           resources:
             requests:
               cpu: 23m
