@@ -28,5 +28,4 @@ app-template:
       globalMounts:
         - path: /config/recyclarr.yml
           readOnly: true
-          defaultMode: 0775
           subPath: recyclarr.yml
