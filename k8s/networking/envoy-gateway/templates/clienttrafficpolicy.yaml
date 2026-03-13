@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: ClientTrafficPolicy
 metadata:
@@ -19,3 +20,23 @@ spec:
     alpnProtocols:
       - h2
       - http/1.1
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: transform-headers
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+  headers:
+    earlyRequestHeaders:
+      set:
+        - name: "X-Forwarded-Uri"
+          value: "%REQ(:PATH)%"
+        - name: "X-Forwarded-Host"
+          value: "%REQ(Host)%"
+        - name: "X-Forwarded-Method"
+          value: "%REQ(:METHOD)%"
+        - name: "X-Forwarded-Proto"
+          value: "https"
