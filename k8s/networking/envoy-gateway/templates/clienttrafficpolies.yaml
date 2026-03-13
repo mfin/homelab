@@ -4,6 +4,7 @@ kind: ClientTrafficPolicy
 metadata:
   name: envoy
 spec:
+  enableProxyProtocol: true
   clientIPDetection:
     xForwardedFor:
       trustedCIDRs:
@@ -21,24 +22,24 @@ spec:
       - h2
       - http/1.1
 ---
-apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: ClientTrafficPolicy
-metadata:
-  name: transform-headers
-spec:
-  targetSelectors:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      matchLabels:
-        transform-headers: "true"
-  headers:
-    earlyRequestHeaders:
-      set:
-        - name: "X-Forwarded-Uri"
-          value: "%REQ(:PATH)%"
-        - name: "X-Forwarded-Host"
-          value: "%REQ(:AUTHORITY)%"
-        - name: "X-Forwarded-Method"
-          value: "%REQ(:METHOD)%"
-        - name: "X-Forwarded-Proto"
-          value: "%REQ(:SCHEME)%"
+# apiVersion: gateway.envoyproxy.io/v1alpha1
+# kind: ClientTrafficPolicy
+# metadata:
+#   name: transform-headers
+# spec:
+#   targetSelectors:
+#     - group: gateway.networking.k8s.io
+#       kind: Gateway
+#       matchLabels:
+#         transform-headers: "true"
+#   headers:
+#     earlyRequestHeaders:
+#       set:
+#         - name: "X-Forwarded-Uri"
+#           value: "%REQ(:PATH)%"
+#         - name: "X-Forwarded-Host"
+#           value: "%REQ(:AUTHORITY)%"
+#         - name: "X-Forwarded-Method"
+#           value: "%REQ(:METHOD)%"
+#         - name: "X-Forwarded-Proto"
+#           value: "%REQ(:SCHEME)%"
