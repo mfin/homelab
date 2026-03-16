@@ -1,0 +1,52 @@
+app-template:
+  controllers:
+    main:
+      replicas: 1
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/9001/copyparty-ac
+            tag: 1.20.10@sha256:c17e537e2197e8f476be79247e645380b5b56644924d77d8d5dc7777773d4691
+          env:
+            TZ: Europe/Ljubljana
+            PRTY_NO_TLS: 1
+          resources:
+            requests:
+              cpu: 10m
+              memory: 250Mi
+            limits:
+              memory: 1000Mi
+
+      pod:
+        securityContext:
+          runAsUser: 1028
+          runAsGroup: 100
+          fsGroup: 100
+          fsGroupChangePolicy: "OnRootMismatch"
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 3923
+  route:
+    main:
+      hostnames:
+        - cp.mfin.app
+      parentRefs:
+        - name: envoy-internal
+          namespace: envoy-gateway
+  persistence:
+    config:
+      enabled: true
+      existingClaim: copyparty
+      globalMounts:
+        - path: /cfg
+    data:
+      enabled: true
+      server: synology.mfin.internal
+      type: nfs
+      path: /volume1/data
+      globalMounts:
+        - path: /data
