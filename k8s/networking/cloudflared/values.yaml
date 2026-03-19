@@ -11,10 +11,14 @@ app-template:
             tag: 2026.3.0
           env:
             TZ: "Europe/Ljubljana"
+            NO_AUTOUPDATE: true
+            TUNNEL_METRICS: 0.0.0.0:80
+            TUNNEL_TRANSPORT_PROTOCOL: http2
+          envFrom:
+            - secretRef:
+                name: cloudflared-secret
           args:
             - tunnel
-            - --config
-            - /etc/cloudflared/config.yaml
             - run
           probes:
             liveness: &probes
@@ -23,14 +27,12 @@ app-template:
               spec:
                 httpGet:
                   path: /ready
-                  port: &port 8080
+                  port: &port 80
                 initialDelaySeconds: 0
                 periodSeconds: 10
-                timeoutSeconds: 1
+                timeoutSeconds: 5
                 failureThreshold: 3
             readiness: *probes
-            startup:
-              enabled: false
       pod:
         priorityClassName: system-cluster-critical
   service:
@@ -43,8 +45,6 @@ app-template:
       enabled: true
       endpoints:
         - port: http
-          scheme: http
-          path: /metrics
   persistence:
     config:
       enabled: true
@@ -53,12 +53,4 @@ app-template:
       globalMounts:
         - path: /etc/cloudflared/config.yaml
           subPath: config.yaml
-          readOnly: true
-    tunnel:
-      enabled: true
-      type: secret
-      name: cloudflared-secret
-      globalMounts:
-        - path: /etc/cloudflared/creds.json
-          subPath: creds.json
           readOnly: true
