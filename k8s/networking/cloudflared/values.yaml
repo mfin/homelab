@@ -45,12 +45,12 @@ app-template:
       enabled: true
       endpoints:
         - port: http
-  persistence:
-    config:
-      enabled: true
-      type: configMap
-      name: cloudflared-config
-      globalMounts:
-        - path: /etc/cloudflared/config.yaml
-          subPath: config.yaml
-          readOnly: true
+  # persistence:
+  #   config:
+  #     enabled: true
+  #     type: configMap
+  #     name: cloudflared-config
+  #     globalMounts:
+  #       - path: /etc/cloudflared/config.yaml
+  #         subPath: config.yaml
+  #         readOnly: true
