@@ -10,7 +10,7 @@ spec:
   endpoints:
     - dnsName: ext.mfin.app
       recordType: CNAME
-      targets: ["af89b57c-344b-40d2-972b-f03084dae14e.cfargotunnel.com"]
+      targets: ["14707ade-6558-4665-8960-50a43e08fbe9.cfargotunnel.com"]
 ---
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
@@ -23,5 +23,5 @@ spec:
   endpoints:
     - dnsName: ext.dnevna.com
       recordType: CNAME
-      targets: ["af89b57c-344b-40d2-972b-f03084dae14e.cfargotunnel.com"]
+      targets: ["14707ade-6558-4665-8960-50a43e08fbe9.cfargotunnel.com"]
 ---
