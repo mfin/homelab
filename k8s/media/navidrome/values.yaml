@@ -52,8 +52,6 @@ app-template:
           port: *port
   route:
     main:
-      annotations:
-        external.mfin.app/managed: "true"
       hostnames:
         - music.mfin.app
       parentRefs:
