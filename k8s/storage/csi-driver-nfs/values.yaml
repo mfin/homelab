@@ -1,0 +1,20 @@
+csi-driver-nfs:
+  controller:
+    runOnControlPlane: true
+  externalSnapshotter:
+    enabled: false
+  node:
+    tolerations: []
+  storageClass:
+    create: true
+    name: nfs-direct
+    parameters:
+      server: synology.mfin.internal
+      share: /volume1/data
+    mountOptions:
+      - nfsvers=4.2
+      - nconnect=16
+      - hard
+      - noatime
+    reclaimPolicy: Retain
+    volumeBindingMode: Immediate
