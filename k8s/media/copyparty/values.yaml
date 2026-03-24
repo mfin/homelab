@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/9001/copyparty-ac
-            tag: 1.20.12@sha256:244433d3ee46c73c85882ecb47d9dfe1c29ce8274f9fd038c5a1bea258c1a3aa
+            tag: 1.20.13@sha256:059c7e2c75a4d2402ccc23febc281b87dc80ec2ba2dcb23de1f666f0b33b9b74
           env:
             TZ: Europe/Ljubljana
             PRTY_NO_TLS: 1
