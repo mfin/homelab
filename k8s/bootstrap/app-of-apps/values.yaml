@@ -160,7 +160,5 @@ apps:
     path: k8s/media
   - name: vaultwarden
     path: k8s/selfhosted
-  - name: copyparty
-    path: k8s/media
   - name: csi-driver-nfs
     path: k8s/storage

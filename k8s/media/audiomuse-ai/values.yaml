@@ -2,7 +2,7 @@ app-template:
   enabled: false
   controllers:
     server:
-      replicas: 1
+      replicas: 0
       type: statefulset
       containers:
         server:
@@ -34,7 +34,7 @@ app-template:
           reloader.stakater.com/auto: "true"
 
     worker:
-      replicas: 1
+      replicas: 0
       containers:
         worker:
           image:
