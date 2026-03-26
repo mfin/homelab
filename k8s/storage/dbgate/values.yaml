@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: dbgate/dbgate
-            tag: 7.1.4-alpine
+            tag: 7.1.6-alpine
           env:
             TZ: Europe/Ljubljana
           envFrom:
