@@ -1,73 +1,85 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    "docker:enableMajor",
-    ":semanticCommits",
-    ":disableRateLimiting",
-    ":dependencyDashboard",
-    ":automergeDigest",
-    ":automergeBranch",
-    "github>mfin/homelab//.github/renovate/autoMerge.json5",
-    "github>mfin/homelab//.github/renovate/commitMessage.json5",
-    "github>mfin/homelab//.github/renovate/labels.json5",
-    "github>mfin/homelab//.github/renovate/semanticCommits.json5",
-    "helpers:pinGitHubActionDigests"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    'docker:enableMajor',
+    ':semanticCommits',
+    ':disableRateLimiting',
+    ':dependencyDashboard',
+    ':automergeDigest',
+    ':automergeBranch',
+    'github>mfin/homelab//.github/renovate/autoMerge.json5',
+    'github>mfin/homelab//.github/renovate/commitMessage.json5',
+    'github>mfin/homelab//.github/renovate/labels.json5',
+    'github>mfin/homelab//.github/renovate/semanticCommits.json5',
+    'helpers:pinGitHubActionDigests',
   ],
-  "prHourlyLimit": 0,
-  "prConcurrentLimit": 0,
-  "commitBodyTable": true,
-  "platform": "github",
-  "username": "mfin-bot[bot]",
-  "repositories": ["mfin/homelab"],
-  "onboarding": false,
-  "requireConfig": "optional",
-  "gitAuthor": "mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>",
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "regexManagers": [
+  prHourlyLimit: 0,
+  prConcurrentLimit: 0,
+  commitBodyTable: true,
+  platform: 'github',
+  username: 'mfin-bot[bot]',
+  repositories: [
+    'mfin/homelab',
+  ],
+  onboarding: false,
+  requireConfig: 'optional',
+  gitAuthor: 'mfin-bot <123061670+mfin-bot[bot]@users.noreply.github.com>',
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  customManagers: [
     {
-      "description": "Process custom dependencies",
-      "fileMatch": [
-        "ansible/.+\\.ya?ml$",
-        "k8s/.+\\.ya?ml$",
-        ".+\\.sh$"
+      customType: 'regex',
+      description: 'Process custom dependencies',
+      managerFilePatterns: [
+        '/ansible/.+\\.ya?ml$/',
+        '/k8s/.+\\.ya?ml$/',
+        '/.+\\.sh$/',
       ],
-      "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value)(: |=)(\\\\?)(\"?)(?<currentValue>.+?)(\\\\?)(\"?)\\n"
+      matchStrings: [
+        'datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?(_version|value)(: |=)(\\\\?)("?)(?<currentValue>.+?)(\\\\?)("?)\\n',
       ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
     },
     {
-      "description": "Process custom kustomization dependencies",
-      "fileMatch": [
-        "k8s/.+kustomization\\.ya?ml$",
+      customType: 'regex',
+      description: 'Process custom kustomization dependencies',
+      managerFilePatterns: [
+        '/k8s/.+kustomization\\.ya?ml$/',
       ],
-      "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*\\/(?<currentValue>v.+?)\\/"
+      matchStrings: [
+        'datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*\\/(?<currentValue>v.+?)\\/',
       ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
+      datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
+    },
   ],
-  "kubernetes": {
-    "fileMatch": [
-      "k8s/.+/templates/.+\\.yaml",
-      ".taskfiles/.+/templates/.+\\.yaml"
-    ]
+  kubernetes: {
+    managerFilePatterns: [
+      '/k8s/.+/templates/.+\\.yaml/',
+      '/.taskfiles/.+/templates/.+\\.yaml/',
+    ],
   },
-  "packageRules": [
+  packageRules: [
     {
-      "description": "Loose versioning for non-semver packages",
-      "matchDatasources": ["docker"],
-      "versioning": "loose",
-      "matchPackagePatterns": ["plex"]
+      description: 'Loose versioning for non-semver packages',
+      matchDatasources: [
+        'docker',
+      ],
+      versioning: 'loose',
+      matchPackageNames: [
+        '/plex/',
+      ],
     },
     {
-      "description": "Use custom versioning for Minio",
-      "matchDatasources": ["docker"],
-      "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$",
-      "matchPackagePatterns": ["minio"]
-    }
-  ]
+      description: 'Use custom versioning for Minio',
+      matchDatasources: [
+        'docker',
+      ],
+      versioning: 'regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$',
+      matchPackageNames: [
+        '/minio/',
+      ],
+    },
+  ],
 }
