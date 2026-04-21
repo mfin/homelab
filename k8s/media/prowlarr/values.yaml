@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/home-operations/prowlarr
-            tag: 2.3.4@sha256:4df82f58d39fde43a206c4bba126226b63ecf2394df202e94c31afc9faae3ed9
+            tag: 2.3.6@sha256:da6b1f914ad22778c347d554a59b6e40110f654b40528c8de516616382db5148
           env:
             TZ: Europe/Ljubljana
             PROWLARR__APP__INSTANCENAME: Prowlarr
