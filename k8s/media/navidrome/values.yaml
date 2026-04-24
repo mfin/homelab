@@ -22,6 +22,7 @@ app-template:
             ND_LISTENBRAINZ_BASEURL: "http://multi-scrobbler.multi-scrobbler:9078/1"
             ND_LISTENBRAINZ_ENABLED: "true"
             ND_AGENTS: "apple-music,deezer,lastfm,listenbrainz"
+            ND_LYRICSPRIORITY: ".lrc,lrclib-lyrics"
           probes:
             liveness:
               enabled: true
