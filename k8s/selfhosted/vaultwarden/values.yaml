@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/dani-garcia/vaultwarden
-            tag: 1.35.7@sha256:9a8eec71f4a52411cc43edc7a50f33e9b6f62b5baca0dd95f0c6e7fd60f1a341
+            tag: 1.36.0@sha256:d626d04934cd1192ad8ced1adb975099fca78cec33ab467d2d3c923cde7f3b0c
           env:
             DOMAIN: https://vault.mfin.app
             TZ: Europe/Ljubljana
