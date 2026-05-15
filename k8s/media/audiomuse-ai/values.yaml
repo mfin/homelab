@@ -8,7 +8,7 @@ app-template:
         server:
           image:
             repository: ghcr.io/neptunehub/audiomuse-ai
-            tag: 0.9.3@sha256:db26a1091392fc91eb6118a07ed52ad7e1058a8ef919f40ac57e9acaf28a78bb
+            tag: 1.1.6@sha256:2c1c55dfc4b7e8027bca1092bab663c9e4d0720c8160d4eebef566345bf7607d
           env:
             SERVICE_TYPE: flask
           envFrom:
@@ -39,7 +39,7 @@ app-template:
         worker:
           image:
             repository: ghcr.io/neptunehub/audiomuse-ai
-            tag: 0.9.3@sha256:db26a1091392fc91eb6118a07ed52ad7e1058a8ef919f40ac57e9acaf28a78bb
+            tag: 1.1.6@sha256:2c1c55dfc4b7e8027bca1092bab663c9e4d0720c8160d4eebef566345bf7607d
           env:
             SERVICE_TYPE: worker
           envFrom:
