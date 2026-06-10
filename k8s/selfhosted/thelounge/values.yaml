@@ -4,7 +4,7 @@ app-template:
       annotations:
         reloader.stakater.com/auto: "true"
       type: statefulset
-      replicas: 0
+      replicas: 1
       containers:
         main:
           image:
