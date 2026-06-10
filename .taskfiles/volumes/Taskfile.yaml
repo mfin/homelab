@@ -2,14 +2,14 @@
 version: "3"
 
 x-task-env: &task-env
-  RSRC: '{{.rsrc}}'
-  NAMESPACE: '{{.namespace}}'
-  CONTROLLER: '{{.controller}}'
-  CLAIM: '{{.claim}}'
-  PVC: '{{.pvc}}'
-  OFFSET: '{{.offset}}'
-  TS: '{{.ts}}'
-  POD: '{{.pod}}'
+  RSRC: "{{.rsrc}}"
+  NAMESPACE: "{{.namespace}}"
+  CONTROLLER: "{{.controller}}"
+  CLAIM: "{{.claim}}"
+  PVC: "{{.pvc}}"
+  OFFSET: "{{.offset}}"
+  TS: "{{.ts}}"
+  POD: "{{.pod}}"
 
 vars:
   destinationTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/ReplicationDestination.tmpl.yaml"
@@ -17,13 +17,14 @@ vars:
   waitForJobScript: "{{.ROOT_DIR}}/.taskfiles/volumes/scripts/wait-for-job.sh"
   listJobTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/ListJob.tmpl.yaml"
   attachPvcTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/AttachPvc.tmpl.yaml"
+  attachNfsTemplate: "{{.ROOT_DIR}}/.taskfiles/volumes/templates/AttachNfs.tmpl.yaml"
 
 tasks:
   snapshot:
     desc: Trigger a Restic ReplicationSource snapshot (ex. task v:snapshot rsrc=plex [namespace=default])
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     vars:
-      rsrc: '{{.rsrc | default (base .dir)}}'
+      rsrc: "{{.rsrc | default (base .dir)}}"
     env: *task-env
     cmds:
       - kubectl -n {{.namespace}} patch replicationsources {{.rsrc}} --type merge -p '{"spec":{"trigger":{"manual":"{{.ts}}"}}}'
@@ -38,10 +39,10 @@ tasks:
 
   attach:
     desc: Attach a PVC to a Pod for debugging purposes (ex. task v:attach pvc=plex [namespace=default])
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     vars:
-      pvc: '{{.pvc | default (base .dir)}}'
-      pod: 'attach-pvc-{{.pvc}}'
+      pvc: "{{.pvc | default (base .dir)}}"
+      pod: "attach-pvc-{{.pvc}}"
     env: *task-env
     cmds:
       - envsubst < <(cat {{.attachPvcTemplate}}) | kubectl apply -f -
@@ -49,12 +50,51 @@ tasks:
       - kubectl exec -it -n {{.namespace}} {{.pod}} -- bash
       - kubectl delete -n {{.namespace}} pod {{.pod}}
 
+  shell:
+    desc: Create a debugging Pod with custom image attached to a PVC or NFS mount (ex. task v:shell mount=plex [image=alpine:latest] [namespace=default])
+    dir: "{{.dir}}"
+    vars:
+      mount: "{{.mount | default (base .dir)}}"
+      pod: "shell-{{.mount}}"
+    env: *task-env
+    cmds:
+      - |
+        IMAGE="{{.image}}"
+        if [ -z "$IMAGE" ] && command -v yq &> /dev/null && [ -f "values.yaml" ]; then
+          IMAGE=$(yq eval '.app-template.controllers.main.containers.main.image.repository + ":" + .app-template.controllers.main.containers.main.image.tag' values.yaml 2>/dev/null)
+        fi
+        IMAGE="${IMAGE:-debian:latest}"
+
+        # Check if mount is NFS or PVC
+        if command -v yq &> /dev/null && [ -f "values.yaml" ]; then
+          MOUNT_TYPE=$(yq eval ".app-template.persistence.{{.mount}}.type" values.yaml 2>/dev/null)
+        fi
+
+        if [ "$MOUNT_TYPE" = "nfs" ]; then
+          NFS_SERVER=$(yq eval ".app-template.persistence.{{.mount}}.server" values.yaml 2>/dev/null)
+          NFS_PATH=$(yq eval ".app-template.persistence.{{.mount}}.path" values.yaml 2>/dev/null)
+          if [ -z "$NFS_SERVER" ] || [ -z "$NFS_PATH" ]; then
+            echo "Error: NFS server or path not found in values.yaml"
+            exit 1
+          fi
+          export NFS_SERVER="$NFS_SERVER"
+          export NFS_PATH="$NFS_PATH"
+          sed "s|image: debian:latest|image: $IMAGE|" {{.attachNfsTemplate}} | envsubst | kubectl apply -f -
+        else
+          # Default to PVC
+          export PVC="{{.mount}}"
+          sed "s|image: debian:latest|image: $IMAGE|" {{.attachPvcTemplate}} | envsubst | kubectl apply -f -
+        fi
+      - kubectl wait pods -n {{.namespace}} {{.pod}} --for condition=Ready --timeout=120s
+      - kubectl exec -it -n {{.namespace}} {{.pod}} -- bash
+      - kubectl delete -n {{.namespace}} pod {{.pod}}
+
   migrate:
     desc: Migrate a PVC to a new, already existing, PVC (ex. task v:migrate dest=plex-new [namespace=default])
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     vars:
-      src: '{{.src | default (base .dir)}}'
-      dest: '{{.dest}}'
+      src: "{{.src | default (base .dir)}}"
+      dest: "{{.dest}}"
     cmds:
       - kubectl pv-migrate migrate --source-namespace {{.namespace}} --dest-namespace {{.namespace}} {{.src}} {{.dest}}
     preconditions:
@@ -67,15 +107,15 @@ tasks:
 
   restore:
     desc: Trigger a Restic ReplicationSource restore (ex. task v:restore rsrc=plex [namespace=default])
-    dir: '{{.dir}}'
+    dir: "{{.dir}}"
     vars:
-      rsrc: '{{.rsrc | default (base .dir)}}'
-      offset: '{{.offset | default 0}}'
+      rsrc: "{{.rsrc | default (base .dir)}}"
+      offset: "{{.offset | default 0}}"
       claim:
         sh: |
           kubectl -n {{.namespace}} get replicationsource {{.rsrc}} \
             -o jsonpath="{.spec.sourcePVC}"
-      pvc: '{{.pvc | default .claim}}'
+      pvc: "{{.pvc | default .claim}}"
       controller:
         sh: |
           app=$(kubectl -n {{.namespace}} get persistentvolumeclaim {{.claim}} -o jsonpath="{.metadata.labels.argocd\.argoproj\.io/instance}")
@@ -88,19 +128,19 @@ tasks:
     cmds:
       - task: restore-suspend-app
         vars:
-          rsrc: '{{.rsrc}}'
-          controller: '{{.controller}}'
+          rsrc: "{{.rsrc}}"
+          controller: "{{.controller}}"
       - task: restore-wipe-job
         vars:
-          rsrc: '{{.rsrc}}'
-          pvc: '{{.pvc}}'
-          claim: '{{.claim}}'
+          rsrc: "{{.rsrc}}"
+          pvc: "{{.pvc}}"
+          claim: "{{.claim}}"
       - task: restore-volsync-job
         vars:
-          rsrc: '{{.rsrc}}'
-          claim: '{{.claim}}'
-          pvc: '{{.pvc}}'
-          offset: '{{.offset}}'
+          rsrc: "{{.rsrc}}"
+          claim: "{{.claim}}"
+          pvc: "{{.pvc}}"
+          offset: "{{.offset}}"
       - task: restore-resume-app
     preconditions:
       - sh: test -f {{.wipeJobTemplate}}
