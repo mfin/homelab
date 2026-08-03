@@ -8,7 +8,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/tinyauthapp/tinyauth
-            tag: v5.0.7@sha256:0793c71c49906e079d90c7e693cded9df569217a92d717dc9b171f2116fcd1c6 
+            tag: v5.1.3@sha256:a1bde189951900f84a60f133c26a1ec7a3264073ec7875b548f4fbadb7f5f735 
           env:
             TZ: Europe/Ljubljana
             TINYAUTH_OAUTH_PROVIDERS_POCKETID_CLIENTID: tinyauth
