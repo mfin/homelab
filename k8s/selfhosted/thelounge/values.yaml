@@ -28,3 +28,8 @@ app-template:
     config:
       enabled: true
       existingClaim: thelounge
+    logs:
+      enabled: true
+      existingClaim: thelounge-logs
+      globalMounts:
+        - path: /config/logs

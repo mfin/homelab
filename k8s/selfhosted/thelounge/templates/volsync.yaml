@@ -40,6 +40,7 @@ spec:
     schedule: "0 0 * * *"
   restic:
     copyMethod: Clone
+    # Backs up the config PVC only. IRC logs live on thelounge-logs (not this source).
     pruneIntervalDays: 10
     repository: thelounge-restic-secret
     storageClassName: local-hostpath
