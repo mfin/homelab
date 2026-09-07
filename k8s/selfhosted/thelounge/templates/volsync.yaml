@@ -1,3 +1,5 @@
+{{- /* VolSync disabled by default. Set volsync.enabled=true in values to re-enable. */ -}}
+{{- if and .Values.volsync .Values.volsync.enabled }}
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
@@ -54,3 +56,4 @@ spec:
     retain:
       daily: 10
       within: 3d
+{{- end }}
