@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: qbittorrent
 spec:
+  paused: true
   sourcePVC: qbittorrent
   trigger:
     schedule: "0 0 * * *"

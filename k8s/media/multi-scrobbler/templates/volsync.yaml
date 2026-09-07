@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: multi-scrobbler
 spec:
+  paused: true
   sourcePVC: multi-scrobbler
   trigger:
     schedule: "0 0 * * *"

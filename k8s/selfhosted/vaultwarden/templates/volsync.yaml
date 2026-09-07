@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: vaultwarden
 spec:
+  paused: true
   sourcePVC: vaultwarden
   trigger:
     schedule: "0 0 * * *"

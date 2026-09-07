@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: bazarr
 spec:
+  paused: true
   sourcePVC: bazarr
   trigger:
     schedule: "0 0 * * *"

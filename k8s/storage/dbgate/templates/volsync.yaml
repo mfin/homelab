@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: dbgate
 spec:
+  paused: true
   sourcePVC: dbgate
   trigger:
     schedule: "0 0 * * *"

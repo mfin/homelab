@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: shelfmark
 spec:
+  paused: true
   sourcePVC: shelfmark
   trigger:
     schedule: "0 0 * * *"

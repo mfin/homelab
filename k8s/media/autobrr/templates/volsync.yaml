@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: autobrr
 spec:
+  paused: true
   sourcePVC: autobrr
   trigger:
     schedule: "0 0 * * *"

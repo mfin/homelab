@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: paperless
 spec:
+  paused: true
   sourcePVC: paperless
   trigger:
     schedule: "0 0 * * *"

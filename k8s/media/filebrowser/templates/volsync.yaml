@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: filebrowser
 spec:
+  paused: true
   sourcePVC: filebrowser
   trigger:
     schedule: "0 0 * * *"

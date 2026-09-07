@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: actual
 spec:
+  paused: true
   sourcePVC: actual
   trigger:
     schedule: "0 0 * * *"

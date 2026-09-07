@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: thelounge
 spec:
+  paused: true
   sourcePVC: thelounge
   trigger:
     schedule: "0 0 * * *"

@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: tautulli
 spec:
+  paused: true
   sourcePVC: tautulli
   trigger:
     schedule: "0 0 * * *"

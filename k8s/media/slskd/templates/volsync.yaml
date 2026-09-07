@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: slskd
 spec:
+  paused: true
   sourcePVC: slskd
   trigger:
     schedule: "0 0 * * *"

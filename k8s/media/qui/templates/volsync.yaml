@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: qui
 spec:
+  paused: true
   sourcePVC: qui
   trigger:
     schedule: "0 0 * * *"

@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: sonarr
 spec:
+  paused: true
   sourcePVC: sonarr
   trigger:
     schedule: "0 0 * * *"

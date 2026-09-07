@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: prowlarr
 spec:
+  paused: true
   sourcePVC: prowlarr
   trigger:
     schedule: "0 0 * * *"

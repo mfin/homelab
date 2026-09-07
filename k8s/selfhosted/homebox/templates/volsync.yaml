@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: homebox
 spec:
+  paused: true
   sourcePVC: homebox
   trigger:
     schedule: "0 0 * * *"

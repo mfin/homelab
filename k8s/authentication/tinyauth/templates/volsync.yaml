@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: tinyauth
 spec:
+  paused: true
   sourcePVC: tinyauth
   trigger:
     schedule: "0 0 * * *"

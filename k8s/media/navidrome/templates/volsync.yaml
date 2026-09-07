@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: navidrome
 spec:
+  paused: true
   sourcePVC: navidrome
   trigger:
     schedule: "0 0 * * *"

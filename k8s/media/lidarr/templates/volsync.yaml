@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: lidarr
 spec:
+  paused: true
   sourcePVC: lidarr
   trigger:
     schedule: "0 0 * * *"

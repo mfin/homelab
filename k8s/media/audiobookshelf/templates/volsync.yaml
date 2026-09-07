@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: audiobookshelf
 spec:
+  paused: true
   sourcePVC: audiobookshelf
   trigger:
     schedule: "0 0 * * *"

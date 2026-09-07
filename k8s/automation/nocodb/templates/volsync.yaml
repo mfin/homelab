@@ -15,6 +15,7 @@ kind: ReplicationSource
 metadata:
   name: nocodb
 spec:
+  paused: true
   sourcePVC: nocodb
   trigger:
     schedule: "0 0 * * *"

@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: seerr
 spec:
+  paused: true
   sourcePVC: seerr
   trigger:
     schedule: "0 0 * * *"

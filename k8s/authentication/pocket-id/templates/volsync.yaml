@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: pocket-id
 spec:
+  paused: true
   sourcePVC: pocket-id
   trigger:
     schedule: "0 0 * * *"

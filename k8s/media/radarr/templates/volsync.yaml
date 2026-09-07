@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: radarr
 spec:
+  paused: true
   sourcePVC: radarr
   trigger:
     schedule: "0 0 * * *"

@@ -35,6 +35,7 @@ kind: ReplicationSource
 metadata:
   name: koito
 spec:
+  paused: true
   sourcePVC: koito
   trigger:
     schedule: "0 0 * * *"
