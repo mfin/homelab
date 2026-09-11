@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: miniflux-backup
 spec:
+  suspend: true
   schedule: "0 23 * * *"
   jobTemplate:
     spec:

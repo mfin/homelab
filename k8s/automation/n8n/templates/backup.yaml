@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: n8n-backup
 spec:
+  suspend: true
   schedule: "0 23 * * *"
   jobTemplate:
     spec:

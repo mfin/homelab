@@ -4,6 +4,7 @@ app-template:
       type: cronjob
       cronjob:
         schedule: "@daily"
+        suspend: true
         ttlSecondsAfterFinished: 86400
       containers:
         main:
