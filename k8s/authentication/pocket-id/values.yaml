@@ -8,7 +8,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/pocket-id/pocket-id
-            tag: v2.12.0@sha256:4a277d141d6069fd9a7b321a9aca80f4b9812b8fa122ee566d2f15900e3d8448
+            tag: v2.16.0@sha256:9366436f3fd21619ed7e5709fa0acac88130f73414ec8ee1caf768fc487111ea
           env:
             TZ: Europe/Ljubljana
             TRUST_PROXY: "true"
