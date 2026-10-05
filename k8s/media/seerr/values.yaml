@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/seerr-team/seerr
-            tag: v3.3.0@sha256:c92d2dc117f62185e7bcb88cd56efd374ea79210eaf433275449e8d5988eb5a8
+            tag: v3.5.0@sha256:27602401178d54f1964442287b9f23f67a3fa2252645ee8065839ea1c3f69e45
           env:
             TZ: Europe/Ljubljana
             PORT: &port 80
