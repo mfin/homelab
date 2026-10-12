@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/slskd/slskd
-            tag: 0.25.1@sha256:ab9ed50e028b524cefdb7c1dd8ebca368a076e18441ee8ac2326473eb850b4c3
+            tag: 0.26.1@sha256:588af49abc3088d639c8f1174d3bfad6e92c093a275a593140e3ac9311ebf6c4
           env:
             TZ: Europe/Ljubljana
             DOTNET_BUNDLE_EXTRACT_BASE_DIR: /tmp/.net
