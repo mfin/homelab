@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/autobrr/qui
-            tag: v1.20.0@sha256:946e96a158d847a01b5d0055aeadfc1998fff021974d0d5b1e61ccd7fb199450
+            tag: v1.32.0@sha256:13a09cb0f27004dd19510f6af37aac140164ba0f9a13333b8698e41bd2d1df4c
           env:
             TZ: Europe/Ljubljana
             QUI__HOST: 0.0.0.0
