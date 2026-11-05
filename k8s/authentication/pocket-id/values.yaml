@@ -36,7 +36,7 @@ app-template:
       hostnames:
         - pocket.mfin.app
       parentRefs:
-        - name: envoy-external
+        - name: envoy-internal
           namespace: envoy-gateway
   persistence:
     data:

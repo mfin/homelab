@@ -61,7 +61,7 @@ app-template:
       hostnames:
         - qui.mfin.app
       parentRefs:
-        - name: envoy-external
+        - name: envoy-internal
           namespace: envoy-gateway
   persistence:
     config:
