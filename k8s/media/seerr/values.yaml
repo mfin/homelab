@@ -31,12 +31,10 @@ app-template:
           port: *port
   route:
     main:
-      annotations:
-        external.mfin.app/managed: "true"
       hostnames:
         - dnevna.com
       parentRefs:
-        - name: envoy-media
+        - name: envoy-internal
           namespace: envoy-gateway
   persistence:
     config:
