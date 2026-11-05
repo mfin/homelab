@@ -72,8 +72,6 @@ apps:
     path: k8s/media
   - name: kube-prometheus-stack
     path: k8s/monitoring
-  - name: cloudflared
-    path: k8s/networking
   - name: grafana
     path: k8s/monitoring
   - name: unpoller
@@ -82,8 +80,6 @@ apps:
     path: k8s/monitoring
   - name: blackbox-exporter
     path: k8s/monitoring
-  - name: dns-external
-    path: k8s/networking
   - name: dns-internal
     path: k8s/networking
   - name: prom-misc
@@ -131,8 +127,6 @@ apps:
     path: k8s/storage
   - name: miniflux
     path: k8s/selfhosted
-  - name: dns-media
-    path: k8s/networking
   - name: envoy-gateway
     path: k8s/networking
   - name: dbgate
