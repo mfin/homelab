@@ -2,8 +2,6 @@ external-dns:
   fullnameOverride: dns-external
   provider: cloudflare
 
-  replicaCount: 0
-
   env:
     - name: CF_API_TOKEN
       valueFrom:
