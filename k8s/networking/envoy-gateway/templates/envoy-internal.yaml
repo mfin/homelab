@@ -29,5 +29,7 @@ spec:
         certificateRefs:
           - kind: Secret
             name: homelab-cert
+            namespace: cert-manager
           - kind: Secret
             name: media-cert
+            namespace: cert-manager

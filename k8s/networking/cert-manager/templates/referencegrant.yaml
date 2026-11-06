@@ -1,0 +1,17 @@
+# Lets the envoy-gateway Gateways use the TLS secrets in place, without copying them.
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: envoy-gateway-tls
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: envoy-gateway
+  to:
+    - group: ""
+      kind: Secret
+      name: homelab-cert
+    - group: ""
+      kind: Secret
+      name: media-cert
