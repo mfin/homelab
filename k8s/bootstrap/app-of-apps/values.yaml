@@ -40,8 +40,6 @@ apps:
     path: k8s/media
   - name: intel-device-plugins-operator
     path: k8s/system
-  - name: reflector
-    path: k8s/system
   - name: reloader
     path: k8s/system
   - name: vpa

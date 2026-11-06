@@ -10,7 +10,3 @@ spec:
     name: letsencrypt-issuer
     kind: ClusterIssuer
     group: cert-manager.io
-  secretTemplate:
-    annotations:
-      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
-      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
