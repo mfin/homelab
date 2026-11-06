@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/home-operations/sonarr
-            tag: 4.0.17.2969@sha256:1989718e9fceb3fd35b4e73f61696c68f8959b8f09981cf137fdef8e6338b85f
+            tag: 5.0.0.2941@sha256:93b0923dd12afd43247739e19dac59d74c52a15ea12e036b7ced264cffb42574
           env:
             TZ: Europe/Ljubljana
             SONARR__APP__INSTANCENAME: Sonarr
