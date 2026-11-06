@@ -29,3 +29,5 @@ spec:
         certificateRefs:
           - kind: Secret
             name: homelab-cert
+          - kind: Secret
+            name: media-cert
