@@ -68,6 +68,8 @@ apps:
   - name: kro
     path: k8s/system
     namespace: kro-system
+  - name: debug
+    path: k8s/system
   - name: tautulli
     path: k8s/media
   - name: kube-prometheus-stack
