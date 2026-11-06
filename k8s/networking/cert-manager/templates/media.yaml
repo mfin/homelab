@@ -9,7 +9,7 @@ spec:
   secretName: media-cert
   issuerRef:
     name: letsencrypt-issuer
-    kind: Issuer
+    kind: ClusterIssuer
     group: cert-manager.io
   secretTemplate:
     annotations:

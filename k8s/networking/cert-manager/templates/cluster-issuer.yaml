@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-issuer
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: le-issuer-account-key
+    solvers:
+    - dns01:
+        webhook:
+          groupName: acme.pr0ton11.github.com
+          solverName: desec
+          config:
+            apiKeySecretRef:
+              name: desec-token
+              key: token
