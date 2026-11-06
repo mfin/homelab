@@ -4,12 +4,12 @@ metadata:
   name: media
 spec:
   dnsNames:
-    - "{{ .Values.media_domain }}"
-    - "*.{{ .Values.media_domain }}"
+    - "dnevna.com"
+    - "*.dnevna.com"
   secretName: media-cert
   issuerRef:
     name: letsencrypt-issuer
-    kind: ClusterIssuer
+    kind: Issuer
     group: cert-manager.io
   secretTemplate:
     annotations:

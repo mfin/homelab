@@ -5,3 +5,6 @@ dependencies:
   - name: cert-manager
     version: v1.20.0
     repository: https://charts.jetstack.io
+  - name: cert-manager-desec-webhook
+    version: 0.1.7
+    repository: oci://ghcr.io/pr0ton11/helm

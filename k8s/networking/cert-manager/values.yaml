@@ -1,3 +1,11 @@
+cert-manager-desec-webhook:
+  groupName: acme.pr0ton11.github.com
+  secretName:
+    - desec-token
+  certManager:
+    namespace: cert-manager
+    serviceAccountName: cert-manager
+
 cert-manager:
   installCRDs: true
 
