@@ -1,4 +1,4 @@
 # Shell with kubectl, helm, jq, yq, curl. Open via ArgoCD: debug app -> pod -> Terminal.
 image:
   repository: docker.io/alpine/k8s
-  tag: 1.35.0
+  tag: 1.37.2
