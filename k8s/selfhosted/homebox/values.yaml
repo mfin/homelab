@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/sysadminsmedia/homebox
-            tag: 0.25.0@sha256:6506480a3dfadd2cc885fa97b32d11b0ee28ec58629fa34a76afdb4ac540c7fc
+            tag: 0.27.1@sha256:9d0b64776c694f018c0ca06faf52105a33ca376024f46bb58e6ab0e2b728bb61
           env:
             TZ: Europe/Ljubljana
             HBOX_LOG_LEVEL: info
