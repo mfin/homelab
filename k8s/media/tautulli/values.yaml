@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/home-operations/tautulli
-            tag: 2.17.1@sha256:2183820d45a1413b4b8868fc18ad5eb9259630ea0151348cdc9cfb4017a0dd33
+            tag: 2.19.1@sha256:de490b2e01593b4efa062ebe8ceb802a2bc119d727df0e545629394ac3667eb0
           env:
             TZ: Europe/Ljubljana
           resources:
