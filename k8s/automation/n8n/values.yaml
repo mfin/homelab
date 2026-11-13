@@ -17,7 +17,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/n8n-io/n8n
-            tag: 2.47.3@sha256:6723b440354bb8e1395a1ecee12685fe03923f897bf6e4d5bb2c6c2bd2051697
+            tag: 2.48.4@sha256:63bdcfdea7e0d21152a7ad8f62e6622658c5eae3835e7515dbd9b610cdb76111
           command: ["n8n"]
           env:
             GENERIC_TIMEZONE: Europe/Ljubljana
