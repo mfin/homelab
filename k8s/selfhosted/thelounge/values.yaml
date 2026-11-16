@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: thelounge/thelounge
-            tag: 4.5.0
+            tag: 4.5.2
           env:
             THELOUNGE_HOME: "/config"
   service:
