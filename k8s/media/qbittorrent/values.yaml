@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/home-operations/qbittorrent-libtorrentv1
-            tag: 5.2.1@sha256:844555b6c1ed43afcb0001100973676fc6d825d5142c65f612a25fd9eba0bb0a
+            tag: 5.3.0@sha256:74a9dd7824d960e1c3355ab07ba23c9946aa18236eebac0c51fe9f5cac35ff8f
           env:
             TZ: Europe/Ljubljana
             QBT_WEBUI_PORT: &port 80
