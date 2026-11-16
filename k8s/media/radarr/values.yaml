@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/home-operations/radarr
-            tag: 6.2.1@sha256:a566e7d364b96ce8ffb1b582266e656c69f3a12dec289d72bb0daa647ed4725e
+            tag: 7.0.3@sha256:55d3cf8a4c4c531bb8b5c1ba88eb270d4435e01e228fbdb16cdfc910a17e3b06
           env:
             TZ: Europe/Ljubljana
             RADARR__APP__INSTANCENAME: Radarr
