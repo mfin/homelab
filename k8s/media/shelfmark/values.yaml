@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/calibrain/shelfmark
-            tag: v1.3.0@sha256:e891eda444b261da48a839db652034bce4e20ac09c167f14adf939dedf96b572
+            tag: v1.7.0@sha256:6544e02595271b0267b9acda58fa7f3db6f14942bece51b7aadfe4000cf34f1c
           command:
             - gunicorn
           args:
