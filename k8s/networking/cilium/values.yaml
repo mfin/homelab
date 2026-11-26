@@ -24,6 +24,7 @@ cilium:
     socketPath: /var/run/k3s/containerd/containerd.sock
   autoDirectNodeRoutes: true
   routingMode: native
+  devices: eno1
   bandwidthManager:
     enabled: true
     bbr: false
