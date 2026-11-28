@@ -7,7 +7,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/advplyr/audiobookshelf
-            tag: 2.35.1@sha256:1eef6716183c52abafe5405e7d6be8390248ecd59c7488c44af871757ac8fc4d
+            tag: 2.38.0@sha256:60064c23f32fd9099fd39e82c5132c51701d1221135bbca04cd099b589e1edc3
           env:
             TZ: Europe/Ljubljana
             AUDIOBOOKSHELF_UID: 1028
